@@ -1,4 +1,3 @@
-
 import { useLanguage } from '@/contexts/LanguageContext';
 import { SearchIcon, MousePointerClick, LineChart, Lightbulb, ArrowRight, Globe, Cog, BarChart3, PieChart } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
@@ -25,7 +24,7 @@ const HowItWorks = () => {
     description: "Get actionable recommendations to improve your SEO"
   }];
   return <section id="how-it-works" className="py-16">
-      <Separator className="h-px bg-gray-800/20" />
+      <Separator className="h-[2px] bg-gray-800/30" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
         <div className="text-center mb-12">
           <div className="inline-block border-b-2 border-vextor-500 pb-2 mb-3">

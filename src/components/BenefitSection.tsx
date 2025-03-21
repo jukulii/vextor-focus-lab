@@ -1,4 +1,3 @@
-
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ArrowUpRight, UserCheck, Search, Trophy } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
@@ -29,6 +28,7 @@ const mockData = [{
   before: 50,
   after: 100
 }];
+
 const BenefitSection = () => {
   const {
     t
@@ -59,7 +59,7 @@ const BenefitSection = () => {
     bgColor: 'bg-purple-900'
   }];
   return <section className="py-16">
-      <Separator className="h-px bg-gray-800/20" />
+      <Separator className="h-[2px] bg-gray-800/30" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
         <div className="text-center mb-12">
           <span className="bg-blue-900 text-blue-300 px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4">Benefits</span>
