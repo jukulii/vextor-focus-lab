@@ -9,7 +9,7 @@ const HowItWorks = () => {
     {
       title: t('step_1'),
       icon: SearchIcon,
-      description: "Enter your website URL to begin the analysis process"
+      description: "Enter sitemap or domain to begin the analysis process"
     },
     {
       title: t('step_2'),
