@@ -42,10 +42,11 @@ const VantaBackground = ({ children, className = '' }: VantaBackgroundProps) => 
           backgroundColor: 0x0a0a0a,
           size: 3.00,
           spacing: 20.00,
-          showLines: true
+          showLines: true,
+          pixelDensity: 1
         });
       }
-    }, 100);
+    }, 300);
 
     // Cleanup function
     return () => {
@@ -60,19 +61,18 @@ const VantaBackground = ({ children, className = '' }: VantaBackgroundProps) => 
   return (
     <div 
       ref={vantaRef}
-      className={`${className}`}
+      className={`fixed inset-0 ${className}`}
       style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
         width: '100%',
         height: '100%',
         zIndex: 0
       }}
     >
-      <div className="relative z-10 w-full h-full">
-        {children}
-      </div>
+      {children && (
+        <div className="relative z-10 w-full h-full">
+          {children}
+        </div>
+      )}
     </div>
   );
 };

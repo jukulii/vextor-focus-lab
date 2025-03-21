@@ -2,7 +2,6 @@
 import { useEffect } from 'react';
 import AppHeader from '@/components/AppHeader';
 import SitemapSearch from '@/components/SitemapSearch';
-import VantaBackground from '@/components/VantaBackground';
 
 const AppPage = () => {
   // Scroll to top when the page loads
