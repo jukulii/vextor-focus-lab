@@ -52,7 +52,7 @@ const BenefitSection = () => {
     bgColor: 'bg-orange-100'
   }, {
     icon: Trophy,
-    title: t('benefit_6_title'),
+    title: "Understand how Google evaluates your site",
     description: t('benefit_6_desc'),
     iconColor: 'text-graph-purple',
     bgColor: 'bg-purple-100'
