@@ -37,7 +37,7 @@ const LandingPage = () => {
 
   return (
     <div className="flex flex-col min-h-screen bg-black text-white">
-      <VantaBackground className="min-h-screen">
+      <VantaBackground className="min-h-screen w-full">
         <Navbar isDark={true} />
         <main className="flex-grow">
           <HeroSection />

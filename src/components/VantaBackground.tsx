@@ -17,13 +17,16 @@ declare global {
 const VantaBackground = ({ children, className = '' }: VantaBackgroundProps) => {
   const vantaRef = useRef<HTMLDivElement>(null);
   const vantaEffect = useRef<any>(null);
-  const [isInitialized, setIsInitialized] = useState(false);
+  const [vantaInitialized, setVantaInitialized] = useState(false);
 
   useEffect(() => {
+    // Wait for component to mount and DOM to be ready
     if (!vantaRef.current) return;
     
-    // Make sure VANTA is available
-    if (typeof window.VANTA !== 'undefined' && !isInitialized) {
+    // Make sure VANTA is available and not already initialized
+    if (typeof window.VANTA !== 'undefined' && !vantaInitialized) {
+      console.log('Initializing VANTA.DOTS in VantaBackground component');
+      
       // Initialize the effect with graph-like settings
       vantaEffect.current = window.VANTA.DOTS({
         el: vantaRef.current,
@@ -49,20 +52,22 @@ const VantaBackground = ({ children, className = '' }: VantaBackgroundProps) => 
         highlightIntensity: 0.8    // Higher intensity highlight
       });
       
-      setIsInitialized(true);
-      console.log('VANTA DOTS initialized with graph-like settings');
+      setVantaInitialized(true);
+      console.log('VANTA DOTS successfully initialized in VantaBackground');
     }
 
     // Cleanup function
     return () => {
       if (vantaEffect.current) {
+        console.log('Cleaning up VANTA effect in VantaBackground');
         vantaEffect.current.destroy();
+        vantaEffect.current = null;
       }
     };
-  }, [isInitialized]);
+  }, [vantaInitialized]);
 
   return (
-    <div ref={vantaRef} className={`relative ${className}`}>
+    <div ref={vantaRef} className={`relative overflow-hidden ${className}`}>
       {children}
     </div>
   );
