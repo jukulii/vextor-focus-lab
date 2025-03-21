@@ -19,9 +19,9 @@ const LandingPage = () => {
       <Navbar />
       <main className="flex-grow">
         <HeroSection />
-        <HowItWorks />
         <FeatureSection />
         <BenefitSection />
+        <HowItWorks />
         <PricingSection />
       </main>
       <Footer />
