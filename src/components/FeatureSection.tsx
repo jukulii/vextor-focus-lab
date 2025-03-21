@@ -14,7 +14,7 @@ const FeatureSection = () => {
             Stay focused. Rank higher
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            {t('new_era_subtitle')}
+            Vextor helps you evaluate and improve your website's content relevance.
           </p>
         </div>
         
