@@ -7,6 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Filter, ArrowRight } from 'lucide-react';
+import axios from 'axios';
 
 interface ApiResponse {
   projectId: number;
@@ -23,6 +24,7 @@ const SitemapsList = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [filterQuery, setFilterQuery] = useState('');
+  const [isSaving, setIsSaving] = useState(false);
 
   // Odbierz dane przekazane przez state
   const apiData: ApiResponse = location.state?.sitemapData;
@@ -35,14 +37,51 @@ const SitemapsList = () => {
   const { projectId, urls } = apiData;
   const { domain, sitemaps, sitemap_count, execution_time } = urls;
 
-  const handleContinue = () => {
-    navigate('/processing');
-  };
-
   // Filtruj sitemapy na podstawie zapytania
   const filteredSitemaps = sitemaps.filter((sitemapUrl) =>
     sitemapUrl.toLowerCase().includes(filterQuery.toLowerCase())
   );
+
+  // Przygotuj dane do wysłania
+  const sitemapsToSave = filteredSitemaps.map((sitemapUrl) => ({
+    url: sitemapUrl,
+  }));
+
+  const handleSaveSitemaps = async () => {
+    setIsSaving(true);
+
+    try {
+      const token = localStorage.getItem('vextor-token');
+
+      if (!token) {
+        throw new Error('No token found');
+      }
+
+      // Wyślij dane na endpoint /save-sitemaps
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/save-sitemaps`,
+        {
+          projectId,
+          sitemaps: sitemapsToSave,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      console.log('Sitemaps saved successfully:', response.data);
+
+      navigate('/processing');
+    } catch (error) {
+      console.error('Error saving sitemaps:', error);
+      alert('Failed to save sitemaps');
+    } finally {
+      setIsSaving(false);
+    }
+  };
 
   return (
     <div className="w-full max-w-4xl mx-auto">
@@ -118,10 +157,11 @@ const SitemapsList = () => {
 
                 <div className="flex justify-center mt-4">
                   <Button
-                    onClick={handleContinue}
+                    onClick={handleSaveSitemaps}
+                    disabled={isSaving}
                     className="bg-blue-500 hover:bg-blue-600 px-8"
                   >
-                    {t('next')}
+                    {isSaving ? 'Saving...' : t('next')}
                   </Button>
                 </div>
               </div>
