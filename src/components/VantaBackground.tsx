@@ -1,5 +1,5 @@
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface VantaBackgroundProps {
   children?: React.ReactNode;
@@ -17,6 +17,17 @@ declare global {
 const VantaBackground = ({ children, className = '' }: VantaBackgroundProps) => {
   const vantaRef = useRef<HTMLDivElement>(null);
   const vantaEffect = useRef<any>(null);
+  const [scrollY, setScrollY] = useState(0);
+
+  // Handle scroll events
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   useEffect(() => {
     // Make sure Vanta is available
@@ -58,6 +69,17 @@ const VantaBackground = ({ children, className = '' }: VantaBackgroundProps) => 
     };
   }, []);
 
+  // Update effect position based on scroll
+  useEffect(() => {
+    if (vantaEffect.current) {
+      // Create a parallax effect by adjusting the position
+      const translateY = scrollY * 0.1; // Adjust the multiplier for speed
+      if (vantaRef.current) {
+        vantaRef.current.style.transform = `translate3d(0, ${translateY}px, 0)`;
+      }
+    }
+  }, [scrollY]);
+
   return (
     <div 
       ref={vantaRef}
@@ -65,7 +87,8 @@ const VantaBackground = ({ children, className = '' }: VantaBackgroundProps) => 
       style={{
         width: '100%',
         height: '100%',
-        zIndex: 0
+        zIndex: 0,
+        transition: 'transform 0.1s ease-out'
       }}
     >
       {children && (
