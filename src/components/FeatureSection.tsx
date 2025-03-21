@@ -6,21 +6,21 @@ const FeatureSection = () => {
   const { t } = useLanguage();
 
   return (
-    <section id="features" className="py-4">
+    <section id="features" className="py-16 bg-gradient-to-b from-white to-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-8">
+        <div className="text-center mb-12">
+          <span className="bg-vextor-100 text-vextor-800 px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4">Features</span>
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             Stay focused. Rank higher
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             {t('new_era_subtitle')}
           </p>
-          <div className="w-24 h-1 bg-vextor-500 mx-auto mt-6"></div>
         </div>
         
-        <div className="grid md:grid-cols-2 gap-12 mt-8">
-          <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-            <div className="w-12 h-12 bg-vextor-100 rounded-lg flex items-center justify-center mb-6">
+        <div className="grid md:grid-cols-2 gap-8 mt-8">
+          <div className="bg-white rounded-xl p-8 shadow-md border border-gray-100 hover:shadow-lg transition-all duration-300 hover:translate-y-[-5px]">
+            <div className="w-14 h-14 bg-gradient-to-br from-vextor-100 to-blue-100 rounded-lg flex items-center justify-center mb-6">
               <Rocket className="h-6 w-6 text-vextor-600" />
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-3">
@@ -31,8 +31,8 @@ const FeatureSection = () => {
             </p>
           </div>
           
-          <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-            <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-6">
+          <div className="bg-white rounded-xl p-8 shadow-md border border-gray-100 hover:shadow-lg transition-all duration-300 hover:translate-y-[-5px]">
+            <div className="w-14 h-14 bg-gradient-to-br from-purple-100 to-pink-100 rounded-lg flex items-center justify-center mb-6">
               <Target className="h-6 w-6 text-purple-600" />
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-3">

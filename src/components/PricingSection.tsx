@@ -55,13 +55,16 @@ const PricingSection = () => {
   ];
 
   return (
-    <section id="pricing" className="py-20">
+    <section id="pricing" className="py-20 bg-gradient-to-b from-gray-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
+          <span className="bg-purple-100 text-purple-800 px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4">Pricing</span>
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             {t('pricing_title')}
           </h2>
-          <div className="w-24 h-1 bg-vextor-500 mx-auto"></div>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Choose the perfect plan for your needs
+          </p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -69,10 +72,10 @@ const PricingSection = () => {
             <div 
               key={index} 
               className={`
-                rounded-xl p-8 transition-all 
+                rounded-xl p-8 transition-all duration-300 
                 ${plan.highlighted 
-                  ? 'bg-white border-2 border-vextor-500 shadow-lg scale-105 z-10' 
-                  : 'bg-white border border-gray-100 shadow-sm hover:shadow-md'
+                  ? 'bg-gradient-to-br from-white to-vextor-50 border-2 border-vextor-500 shadow-xl scale-105 z-10' 
+                  : 'bg-white border border-gray-100 shadow-md hover:shadow-lg hover:translate-y-[-5px]'
                 }
               `}
             >
@@ -111,7 +114,7 @@ const PricingSection = () => {
                 <Button 
                   className={`w-full ${
                     plan.highlighted 
-                      ? 'bg-vextor-600 hover:bg-vextor-700' 
+                      ? 'bg-vextor-600 hover:bg-vextor-700 shadow-md hover:shadow-lg' 
                       : 'bg-gray-900 hover:bg-gray-800'
                   }`}
                 >

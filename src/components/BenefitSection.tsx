@@ -1,3 +1,4 @@
+
 import { useLanguage } from '@/contexts/LanguageContext';
 import { TrendingUp, Users, Search, Award, ArrowUpRight, UserCheck, Trophy } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
@@ -58,35 +59,41 @@ const BenefitSection = () => {
   }];
   
   return (
-    <section className="py-6 bg-gray-50">
+    <section className="py-16 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-8">
+        <div className="text-center mb-12">
+          <span className="bg-blue-100 text-blue-800 px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4">Benefits</span>
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             Improve your SEO performance
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Optimize your content and achieve higher rankings
           </p>
-          <div className="w-24 h-1 bg-vextor-500 mx-auto mt-4"></div>
         </div>
         
-        <div className="grid grid-cols-1 gap-6">
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 h-full">
+        <div className="grid grid-cols-1 gap-8">
+          <div className="bg-white rounded-xl p-8 shadow-md border border-gray-100 hover:shadow-lg transition-all duration-300">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">
               SEO Performance Improvement
             </h3>
-            <div className="h-[250px]">
+            <div className="h-[300px]">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={mockData} margin={{
-                  top: 10,
-                  right: 10,
-                  left: -20,
-                  bottom: 0
+                  top: 20,
+                  right: 20,
+                  left: 0,
+                  bottom: 20
                 }}>
                   <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.3} />
                   <XAxis dataKey="name" axisLine={false} tickLine={false} />
                   <YAxis axisLine={false} tickLine={false} />
-                  <Tooltip />
+                  <Tooltip 
+                    contentStyle={{ 
+                      borderRadius: '8px', 
+                      border: 'none', 
+                      boxShadow: '0 4px 12px rgba(0,0,0,0.1)' 
+                    }} 
+                  />
                   <Bar dataKey="before" fill="#94a3b8" name="Before Vextor" radius={[4, 4, 0, 0]} />
                   <Bar dataKey="after" fill="#0ea2e9" name="After Vextor" radius={[4, 4, 0, 0]} />
                 </BarChart>
@@ -96,8 +103,8 @@ const BenefitSection = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {benefits.map((benefit, index) => (
-              <div key={index} className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                <div className={`w-10 h-10 ${benefit.bgColor} rounded-lg flex items-center justify-center mb-4`}>
+              <div key={index} className="bg-white rounded-xl p-6 shadow-md border border-gray-100 hover:shadow-lg transition-all duration-300 hover:translate-y-[-5px]">
+                <div className={`w-12 h-12 ${benefit.bgColor} rounded-full flex items-center justify-center mb-4`}>
                   <benefit.icon className={`h-5 w-5 ${benefit.iconColor}`} />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">

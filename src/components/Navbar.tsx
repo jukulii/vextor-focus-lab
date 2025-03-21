@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Globe } from 'lucide-react';
+import { Globe, Menu, X } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,6 +14,7 @@ import {
 const Navbar = () => {
   const { t, language, setLanguage } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,11 +25,15 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
+
   return (
     <nav 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled 
-          ? 'bg-white/80 backdrop-blur-md shadow-sm py-3' 
+          ? 'bg-white/90 backdrop-blur-md shadow-sm py-3' 
           : 'bg-transparent py-5'
       }`}
     >
@@ -102,13 +107,58 @@ const Navbar = () => {
             <Link to="/app">
               <Button 
                 variant="default" 
-                className="bg-vextor-600 hover:bg-vextor-700 transition-colors button-glow"
+                className="bg-vextor-600 hover:bg-vextor-700 transition-colors button-glow shadow-md hover:shadow-lg"
               >
                 {t('get_started')}
               </Button>
             </Link>
+            
+            <Button 
+              variant="ghost" 
+              size="icon"
+              className="md:hidden text-gray-700"
+              onClick={toggleMobileMenu}
+            >
+              {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </Button>
           </div>
         </div>
+        
+        {/* Mobile menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden bg-white mt-3 p-4 rounded-lg shadow-lg border border-gray-100 animate-fade-in">
+            <div className="flex flex-col space-y-4">
+              <Link 
+                to="/" 
+                className="text-gray-700 hover:text-vextor-600 font-medium py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {t('home')}
+              </Link>
+              <a 
+                href="#features" 
+                className="text-gray-700 hover:text-vextor-600 font-medium py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {t('features')}
+              </a>
+              <a 
+                href="#how-it-works" 
+                className="text-gray-700 hover:text-vextor-600 font-medium py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {t('how_it_works')}
+              </a>
+              <a 
+                href="#pricing" 
+                className="text-gray-700 hover:text-vextor-600 font-medium py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {t('pricing')}
+              </a>
+            </div>
+          </div>
+        )}
       </div>
     </nav>
   );
