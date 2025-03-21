@@ -3,11 +3,40 @@ import { Button } from "@/components/ui/button";
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Rocket } from 'lucide-react';
-import { ChartContainer } from "@/components/ui/chart";
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
+import { useEffect, useRef } from 'react';
 
 const HeroSection = () => {
   const { t } = useLanguage();
+  const vantaGraphRef = useRef<HTMLDivElement>(null);
+  const vantaEffect = useRef<any>(null);
+
+  useEffect(() => {
+    if (!vantaGraphRef.current || !window.VANTA) return;
+
+    // Create a separate Vanta effect for this specific container
+    vantaEffect.current = window.VANTA.DOTS({
+      el: vantaGraphRef.current,
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 300,
+      minWidth: 300,
+      scale: 1.00,
+      scaleMobile: 1.00,
+      color: 0xff0077,
+      color2: 0x8800ff,
+      backgroundColor: 0x111122,
+      size: 2.50,
+      spacing: 20.00,
+      showLines: true
+    });
+
+    return () => {
+      if (vantaEffect.current) {
+        vantaEffect.current.destroy();
+      }
+    };
+  }, []);
   
   // Sample data for the graph demo
   const data = [
@@ -46,36 +75,10 @@ const HeroSection = () => {
           <div className="mt-12 md:mt-0 md:w-1/2 relative z-0 flex justify-center">
             <div className="relative w-full max-w-md">
               <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-vextor-400 to-purple-400 rounded-full blur-3xl opacity-20"></div>
-              <div className="relative bg-white/80 backdrop-blur-sm border border-white/20 rounded-2xl p-6 shadow-xl vanta-distance-demo">
-                <div className="bg-gradient-to-br from-vextor-50 to-blue-50 rounded-xl p-4">
-                  <div className="flex items-center mb-4">
-                    <div className="w-3 h-3 bg-red-500 rounded-full mr-2"></div>
-                    <div className="w-3 h-3 bg-yellow-500 rounded-full mr-2"></div>
-                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                  </div>
-                  
-                  {/* Graph visualization */}
-                  <div className="vanta-graph-container">
-                    <ChartContainer
-                      className="h-60 w-full rounded-md border p-2"
-                      config={{
-                        primary: {
-                          label: "Growth",
-                          color: "#4e9b8c"
-                        }
-                      }}
-                    >
-                      <LineChart data={data} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
-                        <Line type="monotone" dataKey="value" stroke="#4e9b8c" strokeWidth={2} />
-                        <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-                        <XAxis dataKey="name" />
-                        <YAxis />
-                        <Tooltip />
-                      </LineChart>
-                    </ChartContainer>
-                  </div>
-                </div>
-              </div>
+              <div 
+                ref={vantaGraphRef} 
+                className="h-[300px] rounded-2xl overflow-hidden shadow-xl border border-white/10"
+              ></div>
             </div>
           </div>
         </div>
