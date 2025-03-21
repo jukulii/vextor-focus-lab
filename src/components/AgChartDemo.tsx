@@ -1,6 +1,6 @@
 
 import React, { useRef, useEffect } from 'react';
-import { AgChart } from 'ag-charts-community';
+import { AgCharts } from 'ag-charts-community';
 import { AgChartOptions } from 'ag-charts-community';
 
 interface AgChartDemoProps {
@@ -49,12 +49,12 @@ const AgChartDemo: React.FC<AgChartDemoProps> = ({ title, className }) => {
 
   useEffect(() => {
     if (chartRef.current) {
-      AgChart.create(chartOptions, chartRef.current);
+      AgCharts.create(chartOptions, chartRef.current);
     }
     
     return () => {
       if (chartRef.current) {
-        AgChart.update(chartOptions, chartRef.current);
+        AgCharts.update(chartOptions, chartRef.current);
       }
     };
   }, [chartRef, title]);
