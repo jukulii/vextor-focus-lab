@@ -6,39 +6,39 @@ const FeatureSection = () => {
   const { t } = useLanguage();
 
   return (
-    <section id="features" className="py-16 border-t border-gray-200">
+    <section id="features" className="py-16 border-t border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <span className="bg-vextor-100 text-vextor-700 px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4">Features</span>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <span className="bg-[#0E3866] text-[#38bbf8] px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4">Features</span>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-100 mb-4">
             Stay focused. Rank higher
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
             Vextor helps you evaluate and improve your website's content relevance.
           </p>
         </div>
         
         <div className="grid md:grid-cols-2 gap-8 mt-8">
-          <div className="bg-white rounded-xl p-8 shadow-md border border-gray-200 hover:shadow-lg transition-all duration-300 hover:translate-y-[-5px]">
-            <div className="w-14 h-14 bg-gradient-to-br from-vextor-500 to-blue-500 rounded-lg flex items-center justify-center mb-6">
-              <Rocket className="h-6 w-6 text-white" />
+          <div className="bg-[#1A1F2C] rounded-lg p-8 shadow-lg border border-gray-800 hover:shadow-xl transition-all duration-300">
+            <div className="w-14 h-14 bg-[#0E3866] rounded-full flex items-center justify-center mb-6">
+              <Rocket className="h-6 w-6 text-[#38bbf8]" />
             </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">
+            <h3 className="text-xl font-semibold text-white mb-3">
               {t('benefit_1_title')}
             </h3>
-            <p className="text-gray-600">
+            <p className="text-gray-400">
               {t('benefit_1_desc')}
             </p>
           </div>
           
-          <div className="bg-white rounded-xl p-8 shadow-md border border-gray-200 hover:shadow-lg transition-all duration-300 hover:translate-y-[-5px]">
-            <div className="w-14 h-14 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center mb-6">
-              <Target className="h-6 w-6 text-white" />
+          <div className="bg-[#1A1F2C] rounded-lg p-8 shadow-lg border border-gray-800 hover:shadow-xl transition-all duration-300">
+            <div className="w-14 h-14 bg-[#0E3866] rounded-full flex items-center justify-center mb-6">
+              <Target className="h-6 w-6 text-[#38bbf8]" />
             </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">
+            <h3 className="text-xl font-semibold text-white mb-3">
               {t('benefit_2_title')}
             </h3>
-            <p className="text-gray-600">
+            <p className="text-gray-400">
               {t('benefit_2_desc')}
             </p>
           </div>
