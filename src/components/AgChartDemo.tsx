@@ -70,12 +70,13 @@ const AgChartDemo: React.FC<AgChartDemoProps> = ({ title, className }) => {
   // Update chart when title changes
   useEffect(() => {
     if (chart) {
-      AgCharts.update({
+      // The correct way to update AgCharts is to call create again with new options
+      chart.updateOptions({
         ...chartOptions,
         title: {
           text: title || 'Website Focus Distribution',
         },
-      }, chart);
+      });
     }
   }, [title, chart]);
 
