@@ -1,7 +1,5 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { SearchIcon, MousePointerClick, LineChart, Lightbulb, ArrowRight, Globe, Cog, BarChart3, PieChart } from 'lucide-react';
-import { Separator } from '@/components/ui/separator';
-
 const HowItWorks = () => {
   const {
     t
@@ -23,9 +21,8 @@ const HowItWorks = () => {
     icon: PieChart,
     description: "Get actionable recommendations to improve your SEO"
   }];
-  return <section id="how-it-works" className="py-16">
-      <Separator className="h-[2px] bg-zinc-400/50 rounded-full w-[95%] mx-auto" />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
+  return <section id="how-it-works" className="py-16 border-t border-gray-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <div className="inline-block border-b-2 border-vextor-500 pb-2 mb-3">
             <h2 className="text-3xl md:text-4xl font-bold text-zinc-50">
@@ -39,7 +36,7 @@ const HowItWorks = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6">
           {steps.map((step, index) => <div key={index} className="relative">
-              <div className="border border-gray-800/30 rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col items-center text-center h-full bg-transparent">
+              <div className="border-2 border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col items-center text-center h-full bg-transparent">
                 <div className="w-16 h-16 bg-gradient-to-br from-vextor-500 to-blue-500 rounded-full flex items-center justify-center mt-1 mb-4">
                   <step.icon className="h-7 w-7 text-white" />
                 </div>
