@@ -1,6 +1,6 @@
 
 import { useLanguage } from '@/contexts/LanguageContext';
-import { SearchIcon, MousePointerClick, LineChart, Lightbulb, ArrowRight } from 'lucide-react';
+import { SearchIcon, MousePointerClick, LineChart, Lightbulb, ArrowRight, Globe, Cog, BarChart3, PieChart } from 'lucide-react';
 
 const HowItWorks = () => {
   const { t } = useLanguage();
@@ -8,22 +8,22 @@ const HowItWorks = () => {
   const steps = [
     {
       title: "Add sitemap or domain",
-      icon: SearchIcon,
+      icon: Globe,
       description: "Enter sitemap or domain to begin the analysis process"
     },
     {
       title: t('step_2'),
-      icon: MousePointerClick,
+      icon: Cog,
       description: "Our AI analyzes your site's content and structure"
     },
     {
       title: t('step_3'),
-      icon: LineChart,
+      icon: BarChart3,
       description: "Review detailed insights about your content focus"
     },
     {
       title: t('step_4'),
-      icon: Lightbulb,
+      icon: PieChart,
       description: "Get actionable recommendations to improve your SEO"
     }
   ];

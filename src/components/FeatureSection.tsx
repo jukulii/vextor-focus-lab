@@ -1,6 +1,6 @@
 
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Brain, Zap, BarChart, Activity } from 'lucide-react';
+import { Brain, Zap, BarChart, Activity, Rocket, Target } from 'lucide-react';
 
 const FeatureSection = () => {
   const { t } = useLanguage();
@@ -21,7 +21,7 @@ const FeatureSection = () => {
         <div className="grid md:grid-cols-2 gap-12 mt-16">
           <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
             <div className="w-12 h-12 bg-vextor-100 rounded-lg flex items-center justify-center mb-6">
-              <Brain className="h-6 w-6 text-vextor-600" />
+              <Rocket className="h-6 w-6 text-vextor-600" />
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-3">
               {t('benefit_1_title')}
@@ -33,7 +33,7 @@ const FeatureSection = () => {
           
           <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
             <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-6">
-              <Zap className="h-6 w-6 text-purple-600" />
+              <Target className="h-6 w-6 text-purple-600" />
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-3">
               {t('benefit_2_title')}

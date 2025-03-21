@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Rocket } from 'lucide-react';
 
 const HeroSection = () => {
   const { t } = useLanguage();
@@ -24,7 +24,7 @@ const HeroSection = () => {
                 className="bg-vextor-600 hover:bg-vextor-700 transition-colors button-glow px-8 py-6 text-lg"
               >
                 {t('analyse')}
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <Rocket className="ml-2 h-5 w-5" />
               </Button>
             </Link>
           </div>

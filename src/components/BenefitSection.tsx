@@ -1,6 +1,6 @@
 
 import { useLanguage } from '@/contexts/LanguageContext';
-import { TrendingUp, Users, Search, Award } from 'lucide-react';
+import { TrendingUp, Users, Search, Award, ArrowUpRight, UserCheck, Magnifier, Trophy } from 'lucide-react';
 import { 
   BarChart, 
   Bar, 
@@ -25,14 +25,14 @@ const BenefitSection = () => {
   
   const benefits = [
     {
-      icon: TrendingUp,
+      icon: ArrowUpRight,
       title: t('benefit_3_title'),
       description: t('benefit_3_desc'),
       iconColor: 'text-graph-green',
       bgColor: 'bg-green-100',
     },
     {
-      icon: Users,
+      icon: UserCheck,
       title: t('benefit_4_title'),
       description: t('benefit_4_desc'),
       iconColor: 'text-graph-blue',
@@ -46,7 +46,7 @@ const BenefitSection = () => {
       bgColor: 'bg-orange-100',
     },
     {
-      icon: Award,
+      icon: Trophy,
       title: t('benefit_6_title'),
       description: t('benefit_6_desc'),
       iconColor: 'text-graph-purple',
