@@ -65,7 +65,7 @@ const translations: Translations = {
     en: "Keep visitors on your site longer with relevant, coherent content",
     pl: "Zatrzymaj odwiedzających na swojej stronie dłużej dzięki odpowiednim, spójnym treściom"
   },
-  "benefit_5_title": { en: "Content Gap Identification", pl: "Identyfikacja luk w treści" },
+  "benefit_5_title": { en: "Eliminate content that drags your rankings down", pl: "Eliminuj treści obniżające pozycje" },
   "benefit_5_desc": { 
     en: "Discover missing topics that could enhance your site's authority",
     pl: "Odkryj brakujące tematy, które mogą zwiększyć autorytet Twojej witryny"

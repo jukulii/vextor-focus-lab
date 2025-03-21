@@ -46,7 +46,7 @@ const BenefitSection = () => {
     bgColor: 'bg-blue-100'
   }, {
     icon: Search,
-    title: t('benefit_5_title'),
+    title: "Eliminate content that drags your rankings down",
     description: t('benefit_5_desc'),
     iconColor: 'text-graph-orange',
     bgColor: 'bg-orange-100'
