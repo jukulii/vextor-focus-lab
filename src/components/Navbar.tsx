@@ -44,6 +44,11 @@ const Navbar = () => {
               to="/" 
               className="flex items-center space-x-2"
             >
+              <img 
+                src="/lovable-uploads/2faa5536-84c6-4860-9899-0fc0f78968ff.png" 
+                alt="Vextor Logo" 
+                className="h-8 w-auto"
+              />
               <div className="text-vextor-600 font-bold text-2xl tracking-tight">
                 Vextor
               </div>

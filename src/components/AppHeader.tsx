@@ -16,9 +16,16 @@ const AppHeader = () => {
   return (
     <header className="bg-gray-200/80 backdrop-blur-sm border-b border-gray-300">
       <div className="flex items-center justify-between h-14 px-4">
-        <div className="flex items-center space-x-4">
-          <Link to="/" className="text-vextor-700 font-bold text-xl">
-            Vextor
+        <div className="flex items-center space-x-2">
+          <Link to="/" className="flex items-center space-x-2">
+            <img 
+              src="/lovable-uploads/2faa5536-84c6-4860-9899-0fc0f78968ff.png" 
+              alt="Vextor Logo" 
+              className="h-6 w-auto" 
+            />
+            <span className="text-vextor-700 font-bold text-xl">
+              Vextor
+            </span>
           </Link>
         </div>
         
