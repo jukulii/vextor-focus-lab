@@ -3,9 +3,21 @@ import { Button } from "@/components/ui/button";
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Rocket } from 'lucide-react';
+import { ChartContainer } from "@/components/ui/chart";
+import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
 
 const HeroSection = () => {
   const { t } = useLanguage();
+  
+  // Sample data for the graph demo
+  const data = [
+    { name: 'Jan', value: 400 },
+    { name: 'Feb', value: 300 },
+    { name: 'Mar', value: 600 },
+    { name: 'Apr', value: 800 },
+    { name: 'May', value: 500 },
+    { name: 'Jun', value: 900 },
+  ];
 
   return (
     <section className="pt-24 pb-12 md:pt-32 md:pb-16 relative overflow-hidden">
@@ -41,13 +53,26 @@ const HeroSection = () => {
                     <div className="w-3 h-3 bg-yellow-500 rounded-full mr-2"></div>
                     <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                   </div>
-                  <div className="space-y-3">
-                    <div className="h-2.5 bg-gray-200 rounded-full w-3/4"></div>
-                    <div className="h-2.5 bg-gray-200 rounded-full"></div>
-                    <div className="h-2.5 bg-gray-200 rounded-full w-5/6"></div>
-                    <div className="h-2.5 bg-vextor-300 rounded-full w-2/3"></div>
-                    <div className="h-2.5 bg-gray-200 rounded-full"></div>
-                    <div className="h-2.5 bg-gray-200 rounded-full w-3/4"></div>
+                  
+                  {/* Graph visualization */}
+                  <div className="vanta-graph-container">
+                    <ChartContainer
+                      className="h-60 w-full rounded-md border p-2"
+                      config={{
+                        primary: {
+                          label: "Growth",
+                          color: "#4e9b8c"
+                        }
+                      }}
+                    >
+                      <LineChart data={data} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
+                        <Line type="monotone" dataKey="value" stroke="#4e9b8c" strokeWidth={2} />
+                        <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+                        <XAxis dataKey="name" />
+                        <YAxis />
+                        <Tooltip />
+                      </LineChart>
+                    </ChartContainer>
                   </div>
                 </div>
               </div>

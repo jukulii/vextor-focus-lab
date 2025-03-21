@@ -41,9 +41,19 @@ const VantaBackground = ({ children, className = '' }: VantaBackgroundProps) => 
         showLines: true,
         showDistance: true, // Enable showing distance
         trunk: 3,
-        forceAnimate: true
+        forceAnimate: true,
+        graphData: [4, 8, 2, 9, 3, 7], // Data points for the graph
+        graphMode: true // Enable graph mode if available
       });
     }
+
+    // Customize graph visualization in vanta-graph-container
+    const graphContainers = document.querySelectorAll('.vanta-graph-container');
+    graphContainers.forEach(container => {
+      if (container instanceof HTMLElement) {
+        container.dataset.vantaGraphEnabled = 'true';
+      }
+    });
 
     // Cleanup function
     return () => {
