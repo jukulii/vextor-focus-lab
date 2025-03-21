@@ -54,7 +54,7 @@ const ResultsPage = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50">
+    <div className="flex flex-col min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white">
       <AppHeader />
       <main className="flex-grow p-6">
         <div className="w-full max-w-6xl mx-auto">
@@ -63,7 +63,7 @@ const ResultsPage = () => {
           </h1>
           
           {/* AG Charts Demo Section */}
-          <div className="mb-8 bg-white p-6 rounded-lg shadow">
+          <div className="mb-8 bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
             <h2 className="text-xl font-semibold mb-4">AG Charts Demo</h2>
             <AgChartDemo className="h-96 w-full" />
           </div>

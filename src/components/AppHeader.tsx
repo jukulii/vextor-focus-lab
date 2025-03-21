@@ -9,12 +9,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from '@/components/ui/button';
+import DarkModeToggle from './DarkModeToggle';
 
 const AppHeader = () => {
   const { language, setLanguage } = useLanguage();
   
   return (
-    <header className="bg-gray-100/90 backdrop-blur-sm border-b border-gray-200 shadow-sm">
+    <header className="bg-gray-100/90 dark:bg-gray-900/90 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800 shadow-sm">
       <div className="flex items-center justify-between h-14 px-4">
         <div className="flex items-center space-x-2">
           <Link to="/" className="flex items-center space-x-2">
@@ -23,19 +24,21 @@ const AppHeader = () => {
               alt="Vextor Logo" 
               className="h-10 w-auto object-contain mix-blend-multiply" 
             />
-            <span className="text-vextor-700 font-bold text-xl">
+            <span className="text-vextor-700 dark:text-vextor-400 font-bold text-xl">
               Vextor
             </span>
           </Link>
         </div>
         
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-4">
+          <DarkModeToggle />
+          
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button 
                 variant="ghost" 
                 size="icon"
-                className="text-gray-700 hover:text-vextor-600 transition-colors"
+                className="text-gray-700 dark:text-gray-300 hover:text-vextor-600 dark:hover:text-vextor-400 transition-colors"
               >
                 <Globe className="h-5 w-5" />
               </Button>

@@ -11,16 +11,13 @@ const AppPage = () => {
   }, []);
 
   return (
-    <VantaBackground className="min-h-screen">
-      <div className="flex flex-col min-h-screen bg-transparent backdrop-blur-sm">
-        <AppHeader />
-        <main className="flex-grow p-6">
-          <SitemapSearch />
-        </main>
-      </div>
-    </VantaBackground>
+    <div className="flex flex-col min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white">
+      <AppHeader />
+      <main className="flex-grow p-6">
+        <SitemapSearch />
+      </main>
+    </div>
   );
 };
 
 export default AppPage;
-

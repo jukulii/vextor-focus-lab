@@ -36,7 +36,7 @@ const VantaBackground = ({ children, className = '' }: VantaBackgroundProps) => 
         scaleMobile: 1.00,
         color: 0xff0077,
         color2: 0x8800ff,
-        backgroundColor: 0x111122,
+        backgroundColor: 0x000000,
         size: 3.00,
         spacing: 30.00,
         showLines: false
@@ -62,4 +62,3 @@ const VantaBackground = ({ children, className = '' }: VantaBackgroundProps) => 
 };
 
 export default VantaBackground;
-
