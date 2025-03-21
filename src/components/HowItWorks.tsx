@@ -37,7 +37,7 @@ const HowItWorks = () => {
               {t('how_it_works_title')}
             </h2>
           </div>
-          <p className="text-lg text-gray-300 mt-4 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-500 mt-4 max-w-2xl mx-auto">
             Follow these simple steps to optimize your content
           </p>
         </div>
@@ -50,7 +50,7 @@ const HowItWorks = () => {
                   <step.icon className="h-7 w-7 text-vextor-400" />
                 </div>
                 <h3 className="font-bold text-white mb-2 text-lg">{step.title}</h3>
-                <p className="text-gray-300">{step.description}</p>
+                <p className="text-gray-500">{step.description}</p>
               </div>
               
               {index < steps.length - 1 && (
