@@ -1,5 +1,5 @@
 
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { AgCharts } from 'ag-charts-community';
 import { AgChartOptions } from 'ag-charts-community';
 
@@ -10,6 +10,7 @@ interface AgChartDemoProps {
 
 const AgChartDemo: React.FC<AgChartDemoProps> = ({ title, className }) => {
   const chartRef = useRef<HTMLDivElement>(null);
+  const [chart, setChart] = useState<any>(null);
   
   const chartOptions: AgChartOptions = {
     title: {
@@ -49,15 +50,34 @@ const AgChartDemo: React.FC<AgChartDemoProps> = ({ title, className }) => {
 
   useEffect(() => {
     if (chartRef.current) {
-      AgCharts.create(chartOptions, chartRef.current);
+      // Create the chart and store the instance
+      const chartInstance = AgCharts.create({
+        ...chartOptions,
+        container: chartRef.current,
+      });
+      
+      setChart(chartInstance);
     }
     
+    // Cleanup function
     return () => {
-      if (chartRef.current) {
-        AgCharts.update(chartOptions, chartRef.current);
+      if (chart) {
+        chart.destroy();
       }
     };
-  }, [chartRef, title]);
+  }, []);
+
+  // Update chart when title changes
+  useEffect(() => {
+    if (chart) {
+      AgCharts.update({
+        ...chartOptions,
+        title: {
+          text: title || 'Website Focus Distribution',
+        },
+      }, chart);
+    }
+  }, [title, chart]);
 
   return (
     <div className={className}>
