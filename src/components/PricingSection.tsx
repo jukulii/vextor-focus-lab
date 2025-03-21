@@ -55,14 +55,14 @@ const PricingSection = () => {
   ];
 
   return (
-    <section id="pricing" className="py-20 bg-gradient-to-b from-gray-50 to-white">
+    <section id="pricing" className="py-20 bg-black border-t border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <span className="bg-purple-100 text-purple-800 px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4">Pricing</span>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <span className="bg-purple-900 text-purple-300 px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4">Pricing</span>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             {t('pricing_title')}
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
             Choose the perfect plan for your needs
           </p>
         </div>
@@ -74,27 +74,27 @@ const PricingSection = () => {
               className={`
                 rounded-xl p-8 transition-all duration-300 
                 ${plan.highlighted 
-                  ? 'bg-gradient-to-br from-white to-vextor-50 border-2 border-vextor-500 shadow-xl scale-105 z-10' 
-                  : 'bg-white border border-gray-100 shadow-md hover:shadow-lg hover:translate-y-[-5px]'
+                  ? 'bg-gradient-to-br from-gray-900 to-vextor-950 border-2 border-vextor-500 shadow-xl scale-105 z-10' 
+                  : 'bg-gray-900 border border-gray-800 shadow-md hover:shadow-lg hover:translate-y-[-5px]'
                 }
               `}
             >
-              <h3 className="text-xl font-bold text-gray-900 mb-2">
+              <h3 className="text-xl font-bold text-white mb-2">
                 {plan.name}
               </h3>
               
               <div className="mt-4 mb-6">
                 {plan.price ? (
                   <div className="flex items-baseline">
-                    <span className="text-4xl font-bold text-gray-900">${plan.price}</span>
-                    <span className="ml-1 text-gray-500">{t('monthly')}</span>
+                    <span className="text-4xl font-bold text-white">${plan.price}</span>
+                    <span className="ml-1 text-gray-400">{t('monthly')}</span>
                   </div>
                 ) : (
-                  <div className="text-2xl font-bold text-gray-900 mt-4">
+                  <div className="text-2xl font-bold text-white mt-4">
                     {t('contact_us')}
                   </div>
                 )}
-                <p className="text-gray-600 mt-2 text-sm">
+                <p className="text-gray-300 mt-2 text-sm">
                   {plan.description}
                 </p>
               </div>
@@ -102,10 +102,10 @@ const PricingSection = () => {
               <ul className="mt-6 mb-10 space-y-3">
                 {plan.features.map((feature, i) => (
                   <li key={i} className="flex items-start">
-                    <div className={`mt-0.5 rounded-full p-1 ${plan.highlighted ? 'bg-vextor-100' : 'bg-gray-100'}`}>
-                      <CheckIcon className={`h-3 w-3 ${plan.highlighted ? 'text-vextor-600' : 'text-gray-600'}`} />
+                    <div className={`mt-0.5 rounded-full p-1 ${plan.highlighted ? 'bg-vextor-900' : 'bg-gray-800'}`}>
+                      <CheckIcon className={`h-3 w-3 ${plan.highlighted ? 'text-vextor-400' : 'text-gray-400'}`} />
                     </div>
-                    <span className="ml-3 text-gray-600 text-sm">{feature}</span>
+                    <span className="ml-3 text-gray-300 text-sm">{feature}</span>
                   </li>
                 ))}
               </ul>
@@ -115,7 +115,7 @@ const PricingSection = () => {
                   className={`w-full ${
                     plan.highlighted 
                       ? 'bg-vextor-600 hover:bg-vextor-700 shadow-md hover:shadow-lg' 
-                      : 'bg-gray-900 hover:bg-gray-800'
+                      : 'bg-gray-800 hover:bg-gray-700'
                   }`}
                 >
                   {plan.buttonText}
