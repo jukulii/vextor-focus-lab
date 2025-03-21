@@ -24,7 +24,7 @@ const VantaBackground = ({ children, className = '' }: VantaBackgroundProps) => 
     
     // Make sure VANTA is available
     if (typeof window.VANTA !== 'undefined' && !isInitialized) {
-      // Initialize the effect
+      // Initialize the effect with graph-like settings
       vantaEffect.current = window.VANTA.DOTS({
         el: vantaRef.current,
         mouseControls: true,
@@ -34,16 +34,23 @@ const VantaBackground = ({ children, className = '' }: VantaBackgroundProps) => 
         minWidth: 200.00,
         scale: 1.00,
         scaleMobile: 1.00,
-        color: 0xff0077,
-        color2: 0x8800ff,
+        color: 0x33C3F0,      // Bright blue
+        color2: 0xD946EF,     // Magenta pink
         backgroundColor: 0x000000,
-        size: 3.00,
-        spacing: 30.00,
-        showLines: false
+        size: 6.00,           // Larger dot size
+        spacing: 15.00,       // Tighter spacing for grid appearance
+        showLines: true,      // Show connecting lines for graph effect
+        speed: 1.8,           // Faster animation
+        points: 28,           // More points for denser graph
+        maxDistance: 25.00,   // Decreased maximum distance for more connections
+        lineColor: 0x0EA5E9,  // Line color that matches the dots
+        lineWidth: 0.8,       // Slightly thicker lines
+        highlightColor: 0xF97316,  // Bright orange highlight
+        highlightIntensity: 0.8    // Higher intensity highlight
       });
       
       setIsInitialized(true);
-      console.log('VANTA DOTS initialized');
+      console.log('VANTA DOTS initialized with graph-like settings');
     }
 
     // Cleanup function
