@@ -23,7 +23,7 @@ const HeroSection = () => {
                 size="lg" 
                 className="bg-vextor-600 hover:bg-vextor-700 transition-colors button-glow px-8 py-6 text-lg"
               >
-                {t('get_started')}
+                {t('analyse')}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>
