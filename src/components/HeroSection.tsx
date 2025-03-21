@@ -16,7 +16,7 @@ const HeroSection = () => {
     
     // Make sure VANTA is available
     if (typeof window.VANTA !== 'undefined' && !isInitialized) {
-      // Initialize the effect with enhanced settings
+      // Initialize the effect with more visible settings
       vantaEffect.current = window.VANTA.DOTS({
         el: vantaRef.current,
         mouseControls: true,
@@ -26,21 +26,21 @@ const HeroSection = () => {
         minWidth: 200.00,
         scale: 1.00,
         scaleMobile: 1.00,
-        color: 0xff0077,      // Bright pink
-        color2: 0x8800ff,     // Purple
+        color: 0x33C3F0,      // Bright blue - more visible
+        color2: 0xD946EF,     // Magenta pink - more visible
         backgroundColor: 0x000000,
-        size: 4.50,           // Increased dot size
-        spacing: 20.00,       // Decreased spacing for more dots
+        size: 6.50,           // Much larger dot size for visibility
+        spacing: 15.00,       // Tighter spacing for more dots
         showLines: true,
-        speed: 1.5,           // Slightly faster animation
-        points: 18,           // More points for denser effect
-        maxDistance: 25.00,   // Maximum distance between points
-        highlightColor: 0xff3366,  // Highlight color for interactive dots
-        highlightIntensity: 0.5    // Intensity of the highlight
+        speed: 1.8,           // Faster animation for more noticeable movement
+        points: 22,           // More points for denser effect
+        maxDistance: 30.00,   // Increased maximum distance between points
+        highlightColor: 0xF97316,  // Bright orange highlight
+        highlightIntensity: 0.8    // Higher intensity highlight
       });
       
       setIsInitialized(true);
-      console.log('HeroSection VANTA DOTS initialized with enhanced settings');
+      console.log('HeroSection VANTA DOTS initialized with highly visible settings');
     }
 
     // Cleanup function
@@ -59,7 +59,7 @@ const HeroSection = () => {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 fade-in leading-tight">
               {t('hero_title')}
             </h1>
-            <p className="text-xl text-gray-500 mb-8 fade-in stagger-1 max-w-2xl mx-auto text-balance">
+            <p className="text-xl text-white mb-8 fade-in stagger-1 max-w-2xl mx-auto text-balance">
               {t('hero_subtitle')}
             </p>
             <div className="space-x-4 fade-in stagger-2">
