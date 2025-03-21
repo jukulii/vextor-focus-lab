@@ -24,7 +24,7 @@ const HeroSection = () => {
                   size="lg" 
                   className="bg-vextor-600 hover:bg-vextor-700 transition-all duration-300 button-glow px-8 py-6 text-lg shadow-lg hover:shadow-xl"
                 >
-                  {t('analyse')}
+                  Analyze
                   <Rocket className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
