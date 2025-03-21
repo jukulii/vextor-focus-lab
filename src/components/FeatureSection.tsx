@@ -13,7 +13,7 @@ const FeatureSection = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Stay focused. Rank higher
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-500 max-w-3xl mx-auto">
             Vextor helps you evaluate and improve your website's content relevance.
           </p>
         </div>
@@ -26,7 +26,7 @@ const FeatureSection = () => {
             <h3 className="text-xl font-semibold text-white mb-3">
               {t('benefit_1_title')}
             </h3>
-            <p className="text-gray-300">
+            <p className="text-gray-500">
               {t('benefit_1_desc')}
             </p>
           </div>
@@ -38,7 +38,7 @@ const FeatureSection = () => {
             <h3 className="text-xl font-semibold text-white mb-3">
               {t('benefit_2_title')}
             </h3>
-            <p className="text-gray-300">
+            <p className="text-gray-500">
               {t('benefit_2_desc')}
             </p>
           </div>

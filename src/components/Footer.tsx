@@ -11,7 +11,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between">
           <div className="mb-8 md:mb-0">
             <div className="text-vextor-500 font-bold text-2xl mb-4">Vextor</div>
-            <p className="text-gray-400 max-w-md">
+            <p className="text-gray-500 max-w-md">
               Advanced website analysis tool to improve your content focus and SEO performance.
             </p>
           </div>
@@ -23,17 +23,17 @@ const Footer = () => {
               </h3>
               <ul className="space-y-3">
                 <li>
-                  <a href="#features" className="text-gray-400 hover:text-vextor-500 transition-colors">
+                  <a href="#features" className="text-gray-500 hover:text-vextor-500 transition-colors">
                     Features
                   </a>
                 </li>
                 <li>
-                  <a href="#pricing" className="text-gray-400 hover:text-vextor-500 transition-colors">
+                  <a href="#pricing" className="text-gray-500 hover:text-vextor-500 transition-colors">
                     Pricing
                   </a>
                 </li>
                 <li>
-                  <Link to="/app" className="text-gray-400 hover:text-vextor-500 transition-colors">
+                  <Link to="/app" className="text-gray-500 hover:text-vextor-500 transition-colors">
                     Get Started
                   </Link>
                 </li>
@@ -46,17 +46,17 @@ const Footer = () => {
               </h3>
               <ul className="space-y-3">
                 <li>
-                  <a href="#" className="text-gray-400 hover:text-vextor-500 transition-colors">
+                  <a href="#" className="text-gray-500 hover:text-vextor-500 transition-colors">
                     Documentation
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-gray-400 hover:text-vextor-500 transition-colors">
+                  <a href="#" className="text-gray-500 hover:text-vextor-500 transition-colors">
                     Blog
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-gray-400 hover:text-vextor-500 transition-colors">
+                  <a href="#" className="text-gray-500 hover:text-vextor-500 transition-colors">
                     FAQ
                   </a>
                 </li>
@@ -69,12 +69,12 @@ const Footer = () => {
               </h3>
               <ul className="space-y-3">
                 <li>
-                  <a href="#" className="text-gray-400 hover:text-vextor-500 transition-colors">
+                  <a href="#" className="text-gray-500 hover:text-vextor-500 transition-colors">
                     {t('privacy_policy')}
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-gray-400 hover:text-vextor-500 transition-colors">
+                  <a href="#" className="text-gray-500 hover:text-vextor-500 transition-colors">
                     {t('terms_of_service')}
                   </a>
                 </li>

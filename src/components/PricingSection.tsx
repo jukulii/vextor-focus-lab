@@ -62,7 +62,7 @@ const PricingSection = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             {t('pricing_title')}
           </h2>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-500 max-w-2xl mx-auto">
             Choose the perfect plan for your needs
           </p>
         </div>
@@ -87,14 +87,14 @@ const PricingSection = () => {
                 {plan.price ? (
                   <div className="flex items-baseline">
                     <span className="text-4xl font-bold text-white">${plan.price}</span>
-                    <span className="ml-1 text-gray-400">{t('monthly')}</span>
+                    <span className="ml-1 text-gray-500">{t('monthly')}</span>
                   </div>
                 ) : (
                   <div className="text-2xl font-bold text-white mt-4">
                     {t('contact_us')}
                   </div>
                 )}
-                <p className="text-gray-300 mt-2 text-sm">
+                <p className="text-gray-500 mt-2 text-sm">
                   {plan.description}
                 </p>
               </div>
@@ -105,7 +105,7 @@ const PricingSection = () => {
                     <div className={`mt-0.5 rounded-full p-1 ${plan.highlighted ? 'bg-vextor-900' : 'bg-gray-800'}`}>
                       <CheckIcon className={`h-3 w-3 ${plan.highlighted ? 'text-vextor-400' : 'text-gray-400'}`} />
                     </div>
-                    <span className="ml-3 text-gray-300 text-sm">{feature}</span>
+                    <span className="ml-3 text-gray-500 text-sm">{feature}</span>
                   </li>
                 ))}
               </ul>

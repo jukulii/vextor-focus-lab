@@ -114,7 +114,7 @@ const BenefitSection = () => {
                 <h3 className="text-lg font-semibold text-white mb-2">
                   {benefit.title}
                 </h3>
-                <p className="text-gray-300 text-sm">
+                <p className="text-gray-500 text-sm">
                   {benefit.description}
                 </p>
               </div>
