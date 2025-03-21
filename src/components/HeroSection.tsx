@@ -2,57 +2,16 @@
 import { Button } from "@/components/ui/button";
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Rocket } from 'lucide-react';
-import { useEffect, useRef } from 'react';
+import { Rocket } from 'lucide-react';
 
 const HeroSection = () => {
   const { t } = useLanguage();
-  const vantaGraphRef = useRef<HTMLDivElement>(null);
-  const vantaEffect = useRef<any>(null);
-
-  useEffect(() => {
-    if (!vantaGraphRef.current || !window.VANTA) return;
-
-    // Create a separate Vanta effect for this specific container
-    vantaEffect.current = window.VANTA.DOTS({
-      el: vantaGraphRef.current,
-      mouseControls: true,
-      touchControls: true,
-      gyroControls: false,
-      minHeight: 300,
-      minWidth: 300,
-      scale: 1.00,
-      scaleMobile: 1.00,
-      color: 0xff0077,
-      color2: 0x8800ff,
-      backgroundColor: 0x111122,
-      size: 2.50,
-      spacing: 20.00,
-      showLines: true
-    });
-
-    return () => {
-      if (vantaEffect.current) {
-        vantaEffect.current.destroy();
-      }
-    };
-  }, []);
   
-  // Sample data for the graph demo
-  const data = [
-    { name: 'Jan', value: 400 },
-    { name: 'Feb', value: 300 },
-    { name: 'Mar', value: 600 },
-    { name: 'Apr', value: 800 },
-    { name: 'May', value: 500 },
-    { name: 'Jun', value: 900 },
-  ];
-
   return (
     <section className="pt-24 pb-12 md:pt-32 md:pb-16 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center">
-          <div className="text-center md:text-left md:w-1/2 z-10">
+          <div className="text-center md:text-left md:w-full z-10">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 fade-in leading-tight">
               {t('hero_title')}
             </h1>
@@ -69,16 +28,6 @@ const HeroSection = () => {
                   <Rocket className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
-            </div>
-          </div>
-          
-          <div className="mt-12 md:mt-0 md:w-1/2 relative z-0 flex justify-center">
-            <div className="relative w-full max-w-md">
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-vextor-400 to-purple-400 rounded-full blur-3xl opacity-20"></div>
-              <div 
-                ref={vantaGraphRef} 
-                className="h-[300px] rounded-2xl overflow-hidden shadow-xl border border-white/10"
-              ></div>
             </div>
           </div>
         </div>
