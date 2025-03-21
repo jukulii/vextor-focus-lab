@@ -36,17 +36,19 @@ const LandingPage = () => {
   }, []);
 
   return (
-    <div className="flex flex-col min-h-screen bg-black text-white">
-      <VantaBackground className="min-h-screen w-full">
-        <Navbar isDark={true} />
-        <main className="flex-grow">
-          <HeroSection />
-          <HowItWorks />
-          <FeatureSection />
-          <BenefitSection />
-          <PricingSection />
-        </main>
-        <Footer />
+    <div className="flex flex-col min-h-screen bg-black text-white relative">
+      <VantaBackground className="min-h-screen">
+        <div className="flex flex-col min-h-screen w-full">
+          <Navbar isDark={true} />
+          <main className="flex-grow">
+            <HeroSection />
+            <HowItWorks />
+            <FeatureSection />
+            <BenefitSection />
+            <PricingSection />
+          </main>
+          <Footer />
+        </div>
       </VantaBackground>
     </div>
   );
