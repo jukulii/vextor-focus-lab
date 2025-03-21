@@ -47,7 +47,7 @@ const HowItWorks = () => {
                   <step.icon className="h-6 w-6 text-vextor-600" />
                 </div>
                 <h3 className="font-medium text-gray-900 mb-2">{step.title}</h3>
-                <p className="text-sm text-gray-600 mt-auto mb-auto">{step.description}</p>
+                <p className="text-sm text-gray-600">{step.description}</p>
               </div>
               
               {index < steps.length - 1 && (
