@@ -6,6 +6,7 @@ import FeatureSection from '@/components/FeatureSection';
 import BenefitSection from '@/components/BenefitSection';
 import PricingSection from '@/components/PricingSection';
 import Footer from '@/components/Footer';
+import VantaBackground from '@/components/VantaBackground';
 import { useEffect } from 'react';
 
 const LandingPage = () => {
@@ -16,15 +17,17 @@ const LandingPage = () => {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Navbar />
-      <main className="flex-grow">
-        <HeroSection />
-        <HowItWorks />
-        <FeatureSection />
-        <BenefitSection />
-        <PricingSection />
-      </main>
-      <Footer />
+      <VantaBackground className="min-h-screen">
+        <Navbar />
+        <main className="flex-grow">
+          <HeroSection />
+          <HowItWorks />
+          <FeatureSection />
+          <BenefitSection />
+          <PricingSection />
+        </main>
+        <Footer />
+      </VantaBackground>
     </div>
   );
 };
