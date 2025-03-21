@@ -197,10 +197,6 @@ const translations: Translations = {
     en: "Primary content pattern",
     pl: "Główny wzorzec treści"
   },
-  "analyse": { 
-    en: "Analyse", 
-    pl: "Analizuj" 
-  },
 };
 
 interface LanguageContextType {
