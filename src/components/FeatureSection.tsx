@@ -18,7 +18,7 @@ const FeatureSection = () => {
           <div className="w-24 h-1 bg-vextor-500 mx-auto mt-6"></div>
         </div>
         
-        <div className="grid md:grid-cols-2 gap-12 mt-16">
+        <div className="grid md:grid-cols-2 gap-12 mt-16 hidden">
           <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
             <div className="w-12 h-12 bg-vextor-100 rounded-lg flex items-center justify-center mb-6">
               <Rocket className="h-6 w-6 text-vextor-600" />
