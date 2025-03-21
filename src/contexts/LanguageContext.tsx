@@ -1,3 +1,4 @@
+
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 type Language = 'en' | 'pl';
@@ -60,7 +61,7 @@ const translations: Translations = {
     en: "Improve your search rankings with topically focused content",
     pl: "Popraw swoje pozycje w wyszukiwarkach dzięki tematycznie ukierunkowanym treściom"
   },
-  "benefit_4_title": { en: "Better User Engagement", pl: "Lepsze zaangażowanie użytkowników" },
+  "benefit_4_title": { en: "Future-proof your SEO for the era of LLMs and semantic indexing", pl: "Przygotuj SEO na erę LLM i indeksowania semantycznego" },
   "benefit_4_desc": { 
     en: "Keep visitors on your site longer with relevant, coherent content",
     pl: "Zatrzymaj odwiedzających na swojej stronie dłużej dzięki odpowiednim, spójnym treściom"
@@ -70,7 +71,7 @@ const translations: Translations = {
     en: "Discover missing topics that could enhance your site's authority",
     pl: "Odkryj brakujące tematy, które mogą zwiększyć autorytet Twojej witryny"
   },
-  "benefit_6_title": { en: "Competitive Edge", pl: "Przewaga konkurencyjna" },
+  "benefit_6_title": { en: "Understand how Google evaluates your site", pl: "Zrozum, jak Google ocenia Twoją stronę" },
   "benefit_6_desc": { 
     en: "Understand how your content focus compares to competitors",
     pl: "Zrozum, jak ukierunkowanie Twoich treści wypada na tle konkurencji"
