@@ -27,7 +27,7 @@ const translations: Translations = {
     pl: "Odblokuj kompleksowy wgląd w tematykę treści swojej strony i popraw wydajność SEO"
   },
   "get_started": { en: "Get Started", pl: "Rozpocznij" },
-  "analyze": { en: "Analyze", pl: "Analizuj" },
+  "analyse": { en: "Analyse", pl: "Analizuj" },
   
   // How it works section
   "how_it_works_title": { en: "How It Works", pl: "Jak to działa" },
