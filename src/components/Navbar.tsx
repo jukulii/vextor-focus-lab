@@ -27,6 +27,12 @@ const Navbar = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
+  const scrollToTop = (event: React.MouseEvent) => {
+    event.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setMobileMenuOpen(false);
+  };
+
   return <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white/90 backdrop-blur-md shadow-sm py-3' : 'bg-transparent py-5'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
@@ -40,9 +46,9 @@ const Navbar = () => {
           </div>
           
           <div className="hidden md:flex items-center space-x-8">
-            <Link to="/" className="text-gray-700 hover:text-vextor-600 transition-colors font-medium">
+            <a href="#" onClick={scrollToTop} className="text-gray-700 hover:text-vextor-600 transition-colors font-medium">
               {t('home')}
-            </Link>
+            </a>
             <a href="#how-it-works" className="text-gray-700 hover:text-vextor-600 transition-colors font-medium">
               {t('how_it_works')}
             </a>
@@ -86,9 +92,9 @@ const Navbar = () => {
         {/* Mobile menu */}
         {mobileMenuOpen && <div className="md:hidden bg-white mt-3 p-4 rounded-lg shadow-lg border border-gray-100 animate-fade-in">
             <div className="flex flex-col space-y-4">
-              <Link to="/" className="text-gray-700 hover:text-vextor-600 font-medium py-2" onClick={() => setMobileMenuOpen(false)}>
+              <a href="#" onClick={scrollToTop} className="text-gray-700 hover:text-vextor-600 font-medium py-2">
                 {t('home')}
-              </Link>
+              </a>
               <a href="#how-it-works" className="text-gray-700 hover:text-vextor-600 font-medium py-2" onClick={() => setMobileMenuOpen(false)}>
                 {t('how_it_works')}
               </a>

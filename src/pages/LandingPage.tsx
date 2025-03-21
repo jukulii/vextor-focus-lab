@@ -13,6 +13,26 @@ const LandingPage = () => {
   // Scroll to top when the page loads
   useEffect(() => {
     window.scrollTo(0, 0);
+    
+    // Handle hash links for smooth scrolling
+    const handleHashChange = () => {
+      const hash = window.location.hash;
+      if (hash) {
+        const element = document.querySelector(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    };
+    
+    // Run once on mount to handle initial hash
+    handleHashChange();
+    
+    // Add event listener for hash changes
+    window.addEventListener('hashchange', handleHashChange);
+    
+    // Clean up
+    return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
   return (
