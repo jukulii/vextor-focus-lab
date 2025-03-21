@@ -9,7 +9,7 @@ interface VantaBackgroundProps {
 declare global {
   interface Window {
     VANTA: {
-      TRUNK: (config: any) => any;
+      DOTS: (config: any) => any;
     };
   }
 }
@@ -25,7 +25,7 @@ const VantaBackground = ({ children, className = '' }: VantaBackgroundProps) => 
     // Make sure VANTA is available
     if (typeof window.VANTA !== 'undefined' && !isInitialized) {
       // Initialize the effect
-      vantaEffect.current = window.VANTA.TRUNK({
+      vantaEffect.current = window.VANTA.DOTS({
         el: vantaRef.current,
         mouseControls: true,
         touchControls: true,
@@ -34,37 +34,16 @@ const VantaBackground = ({ children, className = '' }: VantaBackgroundProps) => 
         minWidth: 200.00,
         scale: 1.00,
         scaleMobile: 1.00,
-        color: 0x4e9b8c,
-        backgroundColor: 0xffffff,
-        spacing: 5.00,
-        chaos: 6.00,
-        showDots: true,
-        showLines: true,
-        showDistance: true,
-        trunk: 4,
-        forceAnimate: true,
-        graphData: [4, 8, 12, 8, 4, 8, 12, 16], // Enhanced data points for the graph
-        graphMode: true,
-        graphScale: 0.8,
-        graphSpeed: 1.5,
-        graphDensity: 0.8
+        color: 0xff0077,
+        color2: 0x8800ff,
+        backgroundColor: 0x111122,
+        size: 3.00,
+        spacing: 30.00,
+        showLines: false
       });
       
       setIsInitialized(true);
-      
-      // Enhance graph visualization in containers
-      setTimeout(() => {
-        const graphContainers = document.querySelectorAll('.vanta-graph-container');
-        graphContainers.forEach(container => {
-          if (container instanceof HTMLElement) {
-            container.dataset.vantaGraphEnabled = 'true';
-            container.dataset.vantaGraphScale = '1.2';
-            container.dataset.vantaGraphSpeed = '2';
-          }
-        });
-        
-        console.log('VANTA TRUNK initialized with graph visualization enabled');
-      }, 500);
+      console.log('VANTA DOTS initialized');
     }
 
     // Cleanup function
@@ -83,3 +62,4 @@ const VantaBackground = ({ children, className = '' }: VantaBackgroundProps) => 
 };
 
 export default VantaBackground;
+
