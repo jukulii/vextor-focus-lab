@@ -7,7 +7,7 @@ const HowItWorks = () => {
 
   const steps = [
     {
-      title: t('step_1'),
+      title: "Add sitemap or domain",
       icon: SearchIcon,
       description: "Enter sitemap or domain to begin the analysis process"
     },
