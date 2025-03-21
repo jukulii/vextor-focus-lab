@@ -5,10 +5,20 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { LineChart, Line, PieChart, Pie, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, ScatterChart, Scatter, ZAxis } from 'recharts';
 import { LayoutDashboard, Search, Copy, GanttChart, Compass, Link2 } from 'lucide-react';
+import { 
+  Pagination, 
+  PaginationContent, 
+  PaginationEllipsis, 
+  PaginationItem, 
+  PaginationLink, 
+  PaginationNext, 
+  PaginationPrevious 
+} from '@/components/ui/pagination';
 
 const AnalysisResults = () => {
   const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState('overview');
+  const [currentPage, setCurrentPage] = useState(1);
 
   const gaugeData = [
     { name: 'value', value: 55 }
@@ -95,6 +105,21 @@ const AnalysisResults = () => {
   
   const allClusterData = [...cluster1, ...cluster2, ...cluster3];
 
+  const totalPages = 10;
+  
+  const handlePageChange = (page: number) => {
+    if (page < 1 || page > totalPages) return;
+    setCurrentPage(page);
+  };
+  
+  const explorationPages = [
+    { id: 1, title: "Homepage Exploration", createdAt: "2023-06-15" },
+    { id: 2, title: "Blog Section Analysis", createdAt: "2023-06-16" },
+    { id: 3, title: "Product Pages Overview", createdAt: "2023-06-17" },
+    { id: 4, title: "Category Structure", createdAt: "2023-06-18" },
+    { id: 5, title: "Navigation Path Analysis", createdAt: "2023-06-19" },
+  ];
+
   const renderGauge = (value: number) => {
     const colors = ["#FF5252", "#FFA726", "#66BB6A"];
     let fillColor;
@@ -131,7 +156,7 @@ const AnalysisResults = () => {
     if (active && payload && payload.length) {
       return (
         <div className="bg-white p-2 border rounded shadow">
-          <p className="font-medium">{`${label || ''}`}</p>
+          <p className="font-medium">{`${payload[0].name || ''}`}</p>
           <p className="text-sm">{`${payload[0].name}: ${payload[0].value}`}</p>
         </div>
       );
@@ -561,18 +586,49 @@ const AnalysisResults = () => {
                 Interactive exploration of content relationships.
               </p>
               
-              <div className="bg-gray-100 p-8 rounded-lg flex items-center justify-center h-96">
-                <p className="text-gray-500 text-center">
-                  {t('exploration')} - {t('summary')}
-                </p>
+              <div className="relative border rounded-lg overflow-hidden">
+                <img 
+                  src="/lovable-uploads/64f106cc-ac24-48a4-8ed0-2f2374a623aa.png" 
+                  alt="Graph visualization" 
+                  className="w-full h-auto"
+                />
+                <div className="absolute top-3 left-3 bg-gray-800 bg-opacity-75 p-2 rounded text-white text-xs">
+                  {t('exploration')} {currentPage} / {totalPages}
+                </div>
               </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-      </Tabs>
-    </div>
-  );
-};
-
-export default AnalysisResults;
+              
+              <div className="mt-6">
+                <h4 className="text-lg font-medium mb-4">{t('exploration_details')}</h4>
+                <div className="overflow-hidden border rounded-md mb-4">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead className="w-[50px]">#</TableHead>
+                        <TableHead>{t('title')}</TableHead>
+                        <TableHead className="text-right">{t('date')}</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {explorationPages.map((page) => (
+                        <TableRow key={page.id}>
+                          <TableCell>{page.id}</TableCell>
+                          <TableCell className="font-medium">{page.title}</TableCell>
+                          <TableCell className="text-right">{page.createdAt}</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
+                
+                <Pagination>
+                  <PaginationContent>
+                    <PaginationItem>
+                      <PaginationPrevious 
+                        onClick={() => handlePageChange(currentPage - 1)}
+                        className={currentPage === 1 ? "cursor-not-allowed opacity-50" : "cursor-pointer"}
+                      />
+                    </PaginationItem>
+                    
+                    {[...Array(Math.min(5, totalPages))].map((_, index) => {
+                      let
 
