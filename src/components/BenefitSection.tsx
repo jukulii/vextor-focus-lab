@@ -1,6 +1,9 @@
+
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ArrowUpRight, UserCheck, Search, Trophy } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { Separator } from '@/components/ui/separator';
+
 const mockData = [{
   name: 'Jan',
   before: 30,
@@ -55,8 +58,9 @@ const BenefitSection = () => {
     iconColor: 'text-graph-purple',
     bgColor: 'bg-purple-900'
   }];
-  return <section className="py-16 border-t border-gray-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  return <section className="py-16">
+      <Separator className="h-px bg-gray-800/20" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
         <div className="text-center mb-12">
           <span className="bg-blue-900 text-blue-300 px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4">Benefits</span>
           <h2 className="text-3xl md:text-4xl mb-4 font-bold text-zinc-50">
@@ -68,7 +72,7 @@ const BenefitSection = () => {
         </div>
         
         <div className="grid grid-cols-1 gap-8">
-          <div className="bg-gray-900 rounded-xl p-8 shadow-md border border-gray-800 hover:shadow-lg transition-all duration-300">
+          <div className="bg-gray-900/30 rounded-xl p-8 shadow-md border border-gray-800/30 hover:shadow-lg transition-all duration-300">
             <h3 className="text-lg font-semibold text-white mb-4">
               SEO Performance Improvement
             </h3>
@@ -106,7 +110,7 @@ const BenefitSection = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {benefits.map((benefit, index) => <div key={index} className="bg-gray-900 rounded-xl p-6 shadow-md border border-gray-800 hover:shadow-lg transition-all duration-300 hover:translate-y-[-5px]">
+            {benefits.map((benefit, index) => <div key={index} className="bg-gray-900/30 rounded-xl p-6 shadow-md border border-gray-800/30 hover:shadow-lg transition-all duration-300 hover:translate-y-[-5px]">
                 <div className={`w-12 h-12 ${benefit.bgColor} rounded-full flex items-center justify-center mb-4`}>
                   <benefit.icon className={`h-5 w-5 ${benefit.iconColor}`} />
                 </div>
