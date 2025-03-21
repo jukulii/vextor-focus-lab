@@ -8,7 +8,7 @@ const HeroSection = () => {
   const { t } = useLanguage();
   
   return (
-    <section className="pt-36 pb-16 md:pt-48 md:pb-20 relative overflow-hidden">
+    <section className="pt-48 pb-24 md:pt-64 md:pb-32 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center justify-center">
           <div className="text-center w-full max-w-3xl mx-auto z-10">
