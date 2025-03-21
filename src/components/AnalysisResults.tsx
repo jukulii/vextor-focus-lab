@@ -4,13 +4,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { LineChart, Line, PieChart, Pie, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
-import { LayoutDashboard, Search, Copy, GanttChart, Compass } from 'lucide-react';
+import { LayoutDashboard, Search, Copy, GanttChart, Compass, Link2 } from 'lucide-react';
 
 const AnalysisResults = () => {
   const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState('overview');
 
-  // Mock data for charts
   const gaugeData = [
     { name: 'value', value: 55 }
   ];
@@ -54,6 +53,14 @@ const AnalysisResults = () => {
     { id: 6, url: 'Senuto.com/about', proximity: 0.3 },
     { id: 7, url: 'Senuto.com/contact', proximity: 0.2 },
     { id: 8, url: 'Senuto.com/pricing', proximity: 0.1 },
+  ];
+
+  const urlSimilarityData = [
+    { id: 0, url1: 'Senuto.com/blog/seo-tips', url2: 'Senuto.com/blog/seo-guide', score: 0.9 },
+    { id: 1, url1: 'Senuto.com/features', url2: 'Senuto.com/features-overview', score: 0.9 },
+    { id: 2, url1: 'Senuto.com/pricing/monthly', url2: 'Senuto.com/pricing/annual', score: 0.9 },
+    { id: 3, url1: 'Senuto.com/blog/content-marketing', url2: 'Senuto.com/blog/content-strategy', score: 0.9 },
+    { id: 4, url1: 'Senuto.com/tools/keyword-research', url2: 'Senuto.com/tools/keyword-finder', score: 0.9 },
   ];
 
   const renderGauge = (value: number) => {
@@ -141,7 +148,7 @@ const AnalysisResults = () => {
               value="canonicalization" 
               className="flex items-center gap-2 data-[state=active]:border-b-2 data-[state=active]:border-blue-500 rounded-none px-4 py-2"
             >
-              <Copy className="h-4 w-4" />
+              <Link2 className="h-4 w-4" />
               {t('canonicalization')}
             </TabsTrigger>
             <TabsTrigger 
@@ -355,8 +362,34 @@ const AnalysisResults = () => {
             <CardContent className="pt-6">
               <h3 className="text-xl font-medium mb-4">{t('canonicalization')}</h3>
               <p className="text-gray-600 mb-6">
-                Identification of duplicate or similar content across the site.
+                {t('canonicalization_description') || 'Identification of duplicate or similar content across the site.'}
               </p>
+              
+              <div className="mb-8">
+                <h4 className="text-lg font-medium mb-4">{t('urls_to_centroid') || "URL's to centroid"}</h4>
+                <div className="overflow-hidden border rounded-md">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead className="w-[50px]">#</TableHead>
+                        <TableHead>{t('url')} 1</TableHead>
+                        <TableHead>{t('url')} 2</TableHead>
+                        <TableHead className="text-right">{t('similarity_score') || 'Similarity score'}</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {urlSimilarityData.map((item) => (
+                        <TableRow key={item.id}>
+                          <TableCell>{item.id}</TableCell>
+                          <TableCell className="font-medium">{item.url1}</TableCell>
+                          <TableCell className="font-medium">{item.url2}</TableCell>
+                          <TableCell className="text-right">{item.score}</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
+              </div>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="h-72">
