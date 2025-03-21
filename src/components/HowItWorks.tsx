@@ -1,6 +1,6 @@
 
 import { useLanguage } from '@/contexts/LanguageContext';
-import { SearchIcon, MousePointerClick, LineChart, Lightbulb } from 'lucide-react';
+import { SearchIcon, MousePointerClick, LineChart, Lightbulb, ArrowRight } from 'lucide-react';
 
 const HowItWorks = () => {
   const { t } = useLanguage();
@@ -32,27 +32,29 @@ const HowItWorks = () => {
     <section id="how-it-works" className="py-16 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            {t('how_it_works_title')}
-          </h2>
-          <div className="w-24 h-1 bg-vextor-500 mx-auto"></div>
+          <div className="inline-block border-2 border-gray-800 rounded-full px-8 py-3 mb-6">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
+              {t('how_it_works_title')}
+            </h2>
+          </div>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4 md:gap-2 relative">
           {steps.map((step, index) => (
-            <div key={index} className="step-item">
-              <div className={`step ${index === 0 ? 'active' : ''}`}>
-                <step.icon className="h-5 w-5" />
-              </div>
-              <div className="mt-4 text-center">
+            <div key={index} className="flex items-center">
+              <div className="bg-white border-2 border-gray-800 rounded-xl p-6 w-full md:w-52 h-40 flex flex-col justify-center items-center text-center">
+                <step.icon className="h-8 w-8 mb-3 text-vextor-600" />
                 <h3 className="font-medium text-gray-900 mb-1">{step.title}</h3>
                 <p className="text-sm text-gray-600">{step.description}</p>
               </div>
+              
+              {index < steps.length - 1 && (
+                <div className="hidden md:flex items-center justify-center mx-2">
+                  <ArrowRight className="h-6 w-6 text-gray-800" />
+                </div>
+              )}
             </div>
           ))}
-          
-          {/* Progress line between steps */}
-          <div className="hidden md:block absolute top-5 left-[calc(12.5%+20px)] right-[calc(12.5%+20px)] h-0.5 bg-gray-200 z-0"></div>
         </div>
       </div>
     </section>
