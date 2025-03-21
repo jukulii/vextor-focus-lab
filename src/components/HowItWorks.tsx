@@ -42,8 +42,8 @@ const HowItWorks = () => {
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 md:gap-2 relative">
           {steps.map((step, index) => (
             <div key={index} className="flex items-center">
-              <div className="bg-white border-2 border-gray-800 rounded-xl p-6 w-full md:w-52 h-40 flex flex-col justify-center items-center text-center">
-                <div className="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mb-3">
+              <div className="bg-white border-2 border-gray-800 rounded-xl p-6 w-full md:w-52 h-40 flex flex-col items-center text-center">
+                <div className="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mt-1 mb-2">
                   <step.icon className="h-6 w-6 text-vextor-600" />
                 </div>
                 <h3 className="font-medium text-gray-900 mb-1">{step.title}</h3>
