@@ -1,3 +1,4 @@
+
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from "@/components/ui/button";
 import { CheckIcon } from 'lucide-react';
@@ -46,35 +47,35 @@ const PricingSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {pricingPlans.map((plan, index) => <div key={index} className={`
                 rounded-xl p-8 transition-all duration-300 
-                ${plan.highlighted ? 'bg-gradient-to-br from-white to-vextor-50 border-2 border-vextor-500 shadow-xl scale-105 z-10' : 'bg-white border border-gray-200 shadow-md hover:shadow-lg hover:translate-y-[-5px]'}
+                ${plan.highlighted ? 'bg-gradient-to-br from-vextor-900 to-blue-900 border-2 border-vextor-500 shadow-xl scale-105 z-10' : 'bg-gradient-to-br from-vextor-950 to-blue-950 border border-gray-700 shadow-md hover:shadow-lg hover:translate-y-[-5px]'}
               `}>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">
+              <h3 className="text-xl font-bold text-zinc-50 mb-2">
                 {plan.name}
               </h3>
               
               <div className="mt-4 mb-6">
                 {plan.price ? <div className="flex items-baseline">
-                    <span className="text-4xl font-bold text-gray-900">${plan.price}</span>
-                    <span className="ml-1 text-gray-600">{t('monthly')}</span>
-                  </div> : <div className="text-2xl font-bold text-gray-900 mt-4">
+                    <span className="text-4xl font-bold text-zinc-50">${plan.price}</span>
+                    <span className="ml-1 text-zinc-400">{t('monthly')}</span>
+                  </div> : <div className="text-2xl font-bold text-zinc-50 mt-4">
                     {t('contact_us')}
                   </div>}
-                <p className="text-gray-600 mt-2 text-sm">
+                <p className="text-zinc-400 mt-2 text-sm">
                   {plan.description}
                 </p>
               </div>
               
               <ul className="mt-6 mb-10 space-y-3">
                 {plan.features.map((feature, i) => <li key={i} className="flex items-start">
-                    <div className={`mt-0.5 rounded-full p-1 ${plan.highlighted ? 'bg-vextor-100' : 'bg-gray-100'}`}>
-                      <CheckIcon className={`h-3 w-3 ${plan.highlighted ? 'text-vextor-600' : 'text-gray-600'}`} />
+                    <div className={`mt-0.5 rounded-full p-1 ${plan.highlighted ? 'bg-vextor-500/20' : 'bg-vextor-700/20'}`}>
+                      <CheckIcon className={`h-3 w-3 ${plan.highlighted ? 'text-vextor-400' : 'text-vextor-500'}`} />
                     </div>
-                    <span className="ml-3 text-gray-600 text-sm">{feature}</span>
+                    <span className="ml-3 text-zinc-400 text-sm">{feature}</span>
                   </li>)}
               </ul>
               
               <Link to={plan.to}>
-                <Button className={`w-full ${plan.highlighted ? 'bg-vextor-600 hover:bg-vextor-700 shadow-md hover:shadow-lg' : 'bg-gray-200 hover:bg-gray-300 text-gray-800'}`}>
+                <Button className={`w-full ${plan.highlighted ? 'bg-vextor-600 hover:bg-vextor-700 shadow-md hover:shadow-lg' : 'bg-gray-800 hover:bg-gray-700 text-zinc-100'}`}>
                   {plan.buttonText}
                 </Button>
               </Link>
