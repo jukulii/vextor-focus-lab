@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { AgChartsReact } from 'ag-charts-react';
+import { AgChartsReact } from 'ag-charts-community';
 import { AgChartOptions } from 'ag-charts-community';
 
 interface AgChartDemoProps {
@@ -31,7 +31,7 @@ const AgChartDemo: React.FC<AgChartDemoProps> = ({ title, className }) => {
           fontWeight: 'bold',
         },
         fills: ['#4CAF50', '#2196F3', '#FF9800', '#E91E63', '#8BC34A'],
-        stroke: 'white',
+        strokes: 'white',
         strokeWidth: 2,
         tooltip: {
           enabled: true,
