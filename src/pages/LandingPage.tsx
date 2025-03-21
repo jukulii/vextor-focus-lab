@@ -37,9 +37,7 @@ const LandingPage = () => {
 
   return (
     <div className="relative flex flex-col min-h-screen overflow-hidden">
-      <div className="absolute inset-0">
-        <VantaBackground />
-      </div>
+      <VantaBackground />
       <div className="relative z-10 flex flex-col min-h-screen w-full">
         <Navbar isDark={true} />
         <main className="flex-grow">
