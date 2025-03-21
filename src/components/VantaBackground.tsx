@@ -24,7 +24,7 @@ const VantaBackground = ({ children, className = '' }: VantaBackgroundProps) => 
     
     // Make sure VANTA is available
     if (typeof window.VANTA !== 'undefined' && !isInitialized) {
-      // Initialize the effect with settings to match the image
+      // Initialize the effect
       vantaEffect.current = window.VANTA.TRUNK({
         el: vantaRef.current,
         mouseControls: true,
@@ -34,33 +34,37 @@ const VantaBackground = ({ children, className = '' }: VantaBackgroundProps) => 
         minWidth: 200.00,
         scale: 1.00,
         scaleMobile: 1.00,
-        color: 0xff4d8e, // Pink/purple color for the lines
-        backgroundColor: 0x1a1a1a, // Dark background
-        spacing: 3.50, // Tighter line spacing
-        chaos: 2.00, // Less chaos for more circular pattern
-        showDots: false, // No dots for cleaner look
+        color: 0x4e9b8c,
+        backgroundColor: 0xffffff,
+        spacing: 5.00,
+        chaos: 6.00,
+        showDots: true,
         showLines: true,
-        showDistance: false, // No distance display
-        trunk: 10, // Increase trunk size for more circular pattern
+        showDistance: true,
+        trunk: 4,
         forceAnimate: true,
-        trunkThickness: 3.5, // Thinner lines
-        ringSize: 1.0, // Creates more circular rings
-        trunkSizeVariation: 0.3, // Less variation in trunk size
-        concentricRings: true, // Enable concentric ring pattern
-        shape: "circle", // Force circular shape
-        symmetry: 8, // High symmetry for even distribution
-        noiseSpeed: 0.5
+        graphData: [4, 8, 12, 8, 4, 8, 12, 16], // Enhanced data points for the graph
+        graphMode: true,
+        graphScale: 0.8,
+        graphSpeed: 1.5,
+        graphDensity: 0.8
       });
       
       setIsInitialized(true);
       
-      // Add custom styling for a fuller effect
-      const vantaCanvas = vantaRef.current.querySelector('canvas');
-      if (vantaCanvas instanceof HTMLElement) {
-        vantaCanvas.style.opacity = '0.9';
-      }
-      
-      console.log('VANTA TRUNK initialized with circular pattern');
+      // Enhance graph visualization in containers
+      setTimeout(() => {
+        const graphContainers = document.querySelectorAll('.vanta-graph-container');
+        graphContainers.forEach(container => {
+          if (container instanceof HTMLElement) {
+            container.dataset.vantaGraphEnabled = 'true';
+            container.dataset.vantaGraphScale = '1.2';
+            container.dataset.vantaGraphSpeed = '2';
+          }
+        });
+        
+        console.log('VANTA TRUNK initialized with graph visualization enabled');
+      }, 500);
     }
 
     // Cleanup function
@@ -72,7 +76,7 @@ const VantaBackground = ({ children, className = '' }: VantaBackgroundProps) => 
   }, [isInitialized]);
 
   return (
-    <div ref={vantaRef} className={`relative ${className}`} style={{ backgroundColor: '#1a1a1a' }}>
+    <div ref={vantaRef} className={`relative ${className}`}>
       {children}
     </div>
   );
