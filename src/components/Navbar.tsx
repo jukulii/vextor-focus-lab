@@ -1,9 +1,11 @@
+
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Globe, Menu, X } from 'lucide-react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+
 const Navbar = () => {
   const {
     t,
@@ -12,6 +14,7 @@ const Navbar = () => {
   } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
@@ -19,9 +22,11 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
+
   return <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white/90 backdrop-blur-md shadow-sm py-3' : 'bg-transparent py-5'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
@@ -38,11 +43,11 @@ const Navbar = () => {
             <Link to="/" className="text-gray-700 hover:text-vextor-600 transition-colors font-medium">
               {t('home')}
             </Link>
-            <a href="#features" className="text-gray-700 hover:text-vextor-600 transition-colors font-medium">
-              {t('features')}
-            </a>
             <a href="#how-it-works" className="text-gray-700 hover:text-vextor-600 transition-colors font-medium">
               {t('how_it_works')}
+            </a>
+            <a href="#features" className="text-gray-700 hover:text-vextor-600 transition-colors font-medium">
+              {t('features')}
             </a>
             <a href="#pricing" className="text-gray-700 hover:text-vextor-600 transition-colors font-medium">
               {t('pricing')}
@@ -84,11 +89,11 @@ const Navbar = () => {
               <Link to="/" className="text-gray-700 hover:text-vextor-600 font-medium py-2" onClick={() => setMobileMenuOpen(false)}>
                 {t('home')}
               </Link>
-              <a href="#features" className="text-gray-700 hover:text-vextor-600 font-medium py-2" onClick={() => setMobileMenuOpen(false)}>
-                {t('features')}
-              </a>
               <a href="#how-it-works" className="text-gray-700 hover:text-vextor-600 font-medium py-2" onClick={() => setMobileMenuOpen(false)}>
                 {t('how_it_works')}
+              </a>
+              <a href="#features" className="text-gray-700 hover:text-vextor-600 font-medium py-2" onClick={() => setMobileMenuOpen(false)}>
+                {t('features')}
               </a>
               <a href="#pricing" className="text-gray-700 hover:text-vextor-600 font-medium py-2" onClick={() => setMobileMenuOpen(false)}>
                 {t('pricing')}
@@ -98,4 +103,5 @@ const Navbar = () => {
       </div>
     </nav>;
 };
+
 export default Navbar;
