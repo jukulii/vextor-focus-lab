@@ -21,7 +21,7 @@ const AppHeader = () => {
             <img 
               src="/lovable-uploads/2faa5536-84c6-4860-9899-0fc0f78968ff.png" 
               alt="Vextor Logo" 
-              className="h-7 w-auto object-contain" 
+              className="h-7 w-auto object-contain mix-blend-multiply" 
             />
             <span className="text-vextor-700 font-bold text-xl">
               Vextor
