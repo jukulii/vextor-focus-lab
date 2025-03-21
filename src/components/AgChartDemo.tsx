@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import AgChartsReact from 'ag-charts-react';
+import { AgChartsReact } from 'ag-charts-react';
 import { AgChartOptions } from 'ag-charts-community';
 
 interface AgChartDemoProps {
