@@ -1,5 +1,5 @@
-
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -9,34 +9,28 @@ import { SearchIcon, Loader2 } from 'lucide-react';
 
 const SitemapSearch = () => {
   const { t } = useLanguage();
+  const navigate = useNavigate();
   const [sitemapUrl, setSitemapUrl] = useState('');
   const [isSearching, setIsSearching] = useState(false);
-  const [step, setStep] = useState('search');
 
   const handleSearch = () => {
     setIsSearching(true);
     
-    // Simulate search delay
+    // Simulate search delay then navigate to sitemaps page
     setTimeout(() => {
       setIsSearching(false);
-      setStep('results');
-    }, 2000);
+      navigate('/sitemaps');
+    }, 1500);
   };
 
   const handleAutomaticSearch = () => {
     setIsSearching(true);
     
-    // Simulate search delay
+    // Simulate search delay then navigate to sitemaps page
     setTimeout(() => {
       setIsSearching(false);
-      setStep('results');
-    }, 2000);
-  };
-
-  const handleNext = () => {
-    // This would normally go to the next steps of processing
-    // For now it's just a placeholder
-    console.log("Moving to next step");
+      navigate('/sitemaps');
+    }, 1500);
   };
 
   return (
@@ -55,95 +49,50 @@ const SitemapSearch = () => {
         <TabsContent value="url">
           <Card>
             <CardContent className="pt-6">
-              {step === 'search' && (
-                <div className="space-y-4">
-                  <div className="space-y-2">
-                    <Input
-                      placeholder={t('enter_sitemap_url')}
-                      value={sitemapUrl}
-                      onChange={(e) => setSitemapUrl(e.target.value)}
-                      className="w-full"
-                    />
-                  </div>
-                  
-                  <div className="flex flex-col space-y-2">
-                    <Button 
-                      onClick={handleSearch} 
-                      disabled={isSearching || !sitemapUrl}
-                      className="bg-blue-500 hover:bg-blue-600"
-                    >
-                      {isSearching ? (
-                        <>
-                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                          {t('checking_sitemap')}
-                        </>
-                      ) : (
-                        <>
-                          <SearchIcon className="mr-2 h-4 w-4" />
-                          {t('next')}
-                        </>
-                      )}
-                    </Button>
-                    
-                    <Button
-                      variant="secondary"
-                      onClick={handleAutomaticSearch}
-                      disabled={isSearching}
-                      className="bg-pink-100 text-pink-800 hover:bg-pink-200"
-                    >
-                      {isSearching ? (
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  <Input
+                    placeholder={t('enter_sitemap_url')}
+                    value={sitemapUrl}
+                    onChange={(e) => setSitemapUrl(e.target.value)}
+                    className="w-full"
+                  />
+                </div>
+                
+                <div className="flex flex-col space-y-2">
+                  <Button 
+                    onClick={handleSearch} 
+                    disabled={isSearching || !sitemapUrl}
+                    className="bg-blue-500 hover:bg-blue-600"
+                  >
+                    {isSearching ? (
+                      <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      ) : (
+                        {t('checking_sitemap')}
+                      </>
+                    ) : (
+                      <>
                         <SearchIcon className="mr-2 h-4 w-4" />
-                      )}
-                      {t('check_for_me')}
-                    </Button>
-                  </div>
-                </div>
-              )}
-              
-              {step === 'results' && (
-                <div className="space-y-4">
-                  <div className="bg-green-50 border border-green-200 rounded-md p-4 text-sm">
-                    <div className="flex">
-                      <div className="flex-shrink-0">
-                        <svg className="h-5 w-5 text-green-400" viewBox="0 0 20 20" fill="currentColor">
-                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                        </svg>
-                      </div>
-                      <div className="ml-3">
-                        <p className="text-sm text-green-800">
-                          {t('found_urls').replace('%count%', '13')}
-                        </p>
-                        <p className="mt-2 text-sm text-green-700">
-                          {t('filtering_note')}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
+                        {t('next')}
+                      </>
+                    )}
+                  </Button>
                   
-                  <div className="flex justify-between items-center mt-6">
-                    <div>
-                      <Input
-                        placeholder="Filter URLs..."
-                        className="w-full"
-                      />
-                    </div>
-                    <Button
-                      onClick={handleNext}
-                      className="bg-blue-500 hover:bg-blue-600"
-                    >
-                      {t('next')}
-                    </Button>
-                  </div>
-                  
-                  <div className="bg-green-50 border border-green-200 rounded-md p-4 mt-4 text-sm">
-                    <p className="text-green-800">
-                      {t('after_filtering').replace('%count%', '300')}
-                    </p>
-                  </div>
+                  <Button
+                    variant="secondary"
+                    onClick={handleAutomaticSearch}
+                    disabled={isSearching}
+                    className="bg-pink-100 text-pink-800 hover:bg-pink-200"
+                  >
+                    {isSearching ? (
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    ) : (
+                      <SearchIcon className="mr-2 h-4 w-4" />
+                    )}
+                    {t('check_for_me')}
+                  </Button>
                 </div>
-              )}
+              </div>
             </CardContent>
           </Card>
         </TabsContent>

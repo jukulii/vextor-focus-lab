@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 type Language = 'en' | 'pl';
@@ -142,7 +141,8 @@ const translations: Translations = {
   "top_focused_pages": { en: "Top 10 Most Focused Pages", pl: "Top 10 Most Focused Pages" },
   "top_divergent_pages": { en: "Top 10 Most Divergent Pages", pl: "Top 10 Most Divergent Pages" },
   "content_types": { en: "Content Types", pl: "Typy stron" },
-  "summary": { en: "Summary", pl: "Podsumowanie" }
+  "summary": { en: "Summary", pl: "Podsumowanie" },
+  "filter": { en: "Filter", pl: "Filtruj" }
 };
 
 interface LanguageContextType {

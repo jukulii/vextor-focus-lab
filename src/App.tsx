@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LanguageProvider } from '@/contexts/LanguageContext';
 import LandingPage from "./pages/LandingPage";
 import AppPage from "./pages/AppPage";
+import SitemapsPage from "./pages/SitemapsPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -21,6 +22,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/app" element={<AppPage />} />
+            <Route path="/sitemaps" element={<SitemapsPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
