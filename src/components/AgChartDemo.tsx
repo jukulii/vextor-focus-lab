@@ -1,6 +1,6 @@
 
-import React from 'react';
-import { AgChartsReact } from 'ag-charts-community';
+import React, { useRef, useEffect } from 'react';
+import { AgChart } from 'ag-charts-community';
 import { AgChartOptions } from 'ag-charts-community';
 
 interface AgChartDemoProps {
@@ -9,6 +9,8 @@ interface AgChartDemoProps {
 }
 
 const AgChartDemo: React.FC<AgChartDemoProps> = ({ title, className }) => {
+  const chartRef = useRef<HTMLDivElement>(null);
+  
   const chartOptions: AgChartOptions = {
     title: {
       text: title || 'Website Focus Distribution',
@@ -31,7 +33,7 @@ const AgChartDemo: React.FC<AgChartDemoProps> = ({ title, className }) => {
           fontWeight: 'bold',
         },
         fills: ['#4CAF50', '#2196F3', '#FF9800', '#E91E63', '#8BC34A'],
-        strokes: 'white',
+        strokes: ['white', 'white', 'white', 'white', 'white'],
         strokeWidth: 2,
         tooltip: {
           enabled: true,
@@ -45,9 +47,21 @@ const AgChartDemo: React.FC<AgChartDemoProps> = ({ title, className }) => {
     height: 400,
   };
 
+  useEffect(() => {
+    if (chartRef.current) {
+      AgChart.create(chartOptions, chartRef.current);
+    }
+    
+    return () => {
+      if (chartRef.current) {
+        AgChart.update(chartOptions, chartRef.current);
+      }
+    };
+  }, [chartRef, title]);
+
   return (
     <div className={className}>
-      <AgChartsReact options={chartOptions} />
+      <div ref={chartRef} style={{ width: '100%', height: '100%' }}></div>
     </div>
   );
 };
