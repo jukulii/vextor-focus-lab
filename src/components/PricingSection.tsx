@@ -1,4 +1,3 @@
-
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from "@/components/ui/button";
 import { CheckIcon } from 'lucide-react';
@@ -49,7 +48,7 @@ const PricingSection = () => {
                 rounded-xl p-8 transition-all duration-300 
                 ${plan.highlighted ? 'bg-gradient-to-br from-vextor-900 to-blue-900 border-2 border-vextor-500 shadow-xl scale-105 z-10' : 'bg-gradient-to-br from-vextor-950 to-blue-950 border border-gray-700 shadow-md hover:shadow-lg hover:translate-y-[-5px]'}
               `}>
-              <h3 className="text-xl font-bold text-zinc-50 mb-2">
+              <h3 className="text-xl font-bold mb-2 text-zinc-50">
                 {plan.name}
               </h3>
               
