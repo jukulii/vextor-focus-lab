@@ -12,7 +12,7 @@ const AppPage = () => {
 
   return (
     <VantaBackground className="min-h-screen">
-      <div className="flex flex-col min-h-screen bg-white/80">
+      <div className="flex flex-col min-h-screen bg-black/80 text-white">
         <AppHeader />
         <main className="flex-grow p-6">
           <SitemapSearch />
