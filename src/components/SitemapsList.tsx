@@ -29,8 +29,8 @@ const SitemapsList = () => {
   ];
 
   const handleContinue = () => {
-    // This would process the selected sitemaps and continue to the next step
-    navigate('/app');
+    // Navigate to the processing page instead of directly to /app
+    navigate('/processing');
   };
 
   return (
