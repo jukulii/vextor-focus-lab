@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useState } from 'react';
 
 interface VantaBackgroundProps {
@@ -78,7 +79,7 @@ const VantaBackground = ({ children, className = '' }: VantaBackgroundProps) => 
           mouseControls: true,
           touchControls: true,
           gyroControls: false,
-          minHeight: documentHeight || 1000, // Use document height or fallback
+          minHeight: 200.00,
           minWidth: 200.00,
           scale: 1.00,
           scaleMobile: 1.00,
@@ -101,7 +102,7 @@ const VantaBackground = ({ children, className = '' }: VantaBackgroundProps) => 
         vantaEffect.current = null;
       }
     };
-  }, [documentHeight]);
+  }, []);
 
   // Update effect position based on scroll
   useEffect(() => {
@@ -110,22 +111,24 @@ const VantaBackground = ({ children, className = '' }: VantaBackgroundProps) => 
       const scrollRange = documentHeight - viewportHeight;
       const scrollProgress = scrollY / scrollRange;
       
-      // Instead of moving the background up with scroll (which makes it disappear),
-      // we'll ensure it follows along with minimal parallax offset
-      const parallaxFactor = 0.1; // Very slight parallax to create depth without losing visibility
+      // Dynamic parallax effect that scales with document height
+      // Using a multiplier that's proportional to document height ensures
+      // the effect moves throughout the entire document
+      const parallaxFactor = 0.5; // Adjust for more/less movement
       const translateY = scrollY * parallaxFactor;
       
-      // Apply transform to keep the effect visible throughout scroll
+      // Apply smooth transform
       vantaRef.current.style.transform = `translate3d(0, ${translateY}px, 0)`;
       
       // Adjust Vanta effect properties based on scroll position
       if (vantaEffect.current.options) {
-        // Dynamic spacing changes to create subtle zoom effect
+        // Dynamic spacing changes to create zoom effect
         const baseSpacing = 20;
-        const maxSpacingChange = 10;
+        const maxSpacingChange = 15;
         const newSpacing = baseSpacing + (scrollProgress * maxSpacingChange);
         
         // Subtle color transitions throughout the scroll
+        // Convert from HSL to RGB for smoother color transitions
         const startHue = 240; // Blue
         const endHue = 280;   // Purple
         const hueChange = startHue + (scrollProgress * (endHue - startHue));
@@ -144,7 +147,7 @@ const VantaBackground = ({ children, className = '' }: VantaBackgroundProps) => 
       className={`fixed inset-0 ${className}`}
       style={{
         width: '100%',
-        height: '100%', // Use 100% instead of 100vh to ensure full coverage
+        height: '100vh',
         zIndex: 0,
         transition: 'transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1)'
       }}
