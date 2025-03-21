@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -45,11 +44,20 @@ const AnalysisResults = () => {
     value: Math.floor(Math.random() * 50) + 10
   }));
 
+  const urlToCentroidData = [
+    { id: 0, url: 'Senuto.com', proximity: 0.5 },
+    { id: 1, url: 'Senuto.com', proximity: 0.5 },
+    { id: 2, url: 'Senuto.com', proximity: 0.5 },
+    { id: 3, url: 'Senuto.com', proximity: 0.5 },
+    { id: 4, url: 'Senuto.com', proximity: 0.5 },
+    { id: 5, url: 'Senuto.com/blog', proximity: 0.4 },
+    { id: 6, url: 'Senuto.com/about', proximity: 0.3 },
+    { id: 7, url: 'Senuto.com/contact', proximity: 0.2 },
+    { id: 8, url: 'Senuto.com/pricing', proximity: 0.1 },
+  ];
+
   const renderGauge = (value: number) => {
-    // Colors for the gauge
-    const colors = ["#FF5252", "#FFA726", "#66BB6A"]; // Red, orange, green
-    
-    // Calculate the color based on the value
+    const colors = ["#FF5252", "#FFA726", "#66BB6A"];
     let fillColor;
     if (value < 40) fillColor = colors[0];
     else if (value < 70) fillColor = colors[1];
@@ -57,7 +65,6 @@ const AnalysisResults = () => {
 
     return (
       <div className="relative w-44 h-44 mx-auto">
-        {/* Background circle */}
         <svg viewBox="0 0 100 100" className="w-full h-full">
           <path
             d="M 50,50 m 0,-40 a 40,40 0 1 1 0,80 a 40,40 0 1 1 0,-80"
@@ -65,7 +72,6 @@ const AnalysisResults = () => {
             strokeWidth="8"
             fillOpacity="0"
           />
-          {/* Value arc */}
           <path
             d="M 50,50 m 0,-40 a 40,40 0 1 1 0,80 a 40,40 0 1 1 0,-80"
             stroke={fillColor}
@@ -75,7 +81,6 @@ const AnalysisResults = () => {
             transform="rotate(-90, 50, 50)"
           />
         </svg>
-        {/* Value text */}
         <div className="absolute inset-0 flex items-center justify-center">
           <span className="text-4xl font-bold">{value}</span>
         </div>
@@ -83,7 +88,6 @@ const AnalysisResults = () => {
     );
   };
 
-  // Custom tooltip component for recharts
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
@@ -302,8 +306,32 @@ const AnalysisResults = () => {
             <CardContent className="pt-6">
               <h3 className="text-xl font-medium mb-4">{t('url_analysis')}</h3>
               <p className="text-gray-600 mb-6">
-                Analysis of individual URLs and their content focus.
+                {t('url_analysis_description')}
               </p>
+              
+              <div className="mb-8">
+                <h4 className="text-lg font-medium mb-4">{t('urls_to_centroid')}</h4>
+                <div className="overflow-hidden border rounded-md">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead className="w-[50px]">#</TableHead>
+                        <TableHead>{t('url')}</TableHead>
+                        <TableHead className="text-right">{t('proximity_to_centroid')}</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {urlToCentroidData.map((item) => (
+                        <TableRow key={item.id}>
+                          <TableCell>{item.id}</TableCell>
+                          <TableCell className="font-medium">{item.url}</TableCell>
+                          <TableCell className="text-right">{item.proximity}</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
+              </div>
               
               <div className="h-96">
                 <ResponsiveContainer width="100%" height="100%">
