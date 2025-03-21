@@ -8,7 +8,7 @@ const FeatureSection = () => {
     t
   } = useLanguage();
   return <section id="features" className="py-16">
-      <Separator className="h-[2px] bg-gray-800/30" />
+      <Separator className="h-[2px] bg-zinc-400" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
         <div className="text-center mb-12">
           <span className="bg-vextor-100 text-vextor-700 px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4">Features</span>
