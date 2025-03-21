@@ -1,7 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { AgChart } from 'ag-charts-community';
-import { AgChartReact } from 'ag-charts-react';
+import { AgChartsReact } from 'ag-charts-react';
 import { AgChartOptions } from 'ag-charts-community';
 
 interface AgChartDemoProps {
@@ -59,7 +58,7 @@ const AgChartDemo: React.FC<AgChartDemoProps> = ({ title, className }) => {
 
   return (
     <div className={className}>
-      <AgChartReact options={chartOptions} />
+      <AgChartsReact options={chartOptions} />
     </div>
   );
 };
