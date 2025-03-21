@@ -36,16 +36,18 @@ const LandingPage = () => {
   }, []);
 
   return (
-    <div className="relative min-h-screen overflow-hidden">
+    <div className="relative min-h-screen">
       <VantaBackground />
       <div className="relative z-10 flex flex-col min-h-screen w-full">
         <Navbar isDark={true} />
         <main className="flex-grow">
           <HeroSection />
-          <HowItWorks />
-          <FeatureSection />
-          <BenefitSection />
-          <PricingSection />
+          <div className="bg-white">
+            <HowItWorks />
+            <FeatureSection />
+            <BenefitSection />
+            <PricingSection />
+          </div>
         </main>
         <Footer />
       </div>
