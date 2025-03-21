@@ -18,6 +18,7 @@ const VantaBackground = ({ children, className = '' }: VantaBackgroundProps) => 
   const vantaRef = useRef<HTMLDivElement>(null);
   const vantaEffect = useRef<any>(null);
   const [scrollY, setScrollY] = useState(0);
+  const [documentHeight, setDocumentHeight] = useState(0);
   const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
 
   // Handle scroll events and viewport resizing
@@ -28,14 +29,38 @@ const VantaBackground = ({ children, className = '' }: VantaBackgroundProps) => 
     
     const handleResize = () => {
       setViewportHeight(window.innerHeight);
+      updateDocumentHeight();
+    };
+    
+    const updateDocumentHeight = () => {
+      const height = Math.max(
+        document.body.scrollHeight,
+        document.body.offsetHeight,
+        document.documentElement.clientHeight,
+        document.documentElement.scrollHeight,
+        document.documentElement.offsetHeight
+      );
+      setDocumentHeight(height);
     };
 
+    // Initial document height calculation
+    updateDocumentHeight();
+    
     window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('resize', handleResize, { passive: true });
+    
+    // Set up a mutation observer to detect DOM changes that might affect document height
+    const observer = new MutationObserver(updateDocumentHeight);
+    observer.observe(document.body, { 
+      childList: true, 
+      subtree: true, 
+      attributes: true,
+    });
     
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleResize);
+      observer.disconnect();
     };
   }, []);
 
@@ -81,43 +106,40 @@ const VantaBackground = ({ children, className = '' }: VantaBackgroundProps) => 
 
   // Update effect position based on scroll
   useEffect(() => {
-    if (vantaEffect.current && vantaRef.current) {
-      // Calculate a normalized scroll position (0 to 1) based on document height
-      const documentHeight = Math.max(
-        document.body.scrollHeight,
-        document.body.offsetHeight,
-        document.documentElement.clientHeight,
-        document.documentElement.scrollHeight,
-        document.documentElement.offsetHeight
-      );
-      
-      // Use viewportHeight to ensure full coverage while scrolling
+    if (vantaEffect.current && vantaRef.current && documentHeight > 0) {
+      // Calculate scroll progress relative to full document (0 to 1)
       const scrollRange = documentHeight - viewportHeight;
       const scrollProgress = scrollY / scrollRange;
       
-      // Apply parallax effect with varying intensity based on scroll position
-      const translateY = scrollY * 0.4;
+      // Dynamic parallax effect that scales with document height
+      // Using a multiplier that's proportional to document height ensures
+      // the effect moves throughout the entire document
+      const parallaxFactor = 0.5; // Adjust for more/less movement
+      const translateY = scrollY * parallaxFactor;
       
       // Apply smooth transform
       vantaRef.current.style.transform = `translate3d(0, ${translateY}px, 0)`;
       
-      // Optionally adjust other properties based on scroll progress
+      // Adjust Vanta effect properties based on scroll position
       if (vantaEffect.current.options) {
-        // Subtle color shift based on scroll position (optional)
-        const hue1 = 240 + (scrollProgress * 30); // Shift from blue toward purple
-        const hue2 = 210 + (scrollProgress * 30); // Shift from dark blue
-        
-        // Adjust spacing to create a "zoom" effect while scrolling
+        // Dynamic spacing changes to create zoom effect
         const baseSpacing = 20;
-        const spacingVariation = scrollProgress * 5;
+        const maxSpacingChange = 15;
+        const newSpacing = baseSpacing + (scrollProgress * maxSpacingChange);
+        
+        // Subtle color transitions throughout the scroll
+        // Convert from HSL to RGB for smoother color transitions
+        const startHue = 240; // Blue
+        const endHue = 280;   // Purple
+        const hueChange = startHue + (scrollProgress * (endHue - startHue));
         
         // Update Vanta effect properties
         vantaEffect.current.setOptions({
-          spacing: baseSpacing + spacingVariation,
+          spacing: newSpacing,
         });
       }
     }
-  }, [scrollY, viewportHeight]);
+  }, [scrollY, documentHeight, viewportHeight]);
 
   return (
     <div 
@@ -125,9 +147,9 @@ const VantaBackground = ({ children, className = '' }: VantaBackgroundProps) => 
       className={`fixed inset-0 ${className}`}
       style={{
         width: '100%',
-        height: '100vh', // Use viewport height for consistent coverage
+        height: '100vh',
         zIndex: 0,
-        transition: 'transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1)' // Smoother easing
+        transition: 'transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1)'
       }}
     >
       {children && (
