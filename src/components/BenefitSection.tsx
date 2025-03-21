@@ -1,6 +1,7 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { TrendingUp, Users, Search, Award, ArrowUpRight, UserCheck, Trophy } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+
 const mockData = [{
   name: 'Jan',
   before: 30,
@@ -26,6 +27,7 @@ const mockData = [{
   before: 50,
   after: 100
 }];
+
 const BenefitSection = () => {
   const {
     t
@@ -55,9 +57,9 @@ const BenefitSection = () => {
     iconColor: 'text-graph-purple',
     bgColor: 'bg-purple-100'
   }];
-  return <section className="py-20 bg-gray-50">
+  return <section className="py-12 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           
           
         </div>
