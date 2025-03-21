@@ -8,13 +8,13 @@ const HeroSection = () => {
   const { t } = useLanguage();
 
   return (
-    <section className="pt-32 pb-20 md:pt-40 md:pb-28">
+    <section className="pt-24 pb-12 md:pt-32 md:pb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 fade-in">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 fade-in">
             {t('hero_title')}
           </h1>
-          <p className="text-xl text-gray-600 mb-8 fade-in stagger-1 max-w-2xl mx-auto text-balance">
+          <p className="text-xl text-gray-600 mb-6 fade-in stagger-1 max-w-2xl mx-auto text-balance">
             {t('hero_subtitle')}
           </p>
           <div className="space-x-4 fade-in stagger-2">

@@ -29,9 +29,8 @@ const mockData = [{
 }];
 
 const BenefitSection = () => {
-  const {
-    t
-  } = useLanguage();
+  const { t } = useLanguage();
+  
   const benefits = [{
     icon: ArrowUpRight,
     title: t('benefit_3_title'),
@@ -57,42 +56,33 @@ const BenefitSection = () => {
     iconColor: 'text-graph-purple',
     bgColor: 'bg-purple-100'
   }];
-  return <section className="py-12 bg-gray-50">
+  
+  return (
+    <section className="py-6 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          
-          
+        <div className="text-center mb-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            Improve your SEO performance
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Optimize your content and achieve higher rankings
+          </p>
+          <div className="w-24 h-1 bg-vextor-500 mx-auto mt-4"></div>
         </div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-          <div className="lg:col-span-2">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {benefits.map((benefit, index) => <div key={index} className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                  <div className={`w-10 h-10 ${benefit.bgColor} rounded-lg flex items-center justify-center mb-4`}>
-                    <benefit.icon className={`h-5 w-5 ${benefit.iconColor}`} />
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                    {benefit.title}
-                  </h3>
-                  <p className="text-gray-600 text-sm">
-                    {benefit.description}
-                  </p>
-                </div>)}
-            </div>
-          </div>
-          
+        <div className="grid grid-cols-1 gap-6">
           <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 h-full">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">
               SEO Performance Improvement
             </h3>
-            <div className="h-[300px]">
+            <div className="h-[250px]">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={mockData} margin={{
-                top: 10,
-                right: 10,
-                left: -20,
-                bottom: 0
-              }}>
+                  top: 10,
+                  right: 10,
+                  left: -20,
+                  bottom: 0
+                }}>
                   <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.3} />
                   <XAxis dataKey="name" axisLine={false} tickLine={false} />
                   <YAxis axisLine={false} tickLine={false} />
@@ -103,8 +93,26 @@ const BenefitSection = () => {
               </ResponsiveContainer>
             </div>
           </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {benefits.map((benefit, index) => (
+              <div key={index} className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                <div className={`w-10 h-10 ${benefit.bgColor} rounded-lg flex items-center justify-center mb-4`}>
+                  <benefit.icon className={`h-5 w-5 ${benefit.iconColor}`} />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  {benefit.title}
+                </h3>
+                <p className="text-gray-600 text-sm">
+                  {benefit.description}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default BenefitSection;

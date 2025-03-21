@@ -6,9 +6,9 @@ const FeatureSection = () => {
   const { t } = useLanguage();
 
   return (
-    <section id="features" className="py-6">
+    <section id="features" className="py-4">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <div className="text-center mb-8">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             Stay focused. Rank higher
           </h2>
@@ -18,7 +18,7 @@ const FeatureSection = () => {
           <div className="w-24 h-1 bg-vextor-500 mx-auto mt-6"></div>
         </div>
         
-        <div className="grid md:grid-cols-2 gap-12 mt-16 hidden">
+        <div className="grid md:grid-cols-2 gap-12 mt-8">
           <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
             <div className="w-12 h-12 bg-vextor-100 rounded-lg flex items-center justify-center mb-6">
               <Rocket className="h-6 w-6 text-vextor-600" />

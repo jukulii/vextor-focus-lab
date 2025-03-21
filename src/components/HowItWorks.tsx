@@ -29,20 +29,20 @@ const HowItWorks = () => {
   ];
 
   return (
-    <section id="how-it-works" className="py-16 bg-gray-50">
+    <section id="how-it-works" className="py-8 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <div className="inline-block border-2 border-gray-800 rounded-full px-8 py-3 mb-6">
+        <div className="text-center mb-8">
+          <div className="inline-block border-2 border-gray-800 rounded-full px-8 py-3 mb-4">
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
               {t('how_it_works_title')}
             </h2>
           </div>
         </div>
         
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4 md:gap-2 relative">
+        <div className="flex flex-col gap-4">
           {steps.map((step, index) => (
-            <div key={index} className="flex items-center">
-              <div className="bg-white border-2 border-gray-800 rounded-xl p-6 w-full md:w-64 h-48 flex flex-col items-center text-center">
+            <div key={index} className="flex flex-col items-center">
+              <div className="bg-white border-2 border-gray-800 rounded-xl p-6 w-full flex flex-col items-center text-center">
                 <div className="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mt-1 mb-3">
                   <step.icon className="h-6 w-6 text-vextor-600" />
                 </div>
@@ -51,8 +51,8 @@ const HowItWorks = () => {
               </div>
               
               {index < steps.length - 1 && (
-                <div className="hidden md:flex items-center justify-center mx-2">
-                  <ArrowRight className="h-6 w-6 text-gray-800" />
+                <div className="flex items-center justify-center my-1">
+                  <ArrowRight className="h-6 w-6 text-gray-800 transform rotate-90" />
                 </div>
               )}
             </div>
