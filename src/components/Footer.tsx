@@ -1,3 +1,4 @@
+
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Link } from 'react-router-dom';
 const Footer = () => {
@@ -21,17 +22,17 @@ const Footer = () => {
               </h3>
               <ul className="space-y-3">
                 <li>
-                  <a href="#features" className="text-gray-500 hover:text-vextor-500 transition-colors">
+                  <a href="#features" className="text-zinc-400 hover:text-vextor-500 transition-colors">
                     Features
                   </a>
                 </li>
                 <li>
-                  <a href="#pricing" className="text-gray-500 hover:text-vextor-500 transition-colors">
+                  <a href="#pricing" className="text-zinc-400 hover:text-vextor-500 transition-colors">
                     Pricing
                   </a>
                 </li>
                 <li>
-                  <Link to="/app" className="text-gray-500 hover:text-vextor-500 transition-colors">
+                  <Link to="/app" className="text-zinc-400 hover:text-vextor-500 transition-colors">
                     Get Started
                   </Link>
                 </li>
@@ -44,17 +45,17 @@ const Footer = () => {
               </h3>
               <ul className="space-y-3">
                 <li>
-                  <a href="#" className="text-gray-500 hover:text-vextor-500 transition-colors">
+                  <a href="#" className="text-zinc-400 hover:text-vextor-500 transition-colors">
                     Documentation
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-gray-500 hover:text-vextor-500 transition-colors">
+                  <a href="#" className="text-zinc-400 hover:text-vextor-500 transition-colors">
                     Blog
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-gray-500 hover:text-vextor-500 transition-colors">
+                  <a href="#" className="text-zinc-400 hover:text-vextor-500 transition-colors">
                     FAQ
                   </a>
                 </li>
@@ -67,12 +68,12 @@ const Footer = () => {
               </h3>
               <ul className="space-y-3">
                 <li>
-                  <a href="#" className="text-gray-500 hover:text-vextor-500 transition-colors">
+                  <a href="#" className="text-zinc-400 hover:text-vextor-500 transition-colors">
                     {t('privacy_policy')}
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-gray-500 hover:text-vextor-500 transition-colors">
+                  <a href="#" className="text-zinc-400 hover:text-vextor-500 transition-colors">
                     {t('terms_of_service')}
                   </a>
                 </li>
