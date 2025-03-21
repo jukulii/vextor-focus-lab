@@ -35,6 +35,13 @@ const VantaBackground = ({ children, className = '' }: VantaBackgroundProps) => 
         scaleMobile: 1.00,
         color: 0x4e9b8c,
         backgroundColor: 0xffffff,
+        spacing: 4.00,
+        chaos: 5.00,
+        showDots: true,
+        showLines: true,
+        showDistance: true, // Enable showing distance
+        trunk: 3,
+        forceAnimate: true
       });
     }
 

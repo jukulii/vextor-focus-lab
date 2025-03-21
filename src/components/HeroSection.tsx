@@ -34,7 +34,7 @@ const HeroSection = () => {
           <div className="mt-12 md:mt-0 md:w-1/2 relative z-0 flex justify-center">
             <div className="relative w-full max-w-md">
               <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-vextor-400 to-purple-400 rounded-full blur-3xl opacity-20"></div>
-              <div className="relative bg-white/60 backdrop-blur-sm border border-white/10 rounded-2xl p-6 shadow-xl">
+              <div className="relative bg-white/80 backdrop-blur-sm border border-white/20 rounded-2xl p-6 shadow-xl vanta-distance-demo">
                 <div className="bg-gradient-to-br from-vextor-50 to-blue-50 rounded-xl p-4">
                   <div className="flex items-center mb-4">
                     <div className="w-3 h-3 bg-red-500 rounded-full mr-2"></div>
