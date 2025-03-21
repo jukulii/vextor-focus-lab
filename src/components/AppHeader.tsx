@@ -19,7 +19,7 @@ const AppHeader = () => {
         <div className="flex items-center space-x-2">
           <Link to="/" className="flex items-center space-x-2">
             <img 
-              src="/lovable-uploads/2faa5536-84c6-4860-9899-0fc0f78968ff.png" 
+              src="/lovable-uploads/5634c72d-5100-496b-ade4-9da06c56eda0.png" 
               alt="Vextor Logo" 
               className="h-7 w-auto object-contain mix-blend-multiply" 
             />
