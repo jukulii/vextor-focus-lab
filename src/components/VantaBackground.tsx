@@ -72,9 +72,11 @@ const VantaBackground = ({ children, className = '' }: VantaBackgroundProps) => 
   // Update effect position based on scroll
   useEffect(() => {
     if (vantaEffect.current) {
-      // Create a parallax effect by adjusting the position
-      const translateY = scrollY * 0.1; // Adjust the multiplier for speed
+      // Create a smooth parallax effect by adjusting the position
+      const translateY = scrollY * 0.3; // Increased multiplier for more prominent movement
+      
       if (vantaRef.current) {
+        // Apply the transform with a slight delay for a smoother feeling
         vantaRef.current.style.transform = `translate3d(0, ${translateY}px, 0)`;
       }
     }
@@ -88,7 +90,7 @@ const VantaBackground = ({ children, className = '' }: VantaBackgroundProps) => 
         width: '100%',
         height: '100%',
         zIndex: 0,
-        transition: 'transform 0.1s ease-out'
+        transition: 'transform 0.3s ease-out' // Smoother transition
       }}
     >
       {children && (
