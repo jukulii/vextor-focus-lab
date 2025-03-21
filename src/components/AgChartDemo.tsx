@@ -1,6 +1,6 @@
 
-import React, { useState, useEffect } from 'react';
-import { AgChartsReact } from 'ag-charts-react';
+import React, { useRef, useEffect, useState } from 'react';
+import { AgCharts } from 'ag-charts-community';
 import { AgChartOptions } from 'ag-charts-community';
 
 interface AgChartDemoProps {
@@ -9,7 +9,10 @@ interface AgChartDemoProps {
 }
 
 const AgChartDemo: React.FC<AgChartDemoProps> = ({ title, className }) => {
-  const [chartOptions, setChartOptions] = useState<AgChartOptions>({
+  const chartRef = useRef<HTMLDivElement>(null);
+  const [chart, setChart] = useState<any>(null);
+  
+  const chartOptions: AgChartOptions = {
     title: {
       text: title || 'Website Focus Distribution',
     },
@@ -43,22 +46,46 @@ const AgChartDemo: React.FC<AgChartDemoProps> = ({ title, className }) => {
       position: 'bottom',
     },
     height: 400,
-  });
+  };
 
-  // Update chart options when title changes
   useEffect(() => {
-    setChartOptions(prevOptions => ({
-      ...prevOptions,
-      title: {
-        ...prevOptions.title,
-        text: title || 'Website Focus Distribution',
-      },
-    }));
+    if (chartRef.current) {
+      // Create the chart and store the instance
+      const chartInstance = AgCharts.create({
+        ...chartOptions,
+        container: chartRef.current,
+      });
+      
+      setChart(chartInstance);
+    }
+    
+    // Cleanup function
+    return () => {
+      if (chart) {
+        chart.destroy();
+      }
+    };
+  }, []);
+
+  // Update chart when title changes
+  useEffect(() => {
+    if (chart) {
+      // For AgCharts, we need to create a new chart instance with the updated options
+      chart.destroy();
+      const updatedChart = AgCharts.create({
+        ...chartOptions,
+        title: {
+          text: title || 'Website Focus Distribution',
+        },
+        container: chartRef.current!,
+      });
+      setChart(updatedChart);
+    }
   }, [title]);
 
   return (
     <div className={className}>
-      <AgChartsReact options={chartOptions} />
+      <div ref={chartRef} style={{ width: '100%', height: '100%' }}></div>
     </div>
   );
 };

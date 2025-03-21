@@ -64,10 +64,8 @@ const ResultsPage = () => {
           
           {/* AG Charts Demo Section */}
           <div className="mb-8 bg-white p-6 rounded-lg shadow">
-            <h2 className="text-xl font-semibold mb-4">Website Focus Distribution</h2>
-            <div className="w-full h-[400px]">
-              <AgChartDemo className="h-full w-full" />
-            </div>
+            <h2 className="text-xl font-semibold mb-4">AG Charts Demo</h2>
+            <AgChartDemo className="h-96 w-full" />
           </div>
           
           <AnalysisResults />
