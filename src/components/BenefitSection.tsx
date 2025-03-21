@@ -1,6 +1,6 @@
 
 import { useLanguage } from '@/contexts/LanguageContext';
-import { TrendingUp, Users, Search, Award, ArrowUpRight, UserCheck, Magnifier, Trophy } from 'lucide-react';
+import { TrendingUp, Users, Search, Award, ArrowUpRight, UserCheck, Trophy } from 'lucide-react';
 import { 
   BarChart, 
   Bar, 
