@@ -59,7 +59,7 @@ const BenefitSection = () => {
     bgColor: 'bg-purple-900'
   }];
   return <section className="py-16">
-      <Separator className="h-[2px] bg-zinc-400" />
+      <Separator className="h-[2px] bg-zinc-400/50 rounded-full w-[95%] mx-auto" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
         <div className="text-center mb-12">
           <span className="bg-blue-900 text-blue-300 px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4">Benefits</span>

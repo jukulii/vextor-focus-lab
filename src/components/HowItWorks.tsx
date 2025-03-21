@@ -24,7 +24,7 @@ const HowItWorks = () => {
     description: "Get actionable recommendations to improve your SEO"
   }];
   return <section id="how-it-works" className="py-16">
-      <Separator className="h-[2px] bg-zinc-400" />
+      <Separator className="h-[2px] bg-zinc-400/50 rounded-full w-[95%] mx-auto" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
         <div className="text-center mb-12">
           <div className="inline-block border-b-2 border-vextor-500 pb-2 mb-3">

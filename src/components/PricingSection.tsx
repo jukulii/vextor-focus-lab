@@ -34,7 +34,7 @@ const PricingSection = () => {
     highlighted: false
   }];
   return <section id="pricing" className="py-20">
-      <Separator className="h-[2px] bg-zinc-400" />
+      <Separator className="h-[2px] bg-zinc-400/50 rounded-full w-[95%] mx-auto" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
         <div className="text-center mb-16">
           <span className="bg-purple-100 text-purple-700 px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4">Pricing</span>
