@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import AppHeader from '@/components/AppHeader';
 import AnalysisResults from '@/components/AnalysisResults';
+import AgChartDemo from '@/components/AgChartDemo';
 
 const ResultsPage = () => {
   const { t } = useLanguage();
@@ -60,6 +61,13 @@ const ResultsPage = () => {
           <h1 className="text-2xl font-bold text-center mb-8">
             {t('check_domain_focus')}
           </h1>
+          
+          {/* AG Charts Demo Section */}
+          <div className="mb-8 bg-white p-6 rounded-lg shadow">
+            <h2 className="text-xl font-semibold mb-4">AG Charts Demo</h2>
+            <AgChartDemo className="h-96 w-full" />
+          </div>
+          
           <AnalysisResults />
         </div>
       </main>
