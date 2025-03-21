@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent } from '@/components/ui/card';
 import { SearchIcon, Loader2 } from 'lucide-react';
+import axios from 'axios';
 
 const SitemapSearch = () => {
   const { t } = useLanguage();
@@ -15,7 +16,7 @@ const SitemapSearch = () => {
 
   const handleSearch = () => {
     setIsSearching(true);
-    
+
     // Simulate search delay then navigate to sitemaps page
     setTimeout(() => {
       setIsSearching(false);
@@ -23,14 +24,36 @@ const SitemapSearch = () => {
     }, 1500);
   };
 
-  const handleAutomaticSearch = () => {
+  const handleAutomaticSearch = async () => {
     setIsSearching(true);
-    
-    // Simulate search delay then navigate to sitemaps page
-    setTimeout(() => {
+
+    try {
+      const token = localStorage.getItem('vextor-token');
+
+      if (!token) {
+        throw new Error('No token found');
+      }
+
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/sitemaps`, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        params: {
+          domain: sitemapUrl,
+        },
+      });
+
+      console.log('Data from API:', response.data);
+
+      setTimeout(() => {
+        setIsSearching(false);
+        navigate('/sitemaps', { state: { sitemapData: response.data } });
+      }, 1500);
+    } catch (error) {
+      console.error('Error during search:', error);
       setIsSearching(false);
-      navigate('/sitemaps');
-    }, 1500);
+    }
   };
 
   return (
@@ -38,14 +61,14 @@ const SitemapSearch = () => {
       <h1 className="text-2xl font-bold text-center mb-8">
         {t('check_domain_focus')}
       </h1>
-      
+
       <Tabs defaultValue="url" className="w-full">
         <TabsList className="grid w-full grid-cols-3 mb-8">
           <TabsTrigger value="url">{t('site_url')}</TabsTrigger>
           <TabsTrigger value="filters">{t('filters')}</TabsTrigger>
           <TabsTrigger value="generate">{t('processing')}</TabsTrigger>
         </TabsList>
-        
+
         <TabsContent value="url">
           <Card>
             <CardContent className="pt-6">
@@ -58,10 +81,10 @@ const SitemapSearch = () => {
                     className="w-full"
                   />
                 </div>
-                
+
                 <div className="flex flex-col space-y-2">
-                  <Button 
-                    onClick={handleSearch} 
+                  <Button
+                    onClick={handleSearch}
                     disabled={isSearching || !sitemapUrl}
                     className="bg-blue-500 hover:bg-blue-600"
                   >
@@ -77,7 +100,7 @@ const SitemapSearch = () => {
                       </>
                     )}
                   </Button>
-                  
+
                   <Button
                     variant="secondary"
                     onClick={handleAutomaticSearch}
@@ -96,7 +119,7 @@ const SitemapSearch = () => {
             </CardContent>
           </Card>
         </TabsContent>
-        
+
         <TabsContent value="filters">
           <Card>
             <CardContent>
@@ -105,7 +128,7 @@ const SitemapSearch = () => {
                 <p className="text-gray-600 text-sm">
                   Select which types of content to include in your analysis.
                 </p>
-                
+
                 {/* Filter options would go here */}
                 <div className="grid grid-cols-2 gap-4">
                   <div className="flex items-center space-x-2">
@@ -125,7 +148,7 @@ const SitemapSearch = () => {
                     <label htmlFor="landing">Landing pages</label>
                   </div>
                 </div>
-                
+
                 <Button className="bg-blue-500 hover:bg-blue-600 w-full mt-4">
                   Apply Filters
                 </Button>
@@ -133,7 +156,7 @@ const SitemapSearch = () => {
             </CardContent>
           </Card>
         </TabsContent>
-        
+
         <TabsContent value="generate">
           <Card>
             <CardContent>

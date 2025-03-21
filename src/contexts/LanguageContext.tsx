@@ -17,91 +17,91 @@ const translations: Translations = {
   "features": { en: "Features", pl: "Funkcje" },
   "how_it_works": { en: "How it works", pl: "Jak to działa" },
   "pricing": { en: "Pricing", pl: "Cennik" },
-  
+
   // Hero Section
-  "hero_title": { 
+  "hero_title": {
     en: "Analyze your website's topical focus",
     pl: "Analizuj tematyczne ukierunkowanie swojej strony"
   },
-  "hero_subtitle": { 
+  "hero_subtitle": {
     en: "Unlock comprehensive insights into your website's content focus and improve SEO performance",
     pl: "Odblokuj kompleksowy wgląd w tematykę treści swojej strony i popraw wydajność SEO"
   },
   "get_started": { en: "Get Started", pl: "Rozpocznij" },
   "analyse": { en: "Analyze", pl: "Analizuj" },
-  
+
   // How it works section
   "how_it_works_title": { en: "How It Works", pl: "Jak to działa" },
   "step_1": { en: "Input website URL", pl: "Wprowadź adres URL" },
   "step_2": { en: "AI analyzes content", pl: "AI analizuje treść" },
   "step_3": { en: "Review focus insights", pl: "Przejrzyj wyniki" },
   "step_4": { en: "Optimize content strategy", pl: "Optymalizuj strategię" },
-  
+
   // New Era Section
   "new_era_title": { en: "A New Era for SEO Content Focus", pl: "Nowa era dla contentu SEO" },
-  "new_era_subtitle": { 
+  "new_era_subtitle": {
     en: "Advanced analytics to help you understand and improve your website's thematic coherence",
     pl: "Zaawansowana analityka, która pomoże Ci zrozumieć i ulepszyć tematyczną spójność strony"
   },
   "benefit_1_title": { en: "AI-Powered Analysis", pl: "Analiza oparta na AI" },
-  "benefit_1_desc": { 
+  "benefit_1_desc": {
     en: "Leverage machine learning algorithms to identify your content's topical clusters",
     pl: "Wykorzystaj algorytmy uczenia maszynowego do identyfikacji tematycznych klastrów treści"
   },
   "benefit_2_title": { en: "Actionable Insights", pl: "Praktyczne wskazówki" },
-  "benefit_2_desc": { 
+  "benefit_2_desc": {
     en: "Get clear recommendations to improve your content's thematic relevance",
     pl: "Otrzymaj jasne rekomendacje, aby poprawić tematyczną trafność treści"
   },
-  
+
   // Key Benefits Section
   "key_benefits_title": { en: "Key Benefits", pl: "Główne korzyści" },
   "benefit_3_title": { en: "Enhanced SEO Rankings", pl: "Lepsze pozycje w SEO" },
-  "benefit_3_desc": { 
+  "benefit_3_desc": {
     en: "Improve your search rankings with topically focused content",
     pl: "Popraw swoje pozycje w wyszukiwarkach dzięki tematycznie ukierunkowanym treściom"
   },
   "benefit_4_title": { en: "Future-proof your SEO for the era of LLMs and semantic indexing", pl: "Przygotuj SEO na erę LLM i indeksowania semantycznego" },
-  "benefit_4_desc": { 
+  "benefit_4_desc": {
     en: "Keep visitors on your site longer with relevant, coherent content",
     pl: "Zatrzymaj odwiedzających na swojej stronie dłużej dzięki odpowiednim, spójnym treściom"
   },
   "benefit_5_title": { en: "Eliminate content that drags your rankings down", pl: "Eliminuj treści obniżające pozycje" },
-  "benefit_5_desc": { 
+  "benefit_5_desc": {
     en: "Discover missing topics that could enhance your site's authority",
     pl: "Odkryj brakujące tematy, które mogą zwiększyć autorytet Twojej witryny"
   },
   "benefit_6_title": { en: "Understand how Google evaluates your site", pl: "Zrozum, jak Google ocenia Twoją stronę" },
-  "benefit_6_desc": { 
+  "benefit_6_desc": {
     en: "Understand how your content focus compares to competitors",
     pl: "Zrozum, jak ukierunkowanie Twoich treści wypada na tle konkurencji"
   },
-  
+
   // Pricing Section
   "pricing_title": { en: "Simple, Transparent Pricing", pl: "Proste, przejrzyste ceny" },
   "price_free_title": { en: "Free", pl: "Za darmo" },
-  "price_free_desc": { 
+  "price_free_desc": {
     en: "Basic website analysis with limited reports",
     pl: "Podstawowa analiza strony z ograniczonymi raportami"
   },
   "price_pro_title": { en: "Professional", pl: "Profesjonalny" },
-  "price_pro_desc": { 
+  "price_pro_desc": {
     en: "Complete content analysis with detailed insights and recommendations",
     pl: "Pełna analiza treści ze szczegółowymi wskazówkami i zaleceniami"
   },
   "price_enterprise_title": { en: "Enterprise", pl: "Dla firm" },
-  "price_enterprise_desc": { 
+  "price_enterprise_desc": {
     en: "Custom solutions for large websites with dedicated support",
     pl: "Niestandardowe rozwiązania dla dużych stron z dedykowanym wsparciem"
   },
   "monthly": { en: "/month", pl: "/miesiąc" },
   "contact_us": { en: "Contact Us", pl: "Skontaktuj się z nami" },
-  
+
   // Footer
   "copyright": { en: "© 2023 Vextor. All rights reserved.", pl: "© 2023 Vextor. Wszelkie prawa zastrzeżone." },
   "privacy_policy": { en: "Privacy Policy", pl: "Polityka prywatności" },
   "terms_of_service": { en: "Terms of Service", pl: "Warunki korzystania" },
-  
+
   // App Page
   "check_domain_focus": { en: "Check Your Domain's Focus", pl: "Sprawdź Focus Swojej domeny" },
   "site_url": { en: "Website URL", pl: "Adres URL strony" },
@@ -119,9 +119,9 @@ const translations: Translations = {
   "url_to_centroid": { en: "URL's to centroid", pl: "URL do centroidu" },
   "url": { en: "URL", pl: "Adres URL" },
   "proximity": { en: "Proximity to Centroid", pl: "Bliskość do centroidu" },
-  "found_urls": { 
-    en: "We found %count% URLs that contain a total of 2000 URL addresses.", 
-    pl: "Znaleźliśmy %count% stron, które zawierają łącznie 2000 adresów URL." 
+  "found_sitemaps": {
+    en: "We found %count% sitemaps.",
+    pl: "Znaleźliśmy %count% stron adresów sitemap."
   },
   "filtering_note": {
     en: "You can limit the report to URLs containing a specific term or generate a report with all URL addresses.",
@@ -144,37 +144,37 @@ const translations: Translations = {
   "content_types": { en: "Content Types", pl: "Typy stron" },
   "summary": { en: "Summary", pl: "Podsumowanie" },
   "filter": { en: "Filter", pl: "Filtruj" },
-  
+
   // New translations for results page
   "results": { en: "Analysis Results", pl: "Wyniki analizy" },
   "results_description": { en: "Comprehensive analysis of your website's content focus", pl: "Kompleksowa analiza ukierunkowania treści Twojej strony" },
   "focused_pages": { en: "Most Focused Pages", pl: "Najbardziej skoncentrowane strony" },
   "divergent_pages": { en: "Most Divergent Pages", pl: "Najbardziej odbiegające strony" },
-  
+
   // New translations for canonicalization
-  "canonicalization_description": { 
+  "canonicalization_description": {
     en: "Identification of duplicate or similar content across the site, helping to prevent content cannibalization.",
     pl: "Identyfikacja zduplikowanych lub podobnych treści w witrynie, zapobiegająca kanibalizacji treści."
   },
-  "urls_to_centroid": { 
-    en: "URL's to centroid", 
-    pl: "URL do centroidu" 
+  "urls_to_centroid": {
+    en: "URL's to centroid",
+    pl: "URL do centroidu"
   },
-  "similarity_score": { 
-    en: "Similarity score", 
-    pl: "Wynik podobieństwa" 
+  "similarity_score": {
+    en: "Similarity score",
+    pl: "Wynik podobieństwa"
   },
-  "url_1": { 
-    en: "URL 1", 
-    pl: "URL 1" 
+  "url_1": {
+    en: "URL 1",
+    pl: "URL 1"
   },
-  "url_2": { 
-    en: "URL 2", 
-    pl: "URL 2" 
+  "url_2": {
+    en: "URL 2",
+    pl: "URL 2"
   },
-  
+
   // New translations for clusters/classes tab
-  "cluster_description": { 
+  "cluster_description": {
     en: "Visual representation of content clusters and their relationships based on semantic similarity.",
     pl: "Wizualna reprezentacja klastrów treści i ich relacji na podstawie podobieństwa semantycznego."
   },
