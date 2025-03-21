@@ -9,6 +9,7 @@ import LandingPage from "./pages/LandingPage";
 import AppPage from "./pages/AppPage";
 import SitemapsPage from "./pages/SitemapsPage";
 import ProcessingPage from "./pages/ProcessingPage";
+import ResultsPage from "./pages/ResultsPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -25,6 +26,7 @@ const App = () => (
             <Route path="/app" element={<AppPage />} />
             <Route path="/sitemaps" element={<SitemapsPage />} />
             <Route path="/processing" element={<ProcessingPage />} />
+            <Route path="/results" element={<ResultsPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

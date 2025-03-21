@@ -1,3 +1,4 @@
+
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 type Language = 'en' | 'pl';
@@ -142,7 +143,13 @@ const translations: Translations = {
   "top_divergent_pages": { en: "Top 10 Most Divergent Pages", pl: "Top 10 Most Divergent Pages" },
   "content_types": { en: "Content Types", pl: "Typy stron" },
   "summary": { en: "Summary", pl: "Podsumowanie" },
-  "filter": { en: "Filter", pl: "Filtruj" }
+  "filter": { en: "Filter", pl: "Filtruj" },
+  
+  // New translations for results page
+  "results": { en: "Analysis Results", pl: "Wyniki analizy" },
+  "results_description": { en: "Comprehensive analysis of your website's content focus", pl: "Kompleksowa analiza ukierunkowania treści Twojej strony" },
+  "focused_pages": { en: "Most Focused Pages", pl: "Najbardziej skoncentrowane strony" },
+  "divergent_pages": { en: "Most Divergent Pages", pl: "Najbardziej odbiegające strony" }
 };
 
 interface LanguageContextType {
