@@ -3,12 +3,52 @@ import { Button } from "@/components/ui/button";
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Link } from 'react-router-dom';
 import { Rocket } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 
 const HeroSection = () => {
   const { t } = useLanguage();
+  const vantaRef = useRef<HTMLDivElement>(null);
+  const vantaEffect = useRef<any>(null);
+  const [isInitialized, setIsInitialized] = useState(false);
+
+  useEffect(() => {
+    if (!vantaRef.current) return;
+    
+    // Make sure VANTA is available
+    if (typeof window.VANTA !== 'undefined' && !isInitialized) {
+      // Initialize the effect
+      vantaEffect.current = window.VANTA.DOTS({
+        el: vantaRef.current,
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200.00,
+        minWidth: 200.00,
+        scale: 1.00,
+        scaleMobile: 1.00,
+        color: 0xff0077,
+        color2: 0x8800ff,
+        backgroundColor: 0x000000,
+        size: 3.50,
+        spacing: 25.00,
+        showLines: true,
+        speed: 1.2
+      });
+      
+      setIsInitialized(true);
+      console.log('HeroSection VANTA DOTS initialized');
+    }
+
+    // Cleanup function
+    return () => {
+      if (vantaEffect.current) {
+        vantaEffect.current.destroy();
+      }
+    };
+  }, [isInitialized]);
   
   return (
-    <section className="pt-36 pb-16 md:pt-48 md:pb-20 relative overflow-hidden">
+    <section ref={vantaRef} className="pt-36 pb-16 md:pt-48 md:pb-20 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center justify-center">
           <div className="text-center w-full max-w-3xl mx-auto z-10">
