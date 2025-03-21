@@ -42,7 +42,7 @@ const LandingPage = () => {
         <Navbar isDark={true} />
         <main className="flex-grow">
           <HeroSection />
-          <div className="bg-white">
+          <div>
             <HowItWorks />
             <FeatureSection />
             <BenefitSection />

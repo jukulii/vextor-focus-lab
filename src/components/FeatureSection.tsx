@@ -6,7 +6,7 @@ const FeatureSection = () => {
   const { t } = useLanguage();
 
   return (
-    <section id="features" className="py-16 bg-gray-50 border-t border-gray-200">
+    <section id="features" className="py-16 border-t border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <span className="bg-vextor-100 text-vextor-700 px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4">Features</span>

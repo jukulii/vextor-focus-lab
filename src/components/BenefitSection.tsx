@@ -47,7 +47,7 @@ const BenefitSection = () => {
   ];
 
   return (
-    <section className="py-16 bg-black border-t border-gray-800">
+    <section className="py-16 border-t border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <span className="bg-blue-900 text-blue-300 px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4">Benefits</span>
