@@ -1,6 +1,6 @@
 
 import { useLanguage } from '@/contexts/LanguageContext';
-import { SearchIcon, MousePointerClick, LineChart, Lightbulb, ArrowDown, Globe, Cog, BarChart3, PieChart } from 'lucide-react';
+import { SearchIcon, MousePointerClick, LineChart, Lightbulb, ArrowRight, Globe, Cog, BarChart3, PieChart } from 'lucide-react';
 
 const HowItWorks = () => {
   const { t } = useLanguage();
@@ -42,10 +42,10 @@ const HowItWorks = () => {
           </p>
         </div>
         
-        <div className="flex flex-col items-center gap-3 max-w-lg mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6">
           {steps.map((step, index) => (
-            <div key={index} className="w-full">
-              <div className="bg-white hover:bg-gray-50 border-2 border-gray-100 rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 w-full flex flex-col items-center text-center">
+            <div key={index} className="relative">
+              <div className="bg-white hover:bg-gray-50 border-2 border-gray-100 rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col items-center text-center h-full">
                 <div className="w-16 h-16 bg-gradient-to-br from-vextor-100 to-blue-100 rounded-full flex items-center justify-center mt-1 mb-4">
                   <step.icon className="h-7 w-7 text-vextor-600" />
                 </div>
@@ -54,8 +54,8 @@ const HowItWorks = () => {
               </div>
               
               {index < steps.length - 1 && (
-                <div className="py-2 flex justify-center">
-                  <ArrowDown className="h-6 w-6 text-vextor-500 animate-pulse-subtle" />
+                <div className="hidden md:flex absolute top-1/2 -right-3 transform -translate-y-1/2 z-10">
+                  <ArrowRight className="h-6 w-6 text-vextor-500 animate-pulse-subtle" />
                 </div>
               )}
             </div>
