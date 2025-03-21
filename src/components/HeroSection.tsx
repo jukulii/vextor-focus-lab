@@ -15,7 +15,7 @@ const HeroSection = () => {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 fade-in leading-tight">
               {t('hero_title')}
             </h1>
-            <p className="text-xl text-white mb-8 fade-in stagger-1 max-w-2xl mx-auto text-balance">
+            <p className="text-xl text-gray-400 mb-8 fade-in stagger-1 max-w-2xl mx-auto text-balance">
               {t('hero_subtitle')}
             </p>
             <div className="space-x-4 fade-in stagger-2">
