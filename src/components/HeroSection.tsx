@@ -16,7 +16,7 @@ const HeroSection = () => {
     
     // Make sure VANTA is available
     if (typeof window.VANTA !== 'undefined' && !isInitialized) {
-      // Initialize the effect
+      // Initialize the effect with enhanced settings
       vantaEffect.current = window.VANTA.DOTS({
         el: vantaRef.current,
         mouseControls: true,
@@ -26,17 +26,21 @@ const HeroSection = () => {
         minWidth: 200.00,
         scale: 1.00,
         scaleMobile: 1.00,
-        color: 0xff0077,
-        color2: 0x8800ff,
+        color: 0xff0077,      // Bright pink
+        color2: 0x8800ff,     // Purple
         backgroundColor: 0x000000,
-        size: 3.50,
-        spacing: 25.00,
+        size: 4.50,           // Increased dot size
+        spacing: 20.00,       // Decreased spacing for more dots
         showLines: true,
-        speed: 1.2
+        speed: 1.5,           // Slightly faster animation
+        points: 18,           // More points for denser effect
+        maxDistance: 25.00,   // Maximum distance between points
+        highlightColor: 0xff3366,  // Highlight color for interactive dots
+        highlightIntensity: 0.5    // Intensity of the highlight
       });
       
       setIsInitialized(true);
-      console.log('HeroSection VANTA DOTS initialized');
+      console.log('HeroSection VANTA DOTS initialized with enhanced settings');
     }
 
     // Cleanup function
