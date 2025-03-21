@@ -4,7 +4,6 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 import { LineChart, Line, PieChart, Pie, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 import { LayoutDashboard, Search, Copy, GanttChart, Compass } from 'lucide-react';
 
@@ -82,6 +81,19 @@ const AnalysisResults = () => {
         </div>
       </div>
     );
+  };
+
+  // Custom tooltip component for recharts
+  const CustomTooltip = ({ active, payload, label }: any) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="bg-white p-2 border rounded shadow">
+          <p className="font-medium">{`${label || ''}`}</p>
+          <p className="text-sm">{`${payload[0].name}: ${payload[0].value}`}</p>
+        </div>
+      );
+    }
+    return null;
   };
 
   return (
@@ -258,7 +270,7 @@ const AnalysisResults = () => {
                           <Cell key={`cell-${index}`} fill={entry.color} />
                         ))}
                       </Pie>
-                      <Tooltip content={<ChartTooltipContent />} />
+                      <Tooltip content={<CustomTooltip />} />
                     </PieChart>
                   </ResponsiveContainer>
                 </div>
@@ -275,7 +287,7 @@ const AnalysisResults = () => {
                     <BarChart data={distributionData}>
                       <XAxis dataKey="name" />
                       <YAxis />
-                      <Tooltip content={<ChartTooltipContent />} />
+                      <Tooltip content={<CustomTooltip />} />
                       <Bar dataKey="value" fill="#4F46E5" />
                     </BarChart>
                   </ResponsiveContainer>
@@ -301,7 +313,7 @@ const AnalysisResults = () => {
                   >
                     <XAxis dataKey="name" />
                     <YAxis />
-                    <Tooltip content={<ChartTooltipContent />} />
+                    <Tooltip content={<CustomTooltip />} />
                     <Bar dataKey="value" fill="#3B82F6" />
                   </BarChart>
                 </ResponsiveContainer>
@@ -327,7 +339,7 @@ const AnalysisResults = () => {
                     >
                       <XAxis dataKey="name" />
                       <YAxis />
-                      <Tooltip content={<ChartTooltipContent />} />
+                      <Tooltip content={<CustomTooltip />} />
                       <Bar dataKey="value" fill="#EF4444" />
                     </BarChart>
                   </ResponsiveContainer>
@@ -341,7 +353,7 @@ const AnalysisResults = () => {
                     >
                       <XAxis dataKey="name" />
                       <YAxis />
-                      <Tooltip content={<ChartTooltipContent />} />
+                      <Tooltip content={<CustomTooltip />} />
                       <Bar dataKey="value" fill="#10B981" />
                     </BarChart>
                   </ResponsiveContainer>
@@ -374,7 +386,7 @@ const AnalysisResults = () => {
                         <Cell key={`cell-${index}`} fill={entry.color} />
                       ))}
                     </Pie>
-                    <Tooltip content={<ChartTooltipContent />} />
+                    <Tooltip content={<CustomTooltip />} />
                   </PieChart>
                 </ResponsiveContainer>
               </div>

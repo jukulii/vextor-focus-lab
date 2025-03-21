@@ -25,7 +25,7 @@ const ProcessingPage = () => {
         if (newProgress >= 100) {
           clearInterval(progressInterval);
           setTimeout(() => {
-            // Redirect to results page instead of /app
+            // Redirect to results page
             navigate('/results');
           }, 500);
           return 100;
