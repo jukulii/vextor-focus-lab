@@ -3,7 +3,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { LineChart, Line, PieChart, Pie, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
+import { LineChart, Line, PieChart, Pie, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, ScatterChart, Scatter, ZAxis } from 'recharts';
 import { LayoutDashboard, Search, Copy, GanttChart, Compass, Link2 } from 'lucide-react';
 
 const AnalysisResults = () => {
@@ -63,6 +63,38 @@ const AnalysisResults = () => {
     { id: 4, url1: 'Senuto.com/tools/keyword-research', url2: 'Senuto.com/tools/keyword-finder', score: 0.9 },
   ];
 
+  const clusterData = Array.from({ length: 300 }, () => ({
+    x: Math.random() * 160 - 80,
+    y: Math.random() * 120 - 60,
+    z: Math.random() * 0.4 + 0.5,
+  }));
+
+  const cluster1 = clusterData.slice(0, 100).map(item => ({
+    ...item,
+    x: item.x * 0.7,
+    y: item.y * 0.7 + 15,
+    z: item.z + 0.2,
+    cluster: 1
+  }));
+  
+  const cluster2 = clusterData.slice(100, 200).map(item => ({
+    ...item,
+    x: item.x * 0.6 - 10,
+    y: item.y * 0.6 - 20,
+    z: item.z + 0.1,
+    cluster: 2
+  }));
+  
+  const cluster3 = clusterData.slice(200, 300).map(item => ({
+    ...item,
+    x: item.x * 0.5 + 40,
+    y: item.y * 0.5 + 5,
+    z: item.z,
+    cluster: 3
+  }));
+  
+  const allClusterData = [...cluster1, ...cluster2, ...cluster3];
+
   const renderGauge = (value: number) => {
     const colors = ["#FF5252", "#FFA726", "#66BB6A"];
     let fillColor;
@@ -95,12 +127,26 @@ const AnalysisResults = () => {
     );
   };
 
-  const CustomTooltip = ({ active, payload, label }: any) => {
+  const CustomTooltip = ({ active, payload }: any) => {
     if (active && payload && payload.length) {
       return (
         <div className="bg-white p-2 border rounded shadow">
           <p className="font-medium">{`${label || ''}`}</p>
           <p className="text-sm">{`${payload[0].name}: ${payload[0].value}`}</p>
+        </div>
+      );
+    }
+    return null;
+  };
+
+  const ClusterTooltip = ({ active, payload }: any) => {
+    if (active && payload && payload.length) {
+      const data = payload[0].payload;
+      return (
+        <div className="bg-white p-2 border rounded shadow">
+          <p className="font-medium">{`Cluster: ${data.cluster}`}</p>
+          <p className="text-sm">{`Distance: ${data.z.toFixed(2)}`}</p>
+          <p className="text-sm">{`Position: (${data.x.toFixed(1)}, ${data.y.toFixed(1)})`}</p>
         </div>
       );
     }
@@ -429,27 +475,79 @@ const AnalysisResults = () => {
             <CardContent className="pt-6">
               <h3 className="text-xl font-medium mb-4">{t('classes')}</h3>
               <p className="text-gray-600 mb-6">
-                Content clusters and their relationships.
+                {t('cluster_description') || 'Visual representation of content clusters and their relationships.'}
               </p>
               
-              <div className="h-96">
-                <ResponsiveContainer width="100%" height="100%">
-                  <PieChart>
-                    <Pie
-                      data={contentTypesData}
-                      cx="50%"
-                      cy="50%"
-                      outerRadius={120}
-                      dataKey="value"
-                      label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+              <div className="mb-8">
+                <h4 className="text-lg font-medium mb-4">2D t-SNE Projection of Pages</h4>
+                <div className="h-[600px] border rounded-lg p-4 bg-white">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <ScatterChart
+                      margin={{ top: 20, right: 50, bottom: 20, left: 20 }}
                     >
-                      {contentTypesData.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={entry.color} />
-                      ))}
-                    </Pie>
-                    <Tooltip content={<CustomTooltip />} />
-                  </PieChart>
-                </ResponsiveContainer>
+                      <XAxis type="number" dataKey="x" name="X" domain={[-80, 80]} tickCount={9} />
+                      <YAxis type="number" dataKey="y" name="Y" domain={[-60, 60]} tickCount={7} />
+                      <ZAxis type="number" dataKey="z" range={[20, 500]} name="Distance" />
+                      <Tooltip content={<ClusterTooltip />} />
+                      <Scatter 
+                        name="Cluster 1" 
+                        data={cluster1} 
+                        fill="#E57373"
+                      />
+                      <Scatter 
+                        name="Cluster 2" 
+                        data={cluster2} 
+                        fill="#FFB74D"
+                      />
+                      <Scatter 
+                        name="Cluster 3" 
+                        data={cluster3} 
+                        fill="#81C784"
+                      />
+                    </ScatterChart>
+                  </ResponsiveContainer>
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                <Card>
+                  <CardContent className="pt-6">
+                    <h4 className="text-base font-medium mb-2">Cluster 1</h4>
+                    <div className="h-4 w-16 bg-red-400 rounded mb-2"></div>
+                    <p className="text-sm text-gray-600">
+                      217 URLs (39.1%)
+                    </p>
+                    <p className="text-sm text-gray-600 mt-2">
+                      Primary content pattern: Product pages
+                    </p>
+                  </CardContent>
+                </Card>
+                
+                <Card>
+                  <CardContent className="pt-6">
+                    <h4 className="text-base font-medium mb-2">Cluster 2</h4>
+                    <div className="h-4 w-16 bg-orange-400 rounded mb-2"></div>
+                    <p className="text-sm text-gray-600">
+                      193 URLs (34.8%)
+                    </p>
+                    <p className="text-sm text-gray-600 mt-2">
+                      Primary content pattern: Blog posts
+                    </p>
+                  </CardContent>
+                </Card>
+                
+                <Card>
+                  <CardContent className="pt-6">
+                    <h4 className="text-base font-medium mb-2">Cluster 3</h4>
+                    <div className="h-4 w-16 bg-green-400 rounded mb-2"></div>
+                    <p className="text-sm text-gray-600">
+                      146 URLs (26.1%)
+                    </p>
+                    <p className="text-sm text-gray-600 mt-2">
+                      Primary content pattern: Support pages
+                    </p>
+                  </CardContent>
+                </Card>
               </div>
             </CardContent>
           </Card>
@@ -477,3 +575,4 @@ const AnalysisResults = () => {
 };
 
 export default AnalysisResults;
+

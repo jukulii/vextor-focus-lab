@@ -171,6 +171,32 @@ const translations: Translations = {
     en: "URL 2", 
     pl: "URL 2" 
   },
+  
+  // New translations for clusters/classes tab
+  "cluster_description": { 
+    en: "Visual representation of content clusters and their relationships based on semantic similarity.",
+    pl: "Wizualna reprezentacja klastrów treści i ich relacji na podstawie podobieństwa semantycznego."
+  },
+  "cluster_1": {
+    en: "Cluster 1",
+    pl: "Klaster 1"
+  },
+  "cluster_2": {
+    en: "Cluster 2",
+    pl: "Klaster 2"
+  },
+  "cluster_3": {
+    en: "Cluster 3",
+    pl: "Klaster 3"
+  },
+  "urls_count": {
+    en: "URLs",
+    pl: "Adresy URL"
+  },
+  "content_pattern": {
+    en: "Primary content pattern",
+    pl: "Główny wzorzec treści"
+  },
 };
 
 interface LanguageContextType {
