@@ -1,3 +1,4 @@
+
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from "@/components/ui/button";
 import { CheckIcon, SparklesIcon } from 'lucide-react';
@@ -43,7 +44,7 @@ const PricingSection = () => {
         <div className="text-center mb-16">
           <span className="bg-purple-100 text-purple-700 px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4">Pricing</span>
           <h2 className="text-3xl md:text-4xl mb-4 font-bold text-zinc-50">
-            {t('pricing_title')}
+            Simple, transparent pricing
           </h2>
           <p className="text-xl max-w-2xl mx-auto text-zinc-400">
             Choose the perfect plan for your needs
