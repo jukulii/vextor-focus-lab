@@ -23,7 +23,7 @@ const translations: Translations = {
     pl: "Analizuj tematyczne ukierunkowanie swojej strony"
   },
   "hero_subtitle": {
-    en: "Unlock comprehensive insights into your website's content focus and improve SEO performance",
+    en: "Unlock comprehensive insights into your website content focus and improve SEO performance",
     pl: "Odblokuj kompleksowy wgląd w tematykę treści swojej strony i popraw wydajność SEO"
   },
   "get_started": { en: "Get Started", pl: "Rozpocznij" },
