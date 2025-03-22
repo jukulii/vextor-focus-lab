@@ -19,7 +19,7 @@ const HowItWorks = () => {
   }, {
     title: t('step_4'),
     icon: PieChart,
-    description: "Plus smart recommendations on what to improve"
+    description: "And share it with your team or clients"
   }];
   return <section id="how-it-works" className="py-16 border-t border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
