@@ -1,9 +1,12 @@
+
 import { useLanguage } from '@/contexts/LanguageContext';
 import { SearchIcon, MousePointerClick, LineChart, Lightbulb, ArrowRight, Globe, Cog, BarChart3, PieChart } from 'lucide-react';
+
 const HowItWorks = () => {
   const {
     t
   } = useLanguage();
+  
   const steps = [{
     title: "Add sitemap or domain",
     icon: Globe,
@@ -21,6 +24,7 @@ const HowItWorks = () => {
     icon: PieChart,
     description: "And share it with your team or clients"
   }];
+  
   return <section id="how-it-works" className="py-16 border-t border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
@@ -40,8 +44,10 @@ const HowItWorks = () => {
                 <div className="w-16 h-16 bg-gradient-to-br from-vextor-500 to-blue-500 rounded-full flex items-center justify-center mt-1 mb-4">
                   <step.icon className="h-7 w-7 text-white" />
                 </div>
-                <h3 className="mb-2 text-lg font-bold text-zinc-50">{step.title}</h3>
-                <p className="text-zinc-400">{step.description}</p>
+                <h3 className="mb-4 text-lg font-bold text-zinc-50">{step.title}</h3>
+                <div className="mt-auto">
+                  <p className="text-zinc-400">{step.description}</p>
+                </div>
               </div>
               
               {index < steps.length - 1 && <div className="hidden md:flex absolute top-1/2 -right-3 transform -translate-y-1/2 z-10">
@@ -52,4 +58,5 @@ const HowItWorks = () => {
       </div>
     </section>;
 };
+
 export default HowItWorks;
