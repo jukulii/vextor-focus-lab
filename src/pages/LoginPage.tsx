@@ -8,6 +8,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { useToast } from '@/components/ui/use-toast';
 import { Eye, EyeOff, LogIn } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
+import VantaBackground from '@/components/VantaBackground';
 
 const LoginPage = () => {
     const { t } = useLanguage();
@@ -58,98 +59,101 @@ const LoginPage = () => {
     };
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-gray-50 dark:bg-gray-950">
-            <div className="w-full max-w-md">
-                <div className="flex justify-center mb-8">
-                    <Link to="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
-                        <img
-                            src="/lovable-uploads/5634c72d-5100-496b-ade4-9da06c56eda0.png"
-                            alt="Vextor Logo"
-                            className="h-12 w-auto object-contain mix-blend-multiply"
-                        />
-                        <span className="text-vextor-700 dark:text-vextor-400 font-bold text-2xl">
-                            Vextor
-                        </span>
-                    </Link>
-                </div>
+        <div className="relative min-h-screen w-full">
+            <VantaBackground />
+            <div className="relative z-10 min-h-screen flex flex-col items-center justify-center p-4">
+                <div className="w-full max-w-md">
+                    <div className="flex justify-center mb-8">
+                        <Link to="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
+                            <img
+                                src="/lovable-uploads/5634c72d-5100-496b-ade4-9da06c56eda0.png"
+                                alt="Vextor Logo"
+                                className="h-20 w-auto object-contain mix-blend-multiply"
+                            />
+                            <span className="text-white font-bold text-2xl">
+                                Vextor
+                            </span>
+                        </Link>
+                    </div>
 
-                <Card className="border-gray-200 dark:border-gray-800">
-                    <CardHeader>
-                        <CardTitle className="text-2xl">{t('login') || "Login"}</CardTitle>
-                        <CardDescription>{t('login_subtitle') || "Enter your credentials to access your account"}</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                        <form onSubmit={handleSubmit} className="space-y-4">
-                            <div className="space-y-2">
-                                <label htmlFor="email" className="text-sm font-medium">
-                                    {t('email') || "Email"}
-                                </label>
-                                <Input
-                                    id="email"
-                                    type="email"
-                                    placeholder="your@email.com"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    required
-                                    className="w-full"
-                                />
-                            </div>
-
-                            <div className="space-y-2">
-                                <label htmlFor="password" className="text-sm font-medium">
-                                    {t('password') || "Password"}
-                                </label>
-                                <div className="relative">
+                    <Card className="bg-black/40 backdrop-blur-lg border-gray-800 text-white shadow-lg">
+                        <CardHeader>
+                            <CardTitle className="text-2xl text-white">{t('login') || "Login"}</CardTitle>
+                            <CardDescription className="text-gray-300">{t('login_subtitle') || "Enter your credentials to access your account"}</CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                            <form onSubmit={handleSubmit} className="space-y-4">
+                                <div className="space-y-2">
+                                    <label htmlFor="email" className="text-sm font-medium text-gray-200">
+                                        {t('email') || "Email"}
+                                    </label>
                                     <Input
-                                        id="password"
-                                        type={showPassword ? "text" : "password"}
-                                        placeholder="••••••••"
-                                        value={password}
-                                        onChange={(e) => setPassword(e.target.value)}
+                                        id="email"
+                                        type="email"
+                                        placeholder="your@email.com"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
                                         required
-                                        className="w-full pr-10"
+                                        className="w-full bg-gray-800/60 border-gray-700 text-white"
                                     />
-                                    <button
-                                        type="button"
-                                        onClick={() => setShowPassword(!showPassword)}
-                                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
-                                    >
-                                        {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                                    </button>
                                 </div>
-                            </div>
 
-                            <Button
-                                type="submit"
-                                className="w-full bg-vextor-600 hover:bg-vextor-700 text-white"
-                                disabled={isLoading}
-                            >
-                                {isLoading ? (
-                                    <span className="flex items-center gap-2">
-                                        <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                        </svg>
-                                        {t('logging_in') || "Logging in..."}
-                                    </span>
-                                ) : (
-                                    <span className="flex items-center gap-2">
-                                        <LogIn size={18} />
-                                        {t('login') || "Login"}
-                                    </span>
-                                )}
-                            </Button>
-                        </form>
-                    </CardContent>
-                    <CardFooter className="flex flex-col space-y-2">
-                        <div className="text-xs text-center text-gray-500 dark:text-gray-400">
-                            {t('dont_have_account') || "Don't have an account?"}
-                            <a href="#" className="text-vextor-600 hover:underline ml-1">
-                                {t('contact_us') || "Contact us"}
-                            </a>
-                        </div>
-                    </CardFooter>
-                </Card>
+                                <div className="space-y-2">
+                                    <label htmlFor="password" className="text-sm font-medium text-gray-200">
+                                        {t('password') || "Password"}
+                                    </label>
+                                    <div className="relative">
+                                        <Input
+                                            id="password"
+                                            type={showPassword ? "text" : "password"}
+                                            placeholder="••••••••"
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)}
+                                            required
+                                            className="w-full pr-10 bg-gray-800/60 border-gray-700 text-white"
+                                        />
+                                        <button
+                                            type="button"
+                                            onClick={() => setShowPassword(!showPassword)}
+                                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-200"
+                                        >
+                                            {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <Button
+                                    type="submit"
+                                    className="w-full bg-vextor-600 hover:bg-vextor-700 text-white button-glow shadow-lg"
+                                    disabled={isLoading}
+                                >
+                                    {isLoading ? (
+                                        <span className="flex items-center gap-2">
+                                            <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                            </svg>
+                                            {t('logging_in') || "Logging in..."}
+                                        </span>
+                                    ) : (
+                                        <span className="flex items-center gap-2">
+                                            <LogIn size={18} />
+                                            {t('login') || "Login"}
+                                        </span>
+                                    )}
+                                </Button>
+                            </form>
+                        </CardContent>
+                        <CardFooter className="flex flex-col space-y-2">
+                            <div className="text-xs text-center text-gray-400">
+                                {t('dont_have_account') || "Don't have an account?"}
+                                <a href="#" className="text-vextor-400 hover:underline ml-1">
+                                    {t('contact_us') || "Contact us"}
+                                </a>
+                            </div>
+                        </CardFooter>
+                    </Card>
+                </div>
             </div>
         </div>
     );
