@@ -1,3 +1,4 @@
+
 import { useLanguage } from '@/contexts/LanguageContext';
 import { SearchIcon, MousePointerClick, LineChart, Lightbulb, ArrowRight, Globe, Cog, BarChart3, PieChart } from 'lucide-react';
 const HowItWorks = () => {
@@ -11,7 +12,7 @@ const HowItWorks = () => {
   }, {
     title: t('step_2'),
     icon: Cog,
-    description: "Our AI analyzes your site's content and structure"
+    description: "Using the same techniques used by Google and LLMs."
   }, {
     title: t('step_3'),
     icon: BarChart3,
