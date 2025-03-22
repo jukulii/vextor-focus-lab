@@ -36,7 +36,7 @@ const BenefitSection = () => {
     }, 
     {
       icon: Trophy,
-      title: "Measure topical authority (Site Focus & Radius)",
+      title: "Measure Site Focus & Site Radius",
       iconColor: 'text-graph-purple',
       bgColor: 'bg-purple-900'
     }
