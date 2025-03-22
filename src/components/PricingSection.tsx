@@ -1,3 +1,4 @@
+
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from "@/components/ui/button";
 import { CheckIcon } from 'lucide-react';
@@ -10,7 +11,7 @@ const PricingSection = () => {
   
   // Keep only the Pro plan
   const pricingPlan = {
-    name: t('price_pro_title'),
+    name: "Pay-as-You-Go",
     price: '49',
     description: t('price_pro_desc'),
     features: ['Full website analysis', 'Up to 1,000 pages', 'Complete reports & insights', 'Content recommendations', 'Priority support'],
