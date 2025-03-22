@@ -33,7 +33,7 @@ const BenefitSection = () => {
   } = useLanguage();
   const benefits = [{
     icon: ArrowUpRight,
-    title: t('benefit_3_title'),
+    title: "Measure topical authority (Site Focus & Radius)",
     description: t('benefit_3_desc'),
     iconColor: 'text-graph-green',
     bgColor: 'bg-green-900'
