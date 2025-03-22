@@ -6,7 +6,6 @@ import AppHeader from '@/components/AppHeader';
 import AnalysisResults from '@/components/AnalysisResults';
 import AgChartDemo from '@/components/AgChartDemo';
 import VantaBackground from '@/components/VantaBackground';
-import Footer from '@/components/Footer';
 
 const ResultsPage = () => {
   const { t } = useLanguage();
@@ -75,7 +74,6 @@ const ResultsPage = () => {
             <AnalysisResults />
           </div>
         </main>
-        <Footer />
       </div>
     </div>
   );

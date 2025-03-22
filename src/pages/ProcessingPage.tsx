@@ -7,7 +7,6 @@ import { Progress } from '@/components/ui/progress';
 import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import VantaBackground from '@/components/VantaBackground';
-import Footer from '@/components/Footer';
 
 const ProcessingPage = () => {
   const { t } = useLanguage();
@@ -86,7 +85,6 @@ const ProcessingPage = () => {
             </Tabs>
           </div>
         </main>
-        <Footer />
       </div>
     </div>
   );

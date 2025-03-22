@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import AppHeader from '@/components/AppHeader';
 import SitemapSearch from '@/components/SitemapSearch';
 import VantaBackground from '@/components/VantaBackground';
-import Footer from '@/components/Footer';
 
 const AppPage = () => {
   // Scroll to top when the page loads
@@ -21,7 +20,6 @@ const AppPage = () => {
             <SitemapSearch />
           </div>
         </main>
-        <Footer />
       </div>
     </div>
   );
