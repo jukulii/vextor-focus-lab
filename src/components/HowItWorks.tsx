@@ -7,7 +7,7 @@ const HowItWorks = () => {
   const steps = [
     {
       number: "1",
-      title: "Describe what you want to build in natural language.",
+      title: "Enter your sitemap or domain",
       description: "Enter sitemap or domain to begin the analysis process"
     }, 
     {
