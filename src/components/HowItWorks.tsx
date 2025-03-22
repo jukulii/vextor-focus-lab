@@ -56,6 +56,9 @@ const HowItWorks = () => {
               <p className="text-zinc-50 text-sm md:text-base font-medium text-center leading-tight mb-1">
                 {step.title}
               </p>
+              <p className="text-zinc-400 text-xs md:text-sm mt-2">
+                {step.description}
+              </p>
             </div>
           ))}
         </div>
