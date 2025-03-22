@@ -51,8 +51,8 @@ const PricingSection = () => {
                   starts from
                 </span>
               </div>
-              <p className="text-zinc-400 mt-2 text-sm">
-                {pricingPlan.description}
+              <p className="text-zinc-200 mt-2 text-sm bg-purple-600/30 px-3 py-1.5 rounded-md font-medium">
+                Free trial version for 5 000 URL's
               </p>
             </div>
             
