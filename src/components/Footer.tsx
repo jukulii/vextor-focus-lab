@@ -84,7 +84,7 @@ const Footer = () => {
         
         <div className="mt-12 pt-8 border-t border-gray-800">
           <p className="text-gray-500 text-sm text-center">
-            {t('copyright')}
+            © 2025 Vextor. All rights reserved.
           </p>
         </div>
       </div>
