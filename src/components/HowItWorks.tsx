@@ -57,7 +57,7 @@ const HowItWorks = () => {
                 <p className="text-zinc-50 text-sm md:text-base font-medium text-center leading-tight mb-2">
                   {step.title}
                 </p>
-                <p className="text-zinc-400 text-xs md:text-sm">
+                <p className="text-zinc-400 text-xs md:text-sm text-center w-full">
                   {step.description}
                 </p>
               </div>
