@@ -44,9 +44,8 @@ const TestimonialSection = () => {
               align: "center",
             }}
             onSelect={(api) => {
-              const currentIndex = api?.selectedScrollSnap();
-              if (currentIndex !== undefined) {
-                setActiveIndex(currentIndex);
+              if (api) {
+                setActiveIndex(api.selectedScrollSnap());
               }
             }}
           >
