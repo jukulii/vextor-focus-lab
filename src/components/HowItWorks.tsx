@@ -53,11 +53,11 @@ const HowItWorks = () => {
                 )}
               </div>
               
-              <div className="flex flex-col items-center">
+              <div className="flex flex-col items-center h-20">
                 <p className="text-zinc-50 text-sm md:text-base font-medium text-center leading-tight mb-2">
                   {step.title}
                 </p>
-                <p className="text-zinc-400 text-xs md:text-sm text-center w-full h-[40px] flex items-center justify-center">
+                <p className="text-zinc-400 text-xs md:text-sm text-center w-full mt-1">
                   {step.description}
                 </p>
               </div>
