@@ -14,7 +14,7 @@ const PricingSection = () => {
     name: "Pay-as-You-Go",
     price: '49',
     description: t('price_pro_desc'),
-    features: ['Full website analysis', 'Up to 1,000 pages', 'Complete reports & insights', 'Content recommendations', 'Priority support'],
+    features: ['Charge based on what you actually use', 'Up to 1,000 pages', 'Complete reports & insights', 'Content recommendations', 'Priority support'],
     buttonText: t('get_started'),
     to: '/app',
   };
