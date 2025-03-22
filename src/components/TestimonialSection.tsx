@@ -44,8 +44,10 @@ const TestimonialSection = () => {
               loop: true,
               align: "center",
             }}
-            onSelect={(api: UseEmblaCarouselType[1]) => {
-              setActiveIndex(api.selectedScrollSnap());
+            onSelect={(api) => {
+              if (api) {
+                setActiveIndex(api.selectedScrollSnap());
+              }
             }}
           >
             <CarouselContent>
@@ -67,7 +69,7 @@ const TestimonialSection = () => {
               ))}
             </CarouselContent>
 
-            <div className="absolute -bottom-12 left-0 right-0 flex items-center justify-center gap-3 mt-6">
+            <div className="absolute -bottom-12 left-0 right-0 flex items-center justify-center gap-2 mt-6">
               {testimonials.map((_, idx) => (
                 <button
                   key={idx}
@@ -82,10 +84,10 @@ const TestimonialSection = () => {
                       });
                     }
                   }}
-                  className={`h-3 rounded-full transition-all duration-300 ${
+                  className={`h-2.5 w-2.5 rounded-full transition-all duration-300 ${
                     activeIndex === idx 
-                      ? 'bg-vextor-500 w-8' 
-                      : 'bg-gray-600 hover:bg-gray-500 w-3'
+                      ? 'bg-vextor-500' 
+                      : 'bg-gray-600 hover:bg-gray-500'
                   }`}
                   aria-label={`Go to slide ${idx + 1}`}
                 />
