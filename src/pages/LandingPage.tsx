@@ -4,6 +4,7 @@ import HeroSection from '@/components/HeroSection';
 import HowItWorks from '@/components/HowItWorks';
 import FeatureSection from '@/components/FeatureSection';
 import BenefitSection from '@/components/BenefitSection';
+import TestimonialSection from '@/components/TestimonialSection';
 import PricingSection from '@/components/PricingSection';
 import Footer from '@/components/Footer';
 import VantaBackground from '@/components/VantaBackground';
@@ -46,6 +47,7 @@ const LandingPage = () => {
             <HowItWorks />
             <FeatureSection />
             <BenefitSection />
+            <TestimonialSection />
             <PricingSection />
           </div>
         </main>
