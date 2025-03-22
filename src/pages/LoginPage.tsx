@@ -1,5 +1,6 @@
+
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -60,7 +61,7 @@ const LoginPage = () => {
         <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-gray-50 dark:bg-gray-950">
             <div className="w-full max-w-md">
                 <div className="flex justify-center mb-8">
-                    <div className="flex items-center space-x-2">
+                    <Link to="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
                         <img
                             src="/lovable-uploads/5634c72d-5100-496b-ade4-9da06c56eda0.png"
                             alt="Vextor Logo"
@@ -69,7 +70,7 @@ const LoginPage = () => {
                         <span className="text-vextor-700 dark:text-vextor-400 font-bold text-2xl">
                             Vextor
                         </span>
-                    </div>
+                    </Link>
                 </div>
 
                 <Card className="border-gray-200 dark:border-gray-800">
@@ -154,4 +155,4 @@ const LoginPage = () => {
     );
 };
 
-export default LoginPage; 
+export default LoginPage;
