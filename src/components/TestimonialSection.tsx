@@ -32,7 +32,7 @@ const TestimonialSection = () => {
         <div className="text-center mb-16">
           <span className="bg-purple-900 text-purple-300 px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4">Testimonials</span>
           <h2 className="text-3xl md:text-4xl font-bold text-zinc-50 mb-4">
-            What SEOs Are Saying
+            What SEOs are Saying
           </h2>
         </div>
 
