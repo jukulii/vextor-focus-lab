@@ -6,6 +6,7 @@ import FeatureSection from '@/components/FeatureSection';
 import BenefitSection from '@/components/BenefitSection';
 import TestimonialSection from '@/components/TestimonialSection';
 import PricingSection from '@/components/PricingSection';
+import FAQSection from '@/components/FAQSection';
 import Footer from '@/components/Footer';
 import VantaBackground from '@/components/VantaBackground';
 import { useEffect } from 'react';
@@ -49,6 +50,7 @@ const LandingPage = () => {
             <BenefitSection />
             <TestimonialSection />
             <PricingSection />
+            <FAQSection />
           </div>
         </main>
         <Footer />
