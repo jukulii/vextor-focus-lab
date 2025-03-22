@@ -1,4 +1,3 @@
-
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from "@/components/ui/button";
 import { CheckIcon } from 'lucide-react';
@@ -48,9 +47,8 @@ const PricingSection = () => {
             <div className="mt-4 mb-6 text-center">
               <div className="flex items-baseline justify-center">
                 <span className="text-4xl font-bold text-purple-300">
-                  starts from ${pricingPlan.price}
+                  starts from
                 </span>
-                <span className="ml-1 text-zinc-400">{t('monthly')}</span>
               </div>
               <p className="text-zinc-400 mt-2 text-sm">
                 {pricingPlan.description}
