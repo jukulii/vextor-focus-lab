@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 type Language = 'en' | 'pl';
@@ -198,6 +197,20 @@ const translations: Translations = {
     en: "Primary content pattern",
     pl: "Główny wzorzec treści"
   },
+
+  // Login page
+  "login": { en: "Login", pl: "Logowanie" },
+  "login_subtitle": { en: "Enter your credentials to access your account", pl: "Wprowadź dane logowania, aby uzyskać dostęp do konta" },
+  "email": { en: "Email", pl: "Email" },
+  "password": { en: "Password", pl: "Hasło" },
+  "logging_in": { en: "Logging in...", pl: "Logowanie..." },
+  "login_success": { en: "Login successful", pl: "Logowanie udane" },
+  "welcome_back": { en: "Welcome back to Vextor", pl: "Witaj ponownie w Vextor" },
+  "login_failed": { en: "Login failed", pl: "Logowanie nieudane" },
+  "error": { en: "Error", pl: "Błąd" },
+  "dont_have_account": { en: "Don't have an account?", pl: "Nie masz konta?" },
+  "register": { en: "Register", pl: "Zarejestruj się" },
+  "contact_us": { en: "Contact us", pl: "Skontaktuj się z nami" },
 };
 
 interface LanguageContextType {

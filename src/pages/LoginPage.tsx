@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -147,9 +146,9 @@ const LoginPage = () => {
                         <CardFooter className="flex flex-col space-y-2">
                             <div className="text-xs text-center text-gray-400">
                                 {t('dont_have_account') || "Don't have an account?"}
-                                <a href="#" className="text-vextor-400 hover:underline ml-1">
-                                    {t('contact_us') || "Contact us"}
-                                </a>
+                                <Link to="/register" className="text-vextor-400 hover:underline ml-1">
+                                    {t('register') || "Register"}
+                                </Link>
                             </div>
                         </CardFooter>
                     </Card>
