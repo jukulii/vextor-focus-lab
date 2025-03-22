@@ -210,7 +210,6 @@ const translations: Translations = {
   "error": { en: "Error", pl: "Błąd" },
   "dont_have_account": { en: "Don't have an account?", pl: "Nie masz konta?" },
   "register": { en: "Register", pl: "Zarejestruj się" },
-  "contact_us": { en: "Contact us", pl: "Skontaktuj się z nami" },
 };
 
 interface LanguageContextType {
