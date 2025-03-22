@@ -1,3 +1,4 @@
+
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ArrowUpRight, UserCheck, Search, Trophy } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
@@ -50,7 +51,7 @@ const BenefitSection = () => {
     bgColor: 'bg-orange-900'
   }, {
     icon: Trophy,
-    title: "Understand how Google evaluates your site",
+    title: "Measure topical authority (Site Focus & Radius)",
     description: t('benefit_6_desc'),
     iconColor: 'text-graph-purple',
     bgColor: 'bg-purple-900'
