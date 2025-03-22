@@ -1,4 +1,3 @@
-
 import { useLanguage } from '@/contexts/LanguageContext';
 import { SearchIcon, MousePointerClick, LineChart, Lightbulb, ArrowRight, Globe, Cog, BarChart3, PieChart } from 'lucide-react';
 const HowItWorks = () => {
@@ -14,9 +13,9 @@ const HowItWorks = () => {
     icon: Cog,
     description: "Using the same techniques used by Google and LLMs"
   }, {
-    title: t('step_3'),
+    title: "Get your Site Focus & Radius scores",
     icon: BarChart3,
-    description: "Get your Site Focus & Radius scores"
+    description: "Plus smart recommendations on what to improve"
   }, {
     title: t('step_4'),
     icon: PieChart,
