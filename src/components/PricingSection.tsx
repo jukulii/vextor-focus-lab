@@ -48,7 +48,7 @@ const PricingSection = () => {
             <div className="mt-4 mb-6 text-center">
               <div className="flex items-baseline justify-center">
                 <span className="text-4xl font-bold text-purple-300">
-                  ${pricingPlan.price}
+                  starts from ${pricingPlan.price}
                 </span>
                 <span className="ml-1 text-zinc-400">{t('monthly')}</span>
               </div>
