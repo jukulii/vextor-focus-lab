@@ -16,11 +16,11 @@ const HowItWorks = () => {
   }, {
     title: t('step_3'),
     icon: BarChart3,
-    description: "Review detailed insights about your content focus"
+    description: "Get your Site Focus & Radius scores"
   }, {
     title: t('step_4'),
     icon: PieChart,
-    description: "Get actionable recommendations to improve your SEO"
+    description: "Plus smart recommendations on what to improve"
   }];
   return <section id="how-it-works" className="py-16 border-t border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
