@@ -13,7 +13,7 @@ const HowItWorks = () => {
     {
       number: "2",
       title: "We crawl your pages",
-      description: "Using the same techniques used by Google and LLMs"
+      description: "Using the same techniques used by Google and LLMs and calculate key metrics"
     }, 
     {
       number: "3",
