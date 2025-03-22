@@ -36,7 +36,7 @@ const BenefitSection = () => {
   const benefits = [{
     icon: ArrowUpRight,
     title: "Cluster and visualize site structure by semantic topics",
-    description: t('benefit_3_desc'),
+    description: "Understand how your content focus compares to competitors",
     iconColor: 'text-graph-green',
     bgColor: 'bg-green-900'
   }, {
