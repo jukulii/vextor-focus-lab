@@ -12,7 +12,7 @@ const HowItWorks = () => {
   }, {
     title: t('step_2'),
     icon: Cog,
-    description: "Using the same techniques used by Google and LLMs."
+    description: "Using the same techniques used by Google and LLMs"
   }, {
     title: t('step_3'),
     icon: BarChart3,
