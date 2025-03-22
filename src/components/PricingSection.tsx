@@ -1,3 +1,4 @@
+
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from "@/components/ui/button";
 import { CheckIcon } from 'lucide-react';
@@ -35,7 +36,7 @@ const PricingSection = () => {
             className="
               rounded-xl p-8 transition-all duration-300 
               bg-gradient-to-br from-vextor-900 to-blue-900 border-2 border-purple-500 shadow-xl
-              max-w-md w-full
+              max-w-sm w-full
             "
           >
             <div className="flex items-center justify-center mb-2">
