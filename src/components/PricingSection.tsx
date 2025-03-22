@@ -47,7 +47,7 @@ const PricingSection = () => {
             Simple, transparent pricing
           </h2>
           <p className="text-xl max-w-2xl mx-auto text-zinc-400">
-            Choose the perfect plan for your needs
+            Pay-as-You-Go
           </p>
         </div>
         
