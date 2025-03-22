@@ -43,7 +43,8 @@ const App = () => {
                 <Route path="/login" element={<LoginPage />} />
 
                 {/* Protected routes */}
-                <Route element={<ProtectedRoute />}>
+                {/* <Route element={<ProtectedRoute />}> */}
+                <Route>
                   <Route path="/app" element={<AppPage />} />
                   <Route path="/sitemaps" element={<SitemapsPage />} />
                   <Route path="/processing" element={<ProcessingPage />} />
@@ -56,7 +57,7 @@ const App = () => {
           </TooltipProvider>
         </AuthProvider>
       </LanguageProvider>
-    </QueryClientProvider>
+    </QueryClientProvider >
   );
 };
 
