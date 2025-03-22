@@ -24,7 +24,7 @@ const BenefitSection = () => {
     }, 
     {
       icon: UserCheck,
-      title: t('benefit_4_title'),
+      title: "Identify irrelevant or weak content",
       iconColor: 'text-graph-blue',
       bgColor: 'bg-blue-900'
     }, 
