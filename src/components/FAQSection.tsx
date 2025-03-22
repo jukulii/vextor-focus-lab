@@ -1,6 +1,5 @@
 
 import { useLanguage } from '@/contexts/LanguageContext';
-import { ChevronDown } from 'lucide-react';
 import { 
   Accordion, 
   AccordionContent, 
@@ -13,7 +12,7 @@ const FAQSection = () => {
   
   const faqs = [
     {
-      question: "📐 How is Site Focus and Site Radius calculated?",
+      question: "How is Site Focus and Site Radius calculated?",
       answer: (
         <div className="space-y-4">
           <p>Vextor AI uses embedding models (AI models that turn content into vectors) to understand the semantic meaning of each page on your site.</p>
@@ -27,7 +26,7 @@ const FAQSection = () => {
       )
     },
     {
-      question: "📊 What Site Focus and Site Radius mean?",
+      question: "What Site Focus and Site Radius mean?",
       answer: (
         <div className="space-y-4">
           <div>
@@ -53,7 +52,7 @@ const FAQSection = () => {
       )
     },
     {
-      question: "🧩 What can I do with data from Vextor?",
+      question: "What can I do with data from Vextor?",
       answer: (
         <div className="space-y-4">
           <div>
