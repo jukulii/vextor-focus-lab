@@ -12,7 +12,7 @@ const HowItWorks = () => {
     }, 
     {
       number: "2",
-      title: "Lovable builds your first version instantly.",
+      title: "We crawl your pages",
       description: "Using the same techniques used by Google and LLMs"
     }, 
     {
