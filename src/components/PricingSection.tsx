@@ -1,14 +1,12 @@
-
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from "@/components/ui/button";
 import { CheckIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
-
 const PricingSection = () => {
   const {
     t
   } = useLanguage();
-  
+
   // Keep only the Pro plan
   const pricingPlan = {
     name: "Pay-as-You-Go",
@@ -16,9 +14,8 @@ const PricingSection = () => {
     description: t('price_pro_desc'),
     features: ['Charge based on what you actually use', 'Up to 1,000 pages', 'Complete reports & insights', 'Content recommendations', 'Priority support'],
     buttonText: t('get_started'),
-    to: '/app',
+    to: '/app'
   };
-  
   return <section id="pricing" className="py-20 border-t border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
@@ -32,22 +29,20 @@ const PricingSection = () => {
         </div>
         
         <div className="flex justify-center">
-          <div 
-            className="
+          <div className="
               rounded-xl p-8 transition-all duration-300 
               bg-gradient-to-br from-vextor-900 to-blue-900 border-2 border-purple-500 shadow-xl
               max-w-sm w-full
-            "
-          >
+            ">
             <div className="flex items-center justify-center mb-2">
-              <h3 className="text-xl font-bold text-zinc-50 text-center">
+              <h3 className="font-bold text-zinc-50 text-center text-3xl">
                 {pricingPlan.name}
               </h3>
             </div>
             
             <div className="mt-4 mb-6 text-center">
               <div className="flex items-baseline justify-center">
-                <span className="text-4xl font-bold text-purple-300">
+                <span className="font-bold text-purple-300 text-lg">
                   starts from
                 </span>
               </div>
@@ -57,14 +52,12 @@ const PricingSection = () => {
             </div>
             
             <ul className="mt-6 mb-10 space-y-3">
-              {pricingPlan.features.map((feature, i) => (
-                <li key={i} className="flex items-start">
+              {pricingPlan.features.map((feature, i) => <li key={i} className="flex items-start">
                   <div className="mt-0.5 rounded-full p-1 bg-purple-500/20">
                     <CheckIcon className="h-3 w-3 text-purple-400" />
                   </div>
                   <span className="ml-3 text-zinc-400 text-sm">{feature}</span>
-                </li>
-              ))}
+                </li>)}
             </ul>
             
             <Link to={pricingPlan.to}>
@@ -77,5 +70,4 @@ const PricingSection = () => {
       </div>
     </section>;
 };
-
 export default PricingSection;
