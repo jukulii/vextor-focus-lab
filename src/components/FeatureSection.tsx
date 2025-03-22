@@ -1,3 +1,4 @@
+
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Brain, Zap, BarChart, Activity, Rocket, Target } from 'lucide-react';
 const FeatureSection = () => {
@@ -12,7 +13,7 @@ const FeatureSection = () => {
             Stay focused. Rank higher
           </h2>
           <p className="text-xl max-w-3xl mx-auto text-zinc-400">
-            Vextor helps you evaluate and improve your website's content relevance.
+            Vextor AI helps website owners, SEOs, and content strategists understand how semantically focused their websites are — using the same techniques Google likely uses.
           </p>
         </div>
         
