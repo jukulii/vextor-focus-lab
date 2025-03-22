@@ -1,3 +1,4 @@
+
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ArrowUpRight, UserCheck, Search, Trophy } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
@@ -53,7 +54,7 @@ const BenefitSection = () => {
   }, {
     icon: Trophy,
     title: "Measure topical authority (Site Focus & Radius)",
-    description: t('benefit_6_desc'),
+    description: "Improve your search rankings with topically focused content",
     iconColor: 'text-graph-purple',
     bgColor: 'bg-purple-900'
   }];
