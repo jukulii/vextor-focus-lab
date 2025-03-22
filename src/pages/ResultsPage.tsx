@@ -5,6 +5,8 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import AppHeader from '@/components/AppHeader';
 import AnalysisResults from '@/components/AnalysisResults';
 import AgChartDemo from '@/components/AgChartDemo';
+import VantaBackground from '@/components/VantaBackground';
+import Footer from '@/components/Footer';
 
 const ResultsPage = () => {
   const { t } = useLanguage();
@@ -54,23 +56,27 @@ const ResultsPage = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white">
-      <AppHeader />
-      <main className="flex-grow p-6">
-        <div className="w-full max-w-6xl mx-auto">
-          <h1 className="text-2xl font-bold text-center mb-8">
-            {t('check_domain_focus')}
-          </h1>
-          
-          {/* AG Charts Demo Section */}
-          <div className="mb-8 bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
-            <h2 className="text-xl font-semibold mb-4">AG Charts Demo</h2>
-            <AgChartDemo className="h-96 w-full" />
+    <div className="relative min-h-screen">
+      <VantaBackground />
+      <div className="relative z-10 flex flex-col min-h-screen">
+        <AppHeader />
+        <main className="flex-grow p-6">
+          <div className="w-full max-w-6xl mx-auto mt-8">
+            <h1 className="text-2xl font-bold text-center mb-8 text-white">
+              {t('check_domain_focus')}
+            </h1>
+            
+            {/* AG Charts Demo Section */}
+            <div className="mb-8 bg-black/40 backdrop-blur-lg border-gray-800 p-6 rounded-lg shadow-lg">
+              <h2 className="text-xl font-semibold mb-4 text-white">AG Charts Demo</h2>
+              <AgChartDemo className="h-96 w-full" />
+            </div>
+            
+            <AnalysisResults />
           </div>
-          
-          <AnalysisResults />
-        </div>
-      </main>
+        </main>
+        <Footer />
+      </div>
     </div>
   );
 };

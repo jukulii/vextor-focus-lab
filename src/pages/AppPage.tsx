@@ -2,6 +2,8 @@
 import { useEffect } from 'react';
 import AppHeader from '@/components/AppHeader';
 import SitemapSearch from '@/components/SitemapSearch';
+import VantaBackground from '@/components/VantaBackground';
+import Footer from '@/components/Footer';
 
 const AppPage = () => {
   // Scroll to top when the page loads
@@ -10,11 +12,17 @@ const AppPage = () => {
   }, []);
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white">
-      <AppHeader />
-      <main className="flex-grow p-6">
-        <SitemapSearch />
-      </main>
+    <div className="relative min-h-screen">
+      <VantaBackground />
+      <div className="relative z-10 flex flex-col min-h-screen">
+        <AppHeader />
+        <main className="flex-grow p-6">
+          <div className="w-full max-w-6xl mx-auto mt-8">
+            <SitemapSearch />
+          </div>
+        </main>
+        <Footer />
+      </div>
     </div>
   );
 };
