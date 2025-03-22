@@ -17,7 +17,7 @@ const HowItWorks = () => {
     }, 
     {
       number: "3",
-      title: "Talk to the editor to design and extend your project.",
+      title: "Get your Site Focus& Radius Score",
       description: "Plus smart recommendations on what to improve"
     }, 
     {
