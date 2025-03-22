@@ -1,7 +1,7 @@
-
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ArrowUpRight, UserCheck, Search, Trophy } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+
 const mockData = [{
   name: 'Jan',
   before: 30,
@@ -27,13 +27,14 @@ const mockData = [{
   before: 50,
   after: 100
 }];
+
 const BenefitSection = () => {
   const {
     t
   } = useLanguage();
   const benefits = [{
     icon: ArrowUpRight,
-    title: "Measure topical authority (Site Focus & Radius)",
+    title: "Cluster and visualize site structure by semantic topics",
     description: t('benefit_3_desc'),
     iconColor: 'text-graph-green',
     bgColor: 'bg-green-900'
@@ -56,6 +57,7 @@ const BenefitSection = () => {
     iconColor: 'text-graph-purple',
     bgColor: 'bg-purple-900'
   }];
+
   return <section className="py-16 border-t border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
@@ -123,4 +125,5 @@ const BenefitSection = () => {
       </div>
     </section>;
 };
+
 export default BenefitSection;
