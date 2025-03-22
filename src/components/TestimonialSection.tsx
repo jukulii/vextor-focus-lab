@@ -8,6 +8,7 @@ import type { UseEmblaCarouselType } from "embla-carousel-react";
 const TestimonialSection = () => {
   const { t } = useLanguage();
   const [activeIndex, setActiveIndex] = useState(0);
+  const [emblaApi, setEmblaApi] = useState<UseEmblaCarouselType[1] | null>(null);
   
   const testimonials = [
     {
@@ -49,6 +50,7 @@ const TestimonialSection = () => {
                 setActiveIndex(api.selectedScrollSnap());
               }
             }}
+            setApi={setEmblaApi}
           >
             <CarouselContent>
               {testimonials.map((testimonial, index) => (
@@ -74,14 +76,8 @@ const TestimonialSection = () => {
                 <button
                   key={idx}
                   onClick={() => {
-                    const carousel = document.querySelector('[role="region"][aria-roledescription="carousel"]');
-                    if (carousel) {
-                      const scrollSnaps = Array.from(carousel.querySelectorAll('[aria-roledescription="slide"]'));
-                      scrollSnaps[idx]?.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'nearest',
-                        inline: 'center'
-                      });
+                    if (emblaApi) {
+                      emblaApi.scrollTo(idx);
                     }
                   }}
                   className={`h-2.5 w-2.5 rounded-full transition-all duration-300 ${
