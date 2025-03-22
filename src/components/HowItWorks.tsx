@@ -22,7 +22,7 @@ const HowItWorks = () => {
     }, 
     {
       number: "4",
-      title: "Share your project via link or sync your code to GitHub.",
+      title: "Optimize content strategy",
       description: "And share it with your team or clients"
     }
   ];
