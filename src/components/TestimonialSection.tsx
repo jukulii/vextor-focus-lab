@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useLanguage } from '@/contexts/LanguageContext';
 import { QuoteIcon } from 'lucide-react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import type { EmblaCarouselType } from "embla-carousel-react";
+import type { UseEmblaCarouselType } from "embla-carousel-react";
 
 const TestimonialSection = () => {
   const { t } = useLanguage();
@@ -44,7 +44,7 @@ const TestimonialSection = () => {
               loop: true,
               align: "center",
             }}
-            onSelect={(api: EmblaCarouselType) => {
+            onSelect={(api: UseEmblaCarouselType[1]) => {
               setActiveIndex(api.selectedScrollSnap());
             }}
           >
