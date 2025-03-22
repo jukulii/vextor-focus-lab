@@ -40,18 +40,18 @@ const HowItWorks = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6">
           {steps.map((step, index) => <div key={index} className="relative">
-              <div className="border-2 border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col items-center text-center h-full bg-transparent">
-                <div className="w-16 h-16 bg-gradient-to-br from-vextor-500 to-blue-500 rounded-full flex items-center justify-center mt-1 mb-4">
-                  <step.icon className="h-7 w-7 text-white" />
+              <div className="border-2 border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col items-center text-center h-full bg-transparent min-h-[200px]">
+                <div className="w-12 h-12 bg-gradient-to-br from-vextor-500 to-blue-500 rounded-full flex items-center justify-center mb-3">
+                  <step.icon className="h-5 w-5 text-white" />
                 </div>
-                <h3 className="mb-4 text-lg font-bold text-zinc-50">{step.title}</h3>
+                <h3 className="mb-2 text-base font-bold text-zinc-50">{step.title}</h3>
                 <div className="mt-auto">
-                  <p className="text-zinc-400">{step.description}</p>
+                  <p className="text-sm text-zinc-400">{step.description}</p>
                 </div>
               </div>
               
               {index < steps.length - 1 && <div className="hidden md:flex absolute top-1/2 -right-3 transform -translate-y-1/2 z-10">
-                  <ArrowRight className="h-6 w-6 text-vextor-500 animate-pulse-subtle" />
+                  <ArrowRight className="h-5 w-5 text-vextor-500 animate-pulse-subtle" />
                 </div>}
             </div>)}
         </div>
