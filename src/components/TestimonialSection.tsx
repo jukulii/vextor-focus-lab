@@ -28,6 +28,23 @@ const TestimonialSection = () => {
     }
   ];
 
+  // Update active index when the carousel changes
+  useEffect(() => {
+    if (!emblaApi) return;
+
+    const onSelect = () => {
+      setActiveIndex(emblaApi.selectedScrollSnap());
+    };
+
+    emblaApi.on('select', onSelect);
+    // Call once to set initial index
+    onSelect();
+
+    return () => {
+      emblaApi.off('select', onSelect);
+    };
+  }, [emblaApi]);
+
   return (
     <section className="py-20 border-t border-gray-800 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -44,11 +61,6 @@ const TestimonialSection = () => {
             opts={{
               loop: true,
               align: "center",
-            }}
-            onSelect={(api) => {
-              if (api) {
-                setActiveIndex(api.selectedScrollSnap());
-              }
             }}
             setApi={setEmblaApi}
           >
