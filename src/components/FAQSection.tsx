@@ -20,7 +20,7 @@ const FAQSection = () => {
           <ul className="list-disc pl-5 space-y-2">
             <li>Each page becomes a data point in a multi-dimensional space.</li>
             <li>These points are analyzed in terms of how close or far they are from each other (semantically).</li>
-            <li>Based on this, Vextor calculates values</li>
+            <li>Based on this, Vextor calculates values.</li>
           </ul>
         </div>
       )
