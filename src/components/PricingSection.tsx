@@ -39,14 +39,14 @@ const PricingSection = () => {
               max-w-md w-full
             "
           >
-            <div className="flex items-center mb-2">
-              <h3 className="text-xl font-bold text-zinc-50">
+            <div className="flex items-center justify-center mb-2">
+              <h3 className="text-xl font-bold text-zinc-50 text-center">
                 {pricingPlan.name}
               </h3>
             </div>
             
-            <div className="mt-4 mb-6">
-              <div className="flex items-baseline">
+            <div className="mt-4 mb-6 text-center">
+              <div className="flex items-baseline justify-center">
                 <span className="text-4xl font-bold text-purple-300">
                   ${pricingPlan.price}
                 </span>
