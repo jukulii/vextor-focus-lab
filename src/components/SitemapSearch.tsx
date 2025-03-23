@@ -65,11 +65,8 @@ const SitemapSearch = () => {
       <Tabs defaultValue="url" className="w-full">
         <TabsList className="grid w-full grid-cols-3 mb-8">
           <TabsTrigger value="url">{t('site_url')}</TabsTrigger>
-          <TabsTrigger value="filters" disabled className="relative">
+          <TabsTrigger value="filters" disabled>
             {t('filters')}
-            <span className="ml-2 inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full bg-blue-100 text-blue-800 border border-blue-200">
-              {t('coming_soon')}
-            </span>
           </TabsTrigger>
           <TabsTrigger value="generate" disabled>
             {t('processing')}
@@ -91,9 +88,10 @@ const SitemapSearch = () => {
 
                 <div className="flex flex-col space-y-2">
                   <Button
-                    onClick={handleSearch}
-                    disabled={isSearching || !sitemapUrl}
-                    className="bg-blue-500 hover:bg-blue-600"
+                    variant="secondary"
+                    onClick={handleAutomaticSearch}
+                    disabled={isSearching}
+                    className="bg-pink-100 text-pink-800 hover:bg-pink-200"
                   >
                     {isSearching ? (
                       <>
@@ -103,23 +101,9 @@ const SitemapSearch = () => {
                     ) : (
                       <>
                         <SearchIcon className="mr-2 h-4 w-4" />
-                        {t('next')}
+                        {t('check_for_me')}
                       </>
                     )}
-                  </Button>
-
-                  <Button
-                    variant="secondary"
-                    onClick={handleAutomaticSearch}
-                    disabled={isSearching}
-                    className="bg-pink-100 text-pink-800 hover:bg-pink-200"
-                  >
-                    {isSearching ? (
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    ) : (
-                      <SearchIcon className="mr-2 h-4 w-4" />
-                    )}
-                    {t('check_for_me')}
                   </Button>
                 </div>
               </div>

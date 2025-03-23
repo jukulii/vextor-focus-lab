@@ -164,19 +164,20 @@ const SitemapsList = () => {
     setShowingUrls(false);
   };
 
-  // Custom checkbox component
-  const CustomCheckbox = ({ checked, onChange, id }: { checked: boolean; onChange: () => void; id?: string }) => (
+  // Custom toggle switch component
+  const ToggleSwitch = ({ checked, onChange, id }: { checked: boolean; onChange: () => void; id?: string }) => (
     <div
-      className={`flex items-center justify-center w-5 h-5 rounded border cursor-pointer transition-all duration-200 
-        ${checked
-          ? 'bg-blue-500 border-blue-500 text-white'
-          : 'border-gray-300 bg-white hover:border-blue-400'}`}
+      className={`relative inline-block w-10 h-5 rounded-full cursor-pointer transition-colors duration-200 
+        ${checked ? 'bg-blue-500' : 'bg-gray-300'}`}
       onClick={(e) => {
         e.stopPropagation(); // Prevent triggering the row click handler
         onChange();
       }}
     >
-      {checked && <Check className="h-3 w-3 text-white" />}
+      <span
+        className={`absolute top-0.5 left-0.5 bg-white w-4 h-4 rounded-full shadow transform transition-transform duration-200 ease-in-out
+        ${checked ? 'translate-x-5' : 'translate-x-0'}`}
+      />
       {id && <input type="checkbox" id={id} className="sr-only" checked={checked} onChange={onChange} />}
     </div>
   );
@@ -322,7 +323,7 @@ const SitemapsList = () => {
         )}
 
         {filterConditions.map((condition, index) => (
-          <div key={condition.id} className="flex flex-wrap gap-2 items-center p-2 bg-gray-50 rounded border">
+          <div key={condition.id} className="flex flex-wrap gap-2 items-center p-3 bg-gray-800 rounded-md border border-gray-700 shadow-sm">
             {index > 0 && (
               <Select
                 value={condition.logicalOperator}
@@ -330,7 +331,7 @@ const SitemapsList = () => {
                   updateFilterCondition(condition.id, { logicalOperator: value as 'AND' | 'OR' })
                 }
               >
-                <SelectTrigger className="w-20 h-8 text-xs">
+                <SelectTrigger className="w-20 h-8 text-xs bg-gray-700 border-gray-600 text-white">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -346,7 +347,7 @@ const SitemapsList = () => {
                 updateFilterCondition(condition.id, { field: value as 'url' | 'sitemap_url' })
               }
             >
-              <SelectTrigger className="w-28 h-8 text-xs">
+              <SelectTrigger className="w-28 h-8 text-xs bg-gray-700 border-gray-600 text-white">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -363,7 +364,7 @@ const SitemapsList = () => {
                 })
               }
             >
-              <SelectTrigger className="w-32 h-8 text-xs">
+              <SelectTrigger className="w-32 h-8 text-xs bg-gray-700 border-gray-600 text-white">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -379,14 +380,14 @@ const SitemapsList = () => {
               value={condition.value}
               onChange={(e) => updateFilterCondition(condition.id, { value: e.target.value })}
               placeholder={condition.operator === 'regex' ? '/pattern/' : 'Filter value...'}
-              className="flex-1 h-8 text-xs"
+              className="flex-1 h-8 text-xs bg-gray-700 border-gray-600 text-white placeholder-gray-400"
             />
 
             <Button
               variant="ghost"
               size="sm"
               onClick={() => removeFilterCondition(condition.id)}
-              className="w-8 h-8 p-0"
+              className="w-8 h-8 p-0 text-gray-300 hover:bg-gray-700 hover:text-red-400"
             >
               <X size={14} />
             </Button>
@@ -567,8 +568,8 @@ const SitemapsList = () => {
           <Card>
             <CardContent className="pt-6">
               <div className="space-y-4">
-                <div className="bg-green-50 border border-green-200 rounded-md p-4 text-sm flex items-start">
-                  <div className="flex-shrink-0 text-green-500 mt-0.5">
+                <div className="bg-indigo-900 border border-indigo-800 rounded-md p-4 text-sm flex items-start">
+                  <div className="flex-shrink-0 text-indigo-400 mt-0.5">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <circle cx="12" cy="12" r="10"></circle>
                       <line x1="12" y1="16" x2="12" y2="12"></line>
@@ -576,24 +577,24 @@ const SitemapsList = () => {
                     </svg>
                   </div>
                   <div className="ml-3">
-                    <p className="text-green-800">
+                    <p className="text-indigo-200">
                       {showingUrls
                         ? t('found_urls').replace('%count%', responseUrls.length.toString()) || `Found ${responseUrls.length} URLs`
                         : t('found_sitemaps').replace('%count%', sitemap_count.toString())}
                     </p>
-                    <p className="mt-2 text-green-700">
+                    <p className="mt-2 text-indigo-300">
                       Domain: {domain} | Execution time: {execution_time}
                     </p>
                   </div>
                 </div>
 
                 {responseError && (
-                  <div className="bg-red-50 border border-red-200 rounded-md p-4 text-sm flex items-start">
-                    <div className="flex-shrink-0 text-red-500 mt-0.5">
+                  <div className="bg-red-900 border border-red-800 rounded-md p-4 text-sm flex items-start">
+                    <div className="flex-shrink-0 text-red-400 mt-0.5">
                       <AlertCircle size={20} />
                     </div>
                     <div className="ml-3">
-                      <p className="text-red-800">
+                      <p className="text-red-200">
                         Error: {responseError}
                       </p>
                     </div>
@@ -604,45 +605,51 @@ const SitemapsList = () => {
 
                 <div className="overflow-hidden border rounded-md">
                   <Table>
-                    <TableHeader>
-                      <TableRow>
+                    <TableHeader className="bg-gray-900">
+                      <TableRow className="border-b border-gray-700">
                         {!showingUrls ? (
                           <>
-                            <TableHead className="w-16 text-center">
+                            <TableHead className="w-16 text-center font-semibold text-blue-300">
                               <div className="flex justify-center">
-                                <CustomCheckbox checked={areAllSelected} onChange={handleSelectAll} />
+                                <ToggleSwitch checked={areAllSelected} onChange={handleSelectAll} />
                               </div>
                             </TableHead>
-                            <TableHead>{t('site_map')}</TableHead>
+                            <TableHead className="font-semibold text-blue-300 text-base capitalize">
+                              {t('sitemap') || "Sitemap"}
+                            </TableHead>
                           </>
                         ) : (
                           <>
-                            <TableHead className="w-10">#</TableHead>
-                            <TableHead className="w-1/3">Sitemap</TableHead>
-                            <TableHead>URL</TableHead>
-                            <TableHead className="w-10"></TableHead>
+                            <TableHead className="w-10 font-semibold text-blue-300 text-base">#</TableHead>
+                            <TableHead className="w-1/3 font-semibold text-blue-300 text-base capitalize">
+                              Sitemap
+                            </TableHead>
+                            <TableHead className="font-semibold text-blue-300 text-base capitalize">
+                              URL
+                            </TableHead>
+                            <TableHead className="w-10 font-semibold text-blue-300"></TableHead>
                           </>
                         )}
                       </TableRow>
                     </TableHeader>
-                    <TableBody>
+                    <TableBody className="bg-gray-800/50">
                       {!showingUrls ? (
                         sitemaps.map((sitemapUrl, index) => (
                           <TableRow
                             key={index}
-                            className="group transition-colors hover:bg-gray-50 cursor-pointer"
+                            className="group transition-colors hover:bg-gray-700 cursor-pointer border-b border-gray-700"
                             onClick={() => handleCheckboxChange(sitemapUrl)}
                           >
                             <TableCell className="w-16">
                               <div className="flex justify-center">
-                                <CustomCheckbox
+                                <ToggleSwitch
                                   id={`sitemap-${index}`}
                                   checked={checkedSitemaps[sitemapUrl] || false}
                                   onChange={() => handleCheckboxChange(sitemapUrl)}
                                 />
                               </div>
                             </TableCell>
-                            <TableCell className="font-medium truncate group-hover:text-blue-600">
+                            <TableCell className="font-medium truncate text-gray-200 group-hover:text-blue-400">
                               <label htmlFor={`sitemap-${index}`} className="cursor-pointer block w-full">
                                 {sitemapUrl}
                               </label>
@@ -654,12 +661,12 @@ const SitemapsList = () => {
                           paginatedUrls.map((urlItem, index) => {
                             const rowIndex = (currentPage - 1) * itemsPerPage + index + 1;
                             return (
-                              <TableRow key={rowIndex} className="hover:bg-gray-50">
-                                <TableCell className="font-medium w-10">{rowIndex}</TableCell>
-                                <TableCell className="truncate text-gray-600 text-sm w-1/3">
+                              <TableRow key={rowIndex} className="hover:bg-gray-700 border-b border-gray-700">
+                                <TableCell className="font-medium w-10 text-gray-300">{rowIndex}</TableCell>
+                                <TableCell className="truncate text-gray-400 text-sm w-1/3">
                                   {urlItem.sitemap_url || '-'}
                                 </TableCell>
-                                <TableCell className="truncate">
+                                <TableCell className="truncate text-gray-200">
                                   {urlItem.url}
                                 </TableCell>
                                 <TableCell className="w-10 text-right">
@@ -667,7 +674,7 @@ const SitemapsList = () => {
                                     href={urlItem.url}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="text-blue-500 hover:text-blue-700"
+                                    className="text-blue-400 hover:text-blue-300"
                                     onClick={(e) => e.stopPropagation()}
                                   >
                                     <ExternalLink size={16} />
@@ -678,7 +685,7 @@ const SitemapsList = () => {
                           })
                         ) : (
                           <TableRow>
-                            <TableCell colSpan={4} className="text-center py-8 text-gray-500">
+                            <TableCell colSpan={4} className="text-center py-8 text-gray-400">
                               {filterConditions.length > 0
                                 ? t('no_matching_urls') || 'No URLs match your filters'
                                 : responseError
@@ -695,8 +702,8 @@ const SitemapsList = () => {
 
                 {showingUrls && renderPagination()}
 
-                <div className="bg-green-50 border border-green-200 rounded-md p-4 text-sm">
-                  <p className="text-green-800">
+                <div className="bg-indigo-900 border border-indigo-800 rounded-md p-4 text-sm">
+                  <p className="text-indigo-200">
                     {!showingUrls ? (
                       <>
                         {t('found_sitemaps').replace('%count%', sitemap_count.toString())}
@@ -766,19 +773,19 @@ const SitemapsList = () => {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div className="flex items-center space-x-2">
-                    <CustomCheckbox checked={true} onChange={() => { }} />
+                    <ToggleSwitch checked={true} onChange={() => { }} />
                     <label htmlFor="blog" className="cursor-pointer">Blog posts</label>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <CustomCheckbox checked={true} onChange={() => { }} />
+                    <ToggleSwitch checked={true} onChange={() => { }} />
                     <label htmlFor="product" className="cursor-pointer">Product pages</label>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <CustomCheckbox checked={true} onChange={() => { }} />
+                    <ToggleSwitch checked={true} onChange={() => { }} />
                     <label htmlFor="category" className="cursor-pointer">Category pages</label>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <CustomCheckbox checked={true} onChange={() => { }} />
+                    <ToggleSwitch checked={true} onChange={() => { }} />
                     <label htmlFor="landing" className="cursor-pointer">Landing pages</label>
                   </div>
                 </div>

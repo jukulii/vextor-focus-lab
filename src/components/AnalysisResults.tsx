@@ -5,14 +5,14 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { LineChart, Line, PieChart, Pie, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, ScatterChart, Scatter, ZAxis } from 'recharts';
 import { LayoutDashboard, Search, Copy, GanttChart, Compass, Link2 } from 'lucide-react';
-import { 
-  Pagination, 
-  PaginationContent, 
-  PaginationEllipsis, 
-  PaginationItem, 
-  PaginationLink, 
-  PaginationNext, 
-  PaginationPrevious 
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious
 } from '@/components/ui/pagination';
 
 const AnalysisResults = () => {
@@ -86,7 +86,7 @@ const AnalysisResults = () => {
     z: item.z + 0.2,
     cluster: 1
   }));
-  
+
   const cluster2 = clusterData.slice(100, 200).map(item => ({
     ...item,
     x: item.x * 0.6 - 10,
@@ -94,7 +94,7 @@ const AnalysisResults = () => {
     z: item.z + 0.1,
     cluster: 2
   }));
-  
+
   const cluster3 = clusterData.slice(200, 300).map(item => ({
     ...item,
     x: item.x * 0.5 + 40,
@@ -102,16 +102,16 @@ const AnalysisResults = () => {
     z: item.z,
     cluster: 3
   }));
-  
+
   const allClusterData = [...cluster1, ...cluster2, ...cluster3];
 
   const totalPages = 10;
-  
+
   const handlePageChange = (page: number) => {
     if (page < 1 || page > totalPages) return;
     setCurrentPage(page);
   };
-  
+
   const explorationPages = [
     { id: 1, title: "Homepage Exploration", createdAt: "2023-06-15" },
     { id: 2, title: "Blog Section Analysis", createdAt: "2023-06-16" },
@@ -192,45 +192,45 @@ const AnalysisResults = () => {
           <span className="font-medium">550</span>
         </div>
       </div>
-      
-      <Tabs 
-        defaultValue="overview" 
-        className="w-full" 
+
+      <Tabs
+        defaultValue="overview"
+        className="w-full"
         value={activeTab}
         onValueChange={setActiveTab}
       >
         <TabsList className="w-full border-b mb-6 bg-transparent p-0 h-auto">
           <div className="flex space-x-2 overflow-x-auto">
-            <TabsTrigger 
-              value="overview" 
+            <TabsTrigger
+              value="overview"
               className="flex items-center gap-2 data-[state=active]:border-b-2 data-[state=active]:border-blue-500 rounded-none px-4 py-2"
             >
               <LayoutDashboard className="h-4 w-4" />
               {t('overview')}
             </TabsTrigger>
-            <TabsTrigger 
-              value="url-analysis" 
+            <TabsTrigger
+              value="url-analysis"
               className="flex items-center gap-2 data-[state=active]:border-b-2 data-[state=active]:border-blue-500 rounded-none px-4 py-2"
             >
               <Search className="h-4 w-4" />
               {t('url_analysis')}
             </TabsTrigger>
-            <TabsTrigger 
-              value="canonicalization" 
+            <TabsTrigger
+              value="canonicalization"
               className="flex items-center gap-2 data-[state=active]:border-b-2 data-[state=active]:border-blue-500 rounded-none px-4 py-2"
             >
               <Link2 className="h-4 w-4" />
               {t('canonicalization')}
             </TabsTrigger>
-            <TabsTrigger 
-              value="clusters" 
+            <TabsTrigger
+              value="clusters"
               className="flex items-center gap-2 data-[state=active]:border-b-2 data-[state=active]:border-blue-500 rounded-none px-4 py-2"
             >
               <GanttChart className="h-4 w-4" />
               {t('classes')}
             </TabsTrigger>
-            <TabsTrigger 
-              value="exploration" 
+            <TabsTrigger
+              value="exploration"
               className="flex items-center gap-2 data-[state=active]:border-b-2 data-[state=active]:border-blue-500 rounded-none px-4 py-2"
             >
               <Compass className="h-4 w-4" />
@@ -238,7 +238,7 @@ const AnalysisResults = () => {
             </TabsTrigger>
           </div>
         </TabsList>
-        
+
         <TabsContent value="overview">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Card>
@@ -251,7 +251,7 @@ const AnalysisResults = () => {
                 </div>
               </CardContent>
             </Card>
-            
+
             <Card>
               <CardContent className="pt-6">
                 <div className="flex flex-col items-center">
@@ -263,7 +263,7 @@ const AnalysisResults = () => {
               </CardContent>
             </Card>
           </div>
-          
+
           <div className="mt-6">
             <Card>
               <CardContent className="pt-6">
@@ -274,7 +274,7 @@ const AnalysisResults = () => {
               </CardContent>
             </Card>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
             <Card>
               <CardContent className="pt-6">
@@ -303,7 +303,7 @@ const AnalysisResults = () => {
                 </div>
               </CardContent>
             </Card>
-            
+
             <Card>
               <CardContent className="pt-6">
                 <h3 className="text-base font-medium mb-4">{t('top_divergent_pages')}</h3>
@@ -332,7 +332,7 @@ const AnalysisResults = () => {
               </CardContent>
             </Card>
           </div>
-          
+
           <div className="mt-6">
             <Card>
               <CardContent className="pt-6">
@@ -359,7 +359,7 @@ const AnalysisResults = () => {
               </CardContent>
             </Card>
           </div>
-          
+
           <div className="mt-6">
             <Card>
               <CardContent className="pt-6">
@@ -378,7 +378,7 @@ const AnalysisResults = () => {
             </Card>
           </div>
         </TabsContent>
-        
+
         <TabsContent value="url-analysis">
           <Card>
             <CardContent className="pt-6">
@@ -386,7 +386,7 @@ const AnalysisResults = () => {
               <p className="text-gray-600 mb-6">
                 {t('url_analysis_description')}
               </p>
-              
+
               <div className="mb-8">
                 <h4 className="text-lg font-medium mb-4">{t('urls_to_centroid')}</h4>
                 <div className="overflow-hidden border rounded-md">
@@ -410,7 +410,7 @@ const AnalysisResults = () => {
                   </Table>
                 </div>
               </div>
-              
+
               <div className="h-96">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart
@@ -427,7 +427,7 @@ const AnalysisResults = () => {
             </CardContent>
           </Card>
         </TabsContent>
-        
+
         <TabsContent value="canonicalization">
           <Card>
             <CardContent className="pt-6">
@@ -435,7 +435,7 @@ const AnalysisResults = () => {
               <p className="text-gray-600 mb-6">
                 {t('canonicalization_description') || 'Identification of duplicate or similar content across the site.'}
               </p>
-              
+
               <div className="mb-8">
                 <h4 className="text-lg font-medium mb-4">{t('urls_to_centroid') || "URL's to centroid"}</h4>
                 <div className="overflow-hidden border rounded-md">
@@ -461,7 +461,7 @@ const AnalysisResults = () => {
                   </Table>
                 </div>
               </div>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="h-72">
                   <ResponsiveContainer width="100%" height="100%">
@@ -476,7 +476,7 @@ const AnalysisResults = () => {
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
-                
+
                 <div className="h-72">
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart
@@ -494,7 +494,7 @@ const AnalysisResults = () => {
             </CardContent>
           </Card>
         </TabsContent>
-        
+
         <TabsContent value="clusters">
           <Card>
             <CardContent className="pt-6">
@@ -502,7 +502,7 @@ const AnalysisResults = () => {
               <p className="text-gray-600 mb-6">
                 {t('cluster_description') || 'Visual representation of content clusters and their relationships.'}
               </p>
-              
+
               <div className="mb-8">
                 <h4 className="text-lg font-medium mb-4">2D t-SNE Projection of Pages</h4>
                 <div className="h-[600px] border rounded-lg p-4 bg-white">
@@ -514,26 +514,26 @@ const AnalysisResults = () => {
                       <YAxis type="number" dataKey="y" name="Y" domain={[-60, 60]} tickCount={7} />
                       <ZAxis type="number" dataKey="z" range={[20, 500]} name="Distance" />
                       <Tooltip content={<ClusterTooltip />} />
-                      <Scatter 
-                        name="Cluster 1" 
-                        data={cluster1} 
+                      <Scatter
+                        name="Cluster 1"
+                        data={cluster1}
                         fill="#E57373"
                       />
-                      <Scatter 
-                        name="Cluster 2" 
-                        data={cluster2} 
+                      <Scatter
+                        name="Cluster 2"
+                        data={cluster2}
                         fill="#FFB74D"
                       />
-                      <Scatter 
-                        name="Cluster 3" 
-                        data={cluster3} 
+                      <Scatter
+                        name="Cluster 3"
+                        data={cluster3}
                         fill="#81C784"
                       />
                     </ScatterChart>
                   </ResponsiveContainer>
                 </div>
               </div>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
                 <Card>
                   <CardContent className="pt-6">
@@ -547,7 +547,7 @@ const AnalysisResults = () => {
                     </p>
                   </CardContent>
                 </Card>
-                
+
                 <Card>
                   <CardContent className="pt-6">
                     <h4 className="text-base font-medium mb-2">Cluster 2</h4>
@@ -560,7 +560,7 @@ const AnalysisResults = () => {
                     </p>
                   </CardContent>
                 </Card>
-                
+
                 <Card>
                   <CardContent className="pt-6">
                     <h4 className="text-base font-medium mb-2">Cluster 3</h4>
@@ -577,7 +577,7 @@ const AnalysisResults = () => {
             </CardContent>
           </Card>
         </TabsContent>
-        
+
         <TabsContent value="exploration">
           <Card>
             <CardContent className="pt-6">
@@ -585,18 +585,18 @@ const AnalysisResults = () => {
               <p className="text-gray-600 mb-6">
                 Interactive exploration of content relationships.
               </p>
-              
+
               <div className="relative border rounded-lg overflow-hidden">
-                <img 
-                  src="/lovable-uploads/64f106cc-ac24-48a4-8ed0-2f2374a623aa.png" 
-                  alt="Graph visualization" 
+                <img
+                  src="/lovable-uploads/64f106cc-ac24-48a4-8ed0-2f2374a623aa.png"
+                  alt="Graph visualization"
                   className="w-full h-auto"
                 />
                 <div className="absolute top-3 left-3 bg-gray-800 bg-opacity-75 p-2 rounded text-white text-xs">
                   {t('exploration')} {currentPage} / {totalPages}
                 </div>
               </div>
-              
+
               <div className="mt-6">
                 <h4 className="text-lg font-medium mb-4">{t('exploration_details')}</h4>
                 <div className="overflow-hidden border rounded-md mb-4">
@@ -619,19 +619,19 @@ const AnalysisResults = () => {
                     </TableBody>
                   </Table>
                 </div>
-                
+
                 <Pagination>
                   <PaginationContent>
                     <PaginationItem>
-                      <PaginationPrevious 
+                      <PaginationPrevious
                         onClick={() => handlePageChange(currentPage - 1)}
                         className={currentPage === 1 ? "cursor-not-allowed opacity-50" : "cursor-pointer"}
                       />
                     </PaginationItem>
-                    
+
                     {Array.from({ length: Math.min(5, totalPages) }).map((_, index) => {
                       let pageNumber = currentPage;
-                      
+
                       if (currentPage <= 3) {
                         pageNumber = index + 1;
                       } else if (currentPage >= totalPages - 2) {
@@ -639,11 +639,11 @@ const AnalysisResults = () => {
                       } else {
                         pageNumber = currentPage - 2 + index;
                       }
-                      
+
                       if (pageNumber < 1 || pageNumber > totalPages) {
                         return null;
                       }
-                      
+
                       return (
                         <PaginationItem key={index}>
                           <PaginationLink
@@ -655,7 +655,7 @@ const AnalysisResults = () => {
                         </PaginationItem>
                       );
                     })}
-                    
+
                     {totalPages > 5 && currentPage < totalPages - 2 && (
                       <>
                         <PaginationItem>
@@ -670,9 +670,9 @@ const AnalysisResults = () => {
                         </PaginationItem>
                       </>
                     )}
-                    
+
                     <PaginationItem>
-                      <PaginationNext 
+                      <PaginationNext
                         onClick={() => handlePageChange(currentPage + 1)}
                         className={currentPage === totalPages ? "cursor-not-allowed opacity-50" : "cursor-pointer"}
                       />

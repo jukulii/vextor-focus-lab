@@ -121,6 +121,25 @@ const translations: Translations = {
   "url_to_centroid": { en: "URL's to centroid", pl: "URL do centroidu" },
   "url": { en: "URL", pl: "Adres URL" },
   "proximity": { en: "Proximity to Centroid", pl: "Bliskość do centroidu" },
+
+  // Filtering and pagination translations
+  "url_filters": { en: "URL Filters", pl: "Filtry URL" },
+  "add_filter": { en: "Add Filter", pl: "Dodaj filtr" },
+  "no_filters": { en: "No filters applied. Click \"Add Filter\" to create one.", pl: "Brak zastosowanych filtrów. Kliknij \"Dodaj filtr\", aby utworzyć filtr." },
+  "contains": { en: "Contains", pl: "Zawiera" },
+  "not_contains": { en: "Does not contain", pl: "Nie zawiera" },
+  "starts_with": { en: "Starts with", pl: "Zaczyna się od" },
+  "ends_with": { en: "Ends with", pl: "Kończy się na" },
+  "regex": { en: "RegEx match", pl: "Dopasowanie RegEx" },
+  "urls_matching": { en: "URLs matching", pl: "pasujących URL-i" },
+  "show": { en: "Show", pl: "Pokaż" },
+  "per_page": { en: "per page", pl: "na stronę" },
+  "page_of_total": { en: "Page", pl: "Strona" },
+  "of": { en: "of", pl: "z" },
+  "select_at_least_one_sitemap": { en: "Please select at least one sitemap", pl: "Wybierz co najmniej jedną mapę strony" },
+  "no_urls_to_process": { en: "There are no URLs to process", pl: "Brak adresów URL do przetworzenia" },
+  "found_urls": { en: "Found %count% URLs", pl: "Znaleziono %count% adresów URL" },
+
   "found_sitemaps": {
     en: "We found %count% sitemaps.",
     pl: "Znaleźliśmy %count% stron adresów sitemap."

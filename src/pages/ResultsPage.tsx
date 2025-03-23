@@ -909,10 +909,6 @@ const ResultsPage = () => {
                 {getLocalTranslation('tab_url_analysis')}
               </h2>
               <div className="p-6">
-                <p className="text-gray-200 mb-6">
-                  Szczegółowa analiza URLs pokazuje poziom bliskości każdej strony do centrum tematycznego witryny.
-                </p>
-
                 {/* URL Analysis Table */}
                 <div className="overflow-x-auto">
                   <table className="min-w-full divide-y divide-gray-800">
@@ -957,24 +953,6 @@ const ResultsPage = () => {
               <h2 className="text-xl font-semibold text-white text-center mb-6">
                 {getLocalTranslation('url_structure_analysis')}
               </h2>
-              <div className="text-gray-200 mb-6 text-center">
-                <p className="mb-3">Interaktywna mapa struktury URL witryny z wizualizacją hierarchii i bliskości do głównego tematu:</p>
-                <div className="flex flex-wrap justify-center items-center gap-6 mb-4">
-                  <div className="flex items-center">
-                    <span className="inline-block w-4 h-4 rounded-sm mr-2" style={{ background: 'linear-gradient(90deg, #e74c3c 0%, #f5b041 50%, #2ecc71 100%)' }}></span>
-                    <span>Od najmniej do najbardziej zbieżnych z tematem</span>
-                  </div>
-                  <div className="flex items-center">
-                    <span className="inline-block w-3 h-3 rounded-sm mr-2 border border-gray-600" style={{ background: '#50FFB1' }}></span>
-                    <span>Sekcje główne</span>
-                  </div>
-                  <div className="flex items-center">
-                    <span className="inline-block w-3 h-3 rounded-sm mr-2 border border-gray-600" style={{ background: '#8884d8' }}></span>
-                    <span>Podsekcje</span>
-                  </div>
-                </div>
-                <p className="text-sm">Kliknij na sekcję, aby zobaczyć jej podsekcje. Rozmiar elementów odpowiada liczbie stron w danej sekcji.</p>
-              </div>
               <div className="mt-6">
                 <HighchartsTreeMap
                   id="url-structure-treemap"
