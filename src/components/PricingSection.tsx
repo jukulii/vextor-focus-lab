@@ -57,22 +57,22 @@ const PricingSection = () => {
         <div className="flex justify-center">
           <div className="
               rounded-xl p-8 transition-all duration-300 
-              bg-gradient-to-br from-vextor-900 to-blue-900 border-2 border-purple-500 shadow-xl
-              max-w-sm w-full
+              bg-gradient-to-br from-purple-900 to-blue-950 border border-purple-500/30 shadow-2xl
+              max-w-md w-full hover:shadow-purple-500/10 hover:scale-[1.02]
             ">
-            <p className="text-zinc-200 mt-1 mb-4 text-sm bg-purple-600/30 px-3 py-1.5 rounded-md font-medium text-center">
+            <p className="text-zinc-200 mt-1 mb-6 text-sm bg-purple-600/30 px-3 py-1.5 rounded-md font-medium text-center">
               Free trial version for 1 000 URL's
             </p>
             
-            <div className="flex items-center justify-center mb-2">
+            <div className="flex items-center justify-center mb-6">
               <h3 className="font-bold text-zinc-50 text-center text-3xl">
                 {pricingPlan.name}
               </h3>
             </div>
             
-            <div className="mt-4 mb-6 text-center">
-              <div className="flex items-baseline justify-center">
-                <span className="bg-purple-600 text-white font-medium text-lg mr-2 px-3 py-1 rounded-md">
+            <div className="mt-4 mb-8 text-center">
+              <div className="flex items-baseline justify-center space-x-2">
+                <span className="bg-purple-600 text-white font-medium text-lg px-3 py-1 rounded-md">
                   Starts from
                 </span>
                 <span className="text-zinc-50 text-4xl font-bold">
@@ -81,9 +81,9 @@ const PricingSection = () => {
                 <span className="text-zinc-400 ml-2 text-lg">/month</span>
               </div>
               
-              <div className="mt-3">
+              <div className="mt-4">
                 <Select defaultValue={selectedTier.urls} onValueChange={handlePriceChange}>
-                  <SelectTrigger className="w-full bg-blue-900/50 border-purple-700/50">
+                  <SelectTrigger className="w-full bg-blue-900/50 border-purple-700/50 focus:ring-purple-500/50">
                     <SelectValue placeholder="Select URLs per month" />
                   </SelectTrigger>
                   <SelectContent>
@@ -97,17 +97,17 @@ const PricingSection = () => {
               </div>
             </div>
             
-            <ul className="mt-6 mb-10 space-y-3">
+            <ul className="mt-6 mb-10 space-y-4">
               {pricingPlan.features.map((feature, i) => <li key={i} className="flex items-start">
-                  <div className="mt-0.5 rounded-full p-1 bg-purple-500/20">
-                    <CheckIcon className="h-3 w-3 text-purple-400" />
+                  <div className="mt-0.5 rounded-full p-1.5 bg-purple-500/20">
+                    <CheckIcon className="h-4 w-4 text-purple-400" />
                   </div>
-                  <span className="ml-3 text-zinc-400 text-sm">{feature}</span>
+                  <span className="ml-3 text-zinc-300 text-sm">{feature}</span>
                 </li>)}
             </ul>
             
             <Link to={pricingPlan.to}>
-              <Button className="w-full bg-purple-600 hover:bg-purple-700 shadow-lg shadow-purple-900/30">
+              <Button className="w-full bg-purple-600 hover:bg-purple-700 shadow-lg shadow-purple-900/30 py-6 text-lg font-medium">
                 {pricingPlan.buttonText}
               </Button>
             </Link>
