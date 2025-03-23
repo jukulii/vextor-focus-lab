@@ -1,3 +1,4 @@
+
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from "@/components/ui/button";
 import { CheckIcon } from 'lucide-react';
@@ -88,7 +89,7 @@ const PricingSection = () => {
                   <SelectContent>
                     {pricingTiers.map((tier) => (
                       <SelectItem key={tier.urls} value={tier.urls}>
-                        {tier.urls} URLs
+                        {tier.urls} URLs (${tier.pricePerUrl} per URL)
                       </SelectItem>
                     ))}
                   </SelectContent>
