@@ -1,4 +1,3 @@
-
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from "@/components/ui/button";
 import { CheckIcon } from 'lucide-react';
@@ -11,14 +10,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 
 const PricingSection = () => {
   const { t } = useLanguage();
@@ -68,15 +59,15 @@ const PricingSection = () => {
               bg-gradient-to-br from-vextor-900 to-blue-900 border-2 border-purple-500 shadow-xl
               max-w-sm w-full
             ">
+            <p className="text-zinc-200 mt-1 mb-4 text-sm bg-purple-600/30 px-3 py-1.5 rounded-md font-medium text-center">
+              Free trial version for 1 000 URL's
+            </p>
+            
             <div className="flex items-center justify-center mb-2">
               <h3 className="font-bold text-zinc-50 text-center text-3xl">
                 {pricingPlan.name}
               </h3>
             </div>
-            
-            <p className="text-zinc-200 mt-1 mb-4 text-sm bg-purple-600/30 px-3 py-1.5 rounded-md font-medium text-center">
-              Free trial version for 1 000 URL's
-            </p>
             
             <div className="mt-4 mb-6 text-center">
               <div className="flex items-baseline justify-center">
@@ -103,30 +94,6 @@ const PricingSection = () => {
                   </SelectContent>
                 </Select>
               </div>
-            </div>
-            
-            <div className="mb-6 overflow-hidden rounded-lg border border-purple-500/30">
-              <Table>
-                <TableHeader className="bg-purple-900/20">
-                  <TableRow>
-                    <TableHead className="text-purple-200 font-medium text-xs">URLs</TableHead>
-                    <TableHead className="text-purple-200 font-medium text-xs">Price ($)</TableHead>
-                    <TableHead className="text-purple-200 font-medium text-xs">Per URL ($)</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {pricingTiers.map((tier) => (
-                    <TableRow 
-                      key={tier.urls}
-                      className={selectedTier.urls === tier.urls ? "bg-purple-600/20" : ""}
-                    >
-                      <TableCell className="text-zinc-300 text-xs py-1">{tier.urls}</TableCell>
-                      <TableCell className="text-zinc-300 text-xs py-1">{tier.price}</TableCell>
-                      <TableCell className="text-zinc-300 text-xs py-1">{tier.pricePerUrl}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
             </div>
             
             <ul className="mt-6 mb-10 space-y-3">
