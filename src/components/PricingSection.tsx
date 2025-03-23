@@ -35,7 +35,7 @@ const PricingSection = () => {
 
   // Keep only the Pro plan
   const pricingPlan = {
-    name: "URL Bundles",
+    name: "Scale as You Grow",
     description: t('price_pro_desc'),
     features: ['Charge based on what you actually use', 'Complete reports & insights', 'Content recommendations', 'Priority support'],
     buttonText: t('get_started'),
