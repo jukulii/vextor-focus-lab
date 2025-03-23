@@ -39,7 +39,7 @@ const PricingSection = () => {
     description: t('price_pro_desc'),
     features: ['Charge based on what you actually use', 'Complete reports & insights', 'Content recommendations', 'Priority support'],
     buttonText: t('get_started'),
-    to: '/app'
+    to: '/login' // Changed from '/app' to '/login'
   };
 
   return <section id="pricing" className="py-20 border-t border-gray-200">
