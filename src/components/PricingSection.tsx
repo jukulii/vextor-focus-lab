@@ -74,6 +74,10 @@ const PricingSection = () => {
               </h3>
             </div>
             
+            <p className="text-zinc-200 mt-1 mb-4 text-sm bg-purple-600/30 px-3 py-1.5 rounded-md font-medium text-center">
+              Free trial version for 5 000 URL's
+            </p>
+            
             <div className="mt-4 mb-6 text-center">
               <div className="flex items-baseline justify-center">
                 <span className="bg-purple-600 text-white font-medium text-lg mr-2 px-3 py-1 rounded-md">
@@ -99,10 +103,6 @@ const PricingSection = () => {
                   </SelectContent>
                 </Select>
               </div>
-              
-              <p className="text-zinc-200 mt-3 text-sm bg-purple-600/30 px-3 py-1.5 rounded-md font-medium">
-                Free trial version for 5 000 URL's
-              </p>
             </div>
             
             <div className="mb-6 overflow-hidden rounded-lg border border-purple-500/30">
