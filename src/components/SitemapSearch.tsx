@@ -65,8 +65,15 @@ const SitemapSearch = () => {
       <Tabs defaultValue="url" className="w-full">
         <TabsList className="grid w-full grid-cols-3 mb-8">
           <TabsTrigger value="url">{t('site_url')}</TabsTrigger>
-          <TabsTrigger value="filters">{t('filters')}</TabsTrigger>
-          <TabsTrigger value="generate">{t('processing')}</TabsTrigger>
+          <TabsTrigger value="filters" disabled className="relative">
+            {t('filters')}
+            <span className="ml-2 inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full bg-blue-100 text-blue-800 border border-blue-200">
+              {t('coming_soon')}
+            </span>
+          </TabsTrigger>
+          <TabsTrigger value="generate" disabled>
+            {t('processing')}
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="url">
@@ -123,35 +130,19 @@ const SitemapSearch = () => {
         <TabsContent value="filters">
           <Card>
             <CardContent>
-              <div className="flex flex-col space-y-4 py-4">
-                <h3 className="text-lg font-medium">Content Filtering Options</h3>
-                <p className="text-gray-600 text-sm">
-                  Select which types of content to include in your analysis.
-                </p>
-
-                {/* Filter options would go here */}
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="flex items-center space-x-2">
-                    <input type="checkbox" id="blog" className="rounded border-gray-300" checked />
-                    <label htmlFor="blog">Blog posts</label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <input type="checkbox" id="product" className="rounded border-gray-300" checked />
-                    <label htmlFor="product">Product pages</label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <input type="checkbox" id="category" className="rounded border-gray-300" checked />
-                    <label htmlFor="category">Category pages</label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <input type="checkbox" id="landing" className="rounded border-gray-300" checked />
-                    <label htmlFor="landing">Landing pages</label>
-                  </div>
+              <div className="flex flex-col items-center justify-center py-8 text-center">
+                <div className="mb-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-400">
+                    <path d="M10.3 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6.7" />
+                    <path d="M18 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                    <path d="M18 18v3" />
+                    <path d="M18 15v.01" />
+                  </svg>
                 </div>
-
-                <Button className="bg-blue-500 hover:bg-blue-600 w-full mt-4">
-                  Apply Filters
-                </Button>
+                <h3 className="text-lg font-medium mb-2">Funkcja filtrowania wkrótce będzie dostępna</h3>
+                <p className="text-gray-600 text-sm max-w-md">
+                  Pracujemy nad dodaniem zaawansowanych opcji filtrowania, aby pomóc Ci lepiej analizować zawartość Twojej strony. Ta funkcjonalność będzie dostępna w następnej aktualizacji.
+                </p>
               </div>
             </CardContent>
           </Card>

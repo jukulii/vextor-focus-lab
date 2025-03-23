@@ -19,11 +19,11 @@ const translations: Translations = {
 
   // Hero Section
   "hero_title": {
-    en: "Analyze your website topical focus",
+    en: "Analyze your website's topical focus",
     pl: "Analizuj tematyczne ukierunkowanie swojej strony"
   },
   "hero_subtitle": {
-    en: "Unlock comprehensive insights into your website content focus and improve SEO performance",
+    en: "Unlock comprehensive insights into your website's content focus and improve SEO performance",
     pl: "Odblokuj kompleksowy wgląd w tematykę treści swojej strony i popraw wydajność SEO"
   },
   "get_started": { en: "Get Started", pl: "Rozpocznij" },
@@ -115,6 +115,9 @@ const translations: Translations = {
   "site_map": { en: "Site Map", pl: "Mapa strony" },
   "filters": { en: "Filters", pl: "Filtry" },
   "processing": { en: "Processing", pl: "Przetwarzanie" },
+  "coming_soon": { en: "Coming soon", pl: "Wkrótce dostępne" },
+  "feature_unavailable": { en: "This feature is not available yet", pl: "Ta funkcja nie jest jeszcze dostępna" },
+  "in_development": { en: "In development", pl: "W trakcie rozwoju" },
   "url_to_centroid": { en: "URL's to centroid", pl: "URL do centroidu" },
   "url": { en: "URL", pl: "Adres URL" },
   "proximity": { en: "Proximity to Centroid", pl: "Bliskość do centroidu" },
@@ -122,6 +125,7 @@ const translations: Translations = {
     en: "We found %count% sitemaps.",
     pl: "Znaleźliśmy %count% stron adresów sitemap."
   },
+
   "filtering_note": {
     en: "You can limit the report to URLs containing a specific term or generate a report with all URL addresses.",
     pl: "Możesz ograniczyć raport filtrem lub wygenerować raport ze wszystkimi adresami URL."
@@ -197,19 +201,6 @@ const translations: Translations = {
     en: "Primary content pattern",
     pl: "Główny wzorzec treści"
   },
-
-  // Login page
-  "login": { en: "Login", pl: "Logowanie" },
-  "login_subtitle": { en: "Enter your credentials to access your account", pl: "Wprowadź dane logowania, aby uzyskać dostęp do konta" },
-  "email": { en: "Email", pl: "Email" },
-  "password": { en: "Password", pl: "Hasło" },
-  "logging_in": { en: "Logging in...", pl: "Logowanie..." },
-  "login_success": { en: "Login successful", pl: "Logowanie udane" },
-  "welcome_back": { en: "Welcome back to Vextor", pl: "Witaj ponownie w Vextor" },
-  "login_failed": { en: "Login failed", pl: "Logowanie nieudane" },
-  "error": { en: "Error", pl: "Błąd" },
-  "dont_have_account": { en: "Don't have an account?", pl: "Nie masz konta?" },
-  "register": { en: "Register", pl: "Zarejestruj się" },
 };
 
 interface LanguageContextType {
