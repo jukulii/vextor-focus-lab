@@ -76,7 +76,7 @@ const PricingSection = () => {
             
             <div className="mt-4 mb-6 text-center">
               <div className="flex items-baseline justify-center">
-                <span className="text-zinc-50 font-medium text-lg mr-2">
+                <span className="bg-purple-600 text-white font-medium text-lg mr-2 px-3 py-1 rounded-md">
                   Starts from
                 </span>
                 <span className="text-zinc-50 text-4xl font-bold">
