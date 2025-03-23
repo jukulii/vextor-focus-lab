@@ -75,7 +75,7 @@ const PricingSection = () => {
             </div>
             
             <p className="text-zinc-200 mt-1 mb-4 text-sm bg-purple-600/30 px-3 py-1.5 rounded-md font-medium text-center">
-              Free trial version for 5 000 URL's
+              Free trial version for 1 000 URL's
             </p>
             
             <div className="mt-4 mb-6 text-center">
