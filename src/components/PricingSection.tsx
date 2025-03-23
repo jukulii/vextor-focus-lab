@@ -83,12 +83,16 @@ const PricingSection = () => {
               
               <div className="mt-4">
                 <Select defaultValue={selectedTier.urls} onValueChange={handlePriceChange}>
-                  <SelectTrigger className="w-full bg-blue-900/50 border-purple-700/50 focus:ring-purple-500/50">
+                  <SelectTrigger className="w-full bg-blue-900/50 border-purple-700/50 focus:ring-purple-500/50 text-white">
                     <SelectValue placeholder="Select URLs per month" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="bg-blue-900 border-purple-700/50">
                     {pricingTiers.map((tier) => (
-                      <SelectItem key={tier.urls} value={tier.urls}>
+                      <SelectItem 
+                        key={tier.urls} 
+                        value={tier.urls} 
+                        className="text-white hover:bg-blue-800 focus:bg-blue-800 cursor-pointer"
+                      >
                         {tier.urls} URLs (${tier.pricePerUrl} per URL)
                       </SelectItem>
                     ))}
