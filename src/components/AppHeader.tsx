@@ -33,13 +33,10 @@ const AppHeader = () => {
         <div className="flex items-center space-x-2">
           <Link to="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
             <img
-              src="/lovable-uploads/5634c72d-5100-496b-ade4-9da06c56eda0.png"
+              src="/lovable-uploads/c6aa9c7b-1857-434c-8a40-1fbc3582346a.png"
               alt="Vextor Logo"
-              className="h-8 w-auto object-contain mix-blend-multiply sm:h-10"
+              className="h-8 w-auto object-contain"
             />
-            <span className="text-vextor-700 dark:text-vextor-400 font-bold text-xl hidden sm:inline">
-              Vextor
-            </span>
           </Link>
         </div>
 

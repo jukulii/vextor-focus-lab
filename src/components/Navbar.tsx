@@ -66,13 +66,10 @@ const Navbar = ({ isDark = false }: NavbarProps) => {
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2">
               <img 
-                src="/lovable-uploads/5634c72d-5100-496b-ade4-9da06c56eda0.png" 
+                src="/lovable-uploads/c6aa9c7b-1857-434c-8a40-1fbc3582346a.png" 
                 alt="Vextor Logo" 
-                className="h-14 w-auto object-contain mix-blend-multiply sm:h-20" 
+                className="h-10 w-auto object-contain" 
               />
-              <div className={`${isDark ? 'text-white' : 'text-vextor-600'} font-bold text-xl sm:text-2xl tracking-tight`}>
-                Vextor
-              </div>
             </Link>
           </div>
           

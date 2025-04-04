@@ -12,7 +12,13 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="flex flex-col md:flex-row justify-between">
           <div className="mb-8 md:mb-0">
-            <div className="text-vextor-600 font-bold text-2xl mb-4">Vextor</div>
+            <div className="flex items-center mb-4">
+              <img 
+                src="/lovable-uploads/c6aa9c7b-1857-434c-8a40-1fbc3582346a.png" 
+                alt="Vextor Logo" 
+                className="h-10 w-auto object-contain" 
+              />
+            </div>
             <p className="max-w-md text-gray-600">
               Advanced website analysis tool to improve your content focus and SEO performance.
             </p>
