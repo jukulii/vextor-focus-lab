@@ -1,7 +1,7 @@
 
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from "@/components/ui/button";
-import { CheckIcon } from 'lucide-react';
+import { CheckIcon, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import {
@@ -43,27 +43,49 @@ const PricingSection = () => {
   };
 
   return (
-    <section id="pricing" className="py-20 border-t border-gray-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <span className="bg-purple-100 text-purple-700 px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4">Pricing</span>
+    <section id="pricing" className="py-20 border-t border-gray-200 relative overflow-hidden">
+      {/* Background elements for visual interest */}
+      <div className="absolute -top-24 -right-24 w-96 h-96 bg-[#8da2e5]/10 rounded-full blur-3xl"></div>
+      <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-[#8da2e5]/10 rounded-full blur-3xl"></div>
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="text-center mb-16 relative">
+          <div className="inline-block animate-pulse-subtle">
+            <span className="bg-[#8da2e5]/20 text-[#8da2e5] px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4 border border-[#8da2e5]/30">
+              <Sparkles className="w-4 h-4 inline-block mr-2" />
+              Pricing
+            </span>
+          </div>
           <h2 className="text-3xl md:text-4xl mb-4 font-bold text-gray-900">
             Simple, transparent pricing
           </h2>
           <p className="text-xl max-w-2xl mx-auto text-gray-700">
             Flexible, Usage-Based Pricing
           </p>
+          
+          {/* Added highlight accent */}
+          <div className="absolute w-20 h-1 bg-[#8da2e5] left-1/2 -translate-x-1/2 bottom-0 rounded-full"></div>
         </div>
         
         <div className="flex justify-center">
+          {/* Added subtle animation and enhanced styling */}
           <div className="
               rounded-xl p-8 transition-all duration-300 
               bg-gradient-to-br from-[#8da2e5] to-[#7a8fd2] border border-[#8da2e5]/30 shadow-2xl
               max-w-md w-full hover:shadow-[#8da2e5]/10 hover:scale-[1.02]
+              relative overflow-hidden
             ">
-            <p className="text-zinc-200 mt-1 mb-6 text-sm bg-[#8da2e5]/30 px-3 py-1.5 rounded-md font-medium text-center">
-              Free trial version for 1 000 URL's
-            </p>
+            {/* Decorative elements */}
+            <div className="absolute -right-16 -top-16 w-32 h-32 bg-white/10 rounded-full"></div>
+            <div className="absolute -left-16 -bottom-16 w-32 h-32 bg-white/10 rounded-full"></div>
+            
+            {/* Badge with glow effect */}
+            <div className="flex justify-center mb-4">
+              <p className="text-zinc-200 mt-1 mb-2 text-sm bg-[#8da2e5]/30 px-4 py-1.5 rounded-full font-medium text-center inline-flex items-center shadow-lg shadow-[#8da2e5]/20">
+                <Sparkles className="w-4 h-4 mr-2" />
+                Free trial version for 1 000 URL's
+              </p>
+            </div>
             
             <div className="flex items-center justify-center mb-6">
               <h3 className="font-bold text-zinc-50 text-center text-3xl">
@@ -73,13 +95,13 @@ const PricingSection = () => {
             
             <div className="mt-4 mb-8 text-center">
               <div className="flex items-baseline justify-center space-x-2">
-                <span className="bg-[#8da2e5] text-white font-medium text-lg px-3 py-1 rounded-md">
+                <span className="bg-white/20 text-white font-medium text-lg px-3 py-1 rounded-md backdrop-blur-sm">
                   Starts from
                 </span>
                 <span className="text-zinc-50 text-4xl font-bold">
                   ${selectedTier.price}
                 </span>
-                <span className="text-zinc-400 ml-2 text-lg">/month</span>
+                <span className="text-zinc-300 ml-2 text-lg">/month</span>
               </div>
               
               <div className="mt-4">
@@ -105,16 +127,16 @@ const PricingSection = () => {
             <ul className="mt-6 mb-10 space-y-4">
               {pricingPlan.features.map((feature, i) => (
                 <li key={i} className="flex items-start">
-                  <div className="mt-0.5 rounded-full p-1.5 bg-[#8da2e5]/20">
-                    <CheckIcon className="h-4 w-4 text-[#b3c0f8]" />
+                  <div className="mt-0.5 rounded-full p-1.5 bg-white/20 animate-pulse-subtle">
+                    <CheckIcon className="h-4 w-4 text-white" />
                   </div>
-                  <span className="ml-3 text-zinc-300 text-sm">{feature}</span>
+                  <span className="ml-3 text-zinc-100 text-sm">{feature}</span>
                 </li>
               ))}
             </ul>
             
             <Link to={pricingPlan.to}>
-              <Button className="w-full bg-[#8da2e5] hover:bg-[#7a8fd2] shadow-lg shadow-[#8da2e5]/30 py-6 text-lg font-medium">
+              <Button className="w-full bg-white hover:bg-zinc-100 text-[#7a8fd2] shadow-lg shadow-[#8da2e5]/30 py-6 text-lg font-medium transition-all duration-300">
                 {pricingPlan.buttonText}
               </Button>
             </Link>
