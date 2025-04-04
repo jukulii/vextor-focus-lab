@@ -40,7 +40,7 @@ const HighchartsTreeMap = ({ id, data }: HighchartsTreeMapProps) => {
         if (!chartRef.current) return;
 
         // Make sure Highcharts is available and the TreeMap module has been loaded
-        if (typeof Highcharts === 'undefined' || !Highcharts.seriesTypes?.treemap) {
+        if (typeof Highcharts === 'undefined' || !Highcharts.seriesType) {
             console.error('Highcharts or TreeMap module was not initialized');
             return;
         }
@@ -113,7 +113,17 @@ const HighchartsTreeMap = ({ id, data }: HighchartsTreeMapProps) => {
             });
 
             // Create chart
-            const chart = Highcharts.chart(id, {
+            const chart = Highcharts.chart({
+                chart: {
+                    renderTo: id,
+                    backgroundColor: 'transparent',
+                    style: {
+                        fontFamily: 'Inter, sans-serif'
+                    },
+                    animation: {
+                        duration: 1000
+                    }
+                },
                 series: [{
                     type: 'treemap',
                     name: 'URL Structure',
@@ -222,15 +232,6 @@ const HighchartsTreeMap = ({ id, data }: HighchartsTreeMapProps) => {
                 },
                 credits: {
                     enabled: false
-                },
-                chart: {
-                    backgroundColor: 'transparent',
-                    style: {
-                        fontFamily: 'Inter, sans-serif'
-                    },
-                    animation: {
-                        duration: 1000
-                    }
                 }
             });
 

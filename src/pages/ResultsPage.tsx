@@ -698,7 +698,6 @@ const ResultsPage = () => {
               <div className="h-[600px]">
                 <HighchartsTreeMap
                   id="url-structure-treemap"
-                  title=""
                   data={treeMapData}
                 />
               </div>
