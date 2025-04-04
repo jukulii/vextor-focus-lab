@@ -44,12 +44,12 @@ const HowItWorks = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-4">
           {steps.map((step, index) => (
             <div key={index} className="flex flex-col items-center text-center max-w-[250px] mx-auto relative">
-              <div className="bg-gray-100 w-14 h-14 rounded-md flex items-center justify-center mb-6 relative">
-                <span className="text-xl font-bold text-gray-800">{step.number}</span>
+              <div className="bg-[#788be4] w-14 h-14 rounded-md flex items-center justify-center mb-6 relative">
+                <span className="text-xl font-bold text-white">{step.number}</span>
                 
                 {/* Connecting line between steps */}
                 {index < steps.length - 1 && (
-                  <div className="hidden md:block absolute w-full md:w-[100px] lg:w-[120px] xl:w-[150px] h-[1px] bg-gray-300 left-full top-1/2 transform -translate-y-1/2"></div>
+                  <div className="hidden md:block absolute w-full md:w-[100px] lg:w-[120px] xl:w-[150px] h-[1px] bg-[#788be4]/50 left-full top-1/2 transform -translate-y-1/2"></div>
                 )}
               </div>
               
