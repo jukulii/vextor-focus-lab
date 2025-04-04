@@ -39,7 +39,8 @@ const VantaBackground = ({ children, className = '' }: VantaBackgroundProps) => 
           scaleMobile: 1.00,
           color: 0x3f51ff,
           color2: 0x0d47a1,
-          backgroundColor: 0x0a0a0a,
+          backgroundColor: 0x000000,
+          backgroundAlpha: 0.0, // Setting alpha to 0 for transparent background
           size: 3.00,
           spacing: 20.00,
           showLines: true,
