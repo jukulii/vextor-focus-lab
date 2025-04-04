@@ -1,6 +1,6 @@
 
 import { useLanguage } from '@/contexts/LanguageContext';
-import { ArrowUpRight, UserCheck, Search, Trophy } from 'lucide-react';
+import { ArrowUpRight, UserCheck, Search, Trophy, Sparkles } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 const mockData = [
@@ -19,26 +19,26 @@ const BenefitSection = () => {
     {
       icon: ArrowUpRight,
       title: "Cluster and visualize site structure by semantic topics",
-      iconColor: 'text-graph-green',
-      bgColor: 'bg-[#788be4]/10'
+      iconColor: 'text-[#ff6b6b]',
+      bgColor: 'bg-[#ff6b6b]/10'
     }, 
     {
       icon: UserCheck,
       title: "Identify irrelevant or weak content",
-      iconColor: 'text-graph-blue',
-      bgColor: 'bg-[#788be4]/10'
+      iconColor: 'text-[#ff6b6b]',
+      bgColor: 'bg-[#ff6b6b]/10'
     }, 
     {
       icon: Search,
       title: "Eliminate content that drags your rankings down",
-      iconColor: 'text-graph-orange',
-      bgColor: 'bg-[#788be4]/10'
+      iconColor: 'text-[#ff6b6b]',
+      bgColor: 'bg-[#ff6b6b]/10'
     }, 
     {
       icon: Trophy,
       title: "Measure Site Focus & Site Radius",
-      iconColor: 'text-graph-purple',
-      bgColor: 'bg-[#788be4]/10'
+      iconColor: 'text-[#ff6b6b]',
+      bgColor: 'bg-[#ff6b6b]/10'
     }
   ];
 
@@ -46,7 +46,10 @@ const BenefitSection = () => {
     <section className="py-16 border-t border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <span className="bg-[#788be4]/20 text-[#788be4] px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4">Benefits</span>
+          <span className="bg-[#ff6b6b]/20 text-[#ff6b6b] px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4 border border-[#ff6b6b]/30">
+            <Sparkles className="w-4 h-4 inline-block mr-2" />
+            Benefits
+          </span>
           <h2 className="text-3xl md:text-4xl mb-4 font-bold text-gray-900">
             Improve your SEO performance
           </h2>
@@ -63,7 +66,7 @@ const BenefitSection = () => {
                 className="bg-white rounded-xl p-6 shadow-md border border-gray-200 hover:shadow-lg transition-all duration-300 hover:translate-y-[-5px] flex flex-col items-center text-center"
               >
                 <div className={`w-12 h-12 ${benefit.bgColor} rounded-full flex items-center justify-center mb-4`}>
-                  <benefit.icon className={`h-5 w-5 text-[#788be4]`} />
+                  <benefit.icon className={`h-5 w-5 ${benefit.iconColor}`} />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900">
                   {benefit.title}

@@ -51,7 +51,7 @@ const PricingSection = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16 relative">
           <div className="inline-block animate-pulse-subtle">
-            <span className="bg-[#8da2e5]/20 text-[#8da2e5] px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4 border border-[#8da2e5]/30">
+            <span className="bg-[#ff6b6b]/20 text-[#ff6b6b] px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4 border border-[#ff6b6b]/30">
               <Sparkles className="w-4 h-4 inline-block mr-2" />
               Pricing
             </span>
@@ -64,7 +64,7 @@ const PricingSection = () => {
           </p>
           
           {/* Added highlight accent */}
-          <div className="absolute w-20 h-1 bg-[#8da2e5] left-1/2 -translate-x-1/2 bottom-0 rounded-full"></div>
+          <div className="absolute w-20 h-1 bg-[#ff6b6b] left-1/2 -translate-x-1/2 bottom-0 rounded-full"></div>
         </div>
         
         <div className="flex justify-center">
@@ -95,7 +95,7 @@ const PricingSection = () => {
             
             <div className="mt-4 mb-8 text-center">
               <div className="flex items-baseline justify-center space-x-2">
-                <span className="bg-[#ff9f43]/90 text-white font-medium text-lg px-3 py-1 rounded-md backdrop-blur-sm">
+                <span className="bg-[#ff6b6b]/90 text-white font-medium text-lg px-3 py-1 rounded-md backdrop-blur-sm">
                   Starts from
                 </span>
                 <span className="text-white text-4xl font-bold">
@@ -127,7 +127,7 @@ const PricingSection = () => {
             <ul className="mt-6 mb-10 space-y-4">
               {pricingPlan.features.map((feature, i) => (
                 <li key={i} className="flex items-start">
-                  <div className="mt-0.5 rounded-full p-1.5 bg-[#ff9f43] animate-pulse-subtle">
+                  <div className="mt-0.5 rounded-full p-1.5 bg-[#ff6b6b] animate-pulse-subtle">
                     <CheckIcon className="h-4 w-4 text-white" />
                   </div>
                   <span className="ml-3 text-white text-sm">{feature}</span>
