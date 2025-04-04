@@ -8,6 +8,7 @@ import TestimonialSection from '@/components/TestimonialSection';
 import PricingSection from '@/components/PricingSection';
 import FAQSection from '@/components/FAQSection';
 import Footer from '@/components/Footer';
+import VantaBackground from '@/components/VantaBackground';
 import { useEffect } from 'react';
 
 const LandingPage = () => {
@@ -38,8 +39,9 @@ const LandingPage = () => {
 
   return (
     <div className="relative min-h-screen">
+      <VantaBackground />
       <div className="relative z-10 flex flex-col min-h-screen w-full">
-        <Navbar isDark={true} />
+        <Navbar isDark={false} />
         <main className="flex-grow">
           <HeroSection />
           <div>

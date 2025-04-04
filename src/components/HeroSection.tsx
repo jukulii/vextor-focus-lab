@@ -12,10 +12,10 @@ const HeroSection = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center justify-center">
           <div className="text-center w-full max-w-3xl mx-auto z-10">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 fade-in leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 fade-in leading-tight">
               {t('hero_title')}
             </h1>
-            <p className="text-xl text-white mb-8 fade-in stagger-1 max-w-2xl mx-auto text-balance">
+            <p className="text-xl text-gray-700 mb-8 fade-in stagger-1 max-w-2xl mx-auto text-balance">
               {t('hero_subtitle')}
             </p>
             <div className="space-x-4 fade-in stagger-2">
