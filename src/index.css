@@ -122,7 +122,7 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-gradient-to-br from-gray-900 to-black text-foreground font-sans;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }

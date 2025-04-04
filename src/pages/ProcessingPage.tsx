@@ -6,7 +6,6 @@ import AppHeader from '@/components/AppHeader';
 import { Progress } from '@/components/ui/progress';
 import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import VantaBackground from '@/components/VantaBackground';
 
 const ProcessingPage = () => {
   const { t } = useLanguage();
@@ -53,7 +52,6 @@ const ProcessingPage = () => {
 
   return (
     <div className="relative min-h-screen">
-      <VantaBackground />
       <div className="relative z-10 flex flex-col min-h-screen">
         <AppHeader />
         <main className="flex-grow p-6">

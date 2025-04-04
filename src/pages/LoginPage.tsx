@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -7,7 +8,6 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { useToast } from '@/components/ui/use-toast';
 import { Eye, EyeOff, LogIn } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
-import VantaBackground from '@/components/VantaBackground';
 
 const LoginPage = () => {
     const { t } = useLanguage();
@@ -59,7 +59,6 @@ const LoginPage = () => {
 
     return (
         <div className="relative min-h-screen w-full">
-            <VantaBackground />
             <div className="relative z-10 min-h-screen flex flex-col items-center justify-center p-4">
                 <div className="w-full max-w-md">
                     <div className="flex justify-center mb-8">
