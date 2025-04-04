@@ -150,8 +150,7 @@ const HighchartsTreeMap = ({ id, data }: HighchartsTreeMapProps) => {
                             fontWeight: 'bold'
                         }
                     },
-                    borderColor: '#121212',
-                    // borderRadius: 3, // Remove from here
+                    // Remove the borderColor property as it's not recognized by the type definition
                     nodeSizeBy: 'value',
                     levels: [{
                         level: 1,
