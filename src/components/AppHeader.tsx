@@ -35,7 +35,7 @@ const AppHeader = () => {
             <img
               src="/lovable-uploads/c6aa9c7b-1857-434c-8a40-1fbc3582346a.png"
               alt="Vextor Logo"
-              className="h-8 w-auto object-contain"
+              className="h-10 w-auto object-contain sm:h-12"
             />
           </Link>
         </div>
