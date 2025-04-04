@@ -42,14 +42,15 @@ const PricingSection = () => {
     to: '/login' // Changed from '/app' to '/login'
   };
 
-  return <section id="pricing" className="py-20 border-t border-gray-200">
+  return (
+    <section id="pricing" className="py-20 border-t border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <span className="bg-purple-100 text-purple-700 px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4">Pricing</span>
-          <h2 className="text-3xl md:text-4xl mb-4 font-bold text-zinc-50">
+          <h2 className="text-3xl md:text-4xl mb-4 font-bold text-gray-900">
             Simple, transparent pricing
           </h2>
-          <p className="text-xl max-w-2xl mx-auto text-zinc-400">
+          <p className="text-xl max-w-2xl mx-auto text-gray-700">
             Flexible, Usage-Based Pricing
           </p>
         </div>
@@ -102,12 +103,14 @@ const PricingSection = () => {
             </div>
             
             <ul className="mt-6 mb-10 space-y-4">
-              {pricingPlan.features.map((feature, i) => <li key={i} className="flex items-start">
+              {pricingPlan.features.map((feature, i) => (
+                <li key={i} className="flex items-start">
                   <div className="mt-0.5 rounded-full p-1.5 bg-purple-500/20">
                     <CheckIcon className="h-4 w-4 text-purple-400" />
                   </div>
                   <span className="ml-3 text-zinc-300 text-sm">{feature}</span>
-                </li>)}
+                </li>
+              ))}
             </ul>
             
             <Link to={pricingPlan.to}>
@@ -118,6 +121,8 @@ const PricingSection = () => {
           </div>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default PricingSection;

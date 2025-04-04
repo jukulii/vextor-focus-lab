@@ -85,14 +85,14 @@ const FAQSection = () => {
   ];
   
   return (
-    <section id="faq" className="py-20 border-t border-gray-800">
+    <section id="faq" className="py-20 border-t border-gray-200">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <span className="bg-blue-900 text-blue-300 px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4">FAQ</span>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-zinc-50">
+          <span className="bg-blue-100 text-blue-700 px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4">FAQ</span>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
             Frequently Asked Questions
           </h2>
-          <p className="text-xl max-w-2xl mx-auto text-zinc-400">
+          <p className="text-xl max-w-2xl mx-auto text-gray-700">
             Learn more about how Vextor can help your SEO strategy
           </p>
         </div>
@@ -102,12 +102,12 @@ const FAQSection = () => {
             <AccordionItem 
               key={index} 
               value={`item-${index}`}
-              className="border-b border-gray-800 py-2"
+              className="border-b border-gray-200 py-2"
             >
-              <AccordionTrigger className="text-left font-medium text-lg text-zinc-50 hover:text-zinc-200 hover:no-underline">
+              <AccordionTrigger className="text-left font-medium text-lg text-gray-900 hover:text-gray-700 hover:no-underline">
                 {faq.question}
               </AccordionTrigger>
-              <AccordionContent className="text-zinc-400">
+              <AccordionContent className="text-gray-700">
                 {faq.answer}
               </AccordionContent>
             </AccordionItem>

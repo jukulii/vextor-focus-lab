@@ -46,11 +46,11 @@ const TestimonialSection = () => {
   }, [emblaApi]);
 
   return (
-    <section className="py-20 border-t border-gray-800 relative overflow-hidden">
+    <section className="py-20 border-t border-gray-200 relative overflow-hidden bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <span className="bg-purple-900 text-purple-300 px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4">Testimonials</span>
-          <h2 className="text-3xl md:text-4xl font-bold text-zinc-50 mb-4">
+          <span className="bg-purple-100 text-purple-700 px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4">Testimonials</span>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             What SEOs are saying
           </h2>
         </div>
@@ -70,12 +70,12 @@ const TestimonialSection = () => {
                   <div className="h-full flex items-center justify-center px-4 md:px-10">
                     <div className="text-center">
                       <QuoteIcon className="mx-auto h-10 w-10 text-vextor-500 mb-6 opacity-70" />
-                      <p className="text-2xl md:text-3xl font-medium text-zinc-50 mb-6 leading-relaxed">
+                      <p className="text-2xl md:text-3xl font-medium text-gray-900 mb-6 leading-relaxed">
                         "{testimonial.quote}"
                       </p>
                       <div className="mt-6">
                         <p className="font-medium text-vextor-500">— {testimonial.author}</p>
-                        <p className="text-sm text-zinc-400">{testimonial.position}</p>
+                        <p className="text-sm text-gray-600">{testimonial.position}</p>
                       </div>
                     </div>
                   </div>
@@ -95,7 +95,7 @@ const TestimonialSection = () => {
                   className={`h-2.5 w-2.5 rounded-full transition-all duration-300 ${
                     activeIndex === idx 
                       ? 'bg-vextor-500' 
-                      : 'bg-gray-600 hover:bg-gray-500'
+                      : 'bg-gray-400 hover:bg-gray-500'
                   }`}
                   aria-label={`Go to slide ${idx + 1}`}
                 />
