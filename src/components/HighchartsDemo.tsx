@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
@@ -43,11 +44,13 @@ const HighchartsDemo: React.FC<HighchartsDemoProps> = ({ className }) => {
         },
         series: [
             {
+                type: 'spline', // Added the type property
                 name: 'Domena A',
                 data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0],
                 color: '#8884d8'
             },
             {
+                type: 'spline', // Added the type property
                 name: 'Domena B',
                 data: [19.2, 51.7, 86.8, 109.5, 124.3, 156.2],
                 color: '#82ca9d'
@@ -73,4 +76,4 @@ const HighchartsDemo: React.FC<HighchartsDemoProps> = ({ className }) => {
     );
 };
 
-export default HighchartsDemo; 
+export default HighchartsDemo;

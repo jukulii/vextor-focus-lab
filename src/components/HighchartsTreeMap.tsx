@@ -1,3 +1,4 @@
+
 import { useEffect, useRef } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import Highcharts from 'highcharts';
@@ -39,7 +40,7 @@ const HighchartsTreeMap = ({ id, data }: HighchartsTreeMapProps) => {
         if (!chartRef.current) return;
 
         // Upewnij się, że Highcharts jest dostępny i moduł TreeMap został załadowany
-        if (typeof Highcharts === 'undefined' || !Highcharts.seriesTypes.treemap) {
+        if (typeof Highcharts === 'undefined' || !Highcharts.seriesType?.treemap) {
             console.error('Highcharts lub moduł TreeMap nie został zainicjalizowany');
             return;
         }
@@ -112,7 +113,7 @@ const HighchartsTreeMap = ({ id, data }: HighchartsTreeMapProps) => {
             });
 
             // Tworzenie wykresu
-            const chart = Highcharts.chart(chartRef.current, {
+            const chart = Highcharts.chart(chartRef.current.id, {
                 series: [{
                     type: 'treemap',
                     name: 'URL Structure',
@@ -254,4 +255,4 @@ const HighchartsTreeMap = ({ id, data }: HighchartsTreeMapProps) => {
     );
 };
 
-export default HighchartsTreeMap; 
+export default HighchartsTreeMap;
