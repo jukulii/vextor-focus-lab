@@ -128,12 +128,15 @@ const HighchartsTreeMap = ({ id, data }: HighchartsTreeMapProps) => {
                     type: 'treemap',
                     name: 'URL Structure',
                     allowTraversingTree: true,
-                    alternateStartingDirection: true,
+                    // Remove alternateStartingDirection from here
                     // Disable color change effect on hover
                     states: {
                         hover: {
                             brightness: 0, // No brightness change
-                            halo: false // No halo effect
+                            halo: {
+                                size: 0, // Set to 0 instead of false
+                                opacity: 0
+                            }
                         },
                         inactive: {
                             opacity: 1 // No opacity change
@@ -148,7 +151,7 @@ const HighchartsTreeMap = ({ id, data }: HighchartsTreeMapProps) => {
                         }
                     },
                     borderColor: '#121212',
-                    borderRadius: 3,
+                    // borderRadius: 3, // Remove from here
                     nodeSizeBy: 'value',
                     levels: [{
                         level: 1,
@@ -162,13 +165,13 @@ const HighchartsTreeMap = ({ id, data }: HighchartsTreeMapProps) => {
                                 textTransform: 'uppercase'
                             }
                         },
-                        borderRadius: 3,
+                        // borderRadius: 3, // Remove this property as it's not valid
                         borderWidth: 2
                     }, {
                         level: 2,
                         layoutAlgorithm: 'stripes', // Vertical strips
                         layoutStartingDirection: 'vertical', // Enforce vertical direction
-                        alternateStartingDirection: true, // Alternately change direction
+                        // alternateStartingDirection: true, // Remove this invalid property
                         dataLabels: {
                             enabled: true,
                             style: {
