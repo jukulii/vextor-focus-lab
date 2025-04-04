@@ -68,53 +68,53 @@ const PricingSection = () => {
         </div>
         
         <div className="flex justify-center">
-          {/* Added subtle animation and enhanced styling */}
+          {/* Added contrast colors and enhanced styling */}
           <div className="
               rounded-xl p-8 transition-all duration-300 
-              bg-gradient-to-br from-[#8da2e5] to-[#7a8fd2] border border-[#8da2e5]/30 shadow-2xl
-              max-w-md w-full hover:shadow-[#8da2e5]/10 hover:scale-[1.02]
+              bg-gradient-to-br from-[#5d6cd0] to-[#4c5ebb] border border-[#4c5ebb]/50 shadow-2xl
+              max-w-md w-full hover:shadow-[#8da2e5]/20 hover:scale-[1.02]
               relative overflow-hidden
             ">
-            {/* Decorative elements */}
-            <div className="absolute -right-16 -top-16 w-32 h-32 bg-white/10 rounded-full"></div>
-            <div className="absolute -left-16 -bottom-16 w-32 h-32 bg-white/10 rounded-full"></div>
+            {/* Decorative elements with high contrast */}
+            <div className="absolute -right-16 -top-16 w-32 h-32 bg-white/20 rounded-full"></div>
+            <div className="absolute -left-16 -bottom-16 w-32 h-32 bg-white/20 rounded-full"></div>
             
-            {/* Badge with glow effect */}
+            {/* Badge with contrast glow effect */}
             <div className="flex justify-center mb-4">
-              <p className="text-zinc-200 mt-1 mb-2 text-sm bg-[#8da2e5]/30 px-4 py-1.5 rounded-full font-medium text-center inline-flex items-center shadow-lg shadow-[#8da2e5]/20">
+              <p className="text-white mt-1 mb-2 text-sm bg-[#ff6b6b]/80 px-4 py-1.5 rounded-full font-medium text-center inline-flex items-center shadow-lg shadow-[#ff6b6b]/20">
                 <Sparkles className="w-4 h-4 mr-2" />
                 Free trial version for 1 000 URL's
               </p>
             </div>
             
             <div className="flex items-center justify-center mb-6">
-              <h3 className="font-bold text-zinc-50 text-center text-3xl">
+              <h3 className="font-bold text-white text-center text-3xl">
                 {pricingPlan.name}
               </h3>
             </div>
             
             <div className="mt-4 mb-8 text-center">
               <div className="flex items-baseline justify-center space-x-2">
-                <span className="bg-white/20 text-white font-medium text-lg px-3 py-1 rounded-md backdrop-blur-sm">
+                <span className="bg-[#ff9f43]/90 text-white font-medium text-lg px-3 py-1 rounded-md backdrop-blur-sm">
                   Starts from
                 </span>
-                <span className="text-zinc-50 text-4xl font-bold">
+                <span className="text-white text-4xl font-bold">
                   ${selectedTier.price}
                 </span>
-                <span className="text-zinc-300 ml-2 text-lg">/month</span>
+                <span className="text-white/80 ml-2 text-lg">/month</span>
               </div>
               
               <div className="mt-4">
                 <Select defaultValue={selectedTier.urls} onValueChange={handlePriceChange}>
-                  <SelectTrigger className="w-full bg-[#8da2e5]/50 border-[#8da2e5]/50 focus:ring-[#8da2e5]/50 text-white">
+                  <SelectTrigger className="w-full bg-white/20 border-white/30 focus:ring-white/50 text-white">
                     <SelectValue placeholder="Select URLs per month" />
                   </SelectTrigger>
-                  <SelectContent className="bg-[#7a8fd2] border-[#8da2e5]/50">
+                  <SelectContent className="bg-[#4c5ebb] border-white/30">
                     {pricingTiers.map((tier) => (
                       <SelectItem 
                         key={tier.urls} 
                         value={tier.urls} 
-                        className="text-white hover:bg-[#6a7fc2] focus:bg-[#6a7fc2] cursor-pointer"
+                        className="text-white hover:bg-[#3a4aa8] focus:bg-[#3a4aa8] cursor-pointer"
                       >
                         {tier.urls} URLs (${tier.pricePerUrl} per URL)
                       </SelectItem>
@@ -127,16 +127,16 @@ const PricingSection = () => {
             <ul className="mt-6 mb-10 space-y-4">
               {pricingPlan.features.map((feature, i) => (
                 <li key={i} className="flex items-start">
-                  <div className="mt-0.5 rounded-full p-1.5 bg-white/20 animate-pulse-subtle">
+                  <div className="mt-0.5 rounded-full p-1.5 bg-[#ff9f43] animate-pulse-subtle">
                     <CheckIcon className="h-4 w-4 text-white" />
                   </div>
-                  <span className="ml-3 text-zinc-100 text-sm">{feature}</span>
+                  <span className="ml-3 text-white text-sm">{feature}</span>
                 </li>
               ))}
             </ul>
             
             <Link to={pricingPlan.to}>
-              <Button className="w-full bg-white hover:bg-zinc-100 text-[#7a8fd2] shadow-lg shadow-[#8da2e5]/30 py-6 text-lg font-medium transition-all duration-300">
+              <Button variant="highlight" className="w-full py-6 text-lg font-medium transition-all duration-300 border-2 border-white/20 hover:border-white/40">
                 {pricingPlan.buttonText}
               </Button>
             </Link>
