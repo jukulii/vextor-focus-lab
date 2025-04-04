@@ -69,12 +69,12 @@ const TestimonialSection = () => {
                 <CarouselItem key={index}>
                   <div className="h-full flex items-center justify-center px-4 md:px-10">
                     <div className="text-center">
-                      <QuoteIcon className="mx-auto h-10 w-10 text-vextor-500 mb-6 opacity-70" />
+                      <QuoteIcon className="mx-auto h-10 w-10 text-[#8da2e5] mb-6 opacity-70" />
                       <p className="text-2xl md:text-3xl font-medium text-gray-900 mb-6 leading-relaxed">
                         "{testimonial.quote}"
                       </p>
                       <div className="mt-6">
-                        <p className="font-medium text-vextor-500">— {testimonial.author}</p>
+                        <p className="font-medium text-[#8da2e5]">— {testimonial.author}</p>
                         <p className="text-sm text-gray-600">{testimonial.position}</p>
                       </div>
                     </div>
@@ -94,7 +94,7 @@ const TestimonialSection = () => {
                   }}
                   className={`h-2.5 w-2.5 rounded-full transition-all duration-300 ${
                     activeIndex === idx 
-                      ? 'bg-vextor-500' 
+                      ? 'bg-[#8da2e5]' 
                       : 'bg-gray-400 hover:bg-gray-500'
                   }`}
                   aria-label={`Go to slide ${idx + 1}`}

@@ -22,7 +22,7 @@ const HeroSection = () => {
               <Link to="/app">
                 <Button 
                   size="lg" 
-                  className="bg-[#788be4] hover:bg-[#6678d0] transition-all duration-300 button-glow px-8 py-6 text-lg shadow-lg hover:shadow-xl"
+                  className="bg-[#8da2e5] hover:bg-[#7a8fd2] transition-all duration-300 button-glow px-8 py-6 text-lg shadow-lg hover:shadow-xl"
                 >
                   Analyze
                   <Rocket className="ml-2 h-5 w-5" />
