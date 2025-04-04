@@ -3,11 +3,11 @@ import { useEffect, useRef } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import Highcharts from 'highcharts';
 
-// Ważne - importy modułów muszą być wykonane przed użyciem
+// Important - module imports must be done before use
 import HighchartsMore from 'highcharts/highcharts-more';
 import TreeMapModule from 'highcharts/modules/treemap';
 
-// Inicjalizacja modułów - tylko po stronie klienta
+// Initialize modules - only on the client side
 if (typeof window !== 'undefined') {
     if (typeof HighchartsMore === 'function') {
         HighchartsMore(Highcharts);
@@ -36,16 +36,16 @@ const HighchartsTreeMap = ({ id, data }: HighchartsTreeMapProps) => {
     const { language } = useLanguage();
 
     useEffect(() => {
-        // Sprawdź czy DOM jest dostępny
+        // Check if DOM is available
         if (!chartRef.current) return;
 
-        // Upewnij się, że Highcharts jest dostępny i moduł TreeMap został załadowany
-        if (typeof Highcharts === 'undefined' || !Highcharts.seriesType?.treemap) {
-            console.error('Highcharts lub moduł TreeMap nie został zainicjalizowany');
+        // Make sure Highcharts is available and the TreeMap module has been loaded
+        if (typeof Highcharts === 'undefined' || !Highcharts.seriesTypes?.treemap) {
+            console.error('Highcharts or TreeMap module was not initialized');
             return;
         }
 
-        // Tłumaczenia
+        // Translations
         const translations = {
             url_structure: {
                 pl: "Struktura URL",
@@ -61,47 +61,47 @@ const HighchartsTreeMap = ({ id, data }: HighchartsTreeMapProps) => {
             }
         };
 
-        // Funkcja pomocnicza do tłumaczenia
+        // Helper function for translation
         const t = (key: keyof typeof translations) => {
             return translations[key][language as 'pl' | 'en'] || translations[key].en;
         };
 
-        // Definicje kolorów dla różnych sekcji - więcej różnorodnych kolorów
+        // Color definitions for different sections - more diverse colors
         const sectionColors = [
-            '#50FFB1', // zielonkawy
-            '#8884d8', // fioletowy
-            '#5DADE2', // niebieski
-            '#F7DC6F', // żółty
-            '#E74C3C', // czerwony
-            '#9B59B6', // purpurowy
-            '#27AE60', // zielony
-            '#F1C40F', // złoty
-            '#E67E22'  // pomarańczowy
+            '#50FFB1', // greenish
+            '#8884d8', // purple
+            '#5DADE2', // blue
+            '#F7DC6F', // yellow
+            '#E74C3C', // red
+            '#9B59B6', // magenta
+            '#27AE60', // green
+            '#F1C40F', // gold
+            '#E67E22'  // orange
         ];
 
         try {
-            // Przygotuj dane z konkretnymi kolorami dla poszczególnych sekcji
+            // Prepare data with specific colors for individual sections
             const processedData = data.map((item, index) => {
-                // Ustal kolor na podstawie id elementu dla spójności
+                // Set color based on item id for consistency
                 let colorIndex;
 
                 if (!item.parent) {
-                    // Główny element - kolor na podstawie indeksu
+                    // Main element - color based on index
                     colorIndex = 0;
                 } else if (item.parent === 'main') {
-                    // Elementy pierwszego poziomu - systematyczne kolory
-                    // Wyciągnij indeks z id (np. z "blog" bierzemy 0, z "product" bierzemy 1 itd.)
+                    // First level elements - systematic colors
+                    // Extract index from id (e.g., from "blog" take 0, from "product" take 1, etc.)
                     const parentIndex = index % sectionColors.length;
                     colorIndex = parentIndex;
                 } else {
-                    // Niższe poziomy - kolor bazujący na colorValue (bliskość do centroidu)
+                    // Lower levels - color based on colorValue (proximity to centroid)
                     return {
                         ...item,
-                        // Nie ustawiamy konkretnego koloru, będzie użyty colorAxis
+                        // Don't set a specific color, colorAxis will be used
                     };
                 }
 
-                // Dla głównych sekcji i pierwszego poziomu ustalamy konkretne kolory
+                // For main sections and first level, set specific colors
                 if (item.parent === 'main' || !item.parent) {
                     return {
                         ...item,
@@ -112,21 +112,21 @@ const HighchartsTreeMap = ({ id, data }: HighchartsTreeMapProps) => {
                 return item;
             });
 
-            // Tworzenie wykresu
-            const chart = Highcharts.chart(chartRef.current.id, {
+            // Create chart
+            const chart = Highcharts.chart(id, {
                 series: [{
                     type: 'treemap',
                     name: 'URL Structure',
                     allowTraversingTree: true,
                     alternateStartingDirection: true,
-                    // Wyłącz efekt zmiany koloru przy najechaniu myszą
+                    // Disable color change effect on hover
                     states: {
                         hover: {
-                            brightness: 0, // Brak zmiany jasności
-                            halo: false // Brak efektu halo
+                            brightness: 0, // No brightness change
+                            halo: false // No halo effect
                         },
                         inactive: {
-                            opacity: 1 // Brak zmiany przezroczystości
+                            opacity: 1 // No opacity change
                         }
                     },
                     dataLabels: {
@@ -142,7 +142,7 @@ const HighchartsTreeMap = ({ id, data }: HighchartsTreeMapProps) => {
                     nodeSizeBy: 'value',
                     levels: [{
                         level: 1,
-                        layoutAlgorithm: 'strip', // Zmienione na strip dla większej różnorodności
+                        layoutAlgorithm: 'strip', // Changed to strip for more variety
                         dataLabels: {
                             enabled: true,
                             style: {
@@ -156,9 +156,9 @@ const HighchartsTreeMap = ({ id, data }: HighchartsTreeMapProps) => {
                         borderWidth: 2
                     }, {
                         level: 2,
-                        layoutAlgorithm: 'stripes', // Pionowe paski
-                        layoutStartingDirection: 'vertical', // Wymusza pionowy kierunek
-                        alternateStartingDirection: true, // Naprzemiennie zmienia kierunek
+                        layoutAlgorithm: 'stripes', // Vertical strips
+                        layoutStartingDirection: 'vertical', // Enforce vertical direction
+                        alternateStartingDirection: true, // Alternately change direction
                         dataLabels: {
                             enabled: true,
                             style: {
@@ -169,8 +169,8 @@ const HighchartsTreeMap = ({ id, data }: HighchartsTreeMapProps) => {
                         borderWidth: 1
                     }, {
                         level: 3,
-                        layoutAlgorithm: 'sliceAndDice', // Naprzemienne pionowe i poziome paski
-                        layoutStartingDirection: 'vertical', // Zaczynamy od pionowych 
+                        layoutAlgorithm: 'sliceAndDice', // Alternating vertical and horizontal strips
+                        layoutStartingDirection: 'vertical', // Start with vertical 
                         dataLabels: {
                             enabled: true,
                             style: {
@@ -234,14 +234,14 @@ const HighchartsTreeMap = ({ id, data }: HighchartsTreeMapProps) => {
                 }
             });
 
-            // Czyszczenie przy odmontowaniu komponentu
+            // Cleanup when component unmounts
             return () => {
                 if (chart && typeof chart.destroy === 'function') {
                     chart.destroy();
                 }
             };
         } catch (error) {
-            console.error('Błąd podczas tworzenia wykresu TreeMap:', error);
+            console.error('Error creating TreeMap chart:', error);
         }
     }, [id, data, language]);
 

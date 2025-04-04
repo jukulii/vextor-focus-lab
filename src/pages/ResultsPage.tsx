@@ -159,6 +159,42 @@ const ResultsPage = () => {
     pages: {
       pl: "Strony",
       en: "Pages"
+    },
+    urls_to_centroid: {
+      pl: "URLe do centroidu",
+      en: "URLs to Centroid"
+    },
+    url: {
+      pl: "URL",
+      en: "URL"
+    },
+    proximity: {
+      pl: "Bliskość",
+      en: "Proximity"
+    },
+    url_1: {
+      pl: "URL 1",
+      en: "URL 1"
+    },
+    url_2: {
+      pl: "URL 2",
+      en: "URL 2"
+    },
+    similarity_score: {
+      pl: "Wynik podobieństwa",
+      en: "Similarity Score"
+    },
+    cluster_1: {
+      pl: "Klaster 1",
+      en: "Cluster 1"
+    },
+    cluster_2: {
+      pl: "Klaster 2",
+      en: "Cluster 2"
+    },
+    urls_count: {
+      pl: "Liczba URLi",
+      en: "URLs Count"
     }
   };
 

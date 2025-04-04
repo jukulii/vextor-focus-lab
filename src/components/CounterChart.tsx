@@ -1,3 +1,4 @@
+
 import React from 'react';
 import GaugeChart from 'react-gauge-chart';
 
@@ -16,10 +17,10 @@ const CounterChart: React.FC<CounterChartProps> = ({
     maxValue,
     color = '#8884d8'
 }) => {
-    // Oblicz procent dla gauge chart (wartość pomiędzy 0 a 1)
+    // Calculate percentage for gauge chart (value between 0 and 1)
     const percent = value / maxValue;
 
-    // Kolory dla gradientu
+    // Colors for gradient
     const colors = ["#EA4228", "#F5CD19", "#5BE12C"];
 
     return (
@@ -41,4 +42,4 @@ const CounterChart: React.FC<CounterChartProps> = ({
     );
 };
 
-export default CounterChart; 
+export default CounterChart;

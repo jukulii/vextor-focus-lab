@@ -8,7 +8,7 @@ interface HighchartsDemoProps {
 }
 
 const HighchartsDemo: React.FC<HighchartsDemoProps> = ({ className }) => {
-    // Konfiguracja wykresu
+    // Chart configuration
     const options: Highcharts.Options = {
         chart: {
             type: 'spline',

@@ -1,16 +1,18 @@
+
 import React, { useEffect, useRef } from 'react';
 
 interface HighchartsAreaChartProps {
     id: string;
     title: string;
+    seriesName?: string; // Added seriesName prop
     xAxisTitle: string;
     yAxisTitle: string;
-    data: Array<[number, number]>; // [x, y] punkty dla wykresu
+    data: Array<[number, number]>; // [x, y] points for the chart
     color?: string;
     fillOpacity?: number;
     minX?: number;
     maxX?: number;
-    invertXAxis?: boolean; // czy oś X powinna być odwrócona
+    invertXAxis?: boolean; // Whether the X axis should be inverted
 }
 
 declare global {
@@ -22,6 +24,7 @@ declare global {
 const HighchartsAreaChart: React.FC<HighchartsAreaChartProps> = ({
     id,
     title,
+    seriesName = '', // Default empty string for seriesName
     xAxisTitle,
     yAxisTitle,
     data,
@@ -34,7 +37,7 @@ const HighchartsAreaChart: React.FC<HighchartsAreaChartProps> = ({
     const chartContainer = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        // Inicjalizacja wykresu
+        // Chart initialization
         const initChart = () => {
             if (!chartContainer.current || !window.Highcharts) return;
 
@@ -68,7 +71,7 @@ const HighchartsAreaChart: React.FC<HighchartsAreaChartProps> = ({
                     tickInterval: 0.05,
                     min: minX,
                     max: maxX,
-                    reversed: invertXAxis, // Odwrócenie osi X jeśli potrzeba
+                    reversed: invertXAxis, // Reverse the X axis if needed
                     gridLineColor: 'rgba(255, 255, 255, 0.1)',
                     lineColor: 'rgba(255, 255, 255, 0.3)',
                     tickColor: 'rgba(255, 255, 255, 0.3)'
@@ -89,7 +92,7 @@ const HighchartsAreaChart: React.FC<HighchartsAreaChartProps> = ({
                 },
                 tooltip: {
                     headerFormat: '<b>{point.x}</b><br/>',
-                    pointFormat: `${yAxisTitle}: {point.y}`
+                    pointFormat: `${seriesName || yAxisTitle}: {point.y}`
                 },
                 plotOptions: {
                     area: {
@@ -125,7 +128,7 @@ const HighchartsAreaChart: React.FC<HighchartsAreaChartProps> = ({
                     }
                 },
                 series: [{
-                    name: yAxisTitle,
+                    name: seriesName || yAxisTitle,
                     color: color,
                     data: data
                 }],
@@ -138,11 +141,11 @@ const HighchartsAreaChart: React.FC<HighchartsAreaChartProps> = ({
             });
         };
 
-        // Sprawdź, czy Highcharts jest już załadowany
+        // Check if Highcharts is already loaded
         if (window.Highcharts) {
             initChart();
         } else {
-            // Jeśli nie, obserwuj DOM, aż zostanie załadowany (przez komponent HighchartsGauge)
+            // If not, observe the DOM until it's loaded (by the HighchartsGauge component)
             const checkHighchartsInterval = setInterval(() => {
                 if (window.Highcharts) {
                     clearInterval(checkHighchartsInterval);
@@ -150,14 +153,14 @@ const HighchartsAreaChart: React.FC<HighchartsAreaChartProps> = ({
                 }
             }, 100);
 
-            // Oczyszczenie interwału przy odmontowaniu komponentu
+            // Clear the interval when the component is unmounted
             return () => clearInterval(checkHighchartsInterval);
         }
-    }, [id, title, xAxisTitle, yAxisTitle, data, color, fillOpacity, minX, maxX, invertXAxis]);
+    }, [id, title, seriesName, xAxisTitle, yAxisTitle, data, color, fillOpacity, minX, maxX, invertXAxis]);
 
     return (
         <div ref={chartContainer} id={id} className="w-full h-[300px]"></div>
     );
 };
 
-export default HighchartsAreaChart; 
+export default HighchartsAreaChart;
