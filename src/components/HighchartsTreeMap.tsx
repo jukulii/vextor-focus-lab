@@ -151,7 +151,7 @@ const HighchartsTreeMap = ({ id, data }: HighchartsTreeMapProps) => {
                         }
                     },
                     // Remove the borderColor property as it's not recognized by the type definition
-                    nodeSizeBy: 'value',
+                    // Remove the nodeSizeBy property as it's not recognized by the type definition
                     levels: [{
                         level: 1,
                         layoutAlgorithm: 'strip', // Changed to strip for more variety
