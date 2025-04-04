@@ -43,7 +43,7 @@ const Navbar = ({ isDark = false }: NavbarProps) => {
   };
 
   const textColor = isDark ? 'text-white' : 'text-gray-700';
-  const hoverColor = isDark ? 'hover:text-vextor-400' : 'hover:text-vextor-600';
+  const hoverColor = isDark ? 'hover:text-[#788be4]' : 'hover:text-[#788be4]';
   const bgClass = scrolled 
     ? isDark 
       ? 'bg-black/90 backdrop-blur-md shadow-md py-3' 
@@ -105,7 +105,7 @@ const Navbar = ({ isDark = false }: NavbarProps) => {
             </DropdownMenu>
             
             <Link to="/app">
-              <Button variant="default" className="bg-vextor-600 hover:bg-vextor-700 transition-colors button-glow shadow-md hover:shadow-lg">
+              <Button variant="default" className="bg-[#788be4] hover:bg-[#6678d0] transition-colors button-glow shadow-md hover:shadow-lg">
                 {t('get_started')}
               </Button>
             </Link>

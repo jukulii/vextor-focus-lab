@@ -1,4 +1,3 @@
-
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from "@/components/ui/button";
 import { CheckIcon } from 'lucide-react';
@@ -58,10 +57,10 @@ const PricingSection = () => {
         <div className="flex justify-center">
           <div className="
               rounded-xl p-8 transition-all duration-300 
-              bg-gradient-to-br from-purple-900 to-blue-950 border border-purple-500/30 shadow-2xl
-              max-w-md w-full hover:shadow-purple-500/10 hover:scale-[1.02]
+              bg-gradient-to-br from-[#788be4] to-[#5a6cc0] border border-[#788be4]/30 shadow-2xl
+              max-w-md w-full hover:shadow-[#788be4]/10 hover:scale-[1.02]
             ">
-            <p className="text-zinc-200 mt-1 mb-6 text-sm bg-purple-600/30 px-3 py-1.5 rounded-md font-medium text-center">
+            <p className="text-zinc-200 mt-1 mb-6 text-sm bg-[#788be4]/30 px-3 py-1.5 rounded-md font-medium text-center">
               Free trial version for 1 000 URL's
             </p>
             
@@ -73,7 +72,7 @@ const PricingSection = () => {
             
             <div className="mt-4 mb-8 text-center">
               <div className="flex items-baseline justify-center space-x-2">
-                <span className="bg-purple-600 text-white font-medium text-lg px-3 py-1 rounded-md">
+                <span className="bg-[#788be4] text-white font-medium text-lg px-3 py-1 rounded-md">
                   Starts from
                 </span>
                 <span className="text-zinc-50 text-4xl font-bold">
@@ -84,15 +83,15 @@ const PricingSection = () => {
               
               <div className="mt-4">
                 <Select defaultValue={selectedTier.urls} onValueChange={handlePriceChange}>
-                  <SelectTrigger className="w-full bg-blue-900/50 border-purple-700/50 focus:ring-purple-500/50 text-white">
+                  <SelectTrigger className="w-full bg-[#6e80d6]/50 border-[#788be4]/50 focus:ring-[#788be4]/50 text-white">
                     <SelectValue placeholder="Select URLs per month" />
                   </SelectTrigger>
-                  <SelectContent className="bg-blue-900 border-purple-700/50">
+                  <SelectContent className="bg-[#5a6cc0] border-[#788be4]/50">
                     {pricingTiers.map((tier) => (
                       <SelectItem 
                         key={tier.urls} 
                         value={tier.urls} 
-                        className="text-white hover:bg-blue-800 focus:bg-blue-800 cursor-pointer"
+                        className="text-white hover:bg-[#4a5bb0] focus:bg-[#4a5bb0] cursor-pointer"
                       >
                         {tier.urls} URLs (${tier.pricePerUrl} per URL)
                       </SelectItem>
@@ -105,8 +104,8 @@ const PricingSection = () => {
             <ul className="mt-6 mb-10 space-y-4">
               {pricingPlan.features.map((feature, i) => (
                 <li key={i} className="flex items-start">
-                  <div className="mt-0.5 rounded-full p-1.5 bg-purple-500/20">
-                    <CheckIcon className="h-4 w-4 text-purple-400" />
+                  <div className="mt-0.5 rounded-full p-1.5 bg-[#788be4]/20">
+                    <CheckIcon className="h-4 w-4 text-[#a3b0f8]" />
                   </div>
                   <span className="ml-3 text-zinc-300 text-sm">{feature}</span>
                 </li>
@@ -114,7 +113,7 @@ const PricingSection = () => {
             </ul>
             
             <Link to={pricingPlan.to}>
-              <Button className="w-full bg-purple-600 hover:bg-purple-700 shadow-lg shadow-purple-900/30 py-6 text-lg font-medium">
+              <Button className="w-full bg-[#788be4] hover:bg-[#6678d0] shadow-lg shadow-[#788be4]/30 py-6 text-lg font-medium">
                 {pricingPlan.buttonText}
               </Button>
             </Link>

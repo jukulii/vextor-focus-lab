@@ -49,7 +49,7 @@ const AppHeader = () => {
               <Button
                 variant="ghost"
                 size="icon"
-                className="text-gray-700 dark:text-gray-300 hover:text-vextor-600 dark:hover:text-vextor-400 transition-colors"
+                className="text-gray-700 dark:text-gray-300 hover:text-[#788be4] dark:hover:text-[#788be4] transition-colors"
               >
                 <Globe className="h-5 w-5" />
               </Button>
@@ -82,10 +82,10 @@ const AppHeader = () => {
             </Button>
           ) : (
             <Button
-              variant="ghost"
+              variant="default"
               size="sm"
               onClick={() => navigate('/login')}
-              className="flex items-center gap-2"
+              className="flex items-center gap-2 bg-[#788be4] hover:bg-[#6678d0]"
             >
               <LogIn className="h-4 w-4" />
               <span>Login</span>

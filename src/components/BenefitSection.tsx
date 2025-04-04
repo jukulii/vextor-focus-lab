@@ -20,25 +20,25 @@ const BenefitSection = () => {
       icon: ArrowUpRight,
       title: "Cluster and visualize site structure by semantic topics",
       iconColor: 'text-graph-green',
-      bgColor: 'bg-green-100'
+      bgColor: 'bg-[#788be4]/10'
     }, 
     {
       icon: UserCheck,
       title: "Identify irrelevant or weak content",
       iconColor: 'text-graph-blue',
-      bgColor: 'bg-blue-100'
+      bgColor: 'bg-[#788be4]/10'
     }, 
     {
       icon: Search,
       title: "Eliminate content that drags your rankings down",
       iconColor: 'text-graph-orange',
-      bgColor: 'bg-orange-100'
+      bgColor: 'bg-[#788be4]/10'
     }, 
     {
       icon: Trophy,
       title: "Measure Site Focus & Site Radius",
       iconColor: 'text-graph-purple',
-      bgColor: 'bg-purple-100'
+      bgColor: 'bg-[#788be4]/10'
     }
   ];
 
@@ -46,7 +46,7 @@ const BenefitSection = () => {
     <section className="py-16 border-t border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <span className="bg-blue-100 text-blue-700 px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4">Benefits</span>
+          <span className="bg-[#788be4]/20 text-[#788be4] px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4">Benefits</span>
           <h2 className="text-3xl md:text-4xl mb-4 font-bold text-gray-900">
             Improve your SEO performance
           </h2>
@@ -63,7 +63,7 @@ const BenefitSection = () => {
                 className="bg-white rounded-xl p-6 shadow-md border border-gray-200 hover:shadow-lg transition-all duration-300 hover:translate-y-[-5px] flex flex-col items-center text-center"
               >
                 <div className={`w-12 h-12 ${benefit.bgColor} rounded-full flex items-center justify-center mb-4`}>
-                  <benefit.icon className={`h-5 w-5 ${benefit.iconColor}`} />
+                  <benefit.icon className={`h-5 w-5 text-[#788be4]`} />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900">
                   {benefit.title}
