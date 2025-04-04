@@ -17,14 +17,14 @@ const HighchartsDemo: React.FC<HighchartsDemoProps> = ({ className }) => {
         title: {
             text: 'Analiza domenowa',
             style: {
-                color: '#FFFFFF'
+                color: '#333333'
             }
         },
         xAxis: {
             categories: ['Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec'],
             labels: {
                 style: {
-                    color: '#CCCCCC'
+                    color: '#555555'
                 }
             }
         },
@@ -32,25 +32,25 @@ const HighchartsDemo: React.FC<HighchartsDemoProps> = ({ className }) => {
             title: {
                 text: 'Wartość',
                 style: {
-                    color: '#CCCCCC'
+                    color: '#555555'
                 }
             },
             labels: {
                 style: {
-                    color: '#CCCCCC'
+                    color: '#555555'
                 }
             },
-            gridLineColor: 'rgba(255, 255, 255, 0.1)'
+            gridLineColor: 'rgba(0, 0, 0, 0.1)'
         },
         series: [
             {
-                type: 'spline', // Added the type property
+                type: 'spline',
                 name: 'Domena A',
                 data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0],
                 color: '#8884d8'
             },
             {
-                type: 'spline', // Added the type property
+                type: 'spline',
                 name: 'Domena B',
                 data: [19.2, 51.7, 86.8, 109.5, 124.3, 156.2],
                 color: '#82ca9d'
@@ -58,10 +58,10 @@ const HighchartsDemo: React.FC<HighchartsDemoProps> = ({ className }) => {
         ],
         legend: {
             itemStyle: {
-                color: '#CCCCCC'
+                color: '#333333'
             },
             itemHoverStyle: {
-                color: '#FFFFFF'
+                color: '#000000'
             }
         },
         credits: {
