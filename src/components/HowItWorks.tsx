@@ -11,7 +11,7 @@ const HowItWorks = () => {
     description: language === 'pl' ? "a Vextor AI rozpocznie analizę" : "Enter sitemap or domain to begin the analysis process"
   }, {
     number: "2",
-    title: "We crawl your pages",
+    title: language === 'pl' ? "Vextor przeanalizuje Twoje strony" : "We crawl your pages",
     description: "Using the same techniques used by Google and LLMs and calculate key metrics"
   }, {
     number: "3",
