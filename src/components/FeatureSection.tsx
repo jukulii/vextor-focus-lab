@@ -16,27 +16,15 @@ const FeatureSection = () => {
             <Star className="w-4 h-4 inline-block mr-2" />
             {language === 'pl' ? "Funkcje" : "Features"}
           </span>
-          
-          {language === 'pl' ? (
-            <div className="inline-block">
-              <h2 className="text-3xl md:text-4xl font-bold mb-2 text-gray-900">
-                Skup się na temacie. Bądź wyżej w wynikach
-              </h2>
-              <div className="h-1 w-full bg-[#1eaedb] mt-2 mb-6"></div>
-              <p className="text-xl max-w-3xl mx-auto text-gray-700">
-                Vextor AI pomaga właścicielom stron i specjalistom SEO zrozumieć koncentrację tematyczną witryny — wykorzystując te same techniki, które stosuje Google.
-              </p>
-            </div>
-          ) : (
-            <>
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
-                {t('new_era_title')}
-              </h2>
-              <p className="text-xl max-w-3xl mx-auto text-gray-700">
-                {t('new_era_subtitle')}
-              </p>
-            </>
-          )}
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
+            {language === 'pl' ? "Skup się na temacie. Bądź wyżej w wynikach" : "Stay focused. Rank higher"}
+          </h2>
+          <p className="text-xl max-w-3xl mx-auto text-gray-700">
+            {language === 'pl' 
+              ? "Vextor AI pomaga właścicielom stron i specjalistom SEO zrozumieć koncentrację tematyczną witryny — wykorzystując te same techniki, które stosuje Google."
+              : "Vextor AI helps website owners, SEOs, and content strategists understand how semantically focused their websites are — using the same techniques Google likely uses."
+            }
+          </p>
         </div>
         
         <div className="grid md:grid-cols-2 gap-8 mt-8">

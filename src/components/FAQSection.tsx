@@ -163,27 +163,12 @@ const FAQSection = () => {
           <span className="bg-blue-100 text-blue-700 px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4">
             {language === 'pl' ? "Często zadawane pytania" : "FAQ"}
           </span>
-          
-          {language === 'pl' ? (
-            <div className="inline-block">
-              <h2 className="text-3xl md:text-4xl font-bold mb-2 text-gray-900">
-                Najczęściej zadawane pytania
-              </h2>
-              <div className="h-1 w-full bg-[#1eaedb] mt-2 mb-6"></div>
-              <p className="text-xl max-w-2xl mx-auto text-gray-700">
-                Dowiedz się więcej o tym, jak Vextor może pomóc Twojej strategii SEO
-              </p>
-            </div>
-          ) : (
-            <>
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
-                Frequently Asked Questions
-              </h2>
-              <p className="text-xl max-w-2xl mx-auto text-gray-700">
-                Learn more about how Vextor can help your SEO strategy
-              </p>
-            </>
-          )}
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
+            {language === 'pl' ? "Najczęściej zadawane pytania" : "Frequently Asked Questions"}
+          </h2>
+          <p className="text-xl max-w-2xl mx-auto text-gray-700">
+            {language === 'pl' ? "Dowiedz się więcej o tym, jak Vextor może pomóc Twojej strategii SEO" : "Learn more about how Vextor can help your SEO strategy"}
+          </p>
         </div>
         
         <Accordion type="single" collapsible className="w-full">

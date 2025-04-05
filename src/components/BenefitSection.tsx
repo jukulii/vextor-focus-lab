@@ -50,27 +50,12 @@ const BenefitSection = () => {
             <Sparkles className="w-4 h-4 inline-block mr-2" />
             {language === 'pl' ? "Korzyści" : "Benefits"}
           </span>
-          
-          {language === 'pl' ? (
-            <div className="inline-block">
-              <h2 className="text-3xl md:text-4xl mb-2 font-bold text-gray-900">
-                Podejmuj decyzje oparte na danych, nie intuicji
-              </h2>
-              <div className="h-1 w-full bg-[#1eaedb] mt-2 mb-6"></div>
-              <p className="text-xl max-w-3xl mx-auto text-gray-700">
-                Optymalizuj treści w oparciu o konkretne wskaźniki i osiągaj lepsze wyniki
-              </p>
-            </div>
-          ) : (
-            <>
-              <h2 className="text-3xl md:text-4xl mb-4 font-bold text-gray-900">
-                Improve your SEO performance
-              </h2>
-              <p className="text-xl max-w-3xl mx-auto text-gray-700">
-                Optimize your content and achieve higher rankings
-              </p>
-            </>
-          )}
+          <h2 className="text-3xl md:text-4xl mb-4 font-bold text-gray-900">
+            {language === 'pl' ? 'Podejmuj decyzje oparte na danych, nie intuicji' : 'Improve your SEO performance'}
+          </h2>
+          <p className="text-xl max-w-3xl mx-auto text-gray-700">
+            {language === 'pl' ? 'Optymalizuj treści w oparciu o konkretne wskaźniki i osiągaj lepsze wyniki' : 'Optimize your content and achieve higher rankings'}
+          </p>
         </div>
         
         <div className="grid grid-cols-1 gap-8">
