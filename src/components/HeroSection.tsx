@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Link } from 'react-router-dom';
-import { Rocket, Sparkles } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 
 const HeroSection = () => {
   const { t, language } = useLanguage();
@@ -25,15 +25,6 @@ const HeroSection = () => {
               {language === 'pl' ? 'Zoptymalizuj treść. Zbuduj autorytet. Wygraj wyścig o widoczność.' : t('hero_subtitle')}
             </p>
             <div className="space-x-4 fade-in stagger-2">
-              <Link to="/app">
-                <Button 
-                  size="lg" 
-                  className="bg-[#8da2e5] hover:bg-[#7a8fd2] transition-all duration-300 button-glow px-8 py-6 text-lg shadow-lg hover:shadow-xl"
-                >
-                  Analyze
-                  <Rocket className="ml-2 h-5 w-5" />
-                </Button>
-              </Link>
               <Link to="/login">
                 <Button
                   variant="outline"
