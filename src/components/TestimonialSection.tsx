@@ -6,7 +6,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import type { UseEmblaCarouselType } from "embla-carousel-react";
 
 const TestimonialSection = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [activeIndex, setActiveIndex] = useState(0);
   const [emblaApi, setEmblaApi] = useState<UseEmblaCarouselType[1] | null>(null);
   
@@ -51,7 +51,9 @@ const TestimonialSection = () => {
         <div className="text-center mb-16">
           <span className="bg-purple-100 text-purple-700 px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4">Testimonials</span>
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            What SEOs are saying
+            {language === 'pl' 
+              ? "Zobacz, jak SiteFocus zmienił podejście naszych klientów do SEO" 
+              : "What SEOs are saying"}
           </h2>
         </div>
 
