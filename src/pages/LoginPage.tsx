@@ -61,24 +61,24 @@ const LoginPage = () => {
     };
 
     return (
-        <div className="relative min-h-screen bg-white">
+        <div className="relative min-h-screen bg-white dark:bg-gray-900">
             <div className="relative z-10 flex flex-col min-h-screen w-full">
                 <Navbar isDark={false} />
                 <main className="flex-grow flex items-center justify-center py-32 px-4">
                     <div className="w-full max-w-md">
-                        <Card className="shadow-lg border border-[#ff6b6b]/30 bg-white/70 backdrop-blur-sm">
+                        <Card className="shadow-lg border border-[#ff6b6b]/30 bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm">
                             <CardHeader className="space-y-2">
-                                <CardTitle className="text-2xl font-bold text-center text-gray-900">
+                                <CardTitle className="text-2xl font-bold text-center text-gray-900 dark:text-white">
                                     {t('login') || "Login"}
                                 </CardTitle>
-                                <CardDescription className="text-center text-gray-600">
+                                <CardDescription className="text-center text-gray-600 dark:text-gray-300">
                                     {t('login_subtitle') || "Enter your credentials to access your account"}
                                 </CardDescription>
                             </CardHeader>
                             <CardContent>
                                 <form onSubmit={handleSubmit} className="space-y-6">
                                     <div className="space-y-2">
-                                        <Label htmlFor="email" className="text-sm font-medium text-gray-700">
+                                        <Label htmlFor="email" className="text-sm font-medium text-gray-700 dark:text-gray-200">
                                             {t('email') || "Email"}
                                         </Label>
                                         <Input
@@ -88,12 +88,12 @@ const LoginPage = () => {
                                             value={email}
                                             onChange={(e) => setEmail(e.target.value)}
                                             required
-                                            className="w-full h-12 bg-transparent border-gray-300"
+                                            className="w-full h-12 bg-transparent border-gray-300 dark:border-gray-600 dark:text-white"
                                         />
                                     </div>
 
                                     <div className="space-y-2">
-                                        <Label htmlFor="password" className="text-sm font-medium text-gray-700">
+                                        <Label htmlFor="password" className="text-sm font-medium text-gray-700 dark:text-gray-200">
                                             {t('password') || "Password"}
                                         </Label>
                                         <div className="relative">
@@ -104,12 +104,12 @@ const LoginPage = () => {
                                                 value={password}
                                                 onChange={(e) => setPassword(e.target.value)}
                                                 required
-                                                className="w-full pr-10 h-12 bg-transparent border-gray-300"
+                                                className="w-full pr-10 h-12 bg-transparent border-gray-300 dark:border-gray-600 dark:text-white"
                                             />
                                             <button
                                                 type="button"
                                                 onClick={() => setShowPassword(!showPassword)}
-                                                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                                                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-300"
                                             >
                                                 {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                                             </button>
@@ -139,13 +139,13 @@ const LoginPage = () => {
                                 </form>
                             </CardContent>
                             <CardFooter className="flex flex-col space-y-4 pb-6">
-                                <div className="text-sm text-center text-gray-600 w-full">
+                                <div className="text-sm text-center text-gray-600 dark:text-gray-300 w-full">
                                     {t('dont_have_account') || "Don't have an account?"}{' '}
                                     <Link to="/register" className="text-[#ff6b6b] hover:underline font-medium">
                                         {t('register') || "Register"}
                                     </Link>
                                 </div>
-                                <div className="text-xs text-center text-gray-500 w-full">
+                                <div className="text-xs text-center text-gray-500 dark:text-gray-400 w-full">
                                     By logging in, you agree to our{' '}
                                     <a href="#" className="text-[#ff6b6b] hover:underline">
                                         Terms of Service

@@ -25,16 +25,16 @@ const HowItWorks = () => {
     description: language === 'en' ? "And share it with your team or clients" : "Zoptymalizuj treści w oparciu o rekomendacje od Vextor AI"
   }];
   
-  return <section id="how-it-works" className="py-16 border-t border-gray-200">
+  return <section id="how-it-works" className="py-16 border-t border-gray-200 dark:border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <span className="bg-[#ff6b6b]/20 text-[#ff6b6b] px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4 border border-[#ff6b6b]/30">
             {language === 'pl' ? "Jak to działa" : "How It Works"}
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
             {language === 'pl' ? 'Jak działa Vextor AI?' : t('how_it_works_title')}
           </h2>
-          <p className="text-lg mt-4 max-w-2xl mx-auto text-gray-700">
+          <p className="text-lg mt-4 max-w-2xl mx-auto text-gray-700 dark:text-gray-300">
             {language === 'en' ? 'Follow these simple steps to optimize your content' : 'Wykonaj te proste kroki, aby zoptymalizować swoje treści.'}
           </p>
           <div className="w-16 h-1 bg-[#8da2e5] mx-auto mt-4 rounded-full"></div>
@@ -50,10 +50,10 @@ const HowItWorks = () => {
               </div>
               
               <div className="flex flex-col items-center">
-                <p className="text-gray-800 text-sm md:text-base font-medium text-center leading-tight mb-2 h-10 flex items-center">
+                <p className="text-gray-800 dark:text-gray-200 text-sm md:text-base font-medium text-center leading-tight mb-2 h-10 flex items-center">
                   {step.title}
                 </p>
-                <p className="text-gray-600 text-xs md:text-sm text-center w-full mt-1 h-12 flex items-center justify-center">
+                <p className="text-gray-600 dark:text-gray-400 text-xs md:text-sm text-center w-full mt-1 h-12 flex items-center justify-center">
                   {step.description}
                 </p>
               </div>

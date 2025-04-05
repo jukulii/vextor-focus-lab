@@ -56,15 +56,15 @@ const ProcessingPage = () => {
         <Navbar isDark={true} />
         <main className="flex-grow p-6">
           <div className="w-full max-w-4xl mx-auto mt-8">
-            <h1 className="text-2xl font-bold text-center mb-8 text-white">
+            <h1 className="text-2xl font-bold text-center mb-8 text-white dark:text-white">
               {t('check_domain_focus')}
             </h1>
             
             <Tabs value="generate" className="w-full">
               <TabsList className="grid w-full grid-cols-3 mb-8">
-                <TabsTrigger value="url" disabled>{t('site_url')}</TabsTrigger>
-                <TabsTrigger value="filters" disabled>{t('filters')}</TabsTrigger>
-                <TabsTrigger value="generate">{t('processing')}</TabsTrigger>
+                <TabsTrigger value="url" disabled className="text-gray-600 dark:text-gray-300">{t('site_url')}</TabsTrigger>
+                <TabsTrigger value="filters" disabled className="text-gray-600 dark:text-gray-300">{t('filters')}</TabsTrigger>
+                <TabsTrigger value="generate" className="text-gray-800 dark:text-white">{t('processing')}</TabsTrigger>
               </TabsList>
               
               <Card className="bg-black/40 backdrop-blur-lg border-gray-800 text-white dark:bg-gray-800/60 dark:border-gray-700 shadow-lg">

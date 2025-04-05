@@ -1,3 +1,4 @@
+
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from "@/components/ui/button";
 import { CheckIcon, Sparkles } from 'lucide-react';
@@ -44,7 +45,7 @@ const PricingSection = () => {
   };
 
   return (
-    <section id="pricing" className="py-20 border-t border-gray-200 relative overflow-hidden">
+    <section id="pricing" className="py-20 border-t border-gray-200 dark:border-gray-800 relative overflow-hidden">
       {/* Background elements for visual interest */}
       <div className="absolute -top-24 -right-24 w-96 h-96 bg-[#8da2e5]/10 rounded-full blur-3xl"></div>
       <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-[#8da2e5]/10 rounded-full blur-3xl"></div>
@@ -57,10 +58,10 @@ const PricingSection = () => {
               {language === 'pl' ? "Cennik" : "Pricing"}
             </span>
           </div>
-          <h2 className="text-3xl md:text-4xl mb-4 font-bold text-gray-900">
+          <h2 className="text-3xl md:text-4xl mb-4 font-bold text-gray-900 dark:text-white">
             {language === 'pl' ? "Prosty, transparentny cennik" : "Simple, transparent pricing"}
           </h2>
-          <p className="text-xl max-w-2xl mx-auto text-gray-700">
+          <p className="text-xl max-w-2xl mx-auto text-gray-700 dark:text-gray-300">
             {language === 'pl' ? "Elastyczny cennik oparty na rzeczywistym użyciu" : "Flexible, Usage-Based Pricing"}
           </p>
           <div className="w-16 h-1 bg-[#8da2e5] mx-auto mt-4 rounded-full"></div>
