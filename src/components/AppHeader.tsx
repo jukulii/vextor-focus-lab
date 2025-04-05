@@ -46,8 +46,8 @@ const AppHeader = () => {
   };
 
   const bgClass = scrolled 
-    ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800 shadow-sm'
-    : 'bg-transparent';
+    ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm py-3 border-b border-gray-200 dark:border-gray-800 shadow-sm'
+    : 'bg-transparent py-5';
 
   const navItems = [
     { href: "/app", label: t('home'), onClick: null },
@@ -60,7 +60,7 @@ const AppHeader = () => {
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${bgClass}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center">
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2">
               <img
@@ -126,10 +126,9 @@ const AppHeader = () => {
 
             {isAuthenticated ? (
               <Button
-                variant="default"
-                size="sm"
-                onClick={handleLogout}
+                variant="default" 
                 className="bg-[#788be4] hover:bg-[#6678d0] transition-colors button-glow shadow-md hover:shadow-lg flex items-center gap-2"
+                onClick={handleLogout}
               >
                 <LogOut className="h-4 w-4" />
                 <span>{t('logout') || 'Logout'}</span>
@@ -137,9 +136,8 @@ const AppHeader = () => {
             ) : (
               <Button
                 variant="default"
-                size="sm"
-                onClick={() => navigate('/login')}
                 className="bg-[#788be4] hover:bg-[#6678d0] transition-colors button-glow shadow-md hover:shadow-lg flex items-center gap-2"
+                onClick={() => navigate('/login')}
               >
                 <LogIn className="h-4 w-4" />
                 <span>{t('login') || 'Login'}</span>
@@ -219,9 +217,8 @@ const AppHeader = () => {
                     {isAuthenticated ? (
                       <Button
                         variant="default"
-                        size="sm"
-                        onClick={handleLogout}
                         className="flex items-center justify-center gap-2 w-full bg-[#788be4] hover:bg-[#6678d0] transition-colors button-glow shadow-md hover:shadow-lg mt-4"
+                        onClick={handleLogout}
                       >
                         <LogOut className="h-4 w-4" />
                         <span>{t('logout') || 'Logout'}</span>
@@ -229,9 +226,8 @@ const AppHeader = () => {
                     ) : (
                       <Button
                         variant="default"
-                        size="sm"
-                        onClick={() => navigate('/login')}
                         className="flex items-center justify-center gap-2 w-full bg-[#788be4] hover:bg-[#6678d0] transition-colors button-glow shadow-md hover:shadow-lg mt-4"
+                        onClick={() => navigate('/login')}
                       >
                         <LogIn className="h-4 w-4" />
                         <span>{t('login') || 'Login'}</span>
