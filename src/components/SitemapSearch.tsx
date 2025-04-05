@@ -65,7 +65,7 @@ const SitemapSearch = () => {
 
       <Tabs defaultValue="url" className="w-full">
         <TabsList className="grid w-full grid-cols-3 mb-8 bg-white/70 backdrop-blur-sm border border-[#ff6b6b]/20 rounded-md shadow-sm">
-          <TabsTrigger value="url" className="text-gray-700 bg-transparent">{t('site_url')}</TabsTrigger>
+          <TabsTrigger value="url" className="text-gray-700 bg-white">{t('site_url')}</TabsTrigger>
           <TabsTrigger value="filters" disabled className="text-gray-500">
             {t('filters')}
           </TabsTrigger>
