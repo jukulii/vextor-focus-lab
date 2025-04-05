@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -8,13 +7,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent } from '@/components/ui/card';
 import { SearchIcon, Loader2 } from 'lucide-react';
 import axios from 'axios';
-
 const SitemapSearch = () => {
-  const { t } = useLanguage();
+  const {
+    t
+  } = useLanguage();
   const navigate = useNavigate();
   const [sitemapUrl, setSitemapUrl] = useState('');
   const [isSearching, setIsSearching] = useState(false);
-
   const handleSearch = () => {
     setIsSearching(true);
 
@@ -24,48 +23,44 @@ const SitemapSearch = () => {
       navigate('/sitemaps');
     }, 1500);
   };
-
   const handleAutomaticSearch = async () => {
     setIsSearching(true);
-
     try {
       const token = localStorage.getItem('vextor-token');
-
       if (!token) {
         throw new Error('No token found');
       }
-
       const response = await axios.get(`${import.meta.env.VITE_API_URL}/sitemaps`, {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`
         },
         params: {
-          domain: sitemapUrl,
-        },
+          domain: sitemapUrl
+        }
       });
-
       console.log('Data from API:', response.data);
-
       setTimeout(() => {
         setIsSearching(false);
-        navigate('/sitemaps', { state: { sitemapData: response.data } });
+        navigate('/sitemaps', {
+          state: {
+            sitemapData: response.data
+          }
+        });
       }, 1500);
     } catch (error) {
       console.error('Error during search:', error);
       setIsSearching(false);
     }
   };
-
-  return (
-    <div className="w-full max-w-3xl mx-auto">
+  return <div className="w-full max-w-3xl mx-auto">
       <h1 className="text-2xl font-bold text-center mb-8 text-gray-900">
         {t('check_domain_focus')}
       </h1>
 
       <Tabs defaultValue="url" className="w-full">
         <TabsList className="grid w-full grid-cols-3 mb-8 bg-white/70 backdrop-blur-sm border border-[#ff6b6b]/20 rounded-md shadow-sm">
-          <TabsTrigger value="url" className="text-gray-700 bg-white">{t('site_url')}</TabsTrigger>
+          <TabsTrigger value="url" className="bg-white text-slate-50">{t('site_url')}</TabsTrigger>
           <TabsTrigger value="filters" disabled className="text-gray-500">
             {t('filters')}
           </TabsTrigger>
@@ -79,32 +74,18 @@ const SitemapSearch = () => {
             <CardContent className="pt-6">
               <div className="space-y-4">
                 <div className="space-y-2">
-                  <Input
-                    placeholder={t('enter_sitemap_url')}
-                    value={sitemapUrl}
-                    onChange={(e) => setSitemapUrl(e.target.value)}
-                    className="w-full h-12 bg-transparent border-gray-300"
-                  />
+                  <Input placeholder={t('enter_sitemap_url')} value={sitemapUrl} onChange={e => setSitemapUrl(e.target.value)} className="w-full h-12 bg-transparent border-gray-300" />
                 </div>
 
                 <div className="flex flex-col space-y-2">
-                  <Button
-                    variant="secondary"
-                    onClick={handleAutomaticSearch}
-                    disabled={isSearching}
-                    className="w-full bg-white/70 backdrop-blur-sm border border-[#ff6b6b]/20 text-pink-800 hover:bg-pink-100 shadow-sm h-12 text-base font-medium"
-                  >
-                    {isSearching ? (
-                      <>
+                  <Button variant="secondary" onClick={handleAutomaticSearch} disabled={isSearching} className="w-full bg-white/70 backdrop-blur-sm border border-[#ff6b6b]/20 text-pink-800 hover:bg-pink-100 shadow-sm h-12 text-base font-medium">
+                    {isSearching ? <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                         {t('checking_sitemap')}
-                      </>
-                    ) : (
-                      <>
+                      </> : <>
                         <SearchIcon className="mr-2 h-4 w-4" />
                         {t('check_for_me')}
-                      </>
-                    )}
+                      </>}
                   </Button>
                 </div>
               </div>
@@ -151,8 +132,6 @@ const SitemapSearch = () => {
           </Card>
         </TabsContent>
       </Tabs>
-    </div>
-  );
+    </div>;
 };
-
 export default SitemapSearch;
