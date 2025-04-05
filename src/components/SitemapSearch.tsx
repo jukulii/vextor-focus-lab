@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -7,13 +8,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent } from '@/components/ui/card';
 import { SearchIcon, Loader2 } from 'lucide-react';
 import axios from 'axios';
+
 const SitemapSearch = () => {
-  const {
-    t
-  } = useLanguage();
+  const { t } = useLanguage();
   const navigate = useNavigate();
   const [sitemapUrl, setSitemapUrl] = useState('');
   const [isSearching, setIsSearching] = useState(false);
+
   const handleSearch = () => {
     setIsSearching(true);
 
@@ -23,6 +24,7 @@ const SitemapSearch = () => {
       navigate('/sitemaps');
     }, 1500);
   };
+
   const handleAutomaticSearch = async () => {
     setIsSearching(true);
     try {
@@ -53,39 +55,58 @@ const SitemapSearch = () => {
       setIsSearching(false);
     }
   };
-  return <div className="w-full max-w-3xl mx-auto">
+
+  return (
+    <div className="w-full max-w-lg mx-auto p-8">
       <h1 className="text-2xl font-bold text-center mb-8 text-gray-900">
         {t('check_domain_focus')}
       </h1>
 
       <Tabs defaultValue="url" className="w-full">
-        <TabsList className="grid w-full grid-cols-3 mb-8 bg-white/70 backdrop-blur-sm border border-[#ff6b6b]/20 rounded-md shadow-sm">
-          <TabsTrigger value="url" className="text-slate-50 bg-slate-50">{t('site_url')}</TabsTrigger>
-          <TabsTrigger value="filters" disabled className="text-gray-500">
+        <TabsList className="grid w-full grid-cols-3 mb-8 bg-white border border-gray-100 rounded-md">
+          <TabsTrigger value="url">{t('site_url')}</TabsTrigger>
+          <TabsTrigger value="filters" disabled className="text-gray-400">
             {t('filters')}
           </TabsTrigger>
-          <TabsTrigger value="generate" disabled className="text-gray-500">
+          <TabsTrigger value="generate" disabled className="text-gray-400">
             {t('processing')}
           </TabsTrigger>
         </TabsList>
 
         <TabsContent value="url">
-          <Card className="bg-white/70 backdrop-blur-sm border border-[#ff6b6b]/20 shadow-sm">
+          <Card className="bg-white border border-gray-100">
             <CardContent className="pt-6">
-              <div className="space-y-4">
-                <div className="space-y-2">
-                  <Input placeholder={t('enter_sitemap_url')} value={sitemapUrl} onChange={e => setSitemapUrl(e.target.value)} className="w-full h-12 bg-transparent border-gray-300" />
+              <div className="space-y-6">
+                <div>
+                  <label htmlFor="sitemap-url" className="block mb-2 text-sm font-medium text-gray-700">
+                    {t('enter_sitemap_url')}
+                  </label>
+                  <Input 
+                    id="sitemap-url"
+                    placeholder="https://example.com" 
+                    value={sitemapUrl} 
+                    onChange={e => setSitemapUrl(e.target.value)} 
+                    className="w-full h-12 bg-white border-gray-200" 
+                  />
                 </div>
 
-                <div className="flex flex-col space-y-2">
-                  <Button variant="secondary" onClick={handleAutomaticSearch} disabled={isSearching} className="w-full bg-white/70 backdrop-blur-sm border border-[#ff6b6b]/20 text-pink-800 hover:bg-pink-100 shadow-sm h-12 text-base font-medium">
-                    {isSearching ? <>
+                <div>
+                  <Button 
+                    onClick={handleAutomaticSearch} 
+                    disabled={isSearching} 
+                    className="w-full bg-[#ff6b6b] hover:bg-[#ff5252] text-white h-12 text-base font-medium"
+                  >
+                    {isSearching ? (
+                      <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                         {t('checking_sitemap')}
-                      </> : <>
+                      </>
+                    ) : (
+                      <>
                         <SearchIcon className="mr-2 h-4 w-4" />
                         {t('check_for_me')}
-                      </>}
+                      </>
+                    )}
                   </Button>
                 </div>
               </div>
@@ -94,7 +115,7 @@ const SitemapSearch = () => {
         </TabsContent>
 
         <TabsContent value="filters">
-          <Card className="bg-white/70 backdrop-blur-sm border border-[#ff6b6b]/20 shadow-sm">
+          <Card className="bg-white border border-gray-100">
             <CardContent>
               <div className="flex flex-col items-center justify-center py-8 text-center">
                 <div className="mb-4">
@@ -115,7 +136,7 @@ const SitemapSearch = () => {
         </TabsContent>
 
         <TabsContent value="generate">
-          <Card className="bg-white/70 backdrop-blur-sm border border-[#ff6b6b]/20 shadow-sm">
+          <Card className="bg-white border border-gray-100">
             <CardContent>
               <div className="flex flex-col items-center justify-center py-8">
                 <div className="w-full bg-gray-200 rounded-full h-4 mb-4">
@@ -132,6 +153,8 @@ const SitemapSearch = () => {
           </Card>
         </TabsContent>
       </Tabs>
-    </div>;
+    </div>
+  );
 };
+
 export default SitemapSearch;

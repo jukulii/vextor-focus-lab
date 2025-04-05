@@ -17,8 +17,8 @@ const AppPage = () => {
       <div className="relative z-10 flex flex-col min-h-screen w-full">
         <AppHeader />
         <main className="flex-grow flex items-center justify-center py-32 px-4">
-          <div className="w-full max-w-6xl mx-auto">
-            <div className="shadow-lg border border-[#ff6b6b]/30 bg-white/70 backdrop-blur-sm rounded-lg p-6">
+          <div className="w-full max-w-lg mx-auto">
+            <div className="bg-white border border-[#ff6b6b]/30 rounded-lg shadow-md overflow-hidden">
               <SitemapSearch />
             </div>
           </div>
