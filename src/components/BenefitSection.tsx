@@ -24,7 +24,7 @@ const BenefitSection = () => {
     }, 
     {
       icon: UserCheck,
-      title: "Identify irrelevant or weak content",
+      title: language === 'pl' ? "Zidentyfikuj nieistotne lub mało wartościowe treści" : "Identify irrelevant or weak content",
       iconColor: 'text-[#ff6b6b]',
       bgColor: 'bg-[#ff6b6b]/10'
     }, 
