@@ -19,7 +19,7 @@ const HeroSection = () => {
               </span>
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 fade-in leading-tight">
-              {language === 'pl' ? 'Twoje treści pod lupą AI. Skup się na tym, co naprawdę buduje pozycję.' : t('hero_title')}
+              Analyze your website topical focus
             </h1>
             <p className="text-xl text-gray-700 mb-8 fade-in stagger-1 max-w-2xl mx-auto text-balance">
               {language === 'pl' ? 'Zoptymalizuj treść. Zbuduj autorytet. Wygraj wyścig o widoczność.' : t('hero_subtitle')}

@@ -23,7 +23,7 @@ const translations: Translations = {
 
   // Hero Section
   "hero_title": {
-    en: "Analyze your website's topical focus",
+    en: "Analyze your website topical focus",
     pl: "Analizuj tematyczne ukierunkowanie swojej strony"
   },
   "hero_subtitle": {
