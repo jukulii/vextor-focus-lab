@@ -66,7 +66,7 @@ const LoginPage = () => {
                 <Navbar isDark={false} />
                 <main className="flex-grow flex items-center justify-center py-32 px-4">
                     <div className="w-full max-w-md">
-                        <Card className="shadow-lg border border-gray-200 bg-white/70 backdrop-blur-sm">
+                        <Card className="shadow-lg border border-[#ff6b6b]/30 bg-white/70 backdrop-blur-sm">
                             <CardHeader className="space-y-2">
                                 <CardTitle className="text-2xl font-bold text-center text-gray-900">
                                     {t('login') || "Login"}
@@ -118,7 +118,7 @@ const LoginPage = () => {
 
                                     <Button
                                         type="submit"
-                                        className="w-full bg-[#788be4] hover:bg-[#6678d0] text-white button-glow shadow-md hover:shadow-lg h-12 text-base font-medium"
+                                        className="w-full bg-[#ff6b6b] hover:bg-[#ff5252] text-white button-glow shadow-md hover:shadow-lg h-12 text-base font-medium"
                                         disabled={isLoading}
                                     >
                                         {isLoading ? (
@@ -141,17 +141,17 @@ const LoginPage = () => {
                             <CardFooter className="flex flex-col space-y-4 pb-6">
                                 <div className="text-sm text-center text-gray-600 w-full">
                                     {t('dont_have_account') || "Don't have an account?"}{' '}
-                                    <Link to="/register" className="text-[#788be4] hover:underline font-medium">
+                                    <Link to="/register" className="text-[#ff6b6b] hover:underline font-medium">
                                         {t('register') || "Register"}
                                     </Link>
                                 </div>
                                 <div className="text-xs text-center text-gray-500 w-full">
                                     By logging in, you agree to our{' '}
-                                    <a href="#" className="text-[#788be4] hover:underline">
+                                    <a href="#" className="text-[#ff6b6b] hover:underline">
                                         Terms of Service
                                     </a>{' '}
                                     and{' '}
-                                    <a href="#" className="text-[#788be4] hover:underline">
+                                    <a href="#" className="text-[#ff6b6b] hover:underline">
                                         Privacy Policy
                                     </a>
                                 </div>
