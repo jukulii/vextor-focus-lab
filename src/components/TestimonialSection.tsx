@@ -16,7 +16,7 @@ const TestimonialSection = () => {
         ? '„Myśleliśmy, że mamy świetnie zoptymalizowaną stronę — aż do momentu, gdy zobaczyliśmy nasz SiteRadius. Dopiero wtedy zrozumieliśmy, gdzie Google może się gubić."'
         : "This is the most actionable SEO audit I've ever seen.",
       author: language === 'pl' ? "Marta" : "Anna",
-      position: "Head of Content at SaaS startup"
+      position: language === 'pl' ? "SEO Manager, e-commerce w branży home & living" : "Head of Content at SaaS startup"
     },
     {
       quote: "Vextor showed us what to delete. We saw rankings improve in a week.",
