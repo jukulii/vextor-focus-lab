@@ -11,6 +11,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Label } from '@/components/ui/label';
+import VantaBackground from '@/components/VantaBackground';
 
 const LoginPage = () => {
     const { t } = useLanguage();
@@ -61,12 +62,13 @@ const LoginPage = () => {
     };
 
     return (
-        <div className="relative min-h-screen bg-white">
+        <div className="relative min-h-screen">
+            <VantaBackground />
             <div className="relative z-10 flex flex-col min-h-screen w-full">
                 <Navbar isDark={false} />
                 <main className="flex-grow flex items-center justify-center py-20 px-4">
                     <div className="w-full max-w-md">
-                        <Card className="shadow-lg border border-gray-200">
+                        <Card className="shadow-lg bg-white/80 backdrop-blur-md border border-gray-200/50">
                             <CardHeader className="space-y-2">
                                 <CardTitle className="text-2xl font-bold text-center text-gray-900">
                                     {t('login') || "Login"}
