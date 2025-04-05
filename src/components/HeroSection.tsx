@@ -25,7 +25,7 @@ const HeroSection = () => {
               {language === 'pl' ? 'Zoptymalizuj treść. Zbuduj autorytet. Wygraj wyścig o widoczność.' : t('hero_subtitle')}
             </p>
             <div className="space-x-4 fade-in stagger-2">
-              <Link to="/login">
+              <Link to="/app">
                 <Button
                   variant="outline"
                   size="lg"
