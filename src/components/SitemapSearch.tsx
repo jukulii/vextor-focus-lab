@@ -6,14 +6,16 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent } from '@/components/ui/card';
-import { SearchIcon, Loader2 } from 'lucide-react';
+import { SearchIcon, Loader2, Globe } from 'lucide-react';
 import axios from 'axios';
+import { useToast } from "@/hooks/use-toast";
 
 const SitemapSearch = () => {
   const { t } = useLanguage();
   const navigate = useNavigate();
-  const [sitemapUrl, setSitemapUrl] = useState('');
+  const [websiteUrl, setWebsiteUrl] = useState('');
   const [isSearching, setIsSearching] = useState(false);
+  const { toast } = useToast();
 
   const handleSearch = () => {
     setIsSearching(true);
@@ -26,19 +28,35 @@ const SitemapSearch = () => {
   };
 
   const handleAutomaticSearch = async () => {
+    if (!websiteUrl) {
+      toast({
+        title: t('Error'),
+        description: t('Please enter a website URL'),
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsSearching(true);
     try {
       const token = localStorage.getItem('vextor-token');
       if (!token) {
         throw new Error('No token found');
       }
+      
+      // Format URL if needed
+      let formattedUrl = websiteUrl;
+      if (!formattedUrl.startsWith('http://') && !formattedUrl.startsWith('https://')) {
+        formattedUrl = 'https://' + formattedUrl;
+      }
+      
       const response = await axios.get(`${import.meta.env.VITE_API_URL}/sitemaps`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`
         },
         params: {
-          domain: sitemapUrl
+          domain: formattedUrl
         }
       });
       console.log('Data from API:', response.data);
@@ -53,6 +71,11 @@ const SitemapSearch = () => {
     } catch (error) {
       console.error('Error during search:', error);
       setIsSearching(false);
+      toast({
+        title: t('Error'),
+        description: t('Could not search the website. Please try again.'),
+        variant: "destructive",
+      });
     }
   };
 
@@ -90,13 +113,23 @@ const SitemapSearch = () => {
           <Card className="bg-white/70 backdrop-blur-sm border border-[#ff6b6b]/20 shadow-sm">
             <CardContent className="pt-6">
               <div className="space-y-4">
-                <div className="space-y-2">
-                  <Input 
-                    placeholder={t('enter_sitemap_url')} 
-                    value={sitemapUrl} 
-                    onChange={e => setSitemapUrl(e.target.value)} 
-                    className="w-full h-12 bg-transparent border-gray-300 font-sans"
-                  />
+                <div className="space-y-2 relative">
+                  <div className="flex items-center relative">
+                    <Globe className="absolute left-3 text-gray-400" size={18} />
+                    <Input 
+                      placeholder={t('enter_website_url')} 
+                      value={websiteUrl} 
+                      onChange={e => setWebsiteUrl(e.target.value)}
+                      className="w-full h-12 bg-transparent border-gray-300 font-sans pl-10"
+                      type="url"
+                      autoComplete="url"
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                          handleAutomaticSearch();
+                        }
+                      }}
+                    />
+                  </div>
                 </div>
 
                 <div className="flex flex-col space-y-2">
