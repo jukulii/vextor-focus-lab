@@ -13,7 +13,7 @@ const TestimonialSection = () => {
   const testimonials = [
     {
       quote: language === 'pl' 
-        ? '„Myśleliśmy, że mamy świetnie zoptymalizowaną stronę — aż do momentu, gdy zobaczyliśmy nasz SiteRadius. Dopiero wtedy zrozumieliśmy, gdzie Google może się gubić."'
+        ? '„Analiza centroidów była dla nas objawieniem. Zidentyfikowaliśmy kilka podstron, które psuły tematykę główną i obniżały autorytet naszej domeny."'
         : "This is the most actionable SEO audit I've ever seen.",
       author: language === 'pl' ? "Marta" : "Anna",
       position: language === 'pl' ? "SEO Manager, e-commerce w branży home & living" : "Head of Content at SaaS startup"
