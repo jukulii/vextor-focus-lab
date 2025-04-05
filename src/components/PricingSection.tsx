@@ -98,7 +98,7 @@ const PricingSection = () => {
             <div className="mt-4 mb-8 text-center">
               <div className="flex items-baseline justify-center space-x-2">
                 <span className="bg-[#ff6b6b]/90 text-white font-medium text-lg px-3 py-1 rounded-md backdrop-blur-sm">
-                  {language === 'pl' ? "Zaczyna się od" : "Starts from"}
+                  {language === 'pl' ? "Od" : "Starts from"}
                 </span>
                 <span className="text-white text-4xl font-bold">
                   ${selectedTier.price}
