@@ -12,7 +12,7 @@ const HowItWorks = () => {
   }, {
     number: "2",
     title: language === 'pl' ? "Vextor przeanalizuje Twoje strony" : "We crawl your pages",
-    description: "Using the same techniques used by Google and LLMs and calculate key metrics"
+    description: language === 'pl' ? "Wykorzystujemy te same techniki, co Google i modele językowe (LLM)" : "Using the same techniques used by Google and LLMs and calculate key metrics"
   }, {
     number: "3",
     title: "Get your Site Focus& Radius Score",
