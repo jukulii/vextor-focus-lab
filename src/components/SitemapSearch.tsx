@@ -92,7 +92,7 @@ const SitemapSearch = () => {
                     variant="secondary"
                     onClick={handleAutomaticSearch}
                     disabled={isSearching}
-                    className="bg-pink-100 text-pink-800 hover:bg-pink-200"
+                    className="bg-white/70 backdrop-blur-sm border border-[#ff6b6b]/20 text-pink-800 hover:bg-pink-100 shadow-sm"
                   >
                     {isSearching ? (
                       <>
