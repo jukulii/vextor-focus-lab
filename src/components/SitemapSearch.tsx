@@ -63,13 +63,24 @@ const SitemapSearch = () => {
 
       <Tabs defaultValue="url" className="w-full">
         <TabsList className="grid w-full grid-cols-3 mb-8 bg-white/70 backdrop-blur-sm border border-[#ff6b6b]/20 rounded-md shadow-sm">
-          <TabsTrigger value="url" className="bg-white/70 backdrop-blur-sm text-gray-900 data-[state=active]:bg-[#ff6b6b]/10 data-[state=active]:text-[#ff6b6b] font-sans">
+          <TabsTrigger 
+            value="url" 
+            className="bg-white/70 backdrop-blur-sm text-gray-900 data-[state=active]:bg-[#ff6b6b]/10 data-[state=active]:text-[#ff6b6b] font-sans"
+          >
             {t('site_url')}
           </TabsTrigger>
-          <TabsTrigger value="filters" disabled className="bg-white/70 backdrop-blur-sm text-gray-500 font-sans">
+          <TabsTrigger 
+            value="filters" 
+            disabled 
+            className="bg-white/70 backdrop-blur-sm text-gray-900 data-[state=active]:bg-[#ff6b6b]/10 data-[state=active]:text-[#ff6b6b] font-sans"
+          >
             {t('filters')}
           </TabsTrigger>
-          <TabsTrigger value="generate" disabled className="bg-white/70 backdrop-blur-sm text-gray-500 font-sans">
+          <TabsTrigger 
+            value="generate" 
+            disabled 
+            className="bg-white/70 backdrop-blur-sm text-gray-900 data-[state=active]:bg-[#ff6b6b]/10 data-[state=active]:text-[#ff6b6b] font-sans"
+          >
             {t('processing')}
           </TabsTrigger>
         </TabsList>
