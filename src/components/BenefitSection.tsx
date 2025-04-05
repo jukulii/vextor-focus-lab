@@ -48,7 +48,7 @@ const BenefitSection = () => {
         <div className="text-center mb-12">
           <span className="bg-[#ff6b6b]/20 text-[#ff6b6b] px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4 border border-[#ff6b6b]/30">
             <Sparkles className="w-4 h-4 inline-block mr-2" />
-            Benefits
+            {language === 'pl' ? "Korzyści" : "Benefits"}
           </span>
           <h2 className="text-3xl md:text-4xl mb-4 font-bold text-gray-900">
             {language === 'pl' ? 'Zrezygnuj z "na zdrowy rozum". Zaufaj danym.' : 'Improve your SEO performance'}

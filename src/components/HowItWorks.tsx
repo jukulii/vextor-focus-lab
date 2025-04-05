@@ -29,7 +29,7 @@ const HowItWorks = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <span className="bg-[#ff6b6b]/20 text-[#ff6b6b] px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4 border border-[#ff6b6b]/30">
-            How It Works
+            {language === 'pl' ? "Jak to działa" : "How It Works"}
           </span>
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             {language === 'pl' ? 'Jak działa Vextor AI?' : t('how_it_works_title')}

@@ -1,4 +1,3 @@
-
 import { useLanguage } from '@/contexts/LanguageContext';
 import { 
   Accordion, 
@@ -8,7 +7,7 @@ import {
 } from '@/components/ui/accordion';
 
 const FAQSection = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   
   const faqs = [
     {
@@ -88,12 +87,14 @@ const FAQSection = () => {
     <section id="faq" className="py-20 border-t border-gray-200">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <span className="bg-blue-100 text-blue-700 px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4">FAQ</span>
+          <span className="bg-blue-100 text-blue-700 px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4">
+            {language === 'pl' ? "FAQ" : "FAQ"}
+          </span>
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
-            Frequently Asked Questions
+            {language === 'pl' ? "Często zadawane pytania" : "Frequently Asked Questions"}
           </h2>
           <p className="text-xl max-w-2xl mx-auto text-gray-700">
-            Learn more about how Vextor can help your SEO strategy
+            {language === 'pl' ? "Dowiedz się więcej o tym, jak Vextor może pomóc w Twojej strategii SEO" : "Learn more about how Vextor can help your SEO strategy"}
           </p>
           <div className="w-16 h-1 bg-[#8da2e5] mx-auto mt-4 rounded-full"></div>
         </div>

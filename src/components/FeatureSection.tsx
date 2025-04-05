@@ -14,10 +14,10 @@ const FeatureSection = () => {
         <div className="text-center mb-12">
           <span className="bg-[#ff6b6b]/20 text-[#ff6b6b] px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4 border border-[#ff6b6b]/30">
             <Star className="w-4 h-4 inline-block mr-2" />
-            Features
+            {language === 'pl' ? "Funkcje" : "Features"}
           </span>
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
-            Stay focused. Rank higher
+            {language === 'pl' ? "Zachowaj skupienie. Rankuj wyżej" : "Stay focused. Rank higher"}
           </h2>
           <p className="text-xl max-w-3xl mx-auto text-gray-700">
             {language === 'pl' 

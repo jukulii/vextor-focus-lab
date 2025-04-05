@@ -55,7 +55,9 @@ const TestimonialSection = () => {
     <section className="py-20 border-t border-gray-200 relative overflow-hidden bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <span className="bg-purple-100 text-purple-700 px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4">Testimonials</span>
+          <span className="bg-purple-100 text-purple-700 px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4">
+            {language === 'pl' ? "Opinie klientów" : "Testimonials"}
+          </span>
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             {language === 'pl' 
               ? "Co mówią nasi klienci?" 
