@@ -13,24 +13,24 @@ const TestimonialSection = () => {
   const testimonials = [
     {
       quote: language === 'pl' 
-        ? '„To najbardziej przydatny audyt SEO, jaki kiedykolwiek widziałam. Analiza centroidów pozwoliła nam zidentyfikować podstrony, które osłabiały tematykę główną."'
+        ? '„Analiza centroidów była dla nas objawieniem. Zidentyfikowaliśmy kilka podstron, które psuły tematykę główną i obniżały autorytet naszej domeny."'
         : "This is the most actionable SEO audit I've ever seen.",
       author: language === 'pl' ? "Marta" : "Anna",
-      position: language === 'pl' ? "Kierownik SEO, e-commerce w branży home & living" : "Head of Content at SaaS startup"
+      position: language === 'pl' ? "SEO Manager, e-commerce w branży home & living" : "Head of Content at SaaS startup"
     },
     {
       quote: language === 'pl'
-        ? '„Vextor AI pokazał nam, które treści usunąć. Zaobserwowaliśmy poprawę pozycji już po tygodniu od wdrożenia zmian."'
+        ? '„Vextor AI to coś więcej niż narzędzie – to sposób myślenia o treściach. Zastąpił nam część analiz ręcznych i dał nowe insighty, których wcześniej nie widzieliśmy."'
         : "Vextor showed us what to delete. We saw rankings improve in a week.",
       author: "Marek",
-      position: language === 'pl' ? "Konsultant SEO" : "SEO Consultant"
+      position: "SEO Consultant"
     },
     {
       quote: language === 'pl'
-        ? '„Wreszcie rozumiem, jak Google widzi strukturę naszej strony. Teraz komunikacja z klientami o tematyce witryny opiera się na danych, a nie przeczuciach."'
+        ? '„Od kiedy używamy Vextor AI, łatwiej rozmawia się z klientami o tematyce strony. Mamy dane, wykresy, wyniki – a nie przeczucia."'
         : "I finally understand how Google sees our site's structure.",
       author: "Tina",
-      position: language === 'pl' ? "Freelancer SEO" : "Freelance SEO"
+      position: "Freelance SEO"
     }
   ];
 
@@ -55,12 +55,10 @@ const TestimonialSection = () => {
     <section className="py-20 border-t border-gray-200 relative overflow-hidden bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <span className="bg-purple-100 text-purple-700 px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4">
-            {language === 'pl' ? "Opinie klientów" : "Testimonials"}
-          </span>
+          <span className="bg-purple-100 text-purple-700 px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4">Testimonials</span>
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             {language === 'pl' 
-              ? "Co mówią specjaliści SEO?" 
+              ? "Co mówią nasi klienci?" 
               : "What SEOs are saying"}
           </h2>
         </div>

@@ -8,81 +8,9 @@ import {
 } from '@/components/ui/accordion';
 
 const FAQSection = () => {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
   
-  const faqs = language === 'pl' ? [
-    {
-      question: "Jak obliczane są wskaźniki Site Focus i Site Radius?",
-      answer: (
-        <div className="space-y-4">
-          <p>Vextor AI wykorzystuje modele embedingowe (modele AI zamieniające treść na wektory) do zrozumienia semantycznego znaczenia każdej strony na Twojej witrynie.</p>
-          
-          <ul className="list-disc pl-5 space-y-2">
-            <li>Każda strona staje się punktem danych w wielowymiarowej przestrzeni.</li>
-            <li>Te punkty są analizowane pod kątem ich semantycznej bliskości lub odległości.</li>
-            <li>Na tej podstawie Vextor oblicza wartości wskaźników.</li>
-          </ul>
-        </div>
-      )
-    },
-    {
-      question: "Co oznaczają wskaźniki Site Focus i Site Radius?",
-      answer: (
-        <div className="space-y-4">
-          <div>
-            <p className="font-medium">🧠 Site Focus (0–100%)</p>
-            <ul className="list-disc pl-5 space-y-1">
-              <li>Mierzy, jak tematycznie skoncentrowana jest Twoja witryna.</li>
-              <li>Wyższy wynik oznacza, że Twoje treści trzymają się tematu i prawdopodobnie lepiej pozycjonują się w wynikach.</li>
-              <li>Niższy wynik sugeruje rozrzucone treści, które mogą dezorientować wyszukiwarki.</li>
-            </ul>
-          </div>
-          
-          <div>
-            <p className="font-medium">🌀 Site Radius</p>
-            <ul className="list-disc pl-5 space-y-1">
-              <li>Mierzy, jak bardzo rozproszone są Twoje treści w przestrzeni semantycznej.</li>
-              <li>Mniejszy promień = ściślejsze pokrycie tematyczne (dobrze).</li>
-              <li>Większy promień = treści są semantycznie odległe od głównego tematu (potencjalnie niezwiązane).</li>
-            </ul>
-          </div>
-          
-          <p>👉 Te dwa wskaźniki są odwrotnie skorelowane: wysoki focus = niski radius.</p>
-        </div>
-      )
-    },
-    {
-      question: "Co mogę zrobić z danymi z Vextor?",
-      answer: (
-        <div className="space-y-4">
-          <div>
-            <p className="font-medium">Identyfikować nieistotne treści</p>
-            <p>Użyj Site Radius + odległości klastrów, aby wykryć strony odległe od głównego tematu.</p>
-          </div>
-          
-          <div>
-            <p className="font-medium">Oczyścić strategię treści</p>
-            <p>Usuń lub przepisz treści, które nie wspierają głównych tematów Twojej strony.</p>
-          </div>
-          
-          <div>
-            <p className="font-medium">Poprawić autorytet tematyczny</p>
-            <p>Skup nowe treści wokół silnych klastrów. Rozwijaj to, co działa.</p>
-          </div>
-          
-          <div>
-            <p className="font-medium">Audytować i raportować</p>
-            <p>Wykorzystaj raporty w audytach dla klientów lub prezentacjach dla interesariuszy, aby pokazać kondycję treści.</p>
-          </div>
-          
-          <div>
-            <p className="font-medium">Porównywać domeny (wkrótce)</p>
-            <p>Porównaj wskaźnik Site Focus swojej strony z konkurencją w Twojej niszy.</p>
-          </div>
-        </div>
-      )
-    }
-  ] : [
+  const faqs = [
     {
       question: "How is Site Focus and Site Radius calculated?",
       answer: (
@@ -160,14 +88,12 @@ const FAQSection = () => {
     <section id="faq" className="py-20 border-t border-gray-200">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <span className="bg-blue-100 text-blue-700 px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4">
-            {language === 'pl' ? "Często zadawane pytania" : "FAQ"}
-          </span>
+          <span className="bg-blue-100 text-blue-700 px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4">FAQ</span>
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
-            {language === 'pl' ? "Najczęściej zadawane pytania" : "Frequently Asked Questions"}
+            Frequently Asked Questions
           </h2>
           <p className="text-xl max-w-2xl mx-auto text-gray-700">
-            {language === 'pl' ? "Dowiedz się więcej o tym, jak Vextor może pomóc Twojej strategii SEO" : "Learn more about how Vextor can help your SEO strategy"}
+            Learn more about how Vextor can help your SEO strategy
           </p>
         </div>
         

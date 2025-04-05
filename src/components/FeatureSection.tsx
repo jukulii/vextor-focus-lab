@@ -14,14 +14,14 @@ const FeatureSection = () => {
         <div className="text-center mb-12">
           <span className="bg-[#ff6b6b]/20 text-[#ff6b6b] px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4 border border-[#ff6b6b]/30">
             <Star className="w-4 h-4 inline-block mr-2" />
-            {language === 'pl' ? "Funkcje" : "Features"}
+            Features
           </span>
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
-            {language === 'pl' ? "Skup się na temacie. Bądź wyżej w wynikach" : "Stay focused. Rank higher"}
+            Stay focused. Rank higher
           </h2>
           <p className="text-xl max-w-3xl mx-auto text-gray-700">
             {language === 'pl' 
-              ? "Vextor AI pomaga właścicielom stron i specjalistom SEO zrozumieć koncentrację tematyczną witryny — wykorzystując te same techniki, które stosuje Google."
+              ? "Vextor AI pomaga właścicielom stron, specjalistom SEO i strategom treści zrozumieć, jak bardzo ich witryny są skupione tematycznie — wykorzystując techniki, z których korzysta także Google."
               : "Vextor AI helps website owners, SEOs, and content strategists understand how semantically focused their websites are — using the same techniques Google likely uses."
             }
           </p>
@@ -34,10 +34,10 @@ const FeatureSection = () => {
               <Rocket className="h-6 w-6 text-white" />
             </div>
             <h3 className="text-xl font-semibold mb-3 text-gray-900">
-              {language === 'pl' ? "Analiza tematyczna całej domeny" : t('benefit_1_title')}
+              {t('benefit_1_title')}
             </h3>
             <p className="font-normal text-gray-700">
-              {language === 'pl' ? "Odkryj, jak bardzo skupiona tematycznie jest Twoja strona i jakie tematy najbardziej wpływają na Twój autorytet." : t('benefit_1_desc')}
+              {t('benefit_1_desc')}
             </p>
             <div className="absolute top-4 right-4">
               <div className="w-8 h-8 rounded-full bg-[#ff6b6b]/10 flex items-center justify-center">
@@ -52,10 +52,10 @@ const FeatureSection = () => {
               <Target className="h-6 w-6 text-white" />
             </div>
             <h3 className="text-xl font-semibold mb-3 text-gray-900">
-              {language === 'pl' ? "Identyfikacja słabych punktów" : t('benefit_2_title')}
+              {t('benefit_2_title')}
             </h3>
             <p className="text-gray-700">
-              {language === 'pl' ? "Znajdź podstrony, które osłabiają tematyczną spójność witryny i negatywnie wpływają na widoczność w wyszukiwarkach." : t('benefit_2_desc')}
+              {t('benefit_2_desc')}
             </p>
             <div className="absolute top-4 right-4">
               <div className="w-8 h-8 rounded-full bg-[#ff6b6b]/10 flex items-center justify-center">
