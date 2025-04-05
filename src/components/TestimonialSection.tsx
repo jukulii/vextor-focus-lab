@@ -12,7 +12,9 @@ const TestimonialSection = () => {
   
   const testimonials = [
     {
-      quote: "This is the most actionable SEO audit I've ever seen.",
+      quote: language === 'pl' 
+        ? "„Myśleliśmy, że mamy świetnie zoptymalizowaną stronę — aż do momentu, gdy zobaczyliśmy nasz SiteRadius. Dopiero wtedy zrozumieliśmy, gdzie Google może się gubić.""
+        : "This is the most actionable SEO audit I've ever seen.",
       author: "Anna",
       position: "Head of Content at SaaS startup"
     },
@@ -73,7 +75,7 @@ const TestimonialSection = () => {
                     <div className="text-center">
                       <QuoteIcon className="mx-auto h-10 w-10 text-[#8da2e5] mb-6 opacity-70" />
                       <p className="text-2xl md:text-3xl font-medium text-gray-900 mb-6 leading-relaxed">
-                        "{testimonial.quote}"
+                        {testimonial.quote}
                       </p>
                       <div className="mt-6">
                         <p className="font-medium text-[#8da2e5]">— {testimonial.author}</p>
