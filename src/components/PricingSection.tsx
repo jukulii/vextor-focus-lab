@@ -35,10 +35,10 @@ const PricingSection = () => {
 
   // Keep only the Pro plan
   const pricingPlan = {
-    name: language === 'pl' ? "Rozwijaj się razem z nami" : "Scale as You Grow",
+    name: language === 'pl' ? "Elastyczny plan wzrostu" : "Scale as You Grow",
     description: t('price_pro_desc'),
     features: language === 'pl' 
-      ? ['Płać tylko za to, co faktycznie używasz', 'Kompletne raporty i wnioski', 'Rekomendacje treści', 'Priorytetowe wsparcie']
+      ? ['Opłata tylko za wykorzystane URL-e', 'Szczegółowe raporty i analizy', 'Rekomendacje treści', 'Priorytetowe wsparcie']
       : ['Charge based on what you actually use', 'Complete reports & insights', 'Content recommendations', 'Priority support'],
     buttonText: t('get_started'),
     to: '/login' // Changed from '/app' to '/login'
@@ -62,7 +62,7 @@ const PricingSection = () => {
             {language === 'pl' ? "Prosty, transparentny cennik" : "Simple, transparent pricing"}
           </h2>
           <p className="text-xl max-w-2xl mx-auto text-gray-700">
-            {language === 'pl' ? "Elastyczne ceny oparte na użyciu" : "Flexible, Usage-Based Pricing"}
+            {language === 'pl' ? "Elastyczny cennik oparty na rzeczywistym użyciu" : "Flexible, Usage-Based Pricing"}
           </p>
           
           {/* Added highlight accent */}
@@ -85,7 +85,7 @@ const PricingSection = () => {
             <div className="flex justify-center mb-4">
               <p className="text-white mt-1 mb-2 text-sm bg-[#ff6b6b]/80 px-4 py-1.5 rounded-full font-medium text-center inline-flex items-center shadow-lg shadow-[#ff6b6b]/20">
                 <Sparkles className="w-4 h-4 mr-2" />
-                {language === 'pl' ? "Darmowa wersja próbna dla 1 000 URL-i" : "Free trial version for 1 000 URL's"}
+                {language === 'pl' ? "Wersja próbna dla 1 000 URL-i za darmo" : "Free trial version for 1 000 URL's"}
               </p>
             </div>
             
@@ -109,7 +109,7 @@ const PricingSection = () => {
               <div className="mt-4">
                 <Select defaultValue={selectedTier.urls} onValueChange={handlePriceChange}>
                   <SelectTrigger className="w-full bg-white/20 border-white/30 focus:ring-white/50 text-white">
-                    <SelectValue placeholder={language === 'pl' ? "Wybierz liczbę URL na miesiąc" : "Select URLs per month"} />
+                    <SelectValue placeholder={language === 'pl' ? "Liczba URL na miesiąc" : "Select URLs per month"} />
                   </SelectTrigger>
                   <SelectContent className="bg-[#4c5ebb] border-white/30">
                     {pricingTiers.map((tier) => (
@@ -118,7 +118,7 @@ const PricingSection = () => {
                         value={tier.urls} 
                         className="text-white hover:bg-[#3a4aa8] focus:bg-[#3a4aa8] cursor-pointer"
                       >
-                        {tier.urls} {language === 'pl' ? `URL (${tier.pricePerUrl} za URL)` : `URLs (${tier.pricePerUrl} per URL)`}
+                        {tier.urls} {language === 'pl' ? `URL (${tier.pricePerUrl}$ za URL)` : `URLs (${tier.pricePerUrl} per URL)`}
                       </SelectItem>
                     ))}
                   </SelectContent>
