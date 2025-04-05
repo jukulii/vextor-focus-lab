@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -87,10 +88,10 @@ const SitemapSearch = () => {
 
                 <div className="flex flex-col space-y-2">
                   <Button 
-                    variant="secondary" 
+                    variant="accent" 
                     onClick={handleAutomaticSearch} 
                     disabled={isSearching} 
-                    className="w-full bg-white/70 backdrop-blur-sm border border-[#ff6b6b]/20 text-pink-800 hover:bg-pink-100 shadow-sm h-12 text-base font-medium font-sans"
+                    className="w-full bg-[#ff6b6b] hover:bg-[#ff5252] text-white shadow-md h-12 text-base font-medium font-sans"
                   >
                     {isSearching ? (
                       <>
