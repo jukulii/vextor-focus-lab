@@ -19,7 +19,9 @@ const TestimonialSection = () => {
       position: language === 'pl' ? "SEO Manager, e-commerce w branży home & living" : "Head of Content at SaaS startup"
     },
     {
-      quote: "Vextor showed us what to delete. We saw rankings improve in a week.",
+      quote: language === 'pl'
+        ? "„Vextor AI pokazał nam, że nasz content o ogrodnictwie osłabia pozycję kategorii wnętrzarskich. Zoptymalizowaliśmy strukturę i widzimy realny wzrost w top 10."" 
+        : "Vextor showed us what to delete. We saw rankings improve in a week.",
       author: "Marek",
       position: "SEO Consultant"
     },
