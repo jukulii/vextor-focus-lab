@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -60,14 +59,12 @@ const SitemapSearch = () => {
         }
       });
       console.log('Data from API:', response.data);
-      setTimeout(() => {
-        setIsSearching(false);
-        navigate('/sitemaps', {
-          state: {
-            sitemapData: response.data
-          }
-        });
-      }, 1500);
+      
+      // Store the response data in localStorage for later use
+      localStorage.setItem('sitemapData', JSON.stringify(response.data));
+      
+      // Redirect to processing page instead of sitemaps
+      navigate('/processing');
     } catch (error) {
       console.error('Error during search:', error);
       setIsSearching(false);
