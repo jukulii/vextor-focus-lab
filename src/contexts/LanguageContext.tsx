@@ -17,6 +17,9 @@ const translations: Translations = {
   "how_it_works": { en: "How it works", pl: "Jak to działa" },
   "pricing": { en: "Pricing", pl: "Cennik" },
   "faq": { en: "FAQ", pl: "FAQ" },
+  
+  // Login related translations
+  "login": { en: "Log In", pl: "Zaloguj się" },
 
   // Hero Section
   "hero_title": {

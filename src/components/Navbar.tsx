@@ -1,9 +1,9 @@
 
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Globe, Menu, X } from 'lucide-react';
+import { Globe, Menu, X, LogIn } from 'lucide-react';
 import { 
   DropdownMenu, 
   DropdownMenuContent, 
@@ -28,6 +28,7 @@ const Navbar = ({ isDark = false }: NavbarProps) => {
     setLanguage
   } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,6 +41,10 @@ const Navbar = ({ isDark = false }: NavbarProps) => {
   const scrollToTop = (event: React.MouseEvent) => {
     event.preventDefault();
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleLoginClick = () => {
+    navigate('/login');
   };
 
   const textColor = isDark ? 'text-white' : 'text-gray-700';
@@ -105,11 +110,14 @@ const Navbar = ({ isDark = false }: NavbarProps) => {
               </DropdownMenuContent>
             </DropdownMenu>
             
-            <Link to="/app">
-              <Button variant="default" className="bg-[#788be4] hover:bg-[#6678d0] transition-colors button-glow shadow-md hover:shadow-lg">
-                {t('get_started')}
-              </Button>
-            </Link>
+            <Button 
+              variant="default" 
+              className="bg-[#788be4] hover:bg-[#6678d0] transition-colors button-glow shadow-md hover:shadow-lg flex items-center gap-2"
+              onClick={handleLoginClick}
+            >
+              <LogIn className="h-4 w-4" />
+              {t('login') || "Log In"}
+            </Button>
             
             {/* Mobile menu with Drawer */}
             <div className="md:hidden">
