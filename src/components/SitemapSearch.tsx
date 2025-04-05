@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent } from '@/components/ui/card';
-import { SearchIcon, Loader2, InfoIcon } from 'lucide-react';
+import { SearchIcon, Loader2, InfoIcon, Sparkles } from 'lucide-react';
 import axios from 'axios';
 
 const SitemapSearch = () => {
@@ -63,7 +63,7 @@ const SitemapSearch = () => {
       </h1>
 
       <Tabs defaultValue="url" className="w-full">
-        <TabsList className="grid w-full grid-cols-3 mb-8 bg-white/80 backdrop-blur-sm border border-[#ff6b6b]/30 rounded-xl shadow-md overflow-hidden">
+        <TabsList className="grid w-full grid-cols-3 mb-8 bg-white border border-[#ff6b6b]/30 rounded-xl shadow-md overflow-hidden">
           <TabsTrigger 
             value="url" 
             className="bg-white text-pink-700 font-medium py-3 data-[state=active]:bg-gradient-to-r data-[state=active]:from-pink-500/10 data-[state=active]:to-violet-500/10 data-[state=active]:text-pink-600 data-[state=active]:shadow-sm transition-all"
@@ -87,7 +87,7 @@ const SitemapSearch = () => {
         </TabsList>
 
         <TabsContent value="url">
-          <Card className="bg-white/90 backdrop-blur-sm border border-[#ff6b6b]/20 shadow-lg rounded-xl overflow-hidden">
+          <Card className="bg-white border border-[#ff6b6b]/20 shadow-lg rounded-xl overflow-hidden">
             <CardContent className="pt-8 pb-6 px-8">
               <div className="space-y-6">
                 <div className="space-y-4">
@@ -106,7 +106,6 @@ const SitemapSearch = () => {
 
                 <div className="space-y-4">
                   <Button 
-                    variant="secondary" 
                     onClick={handleAutomaticSearch} 
                     disabled={isSearching || !sitemapUrl.trim()} 
                     className="w-full bg-gradient-to-r from-pink-500 to-violet-500 hover:from-pink-600 hover:to-violet-600 text-white shadow-md h-14 text-base font-medium rounded-lg transition-all duration-300"
@@ -124,9 +123,12 @@ const SitemapSearch = () => {
                     )}
                   </Button>
                   
-                  <p className="text-center text-sm text-gray-500 mt-4">
-                    {t('privacy_note') || 'Your search data is kept private and secure'}
-                  </p>
+                  <div className="flex items-center justify-center mt-4">
+                    <div className="bg-[#ff6b6b]/20 text-[#ff6b6b] px-4 py-1.5 rounded-full text-sm font-medium inline-flex items-center border border-[#ff6b6b]/30">
+                      <Sparkles className="w-4 h-4 mr-2" />
+                      {t('privacy_note') || 'Your search data is kept private and secure'}
+                    </div>
+                  </div>
                 </div>
               </div>
             </CardContent>
@@ -134,7 +136,7 @@ const SitemapSearch = () => {
         </TabsContent>
 
         <TabsContent value="filters">
-          <Card className="bg-white/90 backdrop-blur-sm border border-[#ff6b6b]/20 shadow-lg rounded-xl overflow-hidden">
+          <Card className="bg-white border border-[#ff6b6b]/20 shadow-lg rounded-xl overflow-hidden">
             <CardContent className="p-8">
               <div className="flex flex-col items-center justify-center py-8 text-center">
                 <div className="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mb-6">
@@ -157,7 +159,7 @@ const SitemapSearch = () => {
         </TabsContent>
 
         <TabsContent value="generate">
-          <Card className="bg-white/90 backdrop-blur-sm border border-[#ff6b6b]/20 shadow-lg rounded-xl overflow-hidden">
+          <Card className="bg-white border border-[#ff6b6b]/20 shadow-lg rounded-xl overflow-hidden">
             <CardContent className="p-8">
               <div className="flex flex-col items-center justify-center py-8">
                 <div className="w-full bg-gray-100 rounded-full h-4 mb-6 overflow-hidden">
