@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -92,10 +93,13 @@ const SitemapSearch = () => {
           </TabsTrigger>
           <TabsTrigger 
             value="filters" 
-            className="w-full rounded-md py-2 text-gray-900 data-[state=active]:bg-[#ff6b6b]/10 data-[state=active]:text-[#ff6b6b] font-sans"
+            className="w-full rounded-md py-2 text-gray-900 data-[state=active]:bg-[#ff6b6b]/10 data-[state=active]:text-[#ff6b6b] font-sans relative"
             onClick={() => navigate('/app')}
           >
             {t('filters')}
+            <span className="absolute -top-2 -right-2 bg-[#ff6b6b] text-white text-xs px-2 py-0.5 rounded-full">
+              {t('coming_soon')}
+            </span>
           </TabsTrigger>
           <TabsTrigger 
             value="generate" 
