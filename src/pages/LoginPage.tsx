@@ -65,7 +65,7 @@ const LoginPage = () => {
                 <Navbar isDark={false} />
                 <main className="flex-grow flex items-center justify-center py-20 px-4">
                     <div className="w-full max-w-md">
-                        <Card className="shadow-lg border border-gray-200 bg-[#a2bae6]">
+                        <Card className="shadow-lg border border-gray-200 bg-white/70 backdrop-blur-sm">
                             <CardHeader className="space-y-2">
                                 <CardTitle className="text-2xl font-bold text-center text-gray-900">
                                     {t('login') || "Login"}
