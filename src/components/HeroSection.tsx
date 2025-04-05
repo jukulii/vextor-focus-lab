@@ -18,12 +18,28 @@ const HeroSection = () => {
                 {language === 'pl' ? "Wzmocnij swoją strategię treści" : "Empower Your Content Strategy"}
               </span>
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 fade-in leading-tight">
-              {language === 'pl' ? 'Twoje treści pod lupą AI. Zbuduj pozycję w wyszukiwarkach.' : t('hero_title')}
-            </h1>
-            <p className="text-xl text-gray-700 mb-8 fade-in stagger-1 max-w-2xl mx-auto text-balance">
-              {language === 'pl' ? 'Zoptymalizuj treść. Zbuduj autorytet. Zwiększ widoczność w sieci.' : t('hero_subtitle')}
-            </p>
+            
+            {language === 'pl' ? (
+              <div className="inline-block">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-2 fade-in leading-tight">
+                  Twoje treści pod lupą AI. Zbuduj pozycję w wyszukiwarkach.
+                </h1>
+                <div className="h-1 w-full bg-[#1eaedb] mt-2 mb-6"></div>
+                <p className="text-xl text-gray-700 mb-8 fade-in stagger-1 max-w-2xl mx-auto text-balance">
+                  Zoptymalizuj treść. Zbuduj autorytet. Zwiększ widoczność w sieci.
+                </p>
+              </div>
+            ) : (
+              <>
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 fade-in leading-tight">
+                  {t('hero_title')}
+                </h1>
+                <p className="text-xl text-gray-700 mb-8 fade-in stagger-1 max-w-2xl mx-auto text-balance">
+                  {t('hero_subtitle')}
+                </p>
+              </>
+            )}
+            
             <div className="space-x-4 fade-in stagger-2">
               <Link to="/app">
                 <Button 
