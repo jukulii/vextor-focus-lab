@@ -36,7 +36,7 @@ const BenefitSection = () => {
     }, 
     {
       icon: Trophy,
-      title: "Measure Site Focus & Site Radius",
+      title: language === 'pl' ? "Zmierz Site Focus & Site Radius" : "Measure Site Focus & Site Radius",
       iconColor: 'text-[#ff6b6b]',
       bgColor: 'bg-[#ff6b6b]/10'
     }
