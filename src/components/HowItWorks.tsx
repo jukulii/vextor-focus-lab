@@ -1,3 +1,4 @@
+
 import { useLanguage } from '@/contexts/LanguageContext';
 const HowItWorks = () => {
   const {
@@ -26,7 +27,7 @@ const HowItWorks = () => {
         <div className="text-center mb-12">
           <div className="inline-block border-b-2 border-vextor-500 pb-2 mb-3">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-              {t('how_it_works_title')}
+              {language === 'pl' ? 'Jak działa Vextor AI?' : t('how_it_works_title')}
             </h2>
           </div>
           <p className="text-lg mt-4 max-w-2xl mx-auto text-gray-700">
