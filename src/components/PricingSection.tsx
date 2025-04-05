@@ -35,9 +35,11 @@ const PricingSection = () => {
 
   // Keep only the Pro plan
   const pricingPlan = {
-    name: "Scale as You Grow",
+    name: language === 'pl' ? "Rozwijaj się razem z nami" : "Scale as You Grow",
     description: t('price_pro_desc'),
-    features: ['Charge based on what you actually use', 'Complete reports & insights', 'Content recommendations', 'Priority support'],
+    features: language === 'pl' 
+      ? ['Płać tylko za to, co faktycznie używasz', 'Kompletne raporty i wnioski', 'Rekomendacje treści', 'Priorytetowe wsparcie']
+      : ['Charge based on what you actually use', 'Complete reports & insights', 'Content recommendations', 'Priority support'],
     buttonText: t('get_started'),
     to: '/login' // Changed from '/app' to '/login'
   };
@@ -53,14 +55,14 @@ const PricingSection = () => {
           <div className="inline-block animate-pulse-subtle">
             <span className="bg-[#ff6b6b]/20 text-[#ff6b6b] px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4 border border-[#ff6b6b]/30">
               <Sparkles className="w-4 h-4 inline-block mr-2" />
-              Pricing
+              {language === 'pl' ? "Cennik" : "Pricing"}
             </span>
           </div>
           <h2 className="text-3xl md:text-4xl mb-4 font-bold text-gray-900">
             {language === 'pl' ? "Prosty, transparentny cennik" : "Simple, transparent pricing"}
           </h2>
           <p className="text-xl max-w-2xl mx-auto text-gray-700">
-            Flexible, Usage-Based Pricing
+            {language === 'pl' ? "Elastyczne ceny oparte na użyciu" : "Flexible, Usage-Based Pricing"}
           </p>
           
           {/* Added highlight accent */}
@@ -83,7 +85,7 @@ const PricingSection = () => {
             <div className="flex justify-center mb-4">
               <p className="text-white mt-1 mb-2 text-sm bg-[#ff6b6b]/80 px-4 py-1.5 rounded-full font-medium text-center inline-flex items-center shadow-lg shadow-[#ff6b6b]/20">
                 <Sparkles className="w-4 h-4 mr-2" />
-                Free trial version for 1 000 URL's
+                {language === 'pl' ? "Darmowa wersja próbna dla 1 000 URL-i" : "Free trial version for 1 000 URL's"}
               </p>
             </div>
             
@@ -96,18 +98,18 @@ const PricingSection = () => {
             <div className="mt-4 mb-8 text-center">
               <div className="flex items-baseline justify-center space-x-2">
                 <span className="bg-[#ff6b6b]/90 text-white font-medium text-lg px-3 py-1 rounded-md backdrop-blur-sm">
-                  Starts from
+                  {language === 'pl' ? "Zaczyna się od" : "Starts from"}
                 </span>
                 <span className="text-white text-4xl font-bold">
                   ${selectedTier.price}
                 </span>
-                <span className="text-white/80 ml-2 text-lg">/month</span>
+                <span className="text-white/80 ml-2 text-lg">{language === 'pl' ? "/miesiąc" : "/month"}</span>
               </div>
               
               <div className="mt-4">
                 <Select defaultValue={selectedTier.urls} onValueChange={handlePriceChange}>
                   <SelectTrigger className="w-full bg-white/20 border-white/30 focus:ring-white/50 text-white">
-                    <SelectValue placeholder="Select URLs per month" />
+                    <SelectValue placeholder={language === 'pl' ? "Wybierz liczbę URL na miesiąc" : "Select URLs per month"} />
                   </SelectTrigger>
                   <SelectContent className="bg-[#4c5ebb] border-white/30">
                     {pricingTiers.map((tier) => (
@@ -116,7 +118,7 @@ const PricingSection = () => {
                         value={tier.urls} 
                         className="text-white hover:bg-[#3a4aa8] focus:bg-[#3a4aa8] cursor-pointer"
                       >
-                        {tier.urls} URLs (${tier.pricePerUrl} per URL)
+                        {tier.urls} {language === 'pl' ? `URL (${tier.pricePerUrl} za URL)` : `URLs (${tier.pricePerUrl} per URL)`}
                       </SelectItem>
                     ))}
                   </SelectContent>
