@@ -37,7 +37,7 @@ const LandingPage = () => {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
+    <div className="relative min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
       <div className="relative z-10 flex flex-col min-h-screen w-full">
         <Navbar isDark={false} />
         <main className="flex-grow">

@@ -43,11 +43,18 @@
 }
 
 /* Dark mode transitions */
-body {
-  transition: background-color 0.3s ease, color 0.3s ease;
+body, footer, main, div, section, header, nav, aside {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 .dark .logo:hover {
   filter: drop-shadow(0 0 2em #8da2e5);
+}
+
+/* Glass effect for dark mode */
+.dark .glass-panel {
+  background-color: rgba(30, 30, 40, 0.7);
+  backdrop-filter: blur(12px);
+  border-color: rgba(80, 80, 95, 0.2);
 }
 
