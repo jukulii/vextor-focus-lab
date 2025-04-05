@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { Rocket, Sparkles } from 'lucide-react';
 
 const HeroSection = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   
   return (
     <section className="pt-48 pb-24 md:pt-64 md:pb-32 relative overflow-hidden">
@@ -22,7 +22,7 @@ const HeroSection = () => {
               {t('hero_title')}
             </h1>
             <p className="text-xl text-gray-700 mb-8 fade-in stagger-1 max-w-2xl mx-auto text-balance">
-              {t('hero_subtitle')}
+              {language === 'pl' ? 'Zoptymalizuj treść. Zbuduj autorytet. Wygraj wyścig o widoczność.' : t('hero_subtitle')}
             </p>
             <div className="space-x-4 fade-in stagger-2">
               <Link to="/app">
