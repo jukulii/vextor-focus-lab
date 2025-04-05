@@ -7,13 +7,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent } from '@/components/ui/card';
 import { SearchIcon, Loader2 } from 'lucide-react';
 import axios from 'axios';
+
 const SitemapSearch = () => {
-  const {
-    t
-  } = useLanguage();
+  const { t } = useLanguage();
   const navigate = useNavigate();
   const [sitemapUrl, setSitemapUrl] = useState('');
   const [isSearching, setIsSearching] = useState(false);
+
   const handleSearch = () => {
     setIsSearching(true);
 
@@ -23,6 +23,7 @@ const SitemapSearch = () => {
       navigate('/sitemaps');
     }, 1500);
   };
+
   const handleAutomaticSearch = async () => {
     setIsSearching(true);
     try {
@@ -53,18 +54,20 @@ const SitemapSearch = () => {
       setIsSearching(false);
     }
   };
-  return <div className="w-full max-w-3xl mx-auto">
-      <h1 className="text-2xl font-bold text-center mb-8 text-gray-900">
+
+  return (
+    <div className="w-full max-w-3xl mx-auto font-sans">
+      <h1 className="text-2xl font-bold text-center mb-8 text-gray-900 font-sans">
         {t('check_domain_focus')}
       </h1>
 
       <Tabs defaultValue="url" className="w-full">
         <TabsList className="grid w-full grid-cols-3 mb-8 bg-white/70 backdrop-blur-sm border border-[#ff6b6b]/20 rounded-md shadow-sm">
-          <TabsTrigger value="url" className="text-slate-50 bg-slate-50">{t('site_url')}</TabsTrigger>
-          <TabsTrigger value="filters" disabled className="text-gray-500">
+          <TabsTrigger value="url" className="text-slate-50 bg-slate-50 font-sans">{t('site_url')}</TabsTrigger>
+          <TabsTrigger value="filters" disabled className="text-gray-500 font-sans">
             {t('filters')}
           </TabsTrigger>
-          <TabsTrigger value="generate" disabled className="text-gray-500 bg-slate-50">
+          <TabsTrigger value="generate" disabled className="text-gray-500 bg-slate-50 font-sans">
             {t('processing')}
           </TabsTrigger>
         </TabsList>
@@ -74,18 +77,32 @@ const SitemapSearch = () => {
             <CardContent className="pt-6">
               <div className="space-y-4">
                 <div className="space-y-2">
-                  <Input placeholder={t('enter_sitemap_url')} value={sitemapUrl} onChange={e => setSitemapUrl(e.target.value)} className="w-full h-12 bg-transparent border-gray-300" />
+                  <Input 
+                    placeholder={t('enter_sitemap_url')} 
+                    value={sitemapUrl} 
+                    onChange={e => setSitemapUrl(e.target.value)} 
+                    className="w-full h-12 bg-transparent border-gray-300 font-sans"
+                  />
                 </div>
 
                 <div className="flex flex-col space-y-2">
-                  <Button variant="secondary" onClick={handleAutomaticSearch} disabled={isSearching} className="w-full bg-white/70 backdrop-blur-sm border border-[#ff6b6b]/20 text-pink-800 hover:bg-pink-100 shadow-sm h-12 text-base font-medium">
-                    {isSearching ? <>
+                  <Button 
+                    variant="secondary" 
+                    onClick={handleAutomaticSearch} 
+                    disabled={isSearching} 
+                    className="w-full bg-white/70 backdrop-blur-sm border border-[#ff6b6b]/20 text-pink-800 hover:bg-pink-100 shadow-sm h-12 text-base font-medium font-sans"
+                  >
+                    {isSearching ? (
+                      <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                         {t('checking_sitemap')}
-                      </> : <>
+                      </>
+                    ) : (
+                      <>
                         <SearchIcon className="mr-2 h-4 w-4" />
                         {t('check_for_me')}
-                      </>}
+                      </>
+                    )}
                   </Button>
                 </div>
               </div>
@@ -105,8 +122,8 @@ const SitemapSearch = () => {
                     <path d="M18 15v.01" />
                   </svg>
                 </div>
-                <h3 className="text-lg font-medium mb-2 text-gray-900">Funkcja filtrowania wkrótce będzie dostępna</h3>
-                <p className="text-gray-600 text-sm max-w-md">
+                <h3 className="text-lg font-medium mb-2 text-gray-900 font-sans">Funkcja filtrowania wkrótce będzie dostępna</h3>
+                <p className="text-gray-600 text-sm max-w-md font-sans">
                   Pracujemy nad dodaniem zaawansowanych opcji filtrowania, aby pomóc Ci lepiej analizować zawartość Twojej strony. Ta funkcjonalność będzie dostępna w następnej aktualizacji.
                 </p>
               </div>
@@ -121,10 +138,10 @@ const SitemapSearch = () => {
                 <div className="w-full bg-gray-200 rounded-full h-4 mb-4">
                   <div className="bg-[#ff6b6b] h-4 rounded-full w-3/5"></div>
                 </div>
-                <p className="text-gray-700 mb-2">
+                <p className="text-gray-700 mb-2 font-sans">
                   {t('step')} 3/5, {t('progress')} 10 {t('next')} 26 sec
                 </p>
-                <p className="text-gray-600 text-sm">
+                <p className="text-gray-600 text-sm font-sans">
                   {t('converting_content')}
                 </p>
               </div>
@@ -132,6 +149,8 @@ const SitemapSearch = () => {
           </Card>
         </TabsContent>
       </Tabs>
-    </div>;
+    </div>
+  );
 };
+
 export default SitemapSearch;
