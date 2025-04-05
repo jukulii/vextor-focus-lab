@@ -8,7 +8,7 @@ const HowItWorks = () => {
   const steps = [{
     number: "1",
     title: language === 'pl' ? "Wprowadź domenę lub sitemapę" : "Enter your sitemap or domain",
-    description: language === 'pl' ? "Wprowadź domenę lub sitemapę" : "Enter sitemap or domain to begin the analysis process"
+    description: language === 'pl' ? "a Vextor AI rozpocznie analizę" : "Enter sitemap or domain to begin the analysis process"
   }, {
     number: "2",
     title: "We crawl your pages",
