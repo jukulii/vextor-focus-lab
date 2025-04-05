@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -16,6 +15,7 @@ import {
   DrawerContent, 
   DrawerTrigger 
 } from "@/components/ui/drawer";
+import DarkModeToggle from '@/components/DarkModeToggle';
 
 interface NavbarProps {
   isDark?: boolean;
@@ -47,15 +47,15 @@ const Navbar = ({ isDark = false }: NavbarProps) => {
     navigate('/login');
   };
 
-  const textColor = isDark ? 'text-white' : 'text-gray-700';
+  const textColor = isDark ? 'text-white' : 'text-gray-700 dark:text-white';
   const hoverColor = isDark ? 'hover:text-[#788be4]' : 'hover:text-[#788be4]';
   const bgClass = scrolled 
     ? isDark 
-      ? 'bg-black/90 backdrop-blur-md shadow-md py-3' 
-      : 'bg-white/90 backdrop-blur-md shadow-sm py-3' 
+      ? 'bg-black/90 backdrop-blur-md shadow-md py-3 dark:bg-gray-900/90' 
+      : 'bg-white/90 backdrop-blur-md shadow-sm py-3 dark:bg-gray-900/90' 
     : 'bg-transparent py-5';
-  const mobileMenuBg = isDark ? 'bg-gray-900' : 'bg-white';
-  const mobileBorderColor = isDark ? 'border-gray-800' : 'border-gray-100';
+  const mobileMenuBg = isDark ? 'bg-gray-900' : 'bg-white dark:bg-gray-900';
+  const mobileBorderColor = isDark ? 'border-gray-800' : 'border-gray-100 dark:border-gray-800';
 
   const navItems = [
     { href: "#", label: t('home'), onClick: scrollToTop },
@@ -94,6 +94,8 @@ const Navbar = ({ isDark = false }: NavbarProps) => {
           </div>
           
           <div className="flex items-center space-x-4">
+            <DarkModeToggle />
+            
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="icon" className={`${textColor} ${hoverColor} transition-colors`}>
@@ -112,7 +114,7 @@ const Navbar = ({ isDark = false }: NavbarProps) => {
             
             <Button 
               variant="default" 
-              className="bg-[#788be4] hover:bg-[#6678d0] transition-colors button-glow shadow-md hover:shadow-lg flex items-center gap-2"
+              className="bg-[#788be4] hover:bg-[#6678d0] dark:bg-[#788be4] dark:hover:bg-[#6678d0] transition-colors button-glow shadow-md hover:shadow-lg flex items-center gap-2"
               onClick={handleLoginClick}
             >
               <LogIn className="h-4 w-4" />
@@ -131,11 +133,14 @@ const Navbar = ({ isDark = false }: NavbarProps) => {
                   <div className="flex flex-col space-y-4">
                     <div className="flex justify-between items-center mb-2">
                       <h2 className={`text-lg font-bold ${textColor}`}>Menu</h2>
-                      <DrawerClose asChild>
-                        <Button variant="ghost" size="icon" className={textColor}>
-                          <X className="h-5 w-5" />
-                        </Button>
-                      </DrawerClose>
+                      <div className="flex items-center gap-2">
+                        <DarkModeToggle />
+                        <DrawerClose asChild>
+                          <Button variant="ghost" size="icon" className={textColor}>
+                            <X className="h-5 w-5" />
+                          </Button>
+                        </DrawerClose>
+                      </div>
                     </div>
                     
                     {navItems.map((item, index) => (

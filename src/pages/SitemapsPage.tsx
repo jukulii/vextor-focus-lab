@@ -1,8 +1,8 @@
 
 import { useEffect } from 'react';
-import AppHeader from '@/components/AppHeader';
 import SitemapsList from '@/components/SitemapsList';
 import Footer from '@/components/Footer';
+import Navbar from '@/components/Navbar';
 
 const SitemapsPage = () => {
   // Scroll to top when the page loads
@@ -11,9 +11,9 @@ const SitemapsPage = () => {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-white">
+    <div className="relative min-h-screen bg-white dark:bg-gray-900">
       <div className="relative z-10 flex flex-col min-h-screen">
-        <AppHeader />
+        <Navbar isDark={false} />
         <main className="flex-grow p-6">
           <div className="w-full max-w-6xl mx-auto mt-8">
             <SitemapsList />

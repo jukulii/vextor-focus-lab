@@ -12,13 +12,13 @@ const AppPage = () => {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-white">
+    <div className="relative min-h-screen bg-white dark:bg-gray-900">
       <VantaBackground />
       <div className="relative z-10 flex flex-col min-h-screen w-full">
         <Navbar isDark={false} />
         <main className="flex-grow flex items-center justify-center py-32 px-4">
           <div className="w-full max-w-lg mx-auto">
-            <div className="bg-white border border-[#ff6b6b]/30 rounded-lg shadow-md overflow-hidden">
+            <div className="bg-white dark:bg-gray-800 border border-[#ff6b6b]/30 dark:border-[#ff6b6b]/20 rounded-lg shadow-md overflow-hidden">
               <SitemapSearch />
             </div>
           </div>

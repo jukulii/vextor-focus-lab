@@ -2,10 +2,10 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
-import AppHeader from '@/components/AppHeader';
 import { Progress } from '@/components/ui/progress';
 import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import Navbar from '@/components/Navbar';
 
 const ProcessingPage = () => {
   const { t } = useLanguage();
@@ -51,9 +51,9 @@ const ProcessingPage = () => {
   }, [navigate]);
 
   return (
-    <div className="relative min-h-screen">
+    <div className="relative min-h-screen dark:bg-gray-900">
       <div className="relative z-10 flex flex-col min-h-screen">
-        <AppHeader />
+        <Navbar isDark={true} />
         <main className="flex-grow p-6">
           <div className="w-full max-w-4xl mx-auto mt-8">
             <h1 className="text-2xl font-bold text-center mb-8 text-white">
@@ -67,7 +67,7 @@ const ProcessingPage = () => {
                 <TabsTrigger value="generate">{t('processing')}</TabsTrigger>
               </TabsList>
               
-              <Card className="bg-black/40 backdrop-blur-lg border-gray-800 text-white shadow-lg">
+              <Card className="bg-black/40 backdrop-blur-lg border-gray-800 text-white dark:bg-gray-800/60 dark:border-gray-700 shadow-lg">
                 <CardContent className="pt-6">
                   <div className="flex flex-col items-center justify-center py-8">
                     <Progress value={progress} className="w-full h-8 mb-4" />
