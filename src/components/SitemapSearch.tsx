@@ -80,7 +80,7 @@ const SitemapSearch = () => {
   return (
     <div className="w-full max-w-3xl mx-auto font-sans text-gray-900 dark:text-gray-100 transition-colors">
       <h1 className="text-2xl font-bold text-center mb-8 text-gray-900 dark:text-white font-sans">
-        {t('check_domain_focus')}
+        Check Your Domain Focus
       </h1>
 
       <Tabs defaultValue="url" className="w-full">
