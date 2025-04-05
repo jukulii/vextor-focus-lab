@@ -52,13 +52,13 @@ const TestimonialSection = () => {
   }, [emblaApi]);
 
   return (
-    <section className="py-20 border-t border-gray-200 relative overflow-hidden bg-gray-50">
+    <section className="py-20 border-t border-gray-200 dark:border-gray-800 relative overflow-hidden bg-gray-50 dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <span className="bg-purple-100 text-purple-700 px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4">
+          <span className="bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300 px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4">
             {language === 'pl' ? "Opinie klientów" : "Testimonials"}
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
             {language === 'pl' 
               ? "Co mówią nasi klienci?" 
               : "What SEOs are saying"}
@@ -81,12 +81,12 @@ const TestimonialSection = () => {
                   <div className="h-full flex items-center justify-center px-4 md:px-10">
                     <div className="text-center">
                       <QuoteIcon className="mx-auto h-10 w-10 text-[#8da2e5] mb-6 opacity-70" />
-                      <p className="text-2xl md:text-3xl font-medium text-gray-900 mb-6 leading-relaxed">
+                      <p className="text-2xl md:text-3xl font-medium text-gray-900 dark:text-gray-100 mb-6 leading-relaxed">
                         {testimonial.quote}
                       </p>
                       <div className="mt-6">
                         <p className="font-medium text-[#8da2e5]">— {testimonial.author}</p>
-                        <p className="text-sm text-gray-600">{testimonial.position}</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">{testimonial.position}</p>
                       </div>
                     </div>
                   </div>
@@ -106,7 +106,7 @@ const TestimonialSection = () => {
                   className={`h-2.5 w-2.5 rounded-full transition-all duration-300 ${
                     activeIndex === idx 
                       ? 'bg-[#8da2e5]' 
-                      : 'bg-gray-400 hover:bg-gray-500'
+                      : 'bg-gray-400 hover:bg-gray-500 dark:bg-gray-600 dark:hover:bg-gray-500'
                   }`}
                   aria-label={`Go to slide ${idx + 1}`}
                 />
