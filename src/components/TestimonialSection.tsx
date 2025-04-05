@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { useLanguage } from '@/contexts/LanguageContext';
 import { QuoteIcon } from 'lucide-react';
@@ -12,15 +13,13 @@ const TestimonialSection = () => {
   const testimonials = [
     {
       quote: language === 'pl' 
-        ? "„Analiza centroidów była dla nas objawieniem. Zidentyfikowaliśmy kilka podstron, które psuły tematykę główną i obniżały autorytet naszej domeny."
+        ? '„Myśleliśmy, że mamy świetnie zoptymalizowaną stronę — aż do momentu, gdy zobaczyliśmy nasz SiteRadius. Dopiero wtedy zrozumieliśmy, gdzie Google może się gubić."'
         : "This is the most actionable SEO audit I've ever seen.",
       author: language === 'pl' ? "Marta" : "Anna",
       position: language === 'pl' ? "SEO Manager, e-commerce w branży home & living" : "Head of Content at SaaS startup"
     },
     {
-      quote: language === 'pl'
-        ? "„Vextor AI pokazał nam, że nasz content o ogrodnictwie osłabia pozycję kategorii wnętrzarskich. Zoptymalizowaliśmy strukturę i widzimy realny wzrost w top 10."
-        : "Vextor showed us what to delete. We saw rankings improve in a week.",
+      quote: "Vextor showed us what to delete. We saw rankings improve in a week.",
       author: "Marek",
       position: "SEO Consultant"
     },
@@ -79,7 +78,7 @@ const TestimonialSection = () => {
                         {testimonial.quote}
                       </p>
                       <div className="mt-6">
-                        <p className="font-medium text-[#8da2e5]\">— {testimonial.author}</p>
+                        <p className="font-medium text-[#8da2e5]">— {testimonial.author}</p>
                         <p className="text-sm text-gray-600">{testimonial.position}</p>
                       </div>
                     </div>
