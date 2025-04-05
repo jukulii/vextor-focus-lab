@@ -1,7 +1,7 @@
 
 import { useLocation, Link } from "react-router-dom";
 import { useEffect } from "react";
-import Navbar from '@/components/Navbar';
+import AppHeader from '@/components/AppHeader';
 import Footer from '@/components/Footer';
 import { Button } from "@/components/ui/button";
 import { Home } from "lucide-react";
@@ -19,7 +19,7 @@ const NotFound = () => {
   return (
     <div className="relative min-h-screen bg-white">
       <div className="relative z-10 flex flex-col min-h-screen">
-        <Navbar isDark={false} />
+        <AppHeader />
         <main className="flex-grow flex items-center justify-center p-6">
           <div className="text-center">
             <h1 className="text-6xl font-bold mb-4 text-gray-900">404</h1>
