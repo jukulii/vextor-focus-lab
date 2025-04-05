@@ -1,3 +1,4 @@
+
 import { useLanguage } from '@/contexts/LanguageContext';
 import { 
   Accordion, 
@@ -84,16 +85,16 @@ const FAQSection = () => {
   ];
   
   return (
-    <section id="faq" className="py-20 border-t border-gray-200">
+    <section id="faq" className="py-20 border-t border-gray-200 dark:border-gray-800">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <span className="bg-blue-100 text-blue-700 px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4">
+          <span className="bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4">
             {language === 'pl' ? "FAQ" : "FAQ"}
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-gray-100">
             {language === 'pl' ? "Często zadawane pytania" : "Frequently Asked Questions"}
           </h2>
-          <p className="text-xl max-w-2xl mx-auto text-gray-700">
+          <p className="text-xl max-w-2xl mx-auto text-gray-700 dark:text-gray-300">
             {language === 'pl' ? "Dowiedz się więcej o tym, jak Vextor może pomóc w Twojej strategii SEO" : "Learn more about how Vextor can help your SEO strategy"}
           </p>
           <div className="w-16 h-1 bg-[#8da2e5] mx-auto mt-4 rounded-full"></div>
@@ -104,12 +105,12 @@ const FAQSection = () => {
             <AccordionItem 
               key={index} 
               value={`item-${index}`}
-              className="border-b border-gray-200 py-2"
+              className="border-b border-gray-200 dark:border-gray-700 py-2"
             >
-              <AccordionTrigger className="text-left font-medium text-lg text-gray-900 hover:text-gray-700 hover:no-underline">
+              <AccordionTrigger className="text-left font-medium text-lg text-gray-900 dark:text-gray-100 hover:text-gray-700 dark:hover:text-gray-300 hover:no-underline">
                 {faq.question}
               </AccordionTrigger>
-              <AccordionContent className="text-gray-700">
+              <AccordionContent className="text-gray-700 dark:text-gray-300">
                 {faq.answer}
               </AccordionContent>
             </AccordionItem>
