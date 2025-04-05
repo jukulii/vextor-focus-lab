@@ -51,6 +51,20 @@ const Navbar = ({ isDark = false }: NavbarProps) => {
     }
   };
 
+  const handleSectionClick = (sectionId: string) => (event: React.MouseEvent) => {
+    event.preventDefault();
+    if (location.pathname === '/') {
+      // If already on home page, scroll to section
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // If on another page, navigate to home with hash
+      navigate(`/#${sectionId}`);
+    }
+  };
+
   const handleLoginClick = () => {
     navigate('/login');
   };
@@ -67,10 +81,10 @@ const Navbar = ({ isDark = false }: NavbarProps) => {
 
   const navItems = [
     { href: "/", label: t('home'), onClick: handleHomeClick },
-    { href: "#how-it-works", label: t('how_it_works') },
-    { href: "#features", label: t('features') },
-    { href: "#pricing", label: t('pricing') },
-    { href: "#faq", label: t('faq') },
+    { href: "#how-it-works", label: t('how_it_works'), onClick: handleSectionClick('how-it-works') },
+    { href: "#features", label: t('features'), onClick: handleSectionClick('features') },
+    { href: "#pricing", label: t('pricing'), onClick: handleSectionClick('pricing') },
+    { href: "#faq", label: t('faq'), onClick: handleSectionClick('faq') },
   ];
 
   return (

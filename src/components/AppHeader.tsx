@@ -1,5 +1,5 @@
 
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Globe, Menu, LogIn, LogOut } from 'lucide-react';
 import {
@@ -18,6 +18,7 @@ const AppHeader = () => {
   const { language, setLanguage, t } = useLanguage();
   const { isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -33,12 +34,12 @@ const AppHeader = () => {
     navigate('/login');
   };
 
-  const scrollToSection = (id: string) => {
+  const navigateToSection = (sectionId: string) => {
     // Navigate to landing page first if not already there
-    if (window.location.pathname !== '/') {
-      navigate(`/#${id}`);
+    if (location.pathname !== '/') {
+      navigate(`/#${sectionId}`);
     } else {
-      const element = document.getElementById(id);
+      const element = document.getElementById(sectionId);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
       }
@@ -51,10 +52,10 @@ const AppHeader = () => {
 
   const navItems = [
     { href: "/app", label: t('home'), onClick: null },
-    { href: "#how-it-works", label: t('how_it_works'), onClick: () => scrollToSection('how-it-works') },
-    { href: "#features", label: t('features'), onClick: () => scrollToSection('features') },
-    { href: "#pricing", label: t('pricing'), onClick: () => scrollToSection('pricing') },
-    { href: "#faq", label: t('faq'), onClick: () => scrollToSection('faq') },
+    { href: "#how-it-works", label: t('how_it_works'), onClick: () => navigateToSection('how-it-works') },
+    { href: "#features", label: t('features'), onClick: () => navigateToSection('features') },
+    { href: "#pricing", label: t('pricing'), onClick: () => navigateToSection('pricing') },
+    { href: "#faq", label: t('faq'), onClick: () => navigateToSection('faq') },
   ];
 
   return (

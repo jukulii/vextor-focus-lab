@@ -8,31 +8,48 @@ import TestimonialSection from '@/components/TestimonialSection';
 import PricingSection from '@/components/PricingSection';
 import FAQSection from '@/components/FAQSection';
 import Footer from '@/components/Footer';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const LandingPage = () => {
-  // Scroll to top when the page loads
+  const location = useLocation();
+  const initialized = useRef(false);
+  
+  // Handle scrolling to sections
   useEffect(() => {
+    // Scroll to top when the page loads
     window.scrollTo(0, 0);
     
-    // Handle hash links for smooth scrolling
+    // Track if we've done initial navigation
+    if (!initialized.current) {
+      initialized.current = true;
+      
+      // Handle hash navigation (e.g., if coming from another page with /#section)
+      if (location.hash) {
+        // Add a slight delay to ensure the page has fully loaded
+        setTimeout(() => {
+          const element = document.getElementById(location.hash.substring(1));
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 100);
+      }
+    }
+  }, [location.pathname]);
+  
+  // Handle hash changes after initial load
+  useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash;
       if (hash) {
-        const element = document.querySelector(hash);
+        const element = document.getElementById(hash.substring(1));
         if (element) {
           element.scrollIntoView({ behavior: 'smooth' });
         }
       }
     };
     
-    // Run once on mount to handle initial hash
-    handleHashChange();
-    
-    // Add event listener for hash changes
     window.addEventListener('hashchange', handleHashChange);
-    
-    // Clean up
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
