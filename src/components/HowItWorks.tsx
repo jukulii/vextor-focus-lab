@@ -1,7 +1,9 @@
+
 import { useLanguage } from '@/contexts/LanguageContext';
 const HowItWorks = () => {
   const {
-    t
+    t,
+    language
   } = useLanguage();
   const steps = [{
     number: "1",
@@ -28,16 +30,9 @@ const HowItWorks = () => {
               {t('how_it_works_title')}
             </h2>
           </div>
-          <p className="text-lg mt-4 max-w-2xl mx-auto text-gray-700">Wykonaj te proste kroki, aby zoptymalizować swoje treści.
-
-
-
-
-
-
-
-
-        </p>
+          <p className="text-lg mt-4 max-w-2xl mx-auto text-gray-700">
+            {language === 'en' ? 'Follow these simple steps to optimize your content' : 'Wykonaj te proste kroki, aby zoptymalizować swoje treści.'}
+          </p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-4">
