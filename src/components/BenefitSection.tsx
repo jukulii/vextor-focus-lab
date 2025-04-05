@@ -18,25 +18,25 @@ const BenefitSection = () => {
   const benefits = [
     {
       icon: ArrowUpRight,
-      title: language === 'pl' ? "Grupuj i wizualizuj strukturę strony według tematów semantycznych" : "Cluster and visualize site structure by semantic topics",
+      title: language === 'pl' ? "Wizualizacja tematycznych klastrów strony" : "Cluster and visualize site structure by semantic topics",
       iconColor: 'text-[#ff6b6b]',
       bgColor: 'bg-[#ff6b6b]/10'
     }, 
     {
       icon: UserCheck,
-      title: language === 'pl' ? "Zidentyfikuj nieistotne lub mało wartościowe treści" : "Identify irrelevant or weak content",
+      title: language === 'pl' ? "Identyfikacja treści obniżających wartość witryny" : "Identify irrelevant or weak content",
       iconColor: 'text-[#ff6b6b]',
       bgColor: 'bg-[#ff6b6b]/10'
     }, 
     {
       icon: Search,
-      title: language === 'pl' ? "Usuń treści, które obniżają pozycję Twojej strony w wynikach wyszukiwania" : "Eliminate content that drags your rankings down",
+      title: language === 'pl' ? "Eliminacja treści osłabiających pozycje w wyszukiwarkach" : "Eliminate content that drags your rankings down",
       iconColor: 'text-[#ff6b6b]',
       bgColor: 'bg-[#ff6b6b]/10'
     }, 
     {
       icon: Trophy,
-      title: language === 'pl' ? "Zmierz Site Focus & Site Radius" : "Measure Site Focus & Site Radius",
+      title: language === 'pl' ? "Pomiar wskaźników Site Focus i Site Radius" : "Measure Site Focus & Site Radius",
       iconColor: 'text-[#ff6b6b]',
       bgColor: 'bg-[#ff6b6b]/10'
     }
@@ -48,13 +48,13 @@ const BenefitSection = () => {
         <div className="text-center mb-12">
           <span className="bg-[#ff6b6b]/20 text-[#ff6b6b] px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4 border border-[#ff6b6b]/30">
             <Sparkles className="w-4 h-4 inline-block mr-2" />
-            Benefits
+            {language === 'pl' ? "Korzyści" : "Benefits"}
           </span>
           <h2 className="text-3xl md:text-4xl mb-4 font-bold text-gray-900">
-            {language === 'pl' ? 'Zrezygnuj z "na zdrowy rozum". Zaufaj danym.' : 'Improve your SEO performance'}
+            {language === 'pl' ? 'Podejmuj decyzje oparte na danych, nie intuicji' : 'Improve your SEO performance'}
           </h2>
           <p className="text-xl max-w-3xl mx-auto text-gray-700">
-            {language === 'pl' ? 'Optymalizuj treści i osiągaj wyższe pozycje' : 'Optimize your content and achieve higher rankings'}
+            {language === 'pl' ? 'Optymalizuj treści w oparciu o konkretne wskaźniki i osiągaj lepsze wyniki' : 'Optimize your content and achieve higher rankings'}
           </p>
         </div>
         

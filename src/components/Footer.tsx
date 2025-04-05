@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
   const {
-    t
+    t,
+    language
   } = useLanguage();
   
   return (
@@ -20,29 +21,31 @@ const Footer = () => {
               />
             </div>
             <p className="max-w-md text-gray-600">
-              Advanced website analysis tool to improve your content focus and SEO performance.
+              {language === 'pl' 
+                ? "Zaawansowane narzędzie do analizy stron, poprawiające koncentrację treści i wydajność SEO." 
+                : "Advanced website analysis tool to improve your content focus and SEO performance."}
             </p>
           </div>
           
           <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
             <div>
               <h3 className="text-sm font-semibold text-gray-800 uppercase tracking-wider mb-4">
-                Product
+                {language === 'pl' ? "Produkt" : "Product"}
               </h3>
               <ul className="space-y-3">
                 <li>
                   <a href="#features" className="text-gray-600 hover:text-vextor-600 transition-colors">
-                    Features
+                    {language === 'pl' ? "Funkcje" : "Features"}
                   </a>
                 </li>
                 <li>
                   <a href="#pricing" className="text-gray-600 hover:text-vextor-600 transition-colors">
-                    Pricing
+                    {language === 'pl' ? "Cennik" : "Pricing"}
                   </a>
                 </li>
                 <li>
                   <Link to="/app" className="text-gray-600 hover:text-vextor-600 transition-colors">
-                    Get Started
+                    {language === 'pl' ? "Rozpocznij" : "Get Started"}
                   </Link>
                 </li>
               </ul>
@@ -50,22 +53,22 @@ const Footer = () => {
             
             <div>
               <h3 className="text-sm font-semibold text-gray-800 uppercase tracking-wider mb-4">
-                Resources
+                {language === 'pl' ? "Zasoby" : "Resources"}
               </h3>
               <ul className="space-y-3">
                 <li>
                   <a href="#" className="text-gray-600 hover:text-vextor-600 transition-colors">
-                    Documentation
+                    {language === 'pl' ? "Dokumentacja" : "Documentation"}
                   </a>
                 </li>
                 <li>
                   <a href="#" className="text-gray-600 hover:text-vextor-600 transition-colors">
-                    Blog
+                    {language === 'pl' ? "Blog" : "Blog"}
                   </a>
                 </li>
                 <li>
                   <a href="#" className="text-gray-600 hover:text-vextor-600 transition-colors">
-                    FAQ
+                    {language === 'pl' ? "FAQ" : "FAQ"}
                   </a>
                 </li>
               </ul>
@@ -73,17 +76,17 @@ const Footer = () => {
             
             <div>
               <h3 className="text-sm font-semibold text-gray-800 uppercase tracking-wider mb-4">
-                Legal
+                {language === 'pl' ? "Prawne" : "Legal"}
               </h3>
               <ul className="space-y-3">
                 <li>
                   <a href="#" className="text-gray-600 hover:text-vextor-600 transition-colors">
-                    {t('privacy_policy')}
+                    {language === 'pl' ? "Polityka prywatności" : "Privacy Policy"}
                   </a>
                 </li>
                 <li>
                   <a href="#" className="text-gray-600 hover:text-vextor-600 transition-colors">
-                    {t('terms_of_service')}
+                    {language === 'pl' ? "Warunki korzystania" : "Terms of Service"}
                   </a>
                 </li>
               </ul>
@@ -93,7 +96,9 @@ const Footer = () => {
         
         <div className="mt-12 pt-8 border-t border-gray-200">
           <p className="text-gray-500 text-sm text-center">
-            © 2025 Vextor. All rights reserved.
+            {language === 'pl' 
+              ? "© 2025 Vextor. Wszelkie prawa zastrzeżone." 
+              : "© 2025 Vextor. All rights reserved."}
           </p>
         </div>
       </div>

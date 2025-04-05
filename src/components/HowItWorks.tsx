@@ -9,20 +9,20 @@ const HowItWorks = () => {
   
   const steps = [{
     number: "1",
-    title: language === 'pl' ? "Wprowadź domenę lub sitemapę" : "Enter your sitemap or domain",
-    description: language === 'pl' ? "a Vextor AI rozpocznie analizę" : "Enter sitemap or domain to begin the analysis process"
+    title: language === 'pl' ? "Wprowadź adres strony lub sitemapę" : "Enter your sitemap or domain",
+    description: language === 'pl' ? "Vextor AI rozpocznie analizę struktury treści" : "Enter sitemap or domain to begin the analysis process"
   }, {
     number: "2",
-    title: language === 'pl' ? "Vextor przeanalizuje Twoje strony" : "We crawl your pages",
-    description: language === 'pl' ? "Wykorzystujemy te same techniki, co Google i modele językowe (LLM)" : "Using the same techniques used by Google and LLMs and calculate key metrics"
+    title: language === 'pl' ? "Analizujemy Twoje podstrony" : "We crawl your pages",
+    description: language === 'pl' ? "Wykorzystujemy zaawansowane modele językowe i algorytmy podobne do Google" : "Using the same techniques used by Google and LLMs and calculate key metrics"
   }, {
     number: "3",
-    title: language === 'pl' ? "Obliczymy Site Focus& Radius Score" : "Get your Site Focus& Radius Score",
-    description: language === 'pl' ? "Dodatkowo otrzymasz najlepsze rekomendacje, co warto poprawić" : "Plus smart recommendations on what to improve"
+    title: language === 'pl' ? "Otrzymujesz wskaźniki Site Focus i Radius Score" : "Get your Site Focus& Radius Score",
+    description: language === 'pl' ? "Wraz z praktycznymi rekomendacjami do wdrożenia" : "Plus smart recommendations on what to improve"
   }, {
     number: "4",
-    title: language === 'pl' ? "Wygraj wyścig o widoczność" : "Optimize content strategy",
-    description: language === 'en' ? "And share it with your team or clients" : "Zoptymalizuj treści w oparciu o rekomendacje od Vextor AI"
+    title: language === 'pl' ? "Optymalizuj swoją strategię treści" : "Optimize content strategy",
+    description: language === 'pl' ? "I udostępnij raport swojemu zespołowi lub klientom" : "And share it with your team or clients"
   }];
   
   return <section id="how-it-works" className="py-16 border-t border-gray-200">
@@ -34,7 +34,7 @@ const HowItWorks = () => {
             </h2>
           </div>
           <p className="text-lg mt-4 max-w-2xl mx-auto text-gray-700">
-            {language === 'en' ? 'Follow these simple steps to optimize your content' : 'Wykonaj te proste kroki, aby zoptymalizować swoje treści.'}
+            {language === 'pl' ? 'Cztery proste kroki do optymalizacji treści i struktury Twojej strony.' : 'Follow these simple steps to optimize your content'}
           </p>
         </div>
         
