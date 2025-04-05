@@ -16,7 +16,7 @@ const HowItWorks = () => {
   }, {
     number: "3",
     title: language === 'pl' ? "Obliczymy Site Focus& Radius Score" : "Get your Site Focus& Radius Score",
-    description: "Plus smart recommendations on what to improve"
+    description: language === 'pl' ? "Dodatkowo otrzymasz najlepsze rekomendacje, co warto poprawić." : "Plus smart recommendations on what to improve"
   }, {
     number: "4",
     title: "Optimize content strategy",
