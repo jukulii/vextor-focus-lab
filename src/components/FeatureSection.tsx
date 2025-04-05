@@ -17,7 +17,7 @@ const FeatureSection = () => {
             {language === 'pl' ? "Funkcje" : "Features"}
           </span>
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-gray-100">
-            {language === 'pl' ? "Zachowaj skupienie. Rankuj wyżej" : "Stay focused. Rank higher"}
+            {language === 'pl' ? "Działaj na podstawie konkretów, nie przeczucia" : "Stay focused. Rank higher"}
           </h2>
           <p className="text-xl max-w-3xl mx-auto text-gray-700 dark:text-gray-300">
             {language === 'pl' 
