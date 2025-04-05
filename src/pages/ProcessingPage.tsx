@@ -51,30 +51,30 @@ const ProcessingPage = () => {
   }, [navigate]);
 
   return (
-    <div className="relative min-h-screen dark:bg-gray-900">
+    <div className="relative min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-black">
       <div className="relative z-10 flex flex-col min-h-screen">
-        <Navbar isDark={true} />
+        <Navbar isDark={false} />
         <main className="flex-grow p-6">
           <div className="w-full max-w-4xl mx-auto mt-8">
-            <h1 className="text-2xl font-bold text-center mb-8 text-white dark:text-white">
+            <h1 className="text-2xl font-bold text-center mb-8 text-gray-900 dark:text-white">
               {t('check_domain_focus')}
             </h1>
             
             <Tabs value="generate" className="w-full">
-              <TabsList className="grid w-full grid-cols-3 mb-8">
-                <TabsTrigger value="url" disabled className="text-gray-600 dark:text-gray-300">{t('site_url')}</TabsTrigger>
-                <TabsTrigger value="filters" disabled className="text-gray-600 dark:text-gray-300">{t('filters')}</TabsTrigger>
+              <TabsList className="grid w-full grid-cols-3 mb-8 bg-gray-100 dark:bg-gray-800">
+                <TabsTrigger value="url" disabled className="text-gray-600 dark:text-gray-400">{t('site_url')}</TabsTrigger>
+                <TabsTrigger value="filters" disabled className="text-gray-600 dark:text-gray-400">{t('filters')}</TabsTrigger>
                 <TabsTrigger value="generate" className="text-gray-800 dark:text-white">{t('processing')}</TabsTrigger>
               </TabsList>
               
-              <Card className="bg-black/40 backdrop-blur-lg border-gray-800 text-white dark:bg-gray-800/60 dark:border-gray-700 shadow-lg">
+              <Card className="bg-white/80 dark:bg-black/40 backdrop-blur-lg border-gray-200 dark:border-gray-800 text-gray-900 dark:text-white shadow-lg">
                 <CardContent className="pt-6">
                   <div className="flex flex-col items-center justify-center py-8">
                     <Progress value={progress} className="w-full h-8 mb-4" />
-                    <p className="text-gray-300 mb-2">
+                    <p className="text-gray-700 dark:text-gray-300 mb-2">
                       {t('step')} {step}/5, {t('progress')} {progress}%, {t('next')} {timeRemaining} sec
                     </p>
-                    <p className="text-gray-400 text-sm mt-4">
+                    <p className="text-gray-600 dark:text-gray-400 text-sm mt-4">
                       {t('converting_content')}
                     </p>
                   </div>

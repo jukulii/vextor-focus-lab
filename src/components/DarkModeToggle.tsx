@@ -34,7 +34,7 @@ const DarkModeToggle = () => {
       pressed={isDarkMode}
       onPressedChange={toggleDarkMode}
       aria-label="Toggle dark mode"
-      className="rounded-full p-2 text-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800"
+      className="rounded-full p-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700"
     >
       {isDarkMode ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
     </Toggle>

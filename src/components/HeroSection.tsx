@@ -8,12 +8,12 @@ const HeroSection = () => {
   const { t, language } = useLanguage();
   
   return (
-    <section className="pt-48 pb-24 md:pt-64 md:pb-32 relative overflow-hidden">
+    <section className="pt-48 pb-24 md:pt-64 md:pb-32 relative overflow-hidden bg-white dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center justify-center">
           <div className="text-center w-full max-w-3xl mx-auto z-10">
             <div className="mb-6 inline-block">
-              <span className="bg-[#ff6b6b]/20 text-[#ff6b6b] px-4 py-1.5 rounded-full text-sm font-medium inline-flex items-center border border-[#ff6b6b]/30">
+              <span className="bg-[#ff6b6b]/20 text-[#ff6b6b] dark:bg-[#ff6b6b]/10 dark:text-[#ff8c8c] px-4 py-1.5 rounded-full text-sm font-medium inline-flex items-center border border-[#ff6b6b]/30">
                 <Sparkles className="w-4 h-4 mr-2" />
                 Empower Your Content Strategy
               </span>
@@ -29,7 +29,7 @@ const HeroSection = () => {
                 <Button
                   variant="outline"
                   size="lg"
-                  className="border-[#ff6b6b] text-[#ff6b6b] hover:bg-[#ff6b6b]/10 px-8 py-6 text-lg transition-all duration-300"
+                  className="border-[#ff6b6b] text-[#ff6b6b] dark:border-[#ff8c8c] dark:text-[#ff8c8c] hover:bg-[#ff6b6b]/10 px-8 py-6 text-lg transition-all duration-300"
                 >
                   Try For Free
                 </Button>

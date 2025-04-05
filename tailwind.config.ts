@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -149,6 +148,14 @@ export default {
 				'exit': 'fade-out 0.5s ease-out, scale-out 0.3s ease-out',
 				'pulse-subtle': 'pulse-subtle 3s infinite ease-in-out',
 				'float': 'float 5s infinite ease-in-out'
+			},
+			boxShadow: {
+				'dark': '0 4px 12px rgba(0, 0, 0, 0.25)',
+				'dark-lg': '0 10px 25px -5px rgba(0, 0, 0, 0.3)',
+			},
+			backgroundImage: {
+				'dark-gradient': 'linear-gradient(to bottom right, #1a1a2e, #16213e, #0f3460)',
+				'light-gradient': 'linear-gradient(to bottom right, #f5f7fa, #e4e7eb, #cbd2d9)'
 			}
 		}
 	},
