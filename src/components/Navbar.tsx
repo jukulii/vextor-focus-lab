@@ -57,6 +57,7 @@ const Navbar = ({ isDark = false }: NavbarProps) => {
     { href: "#how-it-works", label: t('how_it_works') },
     { href: "#features", label: t('features') },
     { href: "#pricing", label: t('pricing') },
+    { href: "#faq", label: t('faq') }, // Added FAQ link to navigation
   ];
 
   return (
