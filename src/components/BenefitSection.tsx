@@ -18,7 +18,7 @@ const BenefitSection = () => {
   const benefits = [
     {
       icon: ArrowUpRight,
-      title: "Cluster and visualize site structure by semantic topics",
+      title: language === 'pl' ? "Grupuj i wizualizuj strukturę strony według tematów semantycznych" : "Cluster and visualize site structure by semantic topics",
       iconColor: 'text-[#ff6b6b]',
       bgColor: 'bg-[#ff6b6b]/10'
     }, 
