@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/select";
 
 const PricingSection = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   
   // Define pricing tiers
   const pricingTiers = [
@@ -57,7 +57,7 @@ const PricingSection = () => {
             </span>
           </div>
           <h2 className="text-3xl md:text-4xl mb-4 font-bold text-gray-900">
-            Simple, transparent pricing
+            {language === 'pl' ? "Prosty, transparentny cennik" : "Simple, transparent pricing"}
           </h2>
           <p className="text-xl max-w-2xl mx-auto text-gray-700">
             Flexible, Usage-Based Pricing
