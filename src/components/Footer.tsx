@@ -19,7 +19,7 @@ const Footer = () => {
                 className="h-16 w-auto object-contain" 
               />
             </div>
-            <p className="max-w-md text-gray-600">
+            <p className="max-w-md text-gray-600 leading-relaxed text-sm md:text-base font-light tracking-wide">
               Advanced website analysis tool to improve your content focus and SEO performance.
             </p>
           </div>
