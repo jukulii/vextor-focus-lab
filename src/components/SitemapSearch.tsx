@@ -58,15 +58,15 @@ const SitemapSearch = () => {
 
   return (
     <div className="w-full max-w-3xl mx-auto">
-      <h1 className="text-3xl font-bold text-center mb-8 bg-gradient-to-r from-pink-500 to-violet-500 bg-clip-text text-transparent">
+      <h1 className="text-3xl font-bold text-center mb-8 bg-gradient-to-r from-vextor-500 to-vextor-700 bg-clip-text text-transparent">
         {t('check_domain_focus')}
       </h1>
 
       <Tabs defaultValue="url" className="w-full">
-        <TabsList className="grid w-full grid-cols-3 mb-8 bg-white border border-[#ff6b6b]/30 rounded-xl shadow-md overflow-hidden">
+        <TabsList className="grid w-full grid-cols-3 mb-8 bg-gray-800/60 backdrop-blur-sm border border-gray-700 rounded-xl shadow-md overflow-hidden">
           <TabsTrigger 
             value="url" 
-            className="bg-white text-pink-700 font-medium py-3 data-[state=active]:bg-gradient-to-r data-[state=active]:from-pink-500/10 data-[state=active]:to-violet-500/10 data-[state=active]:text-pink-600 data-[state=active]:shadow-sm transition-all"
+            className="text-vextor-300 font-medium py-3 data-[state=active]:bg-gradient-to-r data-[state=active]:from-vextor-800/30 data-[state=active]:to-vextor-600/20 data-[state=active]:text-vextor-300 data-[state=active]:shadow-sm transition-all"
           >
             {t('site_url')}
           </TabsTrigger>
@@ -87,12 +87,12 @@ const SitemapSearch = () => {
         </TabsList>
 
         <TabsContent value="url">
-          <Card className="bg-white border border-[#ff6b6b]/20 shadow-lg rounded-xl overflow-hidden">
+          <Card className="bg-gray-800/40 backdrop-blur-md border border-gray-700 shadow-lg rounded-xl overflow-hidden">
             <CardContent className="pt-8 pb-6 px-8">
               <div className="space-y-6">
                 <div className="space-y-4">
-                  <div className="flex items-center mb-2 text-pink-800 text-sm">
-                    <InfoIcon size={16} className="mr-2 text-pink-600" />
+                  <div className="flex items-center mb-2 text-vextor-300 text-sm">
+                    <InfoIcon size={16} className="mr-2 text-vextor-400" />
                     <span>{t('enter_sitemap_url_hint') || 'Enter your website URL to check its sitemap'}</span>
                   </div>
                   
@@ -100,7 +100,7 @@ const SitemapSearch = () => {
                     placeholder={t('enter_sitemap_url')} 
                     value={sitemapUrl} 
                     onChange={e => setSitemapUrl(e.target.value)} 
-                    className="w-full h-14 bg-white border-gray-200 rounded-lg px-4 shadow-sm focus:border-pink-500 focus:ring-2 focus:ring-pink-500/20 transition-all text-base"
+                    className="w-full h-14 bg-gray-900/70 border-gray-700 rounded-lg px-4 shadow-sm focus:border-vextor-500 focus:ring-2 focus:ring-vextor-500/20 transition-all text-base text-white"
                   />
                 </div>
 
@@ -108,7 +108,7 @@ const SitemapSearch = () => {
                   <Button 
                     onClick={handleAutomaticSearch} 
                     disabled={isSearching || !sitemapUrl.trim()} 
-                    className="w-full bg-gradient-to-r from-pink-500 to-violet-500 hover:from-pink-600 hover:to-violet-600 text-white shadow-md h-14 text-base font-medium rounded-lg transition-all duration-300"
+                    className="w-full bg-gradient-to-r from-vextor-600 to-vextor-800 hover:from-vextor-700 hover:to-vextor-900 text-white shadow-md h-14 text-base font-medium rounded-lg transition-all duration-300"
                   >
                     {isSearching ? (
                       <>
@@ -124,7 +124,7 @@ const SitemapSearch = () => {
                   </Button>
                   
                   <div className="flex items-center justify-center mt-4">
-                    <div className="bg-[#ff6b6b]/20 text-[#ff6b6b] px-4 py-1.5 rounded-full text-sm font-medium inline-flex items-center border border-[#ff6b6b]/30">
+                    <div className="bg-vextor-900/50 text-vextor-300 px-4 py-1.5 rounded-full text-sm font-medium inline-flex items-center border border-vextor-700/50">
                       <Sparkles className="w-4 h-4 mr-2" />
                       {t('privacy_note') || 'Your search data is kept private and secure'}
                     </div>
@@ -136,21 +136,21 @@ const SitemapSearch = () => {
         </TabsContent>
 
         <TabsContent value="filters">
-          <Card className="bg-white border border-[#ff6b6b]/20 shadow-lg rounded-xl overflow-hidden">
+          <Card className="bg-gray-800/40 backdrop-blur-md border border-gray-700 shadow-lg rounded-xl overflow-hidden">
             <CardContent className="p-8">
               <div className="flex flex-col items-center justify-center py-8 text-center">
-                <div className="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mb-6">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-pink-600">
+                <div className="w-16 h-16 bg-vextor-900/50 rounded-full flex items-center justify-center mb-6">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-vextor-400">
                     <path d="M10.3 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6.7" />
                     <path d="M18 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                     <path d="M18 18v3" />
                     <path d="M18 15v.01" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-semibold mb-3 text-gray-800">
+                <h3 className="text-xl font-semibold mb-3 text-vextor-100">
                   Funkcja filtrowania wkrótce będzie dostępna
                 </h3>
-                <p className="text-gray-600 max-w-md leading-relaxed">
+                <p className="text-gray-400 max-w-md leading-relaxed">
                   Pracujemy nad dodaniem zaawansowanych opcji filtrowania, aby pomóc Ci lepiej analizować zawartość Twojej strony. Ta funkcjonalność będzie dostępna w następnej aktualizacji.
                 </p>
               </div>
@@ -159,16 +159,16 @@ const SitemapSearch = () => {
         </TabsContent>
 
         <TabsContent value="generate">
-          <Card className="bg-white border border-[#ff6b6b]/20 shadow-lg rounded-xl overflow-hidden">
+          <Card className="bg-gray-800/40 backdrop-blur-md border border-gray-700 shadow-lg rounded-xl overflow-hidden">
             <CardContent className="p-8">
               <div className="flex flex-col items-center justify-center py-8">
-                <div className="w-full bg-gray-100 rounded-full h-4 mb-6 overflow-hidden">
-                  <div className="bg-gradient-to-r from-pink-500 to-violet-500 h-4 rounded-full w-3/5 animate-pulse-subtle"></div>
+                <div className="w-full bg-gray-700 rounded-full h-4 mb-6 overflow-hidden">
+                  <div className="bg-gradient-to-r from-vextor-500 to-vextor-700 h-4 rounded-full w-3/5 animate-pulse-subtle"></div>
                 </div>
-                <p className="text-gray-700 mb-3 font-medium">
+                <p className="text-vextor-200 mb-3 font-medium">
                   {t('step')} 3/5, {t('progress')} 10 {t('next')} 26 sec
                 </p>
-                <p className="text-gray-600 text-sm">
+                <p className="text-gray-400 text-sm">
                   {t('converting_content')}
                 </p>
               </div>
