@@ -120,7 +120,7 @@ const SitemapSearch = () => {
                       placeholder={t('enter_website_url')} 
                       value={websiteUrl} 
                       onChange={e => setWebsiteUrl(e.target.value)}
-                      className="w-full h-12 bg-transparent border-gray-300 font-sans pl-10"
+                      className="w-full h-12 bg-transparent border-gray-300 font-sans pl-10 text-gray-800 font-medium focus:ring-[#ff6b6b]/20 focus:border-[#ff6b6b]"
                       type="url"
                       autoComplete="url"
                       onKeyDown={(e) => {
