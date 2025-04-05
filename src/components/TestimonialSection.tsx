@@ -15,7 +15,7 @@ const TestimonialSection = () => {
       quote: language === 'pl' 
         ? '„Myśleliśmy, że mamy świetnie zoptymalizowaną stronę — aż do momentu, gdy zobaczyliśmy nasz SiteRadius. Dopiero wtedy zrozumieliśmy, gdzie Google może się gubić."'
         : "This is the most actionable SEO audit I've ever seen.",
-      author: "Anna",
+      author: language === 'pl' ? "Marta" : "Anna",
       position: "Head of Content at SaaS startup"
     },
     {
