@@ -78,22 +78,22 @@ const SitemapSearch = () => {
   };
 
   return (
-    <div className="w-full max-w-3xl mx-auto font-sans">
-      <h1 className="text-2xl font-bold text-center mb-8 text-gray-900 font-sans">
+    <div className="w-full max-w-3xl mx-auto font-sans text-gray-900 dark:text-gray-100 transition-colors">
+      <h1 className="text-2xl font-bold text-center mb-8 text-gray-900 dark:text-white font-sans">
         {t('check_domain_focus')}
       </h1>
 
       <Tabs defaultValue="url" className="w-full">
-        <TabsList className="grid w-full grid-cols-3 mb-8 bg-white/70 backdrop-blur-sm border border-[#ff6b6b]/20 rounded-md shadow-sm">
+        <TabsList className="grid w-full grid-cols-3 mb-8 bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm border border-[#ff6b6b]/20 dark:border-[#ff6b6b]/10 rounded-md shadow-sm">
           <TabsTrigger 
             value="url" 
-            className="w-full rounded-md py-2 text-gray-900 data-[state=active]:bg-[#ff6b6b]/10 data-[state=active]:text-[#ff6b6b] font-sans"
+            className="w-full rounded-md py-2 text-gray-900 dark:text-gray-200 data-[state=active]:bg-[#ff6b6b]/10 data-[state=active]:text-[#ff6b6b] dark:data-[state=active]:text-[#ff8a8a] font-sans"
           >
             {t('site_url')}
           </TabsTrigger>
           <TabsTrigger 
             value="filters" 
-            className="w-full rounded-md py-2 text-gray-900 data-[state=active]:bg-[#ff6b6b]/10 data-[state=active]:text-[#ff6b6b] font-sans relative"
+            className="w-full rounded-md py-2 text-gray-900 dark:text-gray-200 data-[state=active]:bg-[#ff6b6b]/10 data-[state=active]:text-[#ff6b6b] dark:data-[state=active]:text-[#ff8a8a] font-sans relative"
             onClick={() => navigate('/app')}
           >
             {t('filters')}
@@ -103,7 +103,7 @@ const SitemapSearch = () => {
           </TabsTrigger>
           <TabsTrigger 
             value="generate" 
-            className="w-full rounded-md py-2 text-gray-900 data-[state=active]:bg-[#ff6b6b]/10 data-[state=active]:text-[#ff6b6b] font-sans"
+            className="w-full rounded-md py-2 text-gray-900 dark:text-gray-200 data-[state=active]:bg-[#ff6b6b]/10 data-[state=active]:text-[#ff6b6b] dark:data-[state=active]:text-[#ff8a8a] font-sans"
             onClick={() => navigate('/app')}
           >
             {t('processing')}
@@ -111,17 +111,17 @@ const SitemapSearch = () => {
         </TabsList>
 
         <TabsContent value="url">
-          <Card className="bg-white/70 backdrop-blur-sm border border-[#ff6b6b]/20 shadow-sm">
+          <Card className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm border border-[#ff6b6b]/20 dark:border-[#ff6b6b]/10 shadow-sm">
             <CardContent className="pt-6">
               <div className="space-y-4">
                 <div className="space-y-2 relative">
                   <div className="flex items-center relative">
-                    <Globe className="absolute left-3 text-gray-400" size={18} />
+                    <Globe className="absolute left-3 text-gray-400 dark:text-gray-500" size={18} />
                     <Input 
                       placeholder={t('enter_website_url')} 
                       value={websiteUrl} 
                       onChange={e => setWebsiteUrl(e.target.value)}
-                      className="w-full h-12 bg-transparent border-gray-300 font-sans pl-10 text-gray-800 font-medium focus:ring-[#ff6b6b]/20 focus:border-[#ff6b6b]"
+                      className="w-full h-12 bg-transparent border-gray-300 dark:border-gray-600 font-sans pl-10 text-gray-800 dark:text-gray-200 font-medium focus:ring-[#ff6b6b]/20 focus:border-[#ff6b6b] dark:focus:ring-[#ff6b6b]/30 dark:focus:border-[#ff6b6b]/70 dark:bg-gray-800/50"
                       type="url"
                       autoComplete="url"
                       onKeyDown={(e) => {
@@ -138,7 +138,7 @@ const SitemapSearch = () => {
                     variant="accent" 
                     onClick={handleAutomaticSearch} 
                     disabled={isSearching} 
-                    className="w-full bg-[#ff6b6b] hover:bg-[#ff5252] text-white shadow-md h-12 text-base font-medium font-sans"
+                    className="w-full bg-[#ff6b6b] hover:bg-[#ff5252] text-white shadow-md h-12 text-base font-medium font-sans dark:bg-[#ff6b6b]/90 dark:hover:bg-[#ff5252]/90 dark:shadow-lg dark:shadow-[#ff6b6b]/10"
                   >
                     {isSearching ? (
                       <>
@@ -159,19 +159,19 @@ const SitemapSearch = () => {
         </TabsContent>
 
         <TabsContent value="filters">
-          <Card className="bg-white/70 backdrop-blur-sm border border-[#ff6b6b]/20 shadow-sm">
+          <Card className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm border border-[#ff6b6b]/20 dark:border-[#ff6b6b]/10 shadow-sm">
             <CardContent>
               <div className="flex flex-col items-center justify-center py-8 text-center">
                 <div className="mb-4">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-400">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-400 dark:text-gray-500">
                     <path d="M10.3 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6.7" />
                     <path d="M18 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                     <path d="M18 18v3" />
                     <path d="M18 15v.01" />
                   </svg>
                 </div>
-                <h3 className="text-lg font-medium mb-2 text-gray-900 font-sans">Funkcja filtrowania wkrótce będzie dostępna</h3>
-                <p className="text-gray-600 text-sm max-w-md font-sans">
+                <h3 className="text-lg font-medium mb-2 text-gray-900 dark:text-gray-100 font-sans">Funkcja filtrowania wkrótce będzie dostępna</h3>
+                <p className="text-gray-600 dark:text-gray-400 text-sm max-w-md font-sans">
                   Pracujemy nad dodaniem zaawansowanych opcji filtrowania, aby pomóc Ci lepiej analizować zawartość Twojej strony. Ta funkcjonalność będzie dostępna w następnej aktualizacji.
                 </p>
               </div>
@@ -180,16 +180,16 @@ const SitemapSearch = () => {
         </TabsContent>
 
         <TabsContent value="generate">
-          <Card className="bg-white/70 backdrop-blur-sm border border-[#ff6b6b]/20 shadow-sm">
+          <Card className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm border border-[#ff6b6b]/20 dark:border-[#ff6b6b]/10 shadow-sm">
             <CardContent>
               <div className="flex flex-col items-center justify-center py-8">
-                <div className="w-full bg-gray-200 rounded-full h-4 mb-4">
-                  <div className="bg-[#ff6b6b] h-4 rounded-full w-3/5"></div>
+                <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-4 mb-4">
+                  <div className="bg-[#ff6b6b] dark:bg-[#ff7a7a] h-4 rounded-full w-3/5"></div>
                 </div>
-                <p className="text-gray-700 mb-2 font-sans">
+                <p className="text-gray-700 dark:text-gray-300 mb-2 font-sans">
                   {t('step')} 3/5, {t('progress')} 10 {t('next')} 26 sec
                 </p>
-                <p className="text-gray-600 text-sm font-sans">
+                <p className="text-gray-600 dark:text-gray-400 text-sm font-sans">
                   {t('converting_content')}
                 </p>
               </div>
