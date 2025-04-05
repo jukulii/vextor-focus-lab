@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Globe, Menu, X, LogIn } from 'lucide-react';
@@ -30,6 +30,7 @@ const Navbar = ({ isDark = false }: NavbarProps) => {
   } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,9 +40,15 @@ const Navbar = ({ isDark = false }: NavbarProps) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToTop = (event: React.MouseEvent) => {
+  const handleHomeClick = (event: React.MouseEvent) => {
     event.preventDefault();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (location.pathname === '/') {
+      // If already on home page, just scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      // If on another page (like login), navigate to home
+      navigate('/');
+    }
   };
 
   const handleLoginClick = () => {
@@ -59,11 +66,11 @@ const Navbar = ({ isDark = false }: NavbarProps) => {
   const mobileBorderColor = isDark ? 'border-gray-800' : 'border-gray-100 dark:border-gray-800';
 
   const navItems = [
-    { href: "#", label: t('home'), onClick: scrollToTop },
+    { href: "/", label: t('home'), onClick: handleHomeClick },
     { href: "#how-it-works", label: t('how_it_works') },
     { href: "#features", label: t('features') },
     { href: "#pricing", label: t('pricing') },
-    { href: "#faq", label: t('faq') }, // Added FAQ link to navigation
+    { href: "#faq", label: t('faq') },
   ];
 
   return (
