@@ -1,10 +1,12 @@
 
 import { useLanguage } from '@/contexts/LanguageContext';
+
 const HowItWorks = () => {
   const {
     t,
     language
   } = useLanguage();
+  
   const steps = [{
     number: "1",
     title: language === 'pl' ? "Wprowadź domenę lub sitemapę" : "Enter your sitemap or domain",
@@ -22,6 +24,7 @@ const HowItWorks = () => {
     title: language === 'pl' ? "Wygraj wyścig o widoczność" : "Optimize content strategy",
     description: language === 'en' ? "And share it with your team or clients" : "Zoptymalizuj treści w oparciu o rekomendacje od Vextor AI"
   }];
+  
   return <section id="how-it-works" className="py-16 border-t border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
@@ -44,11 +47,11 @@ const HowItWorks = () => {
                 {index < steps.length - 1 && <div className="hidden md:block absolute w-full md:w-[100px] lg:w-[120px] xl:w-[150px] h-[1px] bg-[#788be4]/50 left-full top-1/2 transform -translate-y-1/2"></div>}
               </div>
               
-              <div className="flex flex-col items-center h-20">
-                <p className="text-gray-800 text-sm md:text-base font-medium text-center leading-tight mb-2">
+              <div className="flex flex-col items-center">
+                <p className="text-gray-800 text-sm md:text-base font-medium text-center leading-tight mb-2 h-10 flex items-center">
                   {step.title}
                 </p>
-                <p className="text-gray-600 text-xs md:text-sm text-center w-full mt-1">
+                <p className="text-gray-600 text-xs md:text-sm text-center w-full mt-1 h-12 flex items-center justify-center">
                   {step.description}
                 </p>
               </div>
@@ -57,4 +60,5 @@ const HowItWorks = () => {
       </div>
     </section>;
 };
+
 export default HowItWorks;
