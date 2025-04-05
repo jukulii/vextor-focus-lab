@@ -19,8 +19,8 @@ const HowItWorks = () => {
     description: language === 'pl' ? "Dodatkowo otrzymasz najlepsze rekomendacje, co warto poprawić." : "Plus smart recommendations on what to improve"
   }, {
     number: "4",
-    title: "Optimize content strategy",
-    description: "And share it with your team or clients"
+    title: language === 'pl' ? "Wygraj wyścig o widoczność." : "Optimize content strategy",
+    description: language === 'en' ? "And share it with your team or clients" : "I udostępnij to swojemu zespołowi lub klientom"
   }];
   return <section id="how-it-works" className="py-16 border-t border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
