@@ -16,6 +16,7 @@ const translations: Translations = {
   "features": { en: "Features", pl: "Funkcje" },
   "how_it_works": { en: "How it works", pl: "Jak to działa" },
   "pricing": { en: "Pricing", pl: "Cennik" },
+  "faq": { en: "FAQ", pl: "FAQ" },
 
   // Hero Section
   "hero_title": {
