@@ -75,7 +75,7 @@ const SitemapSearch = () => {
         </TabsList>
 
         <TabsContent value="url">
-          <Card>
+          <Card className="bg-white/70 backdrop-blur-sm border border-[#ff6b6b]/20 shadow-sm">
             <CardContent className="pt-6">
               <div className="space-y-4">
                 <div className="space-y-2">
