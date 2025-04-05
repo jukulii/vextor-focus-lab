@@ -51,7 +51,7 @@ const BenefitSection = () => {
             {language === 'pl' ? "Korzyści" : "Benefits"}
           </span>
           <h2 className="text-3xl md:text-4xl mb-4 font-bold text-gray-900 dark:text-gray-100">
-            {language === 'pl' ? 'Zrezygnuj z "na zdrowy rozum". Zaufaj danym.' : 'Improve your SEO performance'}
+            {language === 'pl' ? 'Zoptymalizuj stronę pod AI-driven search' : 'Improve your SEO performance'}
           </h2>
           <p className="text-xl max-w-3xl mx-auto text-gray-700 dark:text-gray-300">
             {language === 'pl' ? 'Optymalizuj treści i osiągaj wyższe pozycje' : 'Optimize your content and achieve higher rankings'}
