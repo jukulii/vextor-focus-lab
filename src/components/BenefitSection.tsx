@@ -13,7 +13,7 @@ const mockData = [
 ];
 
 const BenefitSection = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   
   const benefits = [
     {
@@ -51,7 +51,7 @@ const BenefitSection = () => {
             Benefits
           </span>
           <h2 className="text-3xl md:text-4xl mb-4 font-bold text-gray-900">
-            Improve your SEO performance
+            {language === 'pl' ? 'Zrezygnuj z "na zdrowy rozum". Zaufaj danym.' : 'Improve your SEO performance'}
           </h2>
           <p className="text-xl max-w-3xl mx-auto text-gray-700">
             Optimize your content and achieve higher rankings
