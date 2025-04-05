@@ -72,15 +72,15 @@ const SitemapSearch = () => {
           </TabsTrigger>
           <TabsTrigger 
             value="filters" 
-            disabled 
             className="w-full rounded-md py-2 text-gray-900 data-[state=active]:bg-[#ff6b6b]/10 data-[state=active]:text-[#ff6b6b] font-sans"
+            onClick={() => navigate('/app')}
           >
             {t('filters')}
           </TabsTrigger>
           <TabsTrigger 
             value="generate" 
-            disabled 
             className="w-full rounded-md py-2 text-gray-900 data-[state=active]:bg-[#ff6b6b]/10 data-[state=active]:text-[#ff6b6b] font-sans"
+            onClick={() => navigate('/app')}
           >
             {t('processing')}
           </TabsTrigger>
