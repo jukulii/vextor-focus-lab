@@ -2,6 +2,7 @@
 import { useEffect } from 'react';
 import AppHeader from '@/components/AppHeader';
 import SitemapSearch from '@/components/SitemapSearch';
+import Footer from '@/components/Footer';
 
 const AppPage = () => {
   // Scroll to top when the page loads
@@ -10,7 +11,7 @@ const AppPage = () => {
   }, []);
 
   return (
-    <div className="relative min-h-screen">
+    <div className="relative min-h-screen bg-white">
       <div className="relative z-10 flex flex-col min-h-screen">
         <AppHeader />
         <main className="flex-grow p-6">
@@ -18,6 +19,7 @@ const AppPage = () => {
             <SitemapSearch />
           </div>
         </main>
+        <Footer />
       </div>
     </div>
   );
