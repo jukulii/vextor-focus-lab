@@ -58,7 +58,7 @@ const TestimonialSection = () => {
           <span className="bg-purple-100 text-purple-700 px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4">Testimonials</span>
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             {language === 'pl' 
-              ? "Zobacz, jak SiteFocus zmienił podejście naszych klientów do SEO" 
+              ? "Co mówią nasi klienci?" 
               : "What SEOs are saying"}
           </h2>
         </div>
