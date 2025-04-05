@@ -20,7 +20,7 @@ const TestimonialSection = () => {
     },
     {
       quote: language === 'pl'
-        ? "„Vextor AI to coś więcej niż narzędzie – to sposób myślenia o treściach. Zastąpił nam część analiz ręcznych i dał nowe insighty, których wcześniej nie widzieliśmy."" 
+        ? '„Vextor AI to coś więcej niż narzędzie – to sposób myślenia o treściach. Zastąpił nam część analiz ręcznych i dał nowe insighty, których wcześniej nie widzieliśmy."'
         : "Vextor showed us what to delete. We saw rankings improve in a week.",
       author: "Marek",
       position: "SEO Consultant"
