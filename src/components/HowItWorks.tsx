@@ -15,7 +15,7 @@ const HowItWorks = () => {
     description: language === 'pl' ? "Wykorzystujemy te same techniki, co Google i modele językowe (LLM)" : "Using the same techniques used by Google and LLMs and calculate key metrics"
   }, {
     number: "3",
-    title: "Get your Site Focus& Radius Score",
+    title: language === 'pl' ? "Obliczymy Site Focus& Radius Score" : "Get your Site Focus& Radius Score",
     description: "Plus smart recommendations on what to improve"
   }, {
     number: "4",
