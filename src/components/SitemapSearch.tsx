@@ -59,17 +59,17 @@ const SitemapSearch = () => {
 
   return (
     <div className="w-full max-w-3xl mx-auto">
-      <h1 className="text-2xl font-bold text-center mb-8">
+      <h1 className="text-2xl font-bold text-center mb-8 text-gray-900">
         {t('check_domain_focus')}
       </h1>
 
       <Tabs defaultValue="url" className="w-full">
         <TabsList className="grid w-full grid-cols-3 mb-8 bg-white/70 backdrop-blur-sm border border-[#ff6b6b]/20 rounded-md shadow-sm">
-          <TabsTrigger value="url">{t('site_url')}</TabsTrigger>
-          <TabsTrigger value="filters" disabled>
+          <TabsTrigger value="url" className="text-gray-700">{t('site_url')}</TabsTrigger>
+          <TabsTrigger value="filters" disabled className="text-gray-500">
             {t('filters')}
           </TabsTrigger>
-          <TabsTrigger value="generate" disabled>
+          <TabsTrigger value="generate" disabled className="text-gray-500">
             {t('processing')}
           </TabsTrigger>
         </TabsList>
@@ -83,7 +83,7 @@ const SitemapSearch = () => {
                     placeholder={t('enter_sitemap_url')}
                     value={sitemapUrl}
                     onChange={(e) => setSitemapUrl(e.target.value)}
-                    className="w-full"
+                    className="w-full h-12 bg-transparent border-gray-300"
                   />
                 </div>
 
@@ -92,7 +92,7 @@ const SitemapSearch = () => {
                     variant="secondary"
                     onClick={handleAutomaticSearch}
                     disabled={isSearching}
-                    className="bg-white/70 backdrop-blur-sm border border-[#ff6b6b]/20 text-pink-800 hover:bg-pink-100 shadow-sm"
+                    className="w-full bg-white/70 backdrop-blur-sm border border-[#ff6b6b]/20 text-pink-800 hover:bg-pink-100 shadow-sm h-12 text-base font-medium"
                   >
                     {isSearching ? (
                       <>
@@ -113,7 +113,7 @@ const SitemapSearch = () => {
         </TabsContent>
 
         <TabsContent value="filters">
-          <Card>
+          <Card className="bg-white/70 backdrop-blur-sm border border-[#ff6b6b]/20 shadow-sm">
             <CardContent>
               <div className="flex flex-col items-center justify-center py-8 text-center">
                 <div className="mb-4">
@@ -124,7 +124,7 @@ const SitemapSearch = () => {
                     <path d="M18 15v.01" />
                   </svg>
                 </div>
-                <h3 className="text-lg font-medium mb-2">Funkcja filtrowania wkrótce będzie dostępna</h3>
+                <h3 className="text-lg font-medium mb-2 text-gray-900">Funkcja filtrowania wkrótce będzie dostępna</h3>
                 <p className="text-gray-600 text-sm max-w-md">
                   Pracujemy nad dodaniem zaawansowanych opcji filtrowania, aby pomóc Ci lepiej analizować zawartość Twojej strony. Ta funkcjonalność będzie dostępna w następnej aktualizacji.
                 </p>
@@ -134,11 +134,11 @@ const SitemapSearch = () => {
         </TabsContent>
 
         <TabsContent value="generate">
-          <Card>
+          <Card className="bg-white/70 backdrop-blur-sm border border-[#ff6b6b]/20 shadow-sm">
             <CardContent>
               <div className="flex flex-col items-center justify-center py-8">
                 <div className="w-full bg-gray-200 rounded-full h-4 mb-4">
-                  <div className="bg-blue-500 h-4 rounded-full w-3/5"></div>
+                  <div className="bg-[#ff6b6b] h-4 rounded-full w-3/5"></div>
                 </div>
                 <p className="text-gray-700 mb-2">
                   {t('step')} 3/5, {t('progress')} 10 {t('next')} 26 sec
