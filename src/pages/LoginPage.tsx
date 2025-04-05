@@ -10,6 +10,7 @@ import { Eye, EyeOff, LogIn } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { Label } from '@/components/ui/label';
 
 const LoginPage = () => {
     const { t } = useLanguage();
@@ -38,9 +39,9 @@ const LoginPage = () => {
 
                 navigate('/app');
             } else {
-                throw new Error(response.data.message || "Login failed");
+                throw new Error(response.data?.message || "Login failed");
             }
-        } catch (error) {
+        } catch (error: any) {
             let errorMessage = t('login_failed') || "Login failed";
 
             if (error.response && error.response.data && error.response.data.message) {
@@ -63,19 +64,23 @@ const LoginPage = () => {
         <div className="relative min-h-screen bg-white">
             <div className="relative z-10 flex flex-col min-h-screen w-full">
                 <Navbar isDark={false} />
-                <main className="flex-grow flex items-center justify-center py-16 px-4">
+                <main className="flex-grow flex items-center justify-center py-20 px-4">
                     <div className="w-full max-w-md">
                         <Card className="shadow-lg border border-gray-200">
-                            <CardHeader>
-                                <CardTitle className="text-2xl text-gray-900">{t('login') || "Login"}</CardTitle>
-                                <CardDescription className="text-gray-600">{t('login_subtitle') || "Enter your credentials to access your account"}</CardDescription>
+                            <CardHeader className="space-y-2">
+                                <CardTitle className="text-2xl font-bold text-center text-gray-900">
+                                    {t('login') || "Login"}
+                                </CardTitle>
+                                <CardDescription className="text-center text-gray-600">
+                                    {t('login_subtitle') || "Enter your credentials to access your account"}
+                                </CardDescription>
                             </CardHeader>
                             <CardContent>
-                                <form onSubmit={handleSubmit} className="space-y-4">
+                                <form onSubmit={handleSubmit} className="space-y-6">
                                     <div className="space-y-2">
-                                        <label htmlFor="email" className="text-sm font-medium text-gray-700">
+                                        <Label htmlFor="email" className="text-sm font-medium text-gray-700">
                                             {t('email') || "Email"}
-                                        </label>
+                                        </Label>
                                         <Input
                                             id="email"
                                             type="email"
@@ -83,14 +88,14 @@ const LoginPage = () => {
                                             value={email}
                                             onChange={(e) => setEmail(e.target.value)}
                                             required
-                                            className="w-full"
+                                            className="w-full h-12"
                                         />
                                     </div>
 
                                     <div className="space-y-2">
-                                        <label htmlFor="password" className="text-sm font-medium text-gray-700">
+                                        <Label htmlFor="password" className="text-sm font-medium text-gray-700">
                                             {t('password') || "Password"}
-                                        </label>
+                                        </Label>
                                         <div className="relative">
                                             <Input
                                                 id="password"
@@ -99,7 +104,7 @@ const LoginPage = () => {
                                                 value={password}
                                                 onChange={(e) => setPassword(e.target.value)}
                                                 required
-                                                className="w-full pr-10"
+                                                className="w-full pr-10 h-12"
                                             />
                                             <button
                                                 type="button"
@@ -113,32 +118,42 @@ const LoginPage = () => {
 
                                     <Button
                                         type="submit"
-                                        className="w-full bg-[#788be4] hover:bg-[#6678d0] text-white button-glow shadow-md hover:shadow-lg"
+                                        className="w-full bg-[#788be4] hover:bg-[#6678d0] text-white button-glow shadow-md hover:shadow-lg h-12 text-base font-medium"
                                         disabled={isLoading}
                                     >
                                         {isLoading ? (
-                                            <span className="flex items-center gap-2">
-                                                <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                            <span className="flex items-center justify-center gap-2">
+                                                <svg className="animate-spin -ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                                                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                                                 </svg>
                                                 {t('logging_in') || "Logging in..."}
                                             </span>
                                         ) : (
-                                            <span className="flex items-center gap-2">
-                                                <LogIn size={18} />
+                                            <span className="flex items-center justify-center gap-2">
+                                                <LogIn size={20} />
                                                 {t('login') || "Login"}
                                             </span>
                                         )}
                                     </Button>
                                 </form>
                             </CardContent>
-                            <CardFooter className="flex flex-col space-y-2">
-                                <div className="text-sm text-center text-gray-600">
-                                    {t('dont_have_account') || "Don't have an account?"}
-                                    <Link to="/register" className="text-[#788be4] hover:underline ml-1">
+                            <CardFooter className="flex flex-col space-y-4 pb-6">
+                                <div className="text-sm text-center text-gray-600 w-full">
+                                    {t('dont_have_account') || "Don't have an account?"}{' '}
+                                    <Link to="/register" className="text-[#788be4] hover:underline font-medium">
                                         {t('register') || "Register"}
                                     </Link>
+                                </div>
+                                <div className="text-xs text-center text-gray-500 w-full">
+                                    By logging in, you agree to our{' '}
+                                    <a href="#" className="text-[#788be4] hover:underline">
+                                        Terms of Service
+                                    </a>{' '}
+                                    and{' '}
+                                    <a href="#" className="text-[#788be4] hover:underline">
+                                        Privacy Policy
+                                    </a>
                                 </div>
                             </CardFooter>
                         </Card>
