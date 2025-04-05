@@ -4,7 +4,8 @@ import { Brain, Zap, BarChart, Activity, Rocket, Target, Star } from 'lucide-rea
 
 const FeatureSection = () => {
   const {
-    t
+    t,
+    language
   } = useLanguage();
   
   return (
@@ -19,7 +20,10 @@ const FeatureSection = () => {
             Stay focused. Rank higher
           </h2>
           <p className="text-xl max-w-3xl mx-auto text-gray-700">
-            Vextor AI helps website owners, SEOs, and content strategists understand how semantically focused their websites are — using the same techniques Google likely uses.
+            {language === 'pl' 
+              ? "Vextor AI pomaga właścicielom stron, specjalistom SEO i strategom treści zrozumieć, jak bardzo ich witryny są skupione tematycznie — wykorzystując techniki, z których korzysta także Google."
+              : "Vextor AI helps website owners, SEOs, and content strategists understand how semantically focused their websites are — using the same techniques Google likely uses."
+            }
           </p>
         </div>
         
