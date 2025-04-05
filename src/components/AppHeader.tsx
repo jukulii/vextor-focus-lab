@@ -78,7 +78,7 @@ const AppHeader = () => {
                 <button
                   key={index}
                   onClick={item.onClick}
-                  className="text-gray-700 dark:text-gray-300 hover:text-[#788be4] dark:hover:text-[#788be4] transition-colors font-medium"
+                  className="text-gray-900 dark:text-white hover:text-[#788be4] dark:hover:text-[#788be4] transition-colors font-medium"
                 >
                   {item.label}
                 </button>
@@ -86,7 +86,7 @@ const AppHeader = () => {
                 <Link
                   key={index}
                   to={item.href}
-                  className="text-gray-700 dark:text-gray-300 hover:text-[#788be4] dark:hover:text-[#788be4] transition-colors font-medium"
+                  className="text-gray-900 dark:text-white hover:text-[#788be4] dark:hover:text-[#788be4] transition-colors font-medium"
                 >
                   {item.label}
                 </Link>
@@ -103,7 +103,7 @@ const AppHeader = () => {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="text-gray-700 dark:text-gray-300 hover:text-[#788be4] dark:hover:text-[#788be4] transition-colors"
+                  className="text-gray-900 dark:text-white hover:text-[#788be4] dark:hover:text-[#788be4] transition-colors"
                 >
                   <Globe className="h-5 w-5" />
                 </Button>
@@ -151,16 +151,16 @@ const AppHeader = () => {
           <div className="md:hidden flex items-center">
             <Drawer>
               <DrawerTrigger asChild>
-                <Button variant="ghost" size="icon" className="text-gray-700 dark:text-gray-300">
+                <Button variant="ghost" size="icon" className="text-gray-900 dark:text-white">
                   <Menu className="h-5 w-5" />
                 </Button>
               </DrawerTrigger>
               <DrawerContent className="p-4 bg-white dark:bg-gray-900">
                 <div className="flex flex-col space-y-4">
                   <div className="flex justify-between items-center mb-4">
-                    <h2 className="text-lg font-bold text-gray-700 dark:text-gray-300">{t('menu') || 'Menu'}</h2>
+                    <h2 className="text-lg font-bold text-gray-900 dark:text-white">{t('menu') || 'Menu'}</h2>
                     <DrawerClose asChild>
-                      <Button variant="ghost" size="icon" className="text-gray-700 dark:text-gray-300">
+                      <Button variant="ghost" size="icon" className="text-gray-900 dark:text-white">
                         <span className="sr-only">Close</span>
                         ×
                       </Button>
@@ -172,14 +172,14 @@ const AppHeader = () => {
                       {item.onClick ? (
                         <button
                           onClick={item.onClick}
-                          className="text-gray-700 dark:text-gray-300 hover:text-[#788be4] dark:hover:text-[#788be4] font-medium py-2 block w-full text-left"
+                          className="text-gray-900 dark:text-white hover:text-[#788be4] dark:hover:text-[#788be4] font-medium py-2 block w-full text-left"
                         >
                           {item.label}
                         </button>
                       ) : (
                         <Link
                           to={item.href}
-                          className="text-gray-700 dark:text-gray-300 hover:text-[#788be4] dark:hover:text-[#788be4] font-medium py-2 block"
+                          className="text-gray-900 dark:text-white hover:text-[#788be4] dark:hover:text-[#788be4] font-medium py-2 block"
                         >
                           {item.label}
                         </Link>
@@ -195,7 +195,7 @@ const AppHeader = () => {
                         <Button
                           variant="ghost"
                           size="icon"
-                          className="text-gray-700 dark:text-gray-300"
+                          className="text-gray-900 dark:text-white"
                         >
                           <Globe className="h-5 w-5" />
                         </Button>
