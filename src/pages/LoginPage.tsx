@@ -88,7 +88,7 @@ const LoginPage = () => {
                                             value={email}
                                             onChange={(e) => setEmail(e.target.value)}
                                             required
-                                            className="w-full h-12"
+                                            className="w-full h-12 bg-transparent border-gray-300"
                                         />
                                     </div>
 
@@ -104,7 +104,7 @@ const LoginPage = () => {
                                                 value={password}
                                                 onChange={(e) => setPassword(e.target.value)}
                                                 required
-                                                className="w-full pr-10 h-12"
+                                                className="w-full pr-10 h-12 bg-transparent border-gray-300"
                                             />
                                             <button
                                                 type="button"
