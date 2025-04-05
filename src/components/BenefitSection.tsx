@@ -30,7 +30,7 @@ const BenefitSection = () => {
     }, 
     {
       icon: Search,
-      title: "Eliminate content that drags your rankings down",
+      title: language === 'pl' ? "Usuń treści, które obniżają pozycję Twojej strony w wynikach wyszukiwania" : "Eliminate content that drags your rankings down",
       iconColor: 'text-[#ff6b6b]',
       bgColor: 'bg-[#ff6b6b]/10'
     }, 
