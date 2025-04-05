@@ -31,7 +31,7 @@ const HeroSection = () => {
                   size="lg"
                   className="border-[#ff6b6b] text-[#ff6b6b] dark:border-[#ff8c8c] dark:text-[#ff8c8c] hover:bg-[#ff6b6b]/10 px-8 py-6 text-lg transition-all duration-300"
                 >
-                  Try For Free
+                  {language === 'pl' ? 'Wypróbuj za darmo' : 'Try For Free'}
                 </Button>
               </Link>
             </div>
