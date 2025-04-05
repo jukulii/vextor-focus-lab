@@ -26,7 +26,9 @@ const TestimonialSection = () => {
       position: "SEO Consultant"
     },
     {
-      quote: "I finally understand how Google sees our site's structure.",
+      quote: language === 'pl'
+        ? '„Od kiedy używamy Vextor AI, łatwiej rozmawia się z klientami o tematyce strony. Mamy dane, wykresy, wyniki – a nie przeczucia."'
+        : "I finally understand how Google sees our site's structure.",
       author: "Tina",
       position: "Freelance SEO"
     }
