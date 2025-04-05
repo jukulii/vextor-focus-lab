@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -63,7 +64,7 @@ const LoginPage = () => {
         <div className="relative min-h-screen bg-white">
             <div className="relative z-10 flex flex-col min-h-screen w-full">
                 <Navbar isDark={false} />
-                <main className="flex-grow flex items-center justify-center py-20 px-4">
+                <main className="flex-grow flex items-center justify-center py-32 px-4">
                     <div className="w-full max-w-md">
                         <Card className="shadow-lg border border-gray-200 bg-white/70 backdrop-blur-sm">
                             <CardHeader className="space-y-2">
