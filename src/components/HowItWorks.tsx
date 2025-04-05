@@ -28,14 +28,16 @@ const HowItWorks = () => {
   return <section id="how-it-works" className="py-16 border-t border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <div className="inline-block border-b-2 border-vextor-500 pb-2 mb-3">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-              {language === 'pl' ? 'Jak działa Vextor AI?' : t('how_it_works_title')}
-            </h2>
-          </div>
+          <span className="bg-[#ff6b6b]/20 text-[#ff6b6b] px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-4 border border-[#ff6b6b]/30">
+            How It Works
+          </span>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            {language === 'pl' ? 'Jak działa Vextor AI?' : t('how_it_works_title')}
+          </h2>
           <p className="text-lg mt-4 max-w-2xl mx-auto text-gray-700">
             {language === 'en' ? 'Follow these simple steps to optimize your content' : 'Wykonaj te proste kroki, aby zoptymalizować swoje treści.'}
           </p>
+          <div className="w-16 h-1 bg-[#8da2e5] mx-auto mt-4 rounded-full"></div>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-4">

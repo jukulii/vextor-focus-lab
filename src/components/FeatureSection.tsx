@@ -25,6 +25,7 @@ const FeatureSection = () => {
               : "Vextor AI helps website owners, SEOs, and content strategists understand how semantically focused their websites are — using the same techniques Google likely uses."
             }
           </p>
+          <div className="w-16 h-1 bg-[#8da2e5] mx-auto mt-4 rounded-full"></div>
         </div>
         
         <div className="grid md:grid-cols-2 gap-8 mt-8">

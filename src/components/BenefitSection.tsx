@@ -56,6 +56,7 @@ const BenefitSection = () => {
           <p className="text-xl max-w-3xl mx-auto text-gray-700">
             {language === 'pl' ? 'Optymalizuj treści i osiągaj wyższe pozycje' : 'Optimize your content and achieve higher rankings'}
           </p>
+          <div className="w-16 h-1 bg-[#8da2e5] mx-auto mt-4 rounded-full"></div>
         </div>
         
         <div className="grid grid-cols-1 gap-8">

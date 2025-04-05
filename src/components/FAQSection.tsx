@@ -95,6 +95,7 @@ const FAQSection = () => {
           <p className="text-xl max-w-2xl mx-auto text-gray-700">
             Learn more about how Vextor can help your SEO strategy
           </p>
+          <div className="w-16 h-1 bg-[#8da2e5] mx-auto mt-4 rounded-full"></div>
         </div>
         
         <Accordion type="single" collapsible className="w-full">

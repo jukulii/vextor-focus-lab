@@ -1,4 +1,3 @@
-
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from "@/components/ui/button";
 import { CheckIcon, Sparkles } from 'lucide-react';
@@ -64,9 +63,7 @@ const PricingSection = () => {
           <p className="text-xl max-w-2xl mx-auto text-gray-700">
             {language === 'pl' ? "Elastyczny cennik oparty na rzeczywistym użyciu" : "Flexible, Usage-Based Pricing"}
           </p>
-          
-          {/* Added highlight accent */}
-          <div className="absolute w-20 h-1 bg-[#ff6b6b] left-1/2 -translate-x-1/2 bottom-0 rounded-full"></div>
+          <div className="w-16 h-1 bg-[#8da2e5] mx-auto mt-4 rounded-full"></div>
         </div>
         
         <div className="flex justify-center">

@@ -61,6 +61,7 @@ const TestimonialSection = () => {
               ? "Co mówią nasi klienci?" 
               : "What SEOs are saying"}
           </h2>
+          <div className="w-16 h-1 bg-[#8da2e5] mx-auto mt-4 rounded-full"></div>
         </div>
 
         <div className="relative">
