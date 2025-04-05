@@ -1,5 +1,5 @@
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Globe, Menu, LogIn, LogOut } from 'lucide-react';
 import {
@@ -11,8 +11,7 @@ import {
 import { Button } from '@/components/ui/button';
 import DarkModeToggle from './DarkModeToggle';
 import { useAuth } from '@/contexts/AuthContext';
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Drawer, DrawerContent, DrawerTrigger, DrawerClose } from "@/components/ui/drawer";
 
 const AppHeader = () => {
@@ -21,13 +20,45 @@ const AppHeader = () => {
   const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const handleLogout = () => {
     logout();
     navigate('/login');
   };
 
+  const scrollToSection = (id: string) => {
+    // Navigate to landing page first if not already there
+    if (window.location.pathname !== '/') {
+      navigate(`/#${id}`);
+    } else {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
+  const bgClass = scrolled 
+    ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800 shadow-sm'
+    : 'bg-transparent';
+
+  const navItems = [
+    { href: "/app", label: t('home'), onClick: null },
+    { href: "#how-it-works", label: t('how_it_works'), onClick: () => scrollToSection('how-it-works') },
+    { href: "#features", label: t('features'), onClick: () => scrollToSection('features') },
+    { href: "#pricing", label: t('pricing'), onClick: () => scrollToSection('pricing') },
+    { href: "#faq", label: t('faq'), onClick: () => scrollToSection('faq') },
+  ];
+
   return (
-    <header className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800 shadow-sm">
+    <header className={`${bgClass} transition-all duration-300`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
@@ -42,15 +73,25 @@ const AppHeader = () => {
 
           {/* Desktop navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <Link to="/app" className="text-gray-700 dark:text-gray-300 hover:text-[#788be4] dark:hover:text-[#788be4] transition-colors font-medium">
-              {t('home') || 'Home'}
-            </Link>
-            <Link to="/sitemaps" className="text-gray-700 dark:text-gray-300 hover:text-[#788be4] dark:hover:text-[#788be4] transition-colors font-medium">
-              {t('sitemaps') || 'Sitemaps'}
-            </Link>
-            <Link to="/results" className="text-gray-700 dark:text-gray-300 hover:text-[#788be4] dark:hover:text-[#788be4] transition-colors font-medium">
-              {t('results') || 'Results'}
-            </Link>
+            {navItems.map((item, index) => (
+              item.onClick ? (
+                <button
+                  key={index}
+                  onClick={item.onClick}
+                  className="text-gray-700 dark:text-gray-300 hover:text-[#788be4] dark:hover:text-[#788be4] transition-colors font-medium"
+                >
+                  {item.label}
+                </button>
+              ) : (
+                <Link
+                  key={index}
+                  to={item.href}
+                  className="text-gray-700 dark:text-gray-300 hover:text-[#788be4] dark:hover:text-[#788be4] transition-colors font-medium"
+                >
+                  {item.label}
+                </Link>
+              )
+            ))}
           </div>
           
           {/* Desktop actions */}
@@ -126,21 +167,25 @@ const AppHeader = () => {
                     </DrawerClose>
                   </div>
                   
-                  <DrawerClose asChild>
-                    <Link to="/app" className="text-gray-700 dark:text-gray-300 hover:text-[#788be4] dark:hover:text-[#788be4] font-medium py-2 block">
-                      {t('home') || 'Home'}
-                    </Link>
-                  </DrawerClose>
-                  <DrawerClose asChild>
-                    <Link to="/sitemaps" className="text-gray-700 dark:text-gray-300 hover:text-[#788be4] dark:hover:text-[#788be4] font-medium py-2 block">
-                      {t('sitemaps') || 'Sitemaps'}
-                    </Link>
-                  </DrawerClose>
-                  <DrawerClose asChild>
-                    <Link to="/results" className="text-gray-700 dark:text-gray-300 hover:text-[#788be4] dark:hover:text-[#788be4] font-medium py-2 block">
-                      {t('results') || 'Results'}
-                    </Link>
-                  </DrawerClose>
+                  {navItems.map((item, index) => (
+                    <DrawerClose asChild key={index}>
+                      {item.onClick ? (
+                        <button
+                          onClick={item.onClick}
+                          className="text-gray-700 dark:text-gray-300 hover:text-[#788be4] dark:hover:text-[#788be4] font-medium py-2 block w-full text-left"
+                        >
+                          {item.label}
+                        </button>
+                      ) : (
+                        <Link
+                          to={item.href}
+                          className="text-gray-700 dark:text-gray-300 hover:text-[#788be4] dark:hover:text-[#788be4] font-medium py-2 block"
+                        >
+                          {item.label}
+                        </Link>
+                      )}
+                    </DrawerClose>
+                  ))}
                   
                   <div className="flex items-center justify-between pt-4 border-t border-gray-200 dark:border-gray-700">
                     <DarkModeToggle />
