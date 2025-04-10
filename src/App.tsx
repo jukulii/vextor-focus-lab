@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { LanguageProvider } from '@/contexts/LanguageContext';
 import { useEffect } from "react";
 import LandingPage from "./pages/LandingPage";
@@ -13,7 +13,9 @@ import ResultsPage from "./pages/ResultsPage";
 import NotFound from "./pages/NotFound";
 import { AuthProvider } from '@/contexts/AuthContext';
 import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
 import ProtectedRoute from "@/components/ProtectedRoute";
+import ProtectedAuthRoute from '@/components/ProtectedAuthRoute';
 
 const queryClient = new QueryClient();
 
@@ -37,14 +39,22 @@ const App = () => {
           <TooltipProvider>
             <Toaster />
             <Sonner />
-            <BrowserRouter>
+            <Router>
               <Routes>
                 <Route path="/" element={<LandingPage />} />
-                <Route path="/login" element={<LoginPage />} />
+                <Route path="/login" element={
+                  <ProtectedAuthRoute>
+                    <LoginPage />
+                  </ProtectedAuthRoute>
+                } />
+                <Route path="/register" element={
+                  <ProtectedAuthRoute>
+                    <RegisterPage />
+                  </ProtectedAuthRoute>
+                } />
 
                 {/* Protected routes */}
-                {/* <Route element={<ProtectedRoute />}> */}
-                <Route>
+                <Route element={<ProtectedRoute />}>
                   <Route path="/app" element={<AppPage />} />
                   <Route path="/sitemaps" element={<SitemapsPage />} />
                   <Route path="/processing" element={<ProcessingPage />} />
@@ -53,11 +63,11 @@ const App = () => {
 
                 <Route path="*" element={<NotFound />} />
               </Routes>
-            </BrowserRouter>
+            </Router>
           </TooltipProvider>
         </AuthProvider>
       </LanguageProvider>
-    </QueryClientProvider >
+    </QueryClientProvider>
   );
 };
 

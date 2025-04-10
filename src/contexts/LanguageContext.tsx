@@ -17,9 +17,31 @@ const translations: Translations = {
   "how_it_works": { en: "How it works", pl: "Jak to działa" },
   "pricing": { en: "Pricing", pl: "Cennik" },
   "faq": { en: "FAQ", pl: "FAQ" },
-  
+
   // Login related translations
   "login": { en: "Log In", pl: "Zaloguj się" },
+  "login_subtitle": { en: "Enter your credentials to access your account", pl: "Wprowadź swoje dane, aby uzyskać dostęp do konta" },
+  "email": { en: "Email", pl: "Email" },
+  "password": { en: "Password", pl: "Hasło" },
+  "logging_in": { en: "Logging in...", pl: "Logowanie..." },
+  "login_success": { en: "Login successful", pl: "Zalogowano pomyślnie" },
+  "welcome_back": { en: "Welcome back to Vextor", pl: "Witaj z powrotem w Vextor" },
+  "login_failed": { en: "Login failed", pl: "Logowanie nie powiodło się" },
+  "error": { en: "Error", pl: "Błąd" },
+  "dont_have_account": { en: "Don't have an account?", pl: "Nie masz konta?" },
+  "register": { en: "Register", pl: "Zarejestruj się" },
+  "logout": { en: "Logout", pl: "Wyloguj się" },
+  "go_to_app": { en: "Go to App", pl: "Przejdź do aplikacji" },
+
+  // Registration related translations
+  "register_subtitle": { en: "Create your account to get started", pl: "Utwórz konto, aby rozpocząć" },
+  "display_name": { en: "Display Name", pl: "Nazwa wyświetlana" },
+  "display_name_placeholder": { en: "Your name", pl: "Twoje imię" },
+  "registering": { en: "Registering...", pl: "Rejestracja..." },
+  "registration_success": { en: "Registration successful", pl: "Rejestracja pomyślna" },
+  "check_email": { en: "Please check your email to confirm your account", pl: "Sprawdź swoją skrzynkę email, aby potwierdzić konto" },
+  "registration_failed": { en: "Registration failed", pl: "Rejestracja nie powiodła się" },
+  "already_have_account": { en: "Already have an account?", pl: "Masz już konto?" },
 
   // Hero Section
   "hero_title": {
@@ -197,6 +219,54 @@ const translations: Translations = {
   "url_2": {
     en: "URL 2",
     pl: "URL 2"
+  },
+
+  // Website URL form translations
+  "enter_website_url": {
+    en: "Enter your website URL (e.g. example.com)",
+    pl: "Wprowadź adres swojej strony (np. przyklad.pl)"
+  },
+  "please_enter_website_url": {
+    en: "Please enter a website URL",
+    pl: "Proszę wprowadzić adres strony"
+  },
+  "could_not_search_website": {
+    en: "Could not search the website. Please try again.",
+    pl: "Nie udało się przeszukać strony. Spróbuj ponownie."
+  },
+  "domain": {
+    en: "Domain",
+    pl: "Domena"
+  },
+  "execution_time": {
+    en: "Execution time",
+    pl: "Czas wykonania"
+  },
+
+  // Protected routes and authorization messages
+  "protected_route_message": {
+    en: "You need to be logged in to access this page",
+    pl: "Musisz być zalogowany, aby uzyskać dostęp do tej strony"
+  },
+  "redirecting_to_login": {
+    en: "Redirecting to login page...",
+    pl: "Przekierowywanie do strony logowania..."
+  },
+  "already_logged_in": {
+    en: "You are already logged in",
+    pl: "Jesteś już zalogowany"
+  },
+  "redirecting_to_app": {
+    en: "Redirecting to application...",
+    pl: "Przekierowywanie do aplikacji..."
+  },
+  "session_expired": {
+    en: "Your session has expired. Please log in again.",
+    pl: "Twoja sesja wygasła. Zaloguj się ponownie."
+  },
+  "unauthorized_access": {
+    en: "Unauthorized access",
+    pl: "Nieautoryzowany dostęp"
   },
 
   // New translations for clusters/classes tab
