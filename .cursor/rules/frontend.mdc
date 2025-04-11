@@ -1,0 +1,28 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+rules:
+- Use React with functional components and hooks.
+- Always use TypeScript with strict types enabled.
+- Use Tailwind CSS for styling.
+- Prefer composition over inheritance.
+- Add JSDoc comments for all exported functions and components.
+- Avoid inline styles — use Tailwind classes or CSS Modules.
+- When creating reusable UI components, use clear props interfaces.
+- Follow accessibility (a11y) best practices (e.g. proper labels, roles).
+- Keep components small and focused on a single responsibility.
+- Use `useEffect` with clear dependency arrays and proper cleanup.
+- For animations or transitions, use libraries compatible with React (e.g. Framer Motion).
+- Prefer `const` over `let` and avoid mutating state directly.
+
+context:
+- src/components/
+- src/contexts/
+- src/hooks/
+- src/lib/
+- src/pages/
+- src/App.tsx
+- tailwind.config.ts
+- tsconfig.json

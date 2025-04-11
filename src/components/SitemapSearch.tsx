@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -9,10 +8,12 @@ import { Card, CardContent } from '@/components/ui/card';
 import { SearchIcon, Loader2, Globe } from 'lucide-react';
 import axios from 'axios';
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from '@/contexts/AuthContext';
 
 const SitemapSearch = () => {
   const { t } = useLanguage();
   const navigate = useNavigate();
+  const { session, isAuthenticated } = useAuth();
   const [websiteUrl, setWebsiteUrl] = useState('');
   const [isSearching, setIsSearching] = useState(false);
   const { toast } = useToast();
@@ -37,62 +38,81 @@ const SitemapSearch = () => {
       return;
     }
 
+    if (!isAuthenticated || !session?.access_token) {
+      toast({
+        title: t('Error'),
+        description: t('session_expired'),
+        variant: "destructive",
+      });
+      // Add a small delay before navigation to show the toast
+      setTimeout(() => {
+        navigate('/login');
+      }, 1000);
+      return;
+    }
+
     setIsSearching(true);
     try {
-      const token = localStorage.getItem('vextor-token');
-      if (!token) {
-        throw new Error('No token found');
-      }
-      
       // Format URL if needed
       let formattedUrl = websiteUrl;
       if (!formattedUrl.startsWith('http://') && !formattedUrl.startsWith('https://')) {
         formattedUrl = 'https://' + formattedUrl;
       }
-      
+
       const response = await axios.get(`${import.meta.env.VITE_API_URL}/sitemaps`, {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
+          Authorization: `Bearer ${session.access_token}`
         },
         params: {
           domain: formattedUrl
         }
       });
       console.log('Data from API:', response.data);
-      
+
       // Store the response data in localStorage for later use
       localStorage.setItem('sitemapData', JSON.stringify(response.data));
-      
+
       // Redirect to processing page instead of sitemaps
       navigate('/processing');
     } catch (error) {
       console.error('Error during search:', error);
       setIsSearching(false);
-      toast({
-        title: t('Error'),
-        description: t('Could not search the website. Please try again.'),
-        variant: "destructive",
-      });
+      if (error.response?.status === 401) {
+        toast({
+          title: t('Error'),
+          description: t('session_expired'),
+          variant: "destructive",
+        });
+        setTimeout(() => {
+          navigate('/login');
+        }, 1000);
+      } else {
+        toast({
+          title: t('Error'),
+          description: t('Could not search the website. Please try again.'),
+          variant: "destructive",
+        });
+      }
     }
   };
 
   return (
     <div className="w-full max-w-3xl mx-auto font-sans text-gray-900 dark:text-gray-100 transition-colors">
       <h1 className="text-2xl font-bold text-center mb-8 text-gray-900 dark:text-white font-sans">
-        Check Your Domain Focus
+        {t('check_domain_focus')}
       </h1>
 
       <Tabs defaultValue="url" className="w-full">
         <TabsList className="grid w-full grid-cols-3 mb-8 bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm border border-[#ff6b6b]/20 dark:border-[#ff6b6b]/10 rounded-md shadow-sm">
-          <TabsTrigger 
-            value="url" 
+          <TabsTrigger
+            value="url"
             className="w-full rounded-md py-2 text-gray-900 dark:text-gray-200 data-[state=active]:bg-[#ff6b6b]/10 data-[state=active]:text-[#ff6b6b] dark:data-[state=active]:text-[#ff8a8a] font-sans"
           >
             {t('site_url')}
           </TabsTrigger>
-          <TabsTrigger 
-            value="filters" 
+          <TabsTrigger
+            value="filters"
             className="w-full rounded-md py-2 text-gray-900 dark:text-gray-200 data-[state=active]:bg-[#ff6b6b]/10 data-[state=active]:text-[#ff6b6b] dark:data-[state=active]:text-[#ff8a8a] font-sans relative"
             onClick={() => navigate('/app')}
           >
@@ -101,8 +121,8 @@ const SitemapSearch = () => {
               {t('coming_soon')}
             </span>
           </TabsTrigger>
-          <TabsTrigger 
-            value="generate" 
+          <TabsTrigger
+            value="generate"
             className="w-full rounded-md py-2 text-gray-900 dark:text-gray-200 data-[state=active]:bg-[#ff6b6b]/10 data-[state=active]:text-[#ff6b6b] dark:data-[state=active]:text-[#ff8a8a] font-sans"
             onClick={() => navigate('/app')}
           >
@@ -117,9 +137,9 @@ const SitemapSearch = () => {
                 <div className="space-y-2 relative">
                   <div className="flex items-center relative">
                     <Globe className="absolute left-3 text-gray-400 dark:text-gray-500" size={18} />
-                    <Input 
-                      placeholder={t('enter_website_url')} 
-                      value={websiteUrl} 
+                    <Input
+                      placeholder={t('enter_website_url')}
+                      value={websiteUrl}
                       onChange={e => setWebsiteUrl(e.target.value)}
                       className="w-full h-12 bg-transparent border-gray-300 dark:border-gray-600 font-sans pl-10 text-gray-800 dark:text-gray-200 font-medium focus:ring-[#ff6b6b]/20 focus:border-[#ff6b6b] dark:focus:ring-[#ff6b6b]/30 dark:focus:border-[#ff6b6b]/70 dark:bg-gray-800/50"
                       type="url"
@@ -134,10 +154,10 @@ const SitemapSearch = () => {
                 </div>
 
                 <div className="flex flex-col space-y-2">
-                  <Button 
-                    variant="accent" 
-                    onClick={handleAutomaticSearch} 
-                    disabled={isSearching} 
+                  <Button
+                    variant="accent"
+                    onClick={handleAutomaticSearch}
+                    disabled={isSearching}
                     className="w-full bg-[#ff6b6b] hover:bg-[#ff5252] text-white shadow-md h-12 text-base font-medium font-sans dark:bg-[#ff6b6b]/90 dark:hover:bg-[#ff5252]/90 dark:shadow-lg dark:shadow-[#ff6b6b]/10"
                   >
                     {isSearching ? (
@@ -170,9 +190,9 @@ const SitemapSearch = () => {
                     <path d="M18 15v.01" />
                   </svg>
                 </div>
-                <h3 className="text-lg font-medium mb-2 text-gray-900 dark:text-gray-100 font-sans">Funkcja filtrowania wkrótce będzie dostępna</h3>
+                <h3 className="text-lg font-medium mb-2 text-gray-900 dark:text-gray-100 font-sans">{t('feature_unavailable')}</h3>
                 <p className="text-gray-600 dark:text-gray-400 text-sm max-w-md font-sans">
-                  Pracujemy nad dodaniem zaawansowanych opcji filtrowania, aby pomóc Ci lepiej analizować zawartość Twojej strony. Ta funkcjonalność będzie dostępna w następnej aktualizacji.
+                  {t('in_development')}
                 </p>
               </div>
             </CardContent>

@@ -1,0 +1,26 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+rules:
+- Group environment/config variables by feature or dependency.
+- For each group, wrap it with triple-hash section comments similar to Symfony style:
+  Use the pattern: 
+  ###> <group-name> ###
+  KEY=VALUE
+  ...
+  ###< <group-name> ###
+- Sort variables inside each group logically (e.g. URLs together, secrets together).
+- Always use consistent indentation (none) and UPPERCASE keys for env vars.
+- For secrets, clearly name the key with `_KEY`, `_TOKEN`, `_SECRET`, etc.
+- When possible, add a commented-out alternative or example (e.g. for MAILER_DSN).
+- Never include hardcoded secrets in public repositories. Use placeholders like `<your-secret>`.
+- For JavaScript/TypeScript config files, mirror this grouping with section comments and object nesting if possible.
+- Keep all values consistent in style (e.g. quoted URLs if they contain special characters).
+- Avoid duplicate keys and unnecessary comments unless they clarify configuration.
+- Use `.env.local` for developer-specific overrides, and keep `.env` as a default template.
+
+context:
+- .env
+- .env.local

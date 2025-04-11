@@ -294,6 +294,12 @@ const translations: Translations = {
     en: "Primary content pattern",
     pl: "Główny wzorzec treści"
   },
+
+  // Auth related translations
+  "auth.pleaseLogin": { en: "Please log in to access this page", pl: "Zaloguj się, aby uzyskać dostęp do tej strony" },
+  "auth.sessionExpired": { en: "Your session has expired. Please log in again", pl: "Twoja sesja wygasła. Zaloguj się ponownie" },
+  "Info": { en: "Info", pl: "Informacja" },
+  "Error": { en: "Error", pl: "Błąd" },
 };
 
 interface LanguageContextType {

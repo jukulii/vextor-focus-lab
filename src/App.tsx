@@ -42,25 +42,54 @@ const App = () => {
             <Router>
               <Routes>
                 <Route path="/" element={<LandingPage />} />
-                <Route path="/login" element={
-                  <ProtectedAuthRoute>
-                    <LoginPage />
-                  </ProtectedAuthRoute>
-                } />
-                <Route path="/register" element={
-                  <ProtectedAuthRoute>
-                    <RegisterPage />
-                  </ProtectedAuthRoute>
-                } />
-
-                {/* Protected routes */}
-                <Route element={<ProtectedRoute />}>
-                  <Route path="/app" element={<AppPage />} />
-                  <Route path="/sitemaps" element={<SitemapsPage />} />
-                  <Route path="/processing" element={<ProcessingPage />} />
-                  <Route path="/results" element={<ResultsPage />} />
-                </Route>
-
+                <Route
+                  path="/login"
+                  element={
+                    <ProtectedAuthRoute>
+                      <LoginPage />
+                    </ProtectedAuthRoute>
+                  }
+                />
+                <Route
+                  path="/register"
+                  element={
+                    <ProtectedAuthRoute>
+                      <RegisterPage />
+                    </ProtectedAuthRoute>
+                  }
+                />
+                <Route
+                  path="/app"
+                  element={
+                    <ProtectedRoute>
+                      <AppPage />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/sitemaps"
+                  element={
+                    <ProtectedRoute>
+                      <SitemapsPage />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/processing"
+                  element={
+                    <ProtectedRoute>
+                      <ProcessingPage />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/results"
+                  element={
+                    <ProtectedRoute>
+                      <ResultsPage />
+                    </ProtectedRoute>
+                  }
+                />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Router>
