@@ -133,7 +133,7 @@ const translations: Translations = {
   "check_domain": { en: "Check Domain", pl: "Sprawdź domenę" },
   "check_for_me": { en: "Check for me", pl: "Wyszukaj sitemapę za mnie" },
   "checking_sitemap": { en: "Checking sitemap...", pl: "Trwa wyszukiwanie sitemapy..." },
-  "enter_sitemap_url": { en: "Enter sitemap URL", pl: "Wprowadź adres sitemapy" },
+  "enter_sitemap_url": { en: "Enter sitemap URL (e.g. example.com/sitemap.xml)", pl: "Wprowadź adres mapy strony (np. przyklad.pl/sitemap.xml)" },
   "next": { en: "Next", pl: "Dalej" },
   "step": { en: "Step", pl: "Krok" },
   "progress": { en: "progress, estimated time to complete", pl: "postęp, szacowany czas zakończenia" },
@@ -238,6 +238,10 @@ const translations: Translations = {
     en: "Domain",
     pl: "Domena"
   },
+  "sitemap": {
+    en: "Sitemap",
+    pl: "Mapa strony"
+  },
   "execution_time": {
     en: "Execution time",
     pl: "Czas wykonania"
@@ -300,6 +304,10 @@ const translations: Translations = {
   "auth.sessionExpired": { en: "Your session has expired. Please log in again", pl: "Twoja sesja wygasła. Zaloguj się ponownie" },
   "Info": { en: "Info", pl: "Informacja" },
   "Error": { en: "Error", pl: "Błąd" },
+  "please_enter_url": {
+    en: "Please enter a URL",
+    pl: "Proszę wprowadzić adres URL"
+  },
 };
 
 interface LanguageContextType {

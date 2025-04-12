@@ -5,34 +5,57 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent } from '@/components/ui/card';
-import { SearchIcon, Loader2, Globe } from 'lucide-react';
+import { SearchIcon, Loader2, Globe, Layout } from 'lucide-react';
 import axios from 'axios';
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from '@/contexts/AuthContext';
+import { supabase } from '@/lib/supabase';
+
+// Type for project_source_type enum
+type ProjectSourceType = 'domain_url' | 'sitemap_url';
 
 const SitemapSearch = () => {
   const { t } = useLanguage();
   const navigate = useNavigate();
   const { session, isAuthenticated } = useAuth();
-  const [websiteUrl, setWebsiteUrl] = useState('');
+  const [url, setUrl] = useState('');
   const [isSearching, setIsSearching] = useState(false);
+  const [inputType, setInputType] = useState<ProjectSourceType>('domain_url');
   const { toast } = useToast();
 
-  const handleSearch = () => {
-    setIsSearching(true);
+  const createProject = async (url: string, type: ProjectSourceType) => {
+    if (!session?.user?.id) {
+      throw new Error('No user session');
+    }
 
-    // Simulate search delay then navigate to sitemaps page
-    setTimeout(() => {
-      setIsSearching(false);
-      navigate('/sitemaps');
-    }, 1500);
+    try {
+      const { data, error } = await supabase
+        .from('projects')
+        .insert([
+          {
+            user_id: session.user.id,
+            name: url,
+            source_type: type,
+            urls_count: 0,
+            processed_urls_count: 0
+          }
+        ])
+        .select()
+        .single();
+
+      if (error) throw error;
+      return data;
+    } catch (error) {
+      console.error('Error creating project:', error);
+      throw error;
+    }
   };
 
   const handleAutomaticSearch = async () => {
-    if (!websiteUrl) {
+    if (!url) {
       toast({
         title: t('Error'),
-        description: t('Please enter a website URL'),
+        description: t('please_enter_url'),
         variant: "destructive",
       });
       return;
@@ -44,7 +67,6 @@ const SitemapSearch = () => {
         description: t('session_expired'),
         variant: "destructive",
       });
-      // Add a small delay before navigation to show the toast
       setTimeout(() => {
         navigate('/login');
       }, 1000);
@@ -53,11 +75,13 @@ const SitemapSearch = () => {
 
     setIsSearching(true);
     try {
-      // Format URL if needed
-      let formattedUrl = websiteUrl;
-      if (!formattedUrl.startsWith('http://') && !formattedUrl.startsWith('https://')) {
+      let formattedUrl = url;
+      if (inputType === 'domain_url' && !formattedUrl.startsWith('http://') && !formattedUrl.startsWith('https://')) {
         formattedUrl = 'https://' + formattedUrl;
       }
+
+      // Create a new project in Supabase
+      const project = await createProject(formattedUrl, inputType);
 
       const response = await axios.get(`${import.meta.env.VITE_API_URL}/sitemaps`, {
         headers: {
@@ -65,15 +89,13 @@ const SitemapSearch = () => {
           Authorization: `Bearer ${session.access_token}`
         },
         params: {
-          domain: formattedUrl
+          [inputType === 'domain_url' ? 'domain' : 'sitemap']: formattedUrl,
+          projectId: project.id
         }
       });
       console.log('Data from API:', response.data);
 
-      // Store the response data in localStorage for later use
-      localStorage.setItem('sitemapData', JSON.stringify(response.data));
-
-      // Redirect to processing page instead of sitemaps
+      localStorage.setItem('sitemapData', JSON.stringify({ ...response.data, projectId: project.id }));
       navigate('/processing');
     } catch (error) {
       console.error('Error during search:', error);
@@ -90,7 +112,7 @@ const SitemapSearch = () => {
       } else {
         toast({
           title: t('Error'),
-          description: t('Could not search the website. Please try again.'),
+          description: t('could_not_search_website'),
           variant: "destructive",
         });
       }
@@ -134,13 +156,35 @@ const SitemapSearch = () => {
           <Card className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm border border-[#ff6b6b]/20 dark:border-[#ff6b6b]/10 shadow-sm">
             <CardContent className="pt-6">
               <div className="space-y-4">
+                <div className="flex items-center justify-center mb-4">
+                  <Button
+                    variant={inputType === 'domain_url' ? 'default' : 'outline'}
+                    onClick={() => setInputType('domain_url')}
+                    className="mr-2"
+                  >
+                    <Globe className="mr-2 h-4 w-4" />
+                    {t('domain')}
+                  </Button>
+                  <Button
+                    variant={inputType === 'sitemap_url' ? 'default' : 'outline'}
+                    onClick={() => setInputType('sitemap_url')}
+                  >
+                    <Layout className="mr-2 h-4 w-4" />
+                    {t('sitemap')}
+                  </Button>
+                </div>
+
                 <div className="space-y-2 relative">
                   <div className="flex items-center relative">
-                    <Globe className="absolute left-3 text-gray-400 dark:text-gray-500" size={18} />
+                    {inputType === 'domain_url' ? (
+                      <Globe className="absolute left-3 text-gray-400 dark:text-gray-500" size={18} />
+                    ) : (
+                      <Layout className="absolute left-3 text-gray-400 dark:text-gray-500" size={18} />
+                    )}
                     <Input
-                      placeholder={t('enter_website_url')}
-                      value={websiteUrl}
-                      onChange={e => setWebsiteUrl(e.target.value)}
+                      placeholder={inputType === 'domain_url' ? t('enter_website_url') : t('enter_sitemap_url')}
+                      value={url}
+                      onChange={e => setUrl(e.target.value)}
                       className="w-full h-12 bg-transparent border-gray-300 dark:border-gray-600 font-sans pl-10 text-gray-800 dark:text-gray-200 font-medium focus:ring-[#ff6b6b]/20 focus:border-[#ff6b6b] dark:focus:ring-[#ff6b6b]/30 dark:focus:border-[#ff6b6b]/70 dark:bg-gray-800/50"
                       type="url"
                       autoComplete="url"
