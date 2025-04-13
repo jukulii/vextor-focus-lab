@@ -17,28 +17,18 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
     useEffect(() => {
         const checkAuth = async () => {
             try {
-                if (!isAuthenticated) {
-                    toast({
-                        title: t('Info'),
-                        description: t('auth.pleaseLogin'),
-                        variant: "default",
-                    });
-                } else if (!isSessionValid()) {
-                    toast({
-                        title: t('Error'),
-                        description: t('auth.sessionExpired'),
-                        variant: "destructive",
-                    });
-                }
+                // No longer check auth status for toasts here
+                // Just ensure the checking state is set
             } catch (error) {
-                console.error('Error checking authentication:', error);
+                console.error('Error during initial auth check:', error);
             } finally {
                 setIsChecking(false);
             }
         };
 
         checkAuth();
-    }, [isAuthenticated, isSessionValid, toast, t]);
+        // Dependency array simplified as toasts are moved
+    }, [setIsChecking]); // Consider if other dependencies are truly needed if only setting state
 
     if (isChecking) {
         return (
@@ -48,7 +38,22 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
         );
     }
 
-    if (!isAuthenticated || !isSessionValid()) {
+    // Check authentication status *after* initial loading
+    if (!isAuthenticated) {
+        toast({
+            title: t('Info'),
+            description: t('auth.pleaseLogin'),
+            variant: "default",
+        });
+        return <Navigate to="/login" replace />;
+    }
+
+    if (!isSessionValid()) {
+        toast({
+            title: t('Error'),
+            description: t('auth.sessionExpired'),
+            variant: "destructive",
+        });
         return <Navigate to="/login" replace />;
     }
 

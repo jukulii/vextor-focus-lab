@@ -1,0 +1,24 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Rule Name: translation-consistency.mdc
+# Description: Ensures all user-facing text added to the frontend is immediately translated in `src/contexts/languagecontext.tsx` for all supported languages.
+
+rules:
+- All user-facing text in frontend components/pages (src/components, src/pages, etc.) MUST use the `t()` function provided by `LanguageContext`.
+- When introducing any new user-facing text (e.g., button labels, messages, placeholders, titles):
+    1. Create a descriptive and unique translation key (e.g., `confirm_delete_button`, `user_profile_title`, `invalid_email_error`).
+    2. Use the key with the `t()` function in the component code (e.g., `<Button>{t('confirm_delete_button')}</Button>`).
+    3. **Immediately and automatically** edit the `src/contexts/languagecontext.tsx` file.
+    4. Add the newly created key to the translation objects for **every language** defined within that file.
+    5. Set the initial translation value for the new key in *all* languages to the English version of the text (or a sensible default if English is not the base).
+- This process MUST be followed for *every* new piece of user-facing text.
+- Do NOT ask the user for confirmation before adding the keys to `src/contexts/languagecontext.tsx`.
+- Avoid hardcoding any user-facing strings directly in the components.
+
+context:
+- src/contexts/LanguageContext.tsx
+- src/components/
+- src/pages/

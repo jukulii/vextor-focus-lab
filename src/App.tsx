@@ -7,7 +7,6 @@ import { LanguageProvider } from '@/contexts/LanguageContext';
 import { useEffect } from "react";
 import LandingPage from "./pages/LandingPage";
 import AppPage from "./pages/AppPage";
-import SitemapsPage from "./pages/SitemapsPage";
 import ProcessingPage from "./pages/ProcessingPage";
 import ResultsPage from "./pages/ResultsPage";
 import NotFound from "./pages/NotFound";
@@ -63,14 +62,6 @@ const App = () => {
                   element={
                     <ProtectedRoute>
                       <AppPage />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/sitemaps"
-                  element={
-                    <ProtectedRoute>
-                      <SitemapsPage />
                     </ProtectedRoute>
                   }
                 />

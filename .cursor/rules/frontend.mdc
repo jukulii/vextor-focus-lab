@@ -16,6 +16,61 @@ rules:
 - Use `useEffect` with clear dependency arrays and proper cleanup.
 - For animations or transitions, use libraries compatible with React (e.g. Framer Motion).
 - Prefer `const` over `let` and avoid mutating state directly.
+- Always maintain visual consistency with the existing application:
+  - Follow the established design patterns and styles
+  - Reuse existing components and styles when possible
+  - Ensure new components match the application's look and feel
+  - Keep consistent with the application's color scheme
+  - Maintain consistent spacing and layout patterns
+  - Follow the same interaction patterns
+  - Use consistent typography
+  - Keep consistent with the application's dark/light mode implementation
+- Follow mobile-first responsive design principles:
+  - Start with mobile layout and progressively enhance for larger screens
+  - Use Tailwind's responsive prefixes consistently (sm:, md:, lg:, xl:)
+  - Standard breakpoints:
+    - Default (mobile): 0-639px
+    - sm: 640px-767px
+    - md: 768px-1023px
+    - lg: 1024px-1279px
+    - xl: 1280px+
+  - Typography scaling:
+    - Mobile base: text-sm (14px)
+    - Tablet/Desktop base: text-base (16px)
+    - Headers scale proportionally (text-lg -> text-xl -> text-2xl)
+  - Spacing and padding:
+    - Mobile: compact spacing (p-2, p-3, gap-2)
+    - Tablet: moderate spacing (p-4, p-6, gap-4)
+    - Desktop: comfortable spacing (p-6, p-8, gap-6)
+  - Interactive elements:
+    - Mobile: larger touch targets (min 44px height)
+    - Proper spacing between clickable elements
+    - Clear hover/active states
+  - Layout adjustments:
+    - Stack elements vertically on mobile
+    - Use grid/flex layouts for larger screens
+    - Maintain content hierarchy across breakpoints
+  - Container widths:
+    - Mobile: full width with small padding (px-2)
+    - Tablet: max-w-[90%] or specific breakpoint
+    - Desktop: max-w-[1000px] or specific breakpoint
+  - Table handling:
+    - Mobile: scrollable or stacked layout
+    - Reduced padding in cells
+    - Smaller font sizes for dense content
+    - Clear column separation
+  - Form elements:
+    - Mobile-friendly input heights (h-10 -> h-12)
+    - Properly spaced labels and fields
+    - Full-width inputs on mobile
+  - Visual hierarchy:
+    - Maintain consistent information hierarchy across breakpoints
+    - Adjust spacing and typography while preserving visual relationships
+    - Keep critical actions easily accessible
+  - Performance considerations:
+    - Optimize images for different screen sizes
+    - Lazy load off-screen content
+    - Minimize layout shifts during loading
 
 context:
 - src/components/

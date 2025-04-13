@@ -131,19 +131,19 @@ const translations: Translations = {
   "check_domain_focus": { en: "Check Your Domain's Focus", pl: "Sprawdź Focus Swojej domeny" },
   "site_url": { en: "Website URL", pl: "Adres URL strony" },
   "check_domain": { en: "Check Domain", pl: "Sprawdź domenę" },
-  "check_for_me": { en: "Check for me", pl: "Wyszukaj sitemapę za mnie" },
-  "checking_sitemap": { en: "Checking sitemap...", pl: "Trwa wyszukiwanie sitemapy..." },
-  "enter_sitemap_url": { en: "Enter sitemap URL (e.g. example.com/sitemap.xml)", pl: "Wprowadź adres mapy strony (np. przyklad.pl/sitemap.xml)" },
-  "next": { en: "Next", pl: "Dalej" },
+  "check_for_me": { en: "Check for me", pl: "Sprawdź dla mnie" },
+  "checking_sitemap": { en: "Checking sitemap...", pl: "Sprawdzanie sitemapy..." },
+  "enter_sitemap_url": { en: "Enter sitemap URL (e.g. example.com/sitemap.xml)", pl: "Wprowadź adres sitemapy (np. example.com/sitemap.xml)" },
+  "next": { en: "next", pl: "następny" },
   "step": { en: "Step", pl: "Krok" },
-  "progress": { en: "progress, estimated time to complete", pl: "postęp, szacowany czas zakończenia" },
-  "converting_content": { en: "Currently converting your content to embeddings...", pl: "Aktualnie zamieniamy Twoją treść na embeddingi..." },
+  "progress": { en: "progress", pl: "postęp" },
+  "converting_content": { en: "Converting content to vectors...", pl: "Konwertowanie treści na wektory..." },
   "site_map": { en: "Site Map", pl: "Mapa strony" },
   "filters": { en: "Filters", pl: "Filtry" },
   "processing": { en: "Processing", pl: "Przetwarzanie" },
-  "coming_soon": { en: "Coming soon", pl: "Wkrótce dostępne" },
+  "coming_soon": { en: "Coming soon", pl: "Wkrótce" },
   "feature_unavailable": { en: "This feature is not available yet", pl: "Ta funkcja nie jest jeszcze dostępna" },
-  "in_development": { en: "In development", pl: "W trakcie rozwoju" },
+  "in_development": { en: "We're working hard to bring this feature to you soon!", pl: "Pracujemy nad udostępnieniem tej funkcji!" },
   "url_to_centroid": { en: "URL's to centroid", pl: "URL do centroidu" },
   "url": { en: "URL", pl: "Adres URL" },
   "proximity": { en: "Proximity to Centroid", pl: "Bliskość do centroidu" },
@@ -223,16 +223,16 @@ const translations: Translations = {
 
   // Website URL form translations
   "enter_website_url": {
-    en: "Enter your website URL (e.g. example.com)",
-    pl: "Wprowadź adres swojej strony (np. przyklad.pl)"
+    en: "Enter website URL (e.g. example.com)",
+    pl: "Wprowadź adres strony (np. example.com)"
   },
   "please_enter_website_url": {
     en: "Please enter a website URL",
     pl: "Proszę wprowadzić adres strony"
   },
   "could_not_search_website": {
-    en: "Could not search the website. Please try again.",
-    pl: "Nie udało się przeszukać strony. Spróbuj ponownie."
+    en: "Could not search website",
+    pl: "Nie udało się przeszukać strony"
   },
   "domain": {
     en: "Domain",
@@ -245,6 +245,40 @@ const translations: Translations = {
   "execution_time": {
     en: "Execution time",
     pl: "Czas wykonania"
+  },
+
+  // New keys for SitemapSearch
+  "project_id_missing": {
+    en: "Project ID is missing. Cannot proceed.",
+    pl: "Brakuje ID projektu. Nie można kontynuować."
+  },
+  "continue_to_processing": {
+    en: "Continue to Processing",
+    pl: "Kontynuuj do przetwarzania"
+  },
+  "processing_state": {
+    en: "Processing...",
+    pl: "Przetwarzanie..."
+  },
+  "website_domain_label": {
+    en: "Website Domain",
+    pl: "Domena strony"
+  },
+  "website_domain_placeholder": {
+    en: "Enter website domain (e.g., example.com)",
+    pl: "Wprowadź domenę strony (np. example.com)"
+  },
+  "sitemap_url_label": {
+    en: "Sitemap URL",
+    pl: "URL Sitemap"
+  },
+  "sitemap_url_placeholder": {
+    en: "Enter sitemap URL (e.g., example.com/sitemap.xml)",
+    pl: "Wprowadź URL sitemapy (np. example.com/sitemap.xml)"
+  },
+  "url_source_tab": {
+    en: "URL Source",
+    pl: "Źródło URL"
   },
 
   // Protected routes and authorization messages
@@ -265,13 +299,14 @@ const translations: Translations = {
     pl: "Przekierowywanie do aplikacji..."
   },
   "session_expired": {
-    en: "Your session has expired. Please log in again.",
-    pl: "Twoja sesja wygasła. Zaloguj się ponownie."
+    en: "Session expired or invalid. Please log in again.",
+    pl: "Sesja wygasła lub jest nieprawidłowa. Proszę zalogować się ponownie."
   },
   "unauthorized_access": {
     en: "Unauthorized access",
     pl: "Nieautoryzowany dostęp"
   },
+  "unauthorized": { en: "Unauthorized", pl: "Brak autoryzacji" },
 
   // New translations for clusters/classes tab
   "cluster_description": {
@@ -305,9 +340,105 @@ const translations: Translations = {
   "Info": { en: "Info", pl: "Informacja" },
   "Error": { en: "Error", pl: "Błąd" },
   "please_enter_url": {
-    en: "Please enter a URL",
+    en: "Please enter URL",
     pl: "Proszę wprowadzić adres URL"
   },
+  "enter_domain": {
+    en: "Enter domain name",
+    pl: "Wprowadź nazwę domeny"
+  },
+  "enter_sitemap": {
+    en: "Enter sitemap URL",
+    pl: "Wprowadź adres sitemapy"
+  },
+  "project_not_created": {
+    en: "Project could not be created",
+    pl: "Nie udało się utworzyć projektu"
+  },
+  "could_not_save_sitemaps": {
+    en: "Could not save sitemaps",
+    pl: "Nie udało się zapisać sitemapów"
+  },
+  "please_select_at_least_one_sitemap": {
+    en: "Please select at least one sitemap to continue.",
+    pl: "Proszę wybrać co najmniej jedną sitemapę, aby kontynuować."
+  },
+
+  // Key for progress status text
+  "progress_status_text": {
+    en: "Step %current%/%total%, progress %value% %unit%, next in %time% sec",
+    pl: "Krok %current%/%total%, postęp %value% %unit%, następny za %time% sek"
+  },
+
+  // New translations for sitemap results
+  "sitemap_url_header": {
+    en: "Sitemap URL",
+    pl: "URL Sitemap"
+  },
+  "select_header": {
+    en: "Select",
+    pl: "Wybierz"
+  },
+
+  // New keys for SitemapSearch
+  "please_enter_url": { en: "Please enter a URL", pl: "Please enter a URL" },
+  "session_expired": { en: "Session expired. Please log in again.", pl: "Session expired. Please log in again." },
+  "project_id_missing": { en: "Project ID is missing.", pl: "Project ID is missing." },
+  "could_not_save_sitemaps": { en: "Could not save selected sitemaps.", pl: "Could not save selected sitemaps." },
+  "url_source_tab": { en: "URL Source", pl: "URL Source" },
+  "website_domain_label": { en: "Website Domain", pl: "Website Domain" },
+  "sitemap_url_label": { en: "Sitemap URL", pl: "Sitemap URL" },
+  "website_domain_placeholder": { en: "example.com", pl: "example.com" },
+  "sitemap_url_placeholder": { en: "example.com/sitemap.xml", pl: "example.com/sitemap.xml" },
+  "sitemaps_found_summary": { en: "Found %count% sitemaps. Select the ones you want to analyze.", pl: "Found %count% sitemaps. Select the ones you want to analyze." },
+  "select_all": { en: "Select All", pl: "Select All" },
+  "sitemap_url_header": { en: "Sitemap URL", pl: "Sitemap URL" },
+  "select_header": { en: "Select", pl: "Select" },
+  "processing_state": { en: "Processing...", pl: "Processing..." },
+  "continue_to_processing": { en: "Continue to Processing", pl: "Continue to Processing" },
+  "progress_status_text": { en: "Step %step%/5, Progress %progress%%, ETA %timeRemaining%s", pl: "Step %step%/5, Progress %progress%%, ETA %timeRemaining%s" },
+
+  // Keys from ProtectedRoute
+  "Info": { en: "Info", pl: "Info" },
+  "auth.pleaseLogin": { en: "Please log in to access this page.", pl: "Please log in to access this page." },
+  "auth.sessionExpired": { en: "Your session has expired. Please log in again.", pl: "Your session has expired. Please log in again." },
+
+  // Keys from AppHeader
+  "menu": { en: "Menu", pl: "Menu" },
+
+  // Keys from HighchartsTreeMap
+  "pages_count": { en: "Pages Count", pl: "Pages Count" },
+
+  // Keys from AnalysisResults
+  "date": { en: "Date", pl: "Date" },
+  "title": { en: "Title", pl: "Title" },
+  "exploration_details": { en: "Exploration Details", pl: "Exploration Details" },
+  "cluster_description": { en: "Visual representation of content clusters and their relationships.", pl: "Visual representation of content clusters and their relationships." },
+  "proximity_to_centroid": { en: "Proximity to Centroid", pl: "Proximity to Centroid" },
+  "url_analysis_description": { en: "Detailed analysis of individual URLs and their relation to the site's overall focus.", pl: "Detailed analysis of individual URLs and their relation to the site's overall focus." },
+  "proximity_to_centroid": { en: "Proximity to Centroid", pl: "Proximity to Centroid" },
+  "cluster_description": { en: "Visual representation of content clusters and their relationships.", pl: "Visual representation of content clusters and their relationships." },
+  "exploration_details": { en: "Exploration Details", pl: "Exploration Details" },
+  "title": { en: "Title", pl: "Title" },
+  "date": { en: "Date", pl: "Date" },
+  "menu": { en: "Menu", pl: "Menu" },
+  "pages_count": { en: "Pages Count", pl: "Pages Count" },
+  "Info": { en: "Info", pl: "Info" },
+  "auth.pleaseLogin": { en: "Please log in to access this page.", pl: "Please log in to access this page." },
+  "auth.sessionExpired": { en: "Your session has expired. Please log in again.", pl: "Your session has expired. Please log in again." },
+  "please_enter_url": { en: "Please enter a URL", pl: "Please enter a URL" },
+  "session_expired": { en: "Session expired. Please log in again.", pl: "Session expired. Please log in again." },
+  "project_id_missing": { en: "Project ID is missing.", pl: "Project ID is missing." },
+  "url_source_tab": { en: "URL Source", pl: "URL Source" },
+  "website_domain_label": { en: "Website Domain", pl: "Website Domain" },
+  "sitemap_url_label": { en: "Sitemap URL", pl: "Sitemap URL" },
+  "website_domain_placeholder": { en: "example.com", pl: "example.com" },
+  "sitemap_url_placeholder": { en: "example.com/sitemap.xml", pl: "example.com/sitemap.xml" },
+  "sitemaps_found_summary": { en: "Found %count% sitemaps. Select the ones you want to analyze.", pl: "Found %count% sitemaps. Select the ones you want to analyze." },
+  "select_all": { en: "Select All", pl: "Select All" },
+  "processing_state": { en: "Processing...", pl: "Processing..." },
+  "continue_to_processing": { en: "Continue to Processing", pl: "Continue to Processing" },
+  "progress_status_text_sitemap": { en: "Step %step%/5, Progress %progress%%, ETA %timeRemaining%s", pl: "Step %step%/5, Progress %progress%%, ETA %timeRemaining%s" }
 };
 
 interface LanguageContextType {
