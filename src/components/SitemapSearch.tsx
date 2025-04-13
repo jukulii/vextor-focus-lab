@@ -484,34 +484,97 @@ const SitemapSearch = () => {
         for (let i = 0; i < urlsToInsert.length; i += BATCH_SIZE) {
           const batch = urlsToInsert.slice(i, i + BATCH_SIZE);
           console.log(`Inserting URL batch ${i / BATCH_SIZE + 1}...`);
-          const { error: urlInsertError } = await supabase.from('urls').insert(batch as any);
+          const { data: insertedUrls, error: urlInsertError } = await supabase
+            .from('urls')
+            .insert(batch as any)
+            .select('id, url');
+
           if (urlInsertError) {
             console.error('Supabase URL insert error:', urlInsertError);
             throw new Error('Failed to save URLs to database.');
           }
+
+          if (insertedUrls && insertedUrls.length > 0) {
+            console.log(`Successfully inserted batch ${i / BATCH_SIZE + 1}, got ${insertedUrls.length} IDs back.`);
+            const apiPayload = {
+              items: insertedUrls.map(item => ({ id: item.id, url: item.url }))
+            };
+            const apiKey = import.meta.env.VITE_APP_API_KEY;
+            const crawlApiUrl = import.meta.env.VITE_CRAWL_URL_API_URL;
+            const brightDataApiUrl = import.meta.env.VITE_CRAWLER_URL_BRIGHTDATA_TITLE_DESCRIPTION_API_URL;
+
+            if (!apiKey) {
+              console.warn('VITE_APP_API_KEY is not defined. Skipping API calls.');
+            } else {
+              // Send to Crawl API
+              if (crawlApiUrl) {
+                try {
+                  console.log(`Sending batch ${i / BATCH_SIZE + 1} to Crawl API: ${crawlApiUrl}`);
+                  axios.post(crawlApiUrl, apiPayload, {
+                    headers: { 'Content-Type': 'application/json', 'x-api-key': apiKey }
+                  }).catch(crawlError => {
+                    console.error(`Error sending batch ${i / BATCH_SIZE + 1} to Crawl API:`, crawlError);
+                    // Decide if you want to throw or just log the error
+                    // throw new Error('Failed to send data to Crawl API.');
+                    toast({ title: 'API Error', description: `Failed to send batch ${i / BATCH_SIZE + 1} to Crawl API.`, variant: 'default' });
+                  });
+                } catch (syncError) {
+                  // Catch potential synchronous errors during request setup
+                  console.error(`Synchronous error setting up Crawl API request for batch ${i / BATCH_SIZE + 1}:`, syncError);
+                  toast({ title: 'API Setup Error', description: `Failed to setup request for batch ${i / BATCH_SIZE + 1} to Crawl API.`, variant: 'destructive' });
+                }
+              } else {
+                console.warn('VITE_CRAWL_URL_API_URL is not defined. Skipping Crawl API call.');
+              }
+
+              // Send to BrightData API
+              if (brightDataApiUrl) {
+                try {
+                  console.log(`Sending batch ${i / BATCH_SIZE + 1} to BrightData API: ${brightDataApiUrl}`);
+                  axios.post(brightDataApiUrl, apiPayload, {
+                    headers: { 'Content-Type': 'application/json', 'x-api-key': apiKey }
+                  }).catch(brightDataError => {
+                    console.error(`Error sending batch ${i / BATCH_SIZE + 1} to BrightData API:`, brightDataError);
+                    // Decide if you want to throw or just log the error
+                    // throw new Error('Failed to send data to BrightData API.');
+                    toast({ title: 'API Error', description: `Failed to send batch ${i / BATCH_SIZE + 1} to BrightData API.`, variant: 'default' });
+                  });
+                } catch (syncError) {
+                  // Catch potential synchronous errors during request setup
+                  console.error(`Synchronous error setting up BrightData API request for batch ${i / BATCH_SIZE + 1}:`, syncError);
+                  toast({ title: 'API Setup Error', description: `Failed to setup request for batch ${i / BATCH_SIZE + 1} to BrightData API.`, variant: 'destructive' });
+                }
+              } else {
+                console.warn('VITE_CRAWLER_URL_BRIGHTDATA_TITLE_DESCRIPTION_API_URL is not defined. Skipping BrightData API call.');
+              }
+            }
+          } else {
+            console.warn(`Batch ${i / BATCH_SIZE + 1} insertion returned no data or an empty array.`);
+          }
         }
-        console.log('Filtered URLs inserted successfully.');
+        console.log('Filtered URLs inserted and sent to APIs successfully.');
+
+        const finalUrlCount = urlsToInsert.length;
+        const { error: projectUpdateError } = await supabase
+          .from('projects')
+          .update({
+            urls_count: totalFetchedUrlsCount,
+            processed_urls_count: finalUrlCount
+          })
+          .eq('id', projectId);
+
+        if (projectUpdateError) {
+          console.error('Error updating project counts:', projectUpdateError);
+        } else {
+          console.log(`Project ${projectId} updated with counts: total=${totalFetchedUrlsCount}, processed=${finalUrlCount}`);
+        }
+
+        console.log(`Navigating to processing page for project ID: ${projectId}`);
+        navigate(`/processing?projectId=${projectId}`);
+
       } else {
         console.log('No filtered URLs to insert (after filtering by selected sitemaps).');
       }
-
-      const finalUrlCount = urlsToInsert.length;
-      const { error: projectUpdateError } = await supabase
-        .from('projects')
-        .update({
-          urls_count: totalFetchedUrlsCount,
-          processed_urls_count: finalUrlCount
-        })
-        .eq('id', projectId);
-
-      if (projectUpdateError) {
-        console.error('Error updating project counts:', projectUpdateError);
-      } else {
-        console.log(`Project ${projectId} updated with counts: total=${totalFetchedUrlsCount}, processed=${finalUrlCount}`);
-      }
-
-      console.log(`Navigating to processing page for project ID: ${projectId}`);
-      navigate(`/processing?projectId=${projectId}`);
 
     } catch (error) {
       console.error('Error processing filtered URLs:', error);
