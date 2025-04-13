@@ -56,9 +56,12 @@ const SitemapSearch = () => {
   const [selectedSitemaps, setSelectedSitemaps] = useState<Set<string>>(new Set());
   const [isProcessing, setIsProcessing] = useState(false);
   const { toast } = useToast();
-  const [currentProjectId, setCurrentProjectId] = useState<string | null>(null);
   const [fetchedUrlItems, setFetchedUrlItems] = useState<Array<{ sitemapUrl: string; pageUrl: string }>>([]);
   const [totalFetchedUrlsCount, setTotalFetchedUrlsCount] = useState<number>(0);
+
+  // Nowe stany do przechowywania danych wejściowych dla późniejszego tworzenia projektu
+  const [initialUrl, setInitialUrl] = useState('');
+  const [initialInputType, setInitialInputType] = useState<ProjectSourceType>('domain_url');
 
   // Stan aktywnej zakładki
   const [activeTab, setActiveTab] = useState<string>("url");
@@ -103,10 +106,9 @@ const SitemapSearch = () => {
 
   // Zaktualizowana funkcja resetująca stan
   const resetStateForNewSearch = () => {
-    // setUrl('');
+    setUrl('');
     setSitemapData(null);
     setSelectedSitemaps(new Set());
-    setCurrentProjectId(null);
     setFetchedUrlItems([]);
     setTotalFetchedUrlsCount(0);
     setFilters([]);
@@ -114,28 +116,29 @@ const SitemapSearch = () => {
     setNewFilterType('contains');
     setNextOperator('AND');
     setCurrentPage(1);
-    setActiveTab("url"); // Upewnij się, że wracamy do pierwszej zakładki
+    setActiveTab("url");
+    setInitialUrl('');
+    setInitialInputType('domain_url');
   };
 
   // Zaktualizowana funkcja powrotu do wyboru sitemap
   const handleBackToSitemaps = () => {
-    setFetchedUrlItems([]); // Wyczyść tylko wyniki URL
+    setFetchedUrlItems([]);
     setTotalFetchedUrlsCount(0);
     setFilters([]);
     setNewFilterValue('');
     setNewFilterType('contains');
     setNextOperator('AND');
     setCurrentPage(1);
-    // Nie zmieniamy zakładki, pozostajemy w "url"
   };
 
   const handleAutomaticSearch = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // Reset części stanu przed nowym wyszukiwaniem, zachowując URL
     if (!isSearching) {
+      // Reset części stanu, ale zachowaj URL wpisany przez użytkownika
       setSitemapData(null);
       setSelectedSitemaps(new Set());
-      setCurrentProjectId(null);
+      // setCurrentProjectId(null); // Nie używamy
       setFetchedUrlItems([]);
       setTotalFetchedUrlsCount(0);
       setFilters([]);
@@ -143,7 +146,9 @@ const SitemapSearch = () => {
       setNewFilterType('contains');
       setNextOperator('AND');
       setCurrentPage(1);
-      setActiveTab("url"); // Upewnij się, że jesteśmy w pierwszej zakładce
+      setActiveTab("url");
+      setInitialUrl(url); // Zapisz wpisany URL
+      setInitialInputType(inputType); // Zapisz typ
     }
 
     if (!url) { /* toast */ return; }
@@ -151,11 +156,10 @@ const SitemapSearch = () => {
 
     setIsSearching(true);
     try {
-      const project = await createProject(url, inputType);
-      if (!project || !project.id) {
-        throw new Error('Project creation failed or did not return an ID');
-      }
-      setCurrentProjectId(project.id);
+      // --- TWORZENIE PROJEKTU USUNIĘTE STĄD ---
+      // Usunięto: const project = await createProject(url, inputType);
+      // Usunięto: if (!project || !project.id) { ... }
+      // Usunięto: setCurrentProjectId(project.id);
 
       if (inputType === 'domain_url') {
         const response = await axios.get(`${import.meta.env.VITE_DOMAIN_CRAWL_API_URL}`, {
@@ -163,15 +167,15 @@ const SitemapSearch = () => {
           params: { domain: url }
         });
         setSitemapData(response.data);
+        // Automatycznie zaznacz wszystkie znalezione sitemapy dla domeny
         setSelectedSitemaps(new Set(response.data.sitemaps));
-
       } else { // inputType === 'sitemap_url'
         const parserApiUrl = import.meta.env.VITE_SITEMAP_PARSER_API_URL;
         if (!parserApiUrl) {
           throw new Error('Sitemap parser API URL is not defined');
         }
         const response = await axios.post(parserApiUrl, {
-          sitemap_urls: [url]
+          sitemap_urls: [url] // Szukamy tylko dla podanego URL sitemapy
         }, {
           headers: { 'Content-Type': 'application/json', 'x-api-key': import.meta.env.VITE_APP_API_KEY }
         });
@@ -194,14 +198,17 @@ const SitemapSearch = () => {
         }
         setFetchedUrlItems(allUrlItems);
         setTotalFetchedUrlsCount(count);
+        // Ustaw sitemapData, aby UI wiedziało, że przyszliśmy z pojedynczej sitemapy
+        // Traktujemy to jakbyśmy od razu przeszli do kroku z URLami
         setSitemapData({ domain: '(Direct Sitemap)', sitemaps: [url], sitemap_count: 1, execution_time: 'N/A' });
+        // Dodaj pojedynczą sitemapę do wybranych, aby logika filtrowania/przetwarzania działała
+        setSelectedSitemaps(new Set([url]));
       }
 
     } catch (error) {
       console.error('Error during automatic search:', error);
       toast({ title: t('Error'), description: (error instanceof Error ? error.message : t('could_not_search_website')) || 'Search failed', variant: "destructive" });
-      // Resetuj cały stan w razie poważnego błędu (np. tworzenia projektu)
-      resetStateForNewSearch();
+      resetStateForNewSearch(); // Całkowity reset w razie błędu
     } finally {
       setIsSearching(false);
     }
@@ -225,17 +232,12 @@ const SitemapSearch = () => {
     setSelectedSitemaps(newSelected);
   };
 
-  const handleContinueToProcessing = async () => {
+  const handleFetchUrls = async () => {
     if (selectedSitemaps.size === 0) {
       toast({ title: t('Error'), description: t('please_select_at_least_one_sitemap'), variant: "destructive" });
       return;
     }
-    if (!currentProjectId) {
-      toast({ title: t('Error'), description: t('project_id_missing'), variant: "destructive" });
-      return;
-    }
 
-    // Resetuj stan URL/filtrów przed przetwarzaniem
     setFetchedUrlItems([]);
     setTotalFetchedUrlsCount(0);
     setFilters([]);
@@ -246,17 +248,6 @@ const SitemapSearch = () => {
 
     setIsProcessing(true);
     try {
-      const sitemapObjects = Array.from(selectedSitemaps).map(sitemapUrl => ({
-        project_id: currentProjectId,
-        url: sitemapUrl
-      }));
-      const { error: insertError } = await supabase.from('sitemaps').insert(sitemapObjects);
-      if (insertError) {
-        console.error('Supabase insert error:', insertError);
-        throw new Error('Failed to save sitemaps to database.');
-      }
-      console.log('Successfully saved sitemaps to Supabase for project:', currentProjectId);
-
       let parserResponseData;
       try {
         const parserApiUrl = import.meta.env.VITE_SITEMAP_PARSER_API_URL;
@@ -269,7 +260,7 @@ const SitemapSearch = () => {
           headers: { 'Content-Type': 'application/json', 'x-api-key': import.meta.env.VITE_APP_API_KEY }
         });
         parserResponseData = response.data;
-        console.log('Successfully received response from parser API for project:', currentProjectId);
+        console.log('Successfully received response from parser API for sitemaps:', Array.from(selectedSitemaps));
       } catch (apiError) {
         console.error('Error sending sitemaps to parser API or receiving response:', apiError);
         throw new Error('Failed to get URL list from parser API.');
@@ -279,40 +270,43 @@ const SitemapSearch = () => {
       let count = 0;
       if (parserResponseData && typeof parserResponseData.results === 'object') {
         for (const sitemapUrl in parserResponseData.results) {
-          const result = parserResponseData.results[sitemapUrl];
-          if (result && !result.error && Array.isArray(result.urls)) {
-            const itemsFromSitemap = result.urls.map((pageUrl: string) => ({ sitemapUrl: sitemapUrl, pageUrl: pageUrl }));
-            allUrlItems = allUrlItems.concat(itemsFromSitemap);
-            count += result.urls_count || result.urls.length;
+          if (selectedSitemaps.has(sitemapUrl)) {
+            const result = parserResponseData.results[sitemapUrl];
+            if (result && !result.error && Array.isArray(result.urls)) {
+              const itemsFromSitemap = result.urls.map((pageUrl: string) => ({ sitemapUrl: sitemapUrl, pageUrl: pageUrl }));
+              allUrlItems = allUrlItems.concat(itemsFromSitemap);
+              count += result.urls_count || result.urls.length;
+            } else if (result && result.error) {
+              console.error(`Error parsing sitemap ${sitemapUrl}:`, result.error);
+              toast({ title: 'Parsing Error', description: `Could not parse sitemap ${sitemapUrl}: ${result.error}`, variant: 'destructive' });
+            }
           }
         }
       }
 
       setFetchedUrlItems(allUrlItems);
       setTotalFetchedUrlsCount(count);
-      // setActiveTab("generate"); // Usunięto zmianę zakładki
 
     } catch (error) {
-      console.error('Error in handleContinueToProcessing:', error);
-      toast({ title: t('Error'), description: (error instanceof Error ? error.message : t('could_not_save_sitemaps')) || 'An unexpected error occurred.', variant: "destructive" });
+      console.error('Error fetching URLs:', error);
+      toast({ title: t('Error'), description: (error instanceof Error ? error.message : 'Failed to fetch URLs.'), variant: "destructive" });
     } finally {
       setIsProcessing(false);
     }
   };
 
-  // Zaktualizowana funkcja handleAddFilter
   const handleAddFilter = () => {
     if (!newFilterValue.trim()) return;
 
     const newFilter: Filter = {
       id: Date.now(),
-      type: newFilterType, // Użyj wybranego typu
+      type: newFilterType,
       value: newFilterValue.trim(),
       operator: filters.length > 0 ? nextOperator : undefined,
     };
     setFilters([...filters, newFilter]);
     setNewFilterValue('');
-    setNewFilterType('contains'); // Reset typu do domyślnego
+    setNewFilterType('contains');
     setNextOperator('AND');
   };
 
@@ -327,7 +321,6 @@ const SitemapSearch = () => {
     }
   };
 
-  // Zaktualizowana logika filtrowania z obsługą wszystkich typów
   const filteredUrlItems = useMemo(() => {
     if (filters.length === 0) {
       return fetchedUrlItems;
@@ -340,7 +333,7 @@ const SitemapSearch = () => {
         const filter = filters[i];
         let matchesCurrentFilter = false;
         const lowerUrl = item.pageUrl.toLowerCase();
-        const filterValue = filter.value; // Nie konwertuj na lowercase dla RegEx
+        const filterValue = filter.value;
         const lowerFilterValue = filterValue.toLowerCase();
 
         try {
@@ -352,7 +345,7 @@ const SitemapSearch = () => {
               matchesCurrentFilter = !lowerUrl.includes(lowerFilterValue);
               break;
             case 'regex':
-              const regex = new RegExp(filterValue, 'i'); // Użyj oryginalnej wartości
+              const regex = new RegExp(filterValue, 'i');
               matchesCurrentFilter = regex.test(item.pageUrl);
               break;
           }
@@ -373,13 +366,11 @@ const SitemapSearch = () => {
             currentMatch = currentMatch || matchesCurrentFilter;
           }
         }
-        // Optymalizacja usunięta dla poprawności z mieszanymi operatorami
       }
       return currentMatch;
     });
   }, [fetchedUrlItems, filters]);
 
-  // Obliczanie paginacji
   const totalPages = useMemo(() => {
     return Math.ceil(filteredUrlItems.length / itemsPerPage);
   }, [filteredUrlItems.length, itemsPerPage]);
@@ -390,12 +381,10 @@ const SitemapSearch = () => {
     return filteredUrlItems.slice(startIndex, endIndex);
   }, [filteredUrlItems, currentPage, itemsPerPage]);
 
-  // Zaktualizowany useEffect do resetowania strony
   useEffect(() => {
     setCurrentPage(1);
   }, [filters, itemsPerPage]);
 
-  // Funkcje obsługi paginacji
   const handlePreviousPage = () => {
     setCurrentPage((prev) => Math.max(prev - 1, 1));
   };
@@ -406,7 +395,138 @@ const SitemapSearch = () => {
 
   const handleItemsPerPageChange = (value: string) => {
     setItemsPerPage(Number(value));
-    // useEffect already handles resetting currentPage to 1
+  };
+
+  const handleProcessFilteredUrls = async () => {
+    if (!isAuthenticated || !session?.user?.id) {
+      toast({ title: t('Error'), description: t('auth.pleaseLogin'), variant: "destructive" });
+      navigate('/login');
+      return;
+    }
+    if (filteredUrlItems.length === 0 && totalFetchedUrlsCount > 0) {
+      toast({ title: t('Info'), description: 'No URLs match the current filters. Please adjust filters or clear them to proceed.', variant: "default" });
+      return;
+    } else if (totalFetchedUrlsCount === 0 && filters.length === 0) {
+      toast({ title: t('Error'), description: t('no_urls_to_process'), variant: "destructive" });
+      return;
+    }
+
+    setIsProcessing(true);
+    let projectId: string | null = null;
+    const sitemapUrlToIdMap = new Map<string, string>();
+
+    try {
+      console.log(`Creating project for URL: ${initialUrl}, Type: ${initialInputType}`);
+      const projectData = await createProject(initialUrl, initialInputType);
+      if (!projectData || !projectData.id) {
+        throw new Error('Project creation failed or did not return an ID');
+      }
+      projectId = projectData.id;
+      console.log(`Project created successfully with ID: ${projectId}`);
+
+      const sitemapFilteredCounts = new Map<string, number>();
+      filteredUrlItems.forEach(item => {
+        if (selectedSitemaps.has(item.sitemapUrl)) {
+          sitemapFilteredCounts.set(item.sitemapUrl, (sitemapFilteredCounts.get(item.sitemapUrl) || 0) + 1);
+        }
+      });
+      console.log('Filtered URL counts per selected sitemap:', sitemapFilteredCounts);
+
+      const sitemapsToInsert = Array.from(selectedSitemaps).map(sitemapUrl => ({
+        project_id: projectId,
+        url: sitemapUrl,
+        urls_count: sitemapFilteredCounts.get(sitemapUrl) || 0
+      }));
+
+      if (sitemapsToInsert.length > 0) {
+        console.log('Inserting selected sitemaps:', sitemapsToInsert);
+        const { data: insertedSitemaps, error: sitemapInsertError } = await supabase
+          .from('sitemaps')
+          .insert(sitemapsToInsert)
+          .select('id, url');
+
+        if (sitemapInsertError) {
+          console.error('Supabase sitemap insert error:', sitemapInsertError);
+          throw new Error('Failed to save sitemaps to database.');
+        }
+
+        if (insertedSitemaps) {
+          insertedSitemaps.forEach(sitemap => {
+            sitemapUrlToIdMap.set(sitemap.url, sitemap.id);
+          });
+          console.log('Sitemaps inserted successfully. URL to ID map:', sitemapUrlToIdMap);
+        } else {
+          console.warn('Sitemap insert operation returned no data');
+          throw new Error('Failed to retrieve IDs for inserted sitemaps.');
+        }
+      } else {
+        console.log('No selected sitemaps to insert.');
+      }
+
+      const urlsToInsert = filteredUrlItems
+        .filter(item => selectedSitemaps.has(item.sitemapUrl))
+        .map(item => {
+          const sitemapId = sitemapUrlToIdMap.get(item.sitemapUrl);
+          if (!sitemapId) {
+            console.warn(`Could not find sitemap ID for URL: ${item.pageUrl} from sitemap: ${item.sitemapUrl}. Skipping.`);
+            return null;
+          }
+          return {
+            sitemap_id: sitemapId,
+            url: item.pageUrl
+          };
+        })
+        .filter(item => item !== null);
+
+      if (urlsToInsert.length > 0) {
+        console.log(`Inserting ${urlsToInsert.length} filtered URLs...`);
+        const BATCH_SIZE = 1000;
+        for (let i = 0; i < urlsToInsert.length; i += BATCH_SIZE) {
+          const batch = urlsToInsert.slice(i, i + BATCH_SIZE);
+          console.log(`Inserting URL batch ${i / BATCH_SIZE + 1}...`);
+          const { error: urlInsertError } = await supabase.from('urls').insert(batch as any);
+          if (urlInsertError) {
+            console.error('Supabase URL insert error:', urlInsertError);
+            throw new Error('Failed to save URLs to database.');
+          }
+        }
+        console.log('Filtered URLs inserted successfully.');
+      } else {
+        console.log('No filtered URLs to insert (after filtering by selected sitemaps).');
+      }
+
+      const finalUrlCount = urlsToInsert.length;
+      const { error: projectUpdateError } = await supabase
+        .from('projects')
+        .update({
+          urls_count: totalFetchedUrlsCount,
+          processed_urls_count: finalUrlCount
+        })
+        .eq('id', projectId);
+
+      if (projectUpdateError) {
+        console.error('Error updating project counts:', projectUpdateError);
+      } else {
+        console.log(`Project ${projectId} updated with counts: total=${totalFetchedUrlsCount}, processed=${finalUrlCount}`);
+      }
+
+      console.log(`Navigating to processing page for project ID: ${projectId}`);
+      navigate(`/processing?projectId=${projectId}`);
+
+    } catch (error) {
+      console.error('Error processing filtered URLs:', error);
+      toast({ title: t('Error'), description: (error instanceof Error ? error.message : 'Failed to process URLs and save data.'), variant: "destructive" });
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  const tInterpolate = (key: string, params: Record<string, string | number>): string => {
+    let translation = t(key);
+    Object.entries(params).forEach(([paramKey, paramValue]) => {
+      translation = translation.replace(`%${paramKey}%`, String(paramValue));
+    });
+    return translation;
   };
 
   return (
@@ -506,10 +626,24 @@ const SitemapSearch = () => {
                   <div className="overflow-hidden border border-gray-700 dark:border-gray-700 rounded-xl shadow-sm">
                     <div className="overflow-x-auto">
                       <Table>
-                        {/* ... Tabela URL ... */}
-                        <TableHeader className="bg-[#1e1e2d] dark:bg-[#1e1e2d]"> <TableRow className="border-b border-gray-700 dark:border-gray-700"> <TableHead className="w-1/3 font-semibold text-gray-100 dark:text-gray-100 text-sm sm:text-base px-6 py-4"> Sitemap URL </TableHead> <TableHead className="w-2/3 font-semibold text-gray-100 dark:text-gray-100 text-sm sm:text-base px-6 py-4"> Page URL </TableHead> </TableRow> </TableHeader>
+                        {/* Poprawiony nagłówek tabeli URL bez spacji między tagami */}
+                        <TableHeader className="bg-[#1e1e2d] dark:bg-[#1e1e2d]"><TableRow className="border-b border-gray-700 dark:border-gray-700"><TableHead className="w-1/3 font-semibold text-gray-100 dark:text-gray-100 text-sm sm:text-base px-6 py-4">Sitemap URL</TableHead><TableHead className="w-2/3 font-semibold text-gray-100 dark:text-gray-100 text-sm sm:text-base px-6 py-4">Page URL</TableHead></TableRow></TableHeader>
                         <TableBody className="bg-[#13131a] dark:bg-[#13131a]">
-                          {displayedUrlItems.length > 0 ? (displayedUrlItems.map((item, index) => (<TableRow key={`${item.sitemapUrl}-${item.pageUrl}-${index}`} className="hover:bg-[#1e1e2d] dark:hover:bg-[#1e1e2d] border-b border-gray-700 dark:border-gray-700 last:border-b-0"> <TableCell className="text-gray-400 dark:text-gray-400 px-6 py-3 text-xs break-all align-top"> {item.sitemapUrl} </TableCell> <TableCell className="text-gray-300 dark:text-gray-300 px-6 py-3 text-sm break-all align-top"> {item.pageUrl} </TableCell> </TableRow>))) : (<TableRow> <TableCell colSpan={2} className="text-center text-gray-500 py-10"> No URLs found matching the criteria. </TableCell> </TableRow>)}
+                          {displayedUrlItems.length > 0 ? (displayedUrlItems.map((item, index) => (
+                            <TableRow key={`${item.sitemapUrl}-${item.pageUrl}-${index}`} className="hover:bg-[#1e1e2d] dark:hover:bg-[#1e1e2d] border-b border-gray-700 dark:border-gray-700 last:border-b-0">
+                              <TableCell className="text-gray-400 dark:text-gray-400 px-6 py-3 text-xs break-all align-top">{item.sitemapUrl}</TableCell>
+                              <TableCell className="text-gray-300 dark:text-gray-300 px-6 py-3 text-sm break-all align-top">
+                                <a
+                                  href={item.pageUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="hover:text-[#ff6b6b] hover:underline"
+                                >
+                                  {item.pageUrl}
+                                </a>
+                              </TableCell>
+                            </TableRow>
+                          ))) : (<TableRow> <TableCell colSpan={2} className="text-center text-gray-500 py-10"> {filters.length > 0 ? "No URLs found matching the current filters." : "No URLs were found for the selected sitemaps."} </TableCell> </TableRow>)}
                         </TableBody>
                       </Table>
                     </div>
@@ -535,6 +669,19 @@ const SitemapSearch = () => {
                         <Button variant="outline" size="sm" onClick={handleNextPage} disabled={currentPage === totalPages || totalPages === 0} className="h-8 px-3 bg-[#1e1e2d] border-gray-700 hover:bg-[#2a2a3a] disabled:opacity-50">Next</Button>
                       </div>
                     </div>
+                  </div>
+
+                  {/* Przycisk Process */}
+                  <div className="mt-8 flex justify-end">
+                    <Button
+                      onClick={handleProcessFilteredUrls}
+                      disabled={isProcessing || (filteredUrlItems.length === 0 && totalFetchedUrlsCount > 0 && filters.length > 0) || totalFetchedUrlsCount === 0}
+                      className="bg-green-600 hover:bg-green-700 text-white h-10 px-6 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                      title={(filteredUrlItems.length === 0 && totalFetchedUrlsCount > 0 && filters.length > 0) ? "No URLs match filters" : ""}
+                    >
+                      {isProcessing ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+                      {isProcessing ? t('processing_state') : tInterpolate('process_filtered_urls', { count: filteredUrlItems.length })}
+                    </Button>
                   </div>
                 </div>
 
@@ -580,11 +727,15 @@ const SitemapSearch = () => {
                       </Table>
                     </div>
                   </div>
-                  {/* Przycisk Continue */}
-                  <div className="mt-8 flex justify-end"> {/* Zmieniono justify-between na justify-end */}
-                    <Button onClick={handleContinueToProcessing} disabled={isProcessing || selectedSitemaps.size === 0} className="bg-[#ff6b6b] hover:bg-[#ff5252] text-white h-10 px-6 rounded-lg">
+                  {/* Przycisk Fetch URLs */}
+                  <div className="mt-8 flex justify-end">
+                    <Button
+                      onClick={handleFetchUrls}
+                      disabled={isProcessing || selectedSitemaps.size === 0}
+                      className="bg-[#ff6b6b] hover:bg-[#ff5252] text-white h-10 px-6 rounded-lg"
+                    >
                       {isProcessing ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
-                      {isProcessing ? t('processing_state') : t('continue_to_processing')}
+                      {isProcessing ? t('processing_state') : t('fetch_urls_for_selected_sitemaps')}
                     </Button>
                   </div>
                 </div>
@@ -593,31 +744,36 @@ const SitemapSearch = () => {
                 <form onSubmit={handleAutomaticSearch} className="space-y-6 sm:space-y-8 max-w-2xl mx-auto flex flex-col items-center">
                   {/* ... Formularz wprowadzania URL ... */}
                   <div className="flex items-center justify-center gap-3 mb-6"> <Button type="button" onClick={() => setInputType('domain_url')} variant={inputType === 'domain_url' ? "default" : "outline"} className={`px-4 py-2 rounded-md transition-colors ${inputType === 'domain_url' ? 'bg-[#ff6b6b] text-white border-[#ff6b6b]' : 'text-gray-400 border-gray-700 hover:bg-gray-700/50'}`}><Globe className="mr-2 h-4 w-4" />{t('domain')}</Button> <Button type="button" onClick={() => setInputType('sitemap_url')} variant={inputType === 'sitemap_url' ? "default" : "outline"} className={`px-4 py-2 rounded-md transition-colors ${inputType === 'sitemap_url' ? 'bg-[#ff6b6b] text-white border-[#ff6b6b]' : 'text-gray-400 border-gray-700 hover:bg-gray-700/50'}`}><Layout className="mr-2 h-4 w-4" />{t('sitemap')}</Button> </div>
-                  <div className="w-full relative flex-grow"> <Label htmlFor="url-input" className="sr-only">{inputType === 'domain_url' ? t('website_domain_label') : t('sitemap_url_label')}</Label> <Input id="url-input" type="text" value={url} onChange={(e) => setUrl(e.target.value)} placeholder={inputType === 'domain_url' ? t('website_domain_placeholder') : t('sitemap_url_placeholder')} className="w-full bg-[#1e1e2d] border-gray-700 text-gray-100 placeholder-gray-500 h-10 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ff6b6b]" /> </div>
-                  <Button type="submit" disabled={isSearching} className="w-full sm:w-auto bg-[#ff6b6b] hover:bg-[#ff5252] text-white font-sans h-10 px-6 rounded-lg flex items-center justify-center gap-2"> {isSearching ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <SearchIcon className="mr-2 h-4 w-4" />} {isSearching ? t('checking_sitemap') : t('check_for_me')} </Button>
+                  <div className="relative w-full">
+                    <Input
+                      type="text"
+                      id="url"
+                      name="url"
+                      value={url}
+                      onChange={(e) => setUrl(e.target.value)}
+                      placeholder={inputType === 'domain_url' ? t('enter_domain_url') : t('enter_sitemap_url')}
+                      className="w-full h-12 px-4 text-gray-100 bg-[#13131a] border-gray-700 rounded-lg focus:border-[#ff6b6b] focus:ring-[#ff6b6b]"
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    disabled={isSearching}
+                    className="mt-4 h-10 px-6 flex items-center justify-center gap-2 text-sm font-medium text-gray-100 bg-[#ff6b6b] rounded-lg hover:bg-[#ff5252] focus:outline-none focus:ring-2 focus:ring-[#ff6b6b] disabled:opacity-70 disabled:cursor-not-allowed"
+                  >
+                    {isSearching ? (
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                    ) : (
+                      <>
+                        <SearchIcon className="w-5 h-5" />
+                        <span>{t('check_for_me')}</span>
+                      </>
+                    )}
+                  </button>
                 </form>
               )}
             </CardContent>
           </Card>
         </TabsContent>
-
-        {/* Zakładka Filters (bez zmian) */}
-        {/* ... */}
-        <TabsContent value="filters" className="w-full">
-          <Card className="bg-[#13131a]/70 dark:bg-[#13131a]/70 backdrop-blur-sm border-none shadow-md rounded-xl w-full">
-            <CardContent className="p-6 sm:p-8">
-              <div className="flex flex-col items-center justify-center text-center py-12">
-                <h3 className="text-xl font-medium mb-3 text-gray-100 dark:text-gray-100 font-sans">{t('feature_unavailable')}</h3>
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        {/* Zakładka Generate (teraz pusta lub można usunąć content) */}
-        <TabsContent value="generate" className="w-full">
-          {/* Można tu wstawić komunikat lub zostawić puste */}
-        </TabsContent>
-
       </Tabs>
     </div>
   );

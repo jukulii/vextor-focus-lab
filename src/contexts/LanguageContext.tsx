@@ -222,9 +222,9 @@ const translations: Translations = {
   },
 
   // Website URL form translations
-  "enter_website_url": {
-    en: "Enter website URL (e.g. example.com)",
-    pl: "Wprowadź adres strony (np. example.com)"
+  "enter_domain_url": {
+    en: "Enter domain URL (e.g. example.com)",
+    pl: "Wprowadź adres domeny (np. example.com)"
   },
   "please_enter_website_url": {
     en: "Please enter a website URL",
@@ -380,65 +380,29 @@ const translations: Translations = {
     pl: "Wybierz"
   },
 
-  // New keys for SitemapSearch
-  "please_enter_url": { en: "Please enter a URL", pl: "Please enter a URL" },
-  "session_expired": { en: "Session expired. Please log in again.", pl: "Session expired. Please log in again." },
-  "project_id_missing": { en: "Project ID is missing.", pl: "Project ID is missing." },
-  "could_not_save_sitemaps": { en: "Could not save selected sitemaps.", pl: "Could not save selected sitemaps." },
-  "url_source_tab": { en: "URL Source", pl: "URL Source" },
-  "website_domain_label": { en: "Website Domain", pl: "Website Domain" },
-  "sitemap_url_label": { en: "Sitemap URL", pl: "Sitemap URL" },
-  "website_domain_placeholder": { en: "example.com", pl: "example.com" },
-  "sitemap_url_placeholder": { en: "example.com/sitemap.xml", pl: "example.com/sitemap.xml" },
-  "sitemaps_found_summary": { en: "Found %count% sitemaps. Select the ones you want to analyze.", pl: "Found %count% sitemaps. Select the ones you want to analyze." },
-  "select_all": { en: "Select All", pl: "Select All" },
-  "sitemap_url_header": { en: "Sitemap URL", pl: "Sitemap URL" },
-  "select_header": { en: "Select", pl: "Select" },
-  "processing_state": { en: "Processing...", pl: "Processing..." },
-  "continue_to_processing": { en: "Continue to Processing", pl: "Continue to Processing" },
-  "progress_status_text": { en: "Step %step%/5, Progress %progress%%, ETA %timeRemaining%s", pl: "Step %step%/5, Progress %progress%%, ETA %timeRemaining%s" },
-
-  // Keys from ProtectedRoute
-  "Info": { en: "Info", pl: "Info" },
-  "auth.pleaseLogin": { en: "Please log in to access this page.", pl: "Please log in to access this page." },
-  "auth.sessionExpired": { en: "Your session has expired. Please log in again.", pl: "Your session has expired. Please log in again." },
-
   // Keys from AppHeader
   "menu": { en: "Menu", pl: "Menu" },
 
   // Keys from HighchartsTreeMap
-  "pages_count": { en: "Pages Count", pl: "Pages Count" },
+  "pages_count": { en: "Pages Count", pl: "Liczba stron" },
 
   // Keys from AnalysisResults
-  "date": { en: "Date", pl: "Date" },
-  "title": { en: "Title", pl: "Title" },
-  "exploration_details": { en: "Exploration Details", pl: "Exploration Details" },
-  "cluster_description": { en: "Visual representation of content clusters and their relationships.", pl: "Visual representation of content clusters and their relationships." },
-  "proximity_to_centroid": { en: "Proximity to Centroid", pl: "Proximity to Centroid" },
-  "url_analysis_description": { en: "Detailed analysis of individual URLs and their relation to the site's overall focus.", pl: "Detailed analysis of individual URLs and their relation to the site's overall focus." },
-  "proximity_to_centroid": { en: "Proximity to Centroid", pl: "Proximity to Centroid" },
-  "cluster_description": { en: "Visual representation of content clusters and their relationships.", pl: "Visual representation of content clusters and their relationships." },
-  "exploration_details": { en: "Exploration Details", pl: "Exploration Details" },
-  "title": { en: "Title", pl: "Title" },
-  "date": { en: "Date", pl: "Date" },
-  "menu": { en: "Menu", pl: "Menu" },
-  "pages_count": { en: "Pages Count", pl: "Pages Count" },
-  "Info": { en: "Info", pl: "Info" },
-  "auth.pleaseLogin": { en: "Please log in to access this page.", pl: "Please log in to access this page." },
-  "auth.sessionExpired": { en: "Your session has expired. Please log in again.", pl: "Your session has expired. Please log in again." },
-  "please_enter_url": { en: "Please enter a URL", pl: "Please enter a URL" },
-  "session_expired": { en: "Session expired. Please log in again.", pl: "Session expired. Please log in again." },
-  "project_id_missing": { en: "Project ID is missing.", pl: "Project ID is missing." },
-  "url_source_tab": { en: "URL Source", pl: "URL Source" },
-  "website_domain_label": { en: "Website Domain", pl: "Website Domain" },
-  "sitemap_url_label": { en: "Sitemap URL", pl: "Sitemap URL" },
-  "website_domain_placeholder": { en: "example.com", pl: "example.com" },
-  "sitemap_url_placeholder": { en: "example.com/sitemap.xml", pl: "example.com/sitemap.xml" },
-  "sitemaps_found_summary": { en: "Found %count% sitemaps. Select the ones you want to analyze.", pl: "Found %count% sitemaps. Select the ones you want to analyze." },
-  "select_all": { en: "Select All", pl: "Select All" },
-  "processing_state": { en: "Processing...", pl: "Processing..." },
-  "continue_to_processing": { en: "Continue to Processing", pl: "Continue to Processing" },
-  "progress_status_text_sitemap": { en: "Step %step%/5, Progress %progress%%, ETA %timeRemaining%s", pl: "Step %step%/5, Progress %progress%%, ETA %timeRemaining%s" }
+  "date": { en: "Date", pl: "Data" },
+  "title": { en: "Title", pl: "Tytuł" },
+  "exploration_details": { en: "Exploration Details", pl: "Szczegóły eksploracji" },
+  "url_analysis_description": { en: "Detailed analysis of individual URLs and their relation to the site's overall focus.", pl: "Szczegółowa analiza poszczególnych adresów URL i ich związku z ogólnym ukierunkowaniem witryny." },
+  "progress_status_text_sitemap": { en: "Step %step%/5, Progress %progress%%, ETA %timeRemaining%s", pl: "Krok %step%/5, Postęp %progress%%, ETA %timeRemaining%s" },
+  "select_all": { en: "Select All", pl: "Zaznacz wszystko" },
+
+  "fetch_urls_for_selected_sitemaps": {
+    en: "Fetch URLs for selected sitemaps",
+    pl: "Pobierz adresy URL dla wybranych sitemap"
+  },
+
+  "process_filtered_urls": {
+    en: "Process %count% Filtered URLs",
+    pl: "Przetwórz %count% wyfiltrowanych URL-i"
+  }
 };
 
 interface LanguageContextType {
