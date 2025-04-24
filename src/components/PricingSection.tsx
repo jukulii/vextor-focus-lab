@@ -1,7 +1,7 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from "@/components/ui/button";
 import { CheckIcon, Sparkles } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import {
@@ -15,6 +15,7 @@ import {
 const PricingSection = () => {
   const { t, language } = useLanguage();
   const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
   
   // Define pricing tiers
   const pricingTiers = [
@@ -34,7 +35,14 @@ const PricingSection = () => {
     }
   };
 
-  // Keep only the Pro plan
+  const handleTryForFree = () => {
+    if (isAuthenticated) {
+      navigate('/app');
+    } else {
+      navigate('/login');
+    }
+  };
+
   const pricingPlan = {
     name: language === 'pl' ? "Elastyczny plan wzrostu" : "Scale as You Grow",
     description: t('price_pro_desc'),
@@ -68,80 +76,89 @@ const PricingSection = () => {
           <div className="w-16 h-1 bg-[#8da2e5] mx-auto mt-4 rounded-full"></div>
         </div>
         
-        <div className="flex justify-center">
-          {/* Added contrast colors and enhanced styling */}
-          <div className="
-              rounded-xl p-8 transition-all duration-300 
-              bg-gradient-to-br from-[#5d6cd0] to-[#4c5ebb] border border-[#4c5ebb]/50 shadow-2xl
-              max-w-md w-full hover:shadow-[#8da2e5]/20 hover:scale-[1.02]
-              relative overflow-hidden
-            ">
-            {/* Decorative elements with high contrast */}
-            <div className="absolute -right-16 -top-16 w-32 h-32 bg-white/20 rounded-full"></div>
-            <div className="absolute -left-16 -bottom-16 w-32 h-32 bg-white/20 rounded-full"></div>
-            
-            {/* Badge with contrast glow effect */}
-            <div className="flex justify-center mb-4">
-              <p className="text-white mt-1 mb-2 text-sm bg-[#ff6b6b]/80 px-4 py-1.5 rounded-full font-medium text-center inline-flex items-center shadow-lg shadow-[#ff6b6b]/20">
-                <Sparkles className="w-4 h-4 mr-2" />
-                {language === 'pl' ? "Wersja próbna dla 1 000 URL-i za darmo" : "Free trial version for 1 000 URL's"}
-              </p>
-            </div>
-            
-            <div className="flex items-center justify-center mb-6">
-              <h3 className="font-bold text-white text-center text-3xl">
-                {pricingPlan.name}
-              </h3>
-            </div>
-            
-            <div className="mt-4 mb-8 text-center">
-              <div className="flex items-baseline justify-center space-x-2">
-                <span className="bg-[#ff6b6b]/90 text-white font-medium text-lg px-3 py-1 rounded-md backdrop-blur-sm">
-                  {language === 'pl' ? "Od" : "Starts from"}
-                </span>
-                <span className="text-white text-4xl font-bold">
-                  ${selectedTier.price}
-                </span>
-                <span className="text-white/80 ml-2 text-lg">{language === 'pl' ? "/miesiąc" : "/month"}</span>
-              </div>
-              
-              <div className="mt-4">
-                <Select defaultValue={selectedTier.urls} onValueChange={handlePriceChange}>
-                  <SelectTrigger className="w-full bg-white/20 border-white/30 focus:ring-white/50 text-white">
-                    <SelectValue placeholder={language === 'pl' ? "Liczba URL na miesiąc" : "Select URLs per month"} />
-                  </SelectTrigger>
-                  <SelectContent className="bg-[#4c5ebb] border-white/30">
-                    {pricingTiers.map((tier) => (
-                      <SelectItem 
-                        key={tier.urls} 
-                        value={tier.urls} 
-                        className="text-white hover:bg-[#3a4aa8] focus:bg-[#3a4aa8] cursor-pointer"
-                      >
-                        {tier.urls} {language === 'pl' ? `URL (${tier.pricePerUrl}$ za URL)` : `URLs (${tier.pricePerUrl} per URL)`}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-            
-            <ul className="mt-6 mb-10 space-y-4">
-              {pricingPlan.features.map((feature, i) => (
-                <li key={i} className="flex items-start">
-                  <div className="mt-0.5 rounded-full p-1.5 bg-[#ff6b6b] animate-pulse-subtle">
-                    <CheckIcon className="h-4 w-4 text-white" />
-                  </div>
-                  <span className="ml-3 text-white text-sm">{feature}</span>
-                </li>
-              ))}
-            </ul>
-            
-            <Link to={pricingPlan.to}>
-              <Button variant="highlight" className="w-full py-6 text-lg font-medium transition-all duration-300 border-2 border-white/20 hover:border-white/40">
-                {pricingPlan.buttonText}
-              </Button>
-            </Link>
+      <div className="flex justify-center">
+        <div className="
+            rounded-xl p-8 transition-all duration-300 
+            bg-gradient-to-br from-[#5d6cd0] to-[#4c5ebb] border border-[#4c5ebb]/50 shadow-2xl
+            max-w-md w-full hover:shadow-[#8da2e5]/20 hover:scale-[1.02]
+            relative overflow-hidden
+          ">
+          {/* Decorative elements with high contrast */}
+          <div className="absolute -right-16 -top-16 w-32 h-32 bg-white/20 rounded-full"></div>
+          <div className="absolute -left-16 -bottom-16 w-32 h-32 bg-white/20 rounded-full"></div>
+          
+          {/* Badge with contrast glow effect */}
+          <div className="flex justify-center mb-4">
+            <p className="text-white mt-1 mb-2 text-sm bg-[#ff6b6b]/80 px-4 py-1.5 rounded-full font-medium text-center inline-flex items-center shadow-lg shadow-[#ff6b6b]/20">
+              <Sparkles className="w-4 h-4 mr-2" />
+              {language === 'pl' ? "Wersja próbna dla 1 000 URL-i za darmo" : "Free trial version for 1 000 URL's"}
+            </p>
           </div>
+          
+          {/* Add a new button for "Try for Free" */}
+          <div className="mt-4 text-center">
+            <Button 
+              variant="accent" 
+              className="w-full py-6 text-lg font-medium transition-all duration-300 border-2 border-white/20 hover:border-white/40"
+              onClick={handleTryForFree}
+            >
+              {language === 'pl' ? "Wypróbuj za darmo" : "Try for Free"}
+            </Button>
+          </div>
+
+          <div className="flex items-center justify-center mb-6">
+            <h3 className="font-bold text-white text-center text-3xl">
+              {pricingPlan.name}
+            </h3>
+          </div>
+          
+          <div className="mt-4 mb-8 text-center">
+            <div className="flex items-baseline justify-center space-x-2">
+              <span className="bg-[#ff6b6b]/90 text-white font-medium text-lg px-3 py-1 rounded-md backdrop-blur-sm">
+                {language === 'pl' ? "Od" : "Starts from"}
+              </span>
+              <span className="text-white text-4xl font-bold">
+                ${selectedTier.price}
+              </span>
+              <span className="text-white/80 ml-2 text-lg">{language === 'pl' ? "/miesiąc" : "/month"}</span>
+            </div>
+            
+            <div className="mt-4">
+              <Select defaultValue={selectedTier.urls} onValueChange={handlePriceChange}>
+                <SelectTrigger className="w-full bg-white/20 border-white/30 focus:ring-white/50 text-white">
+                  <SelectValue placeholder={language === 'pl' ? "Liczba URL na miesiąc" : "Select URLs per month"} />
+                </SelectTrigger>
+                <SelectContent className="bg-[#4c5ebb] border-white/30">
+                  {pricingTiers.map((tier) => (
+                    <SelectItem 
+                      key={tier.urls} 
+                      value={tier.urls} 
+                      className="text-white hover:bg-[#3a4aa8] focus:bg-[#3a4aa8] cursor-pointer"
+                    >
+                      {tier.urls} {language === 'pl' ? `URL (${tier.pricePerUrl}$ za URL)` : `URLs (${tier.pricePerUrl} per URL)`}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+          
+          <ul className="mt-6 mb-10 space-y-4">
+            {pricingPlan.features.map((feature, i) => (
+              <li key={i} className="flex items-start">
+                <div className="mt-0.5 rounded-full p-1.5 bg-[#ff6b6b] animate-pulse-subtle">
+                  <CheckIcon className="h-4 w-4 text-white" />
+                </div>
+                <span className="ml-3 text-white text-sm">{feature}</span>
+              </li>
+            ))}
+          </ul>
+          
+          <Link to={pricingPlan.to}>
+            <Button variant="highlight" className="w-full py-6 text-lg font-medium transition-all duration-300 border-2 border-white/20 hover:border-white/40">
+              {pricingPlan.buttonText}
+            </Button>
+          </Link>
         </div>
       </div>
     </section>
