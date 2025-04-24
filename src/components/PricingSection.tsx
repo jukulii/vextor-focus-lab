@@ -1,8 +1,7 @@
-
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from "@/components/ui/button";
 import { CheckIcon, Sparkles } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import {
@@ -18,7 +17,6 @@ const PricingSection = () => {
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
   
-  // Define pricing tiers
   const pricingTiers = [
     { urls: "5000", price: "49", pricePerUrl: "0.00980" },
     { urls: "10000", price: "89", pricePerUrl: "0.00890" },
@@ -56,7 +54,6 @@ const PricingSection = () => {
 
   return (
     <section id="pricing" className="py-20 border-t border-gray-200 dark:border-gray-800 relative overflow-hidden">
-      {/* Background elements for visual interest */}
       <div className="absolute -top-24 -right-24 w-96 h-96 bg-[#8da2e5]/10 rounded-full blur-3xl"></div>
       <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-[#8da2e5]/10 rounded-full blur-3xl"></div>
       
@@ -84,27 +81,14 @@ const PricingSection = () => {
               max-w-md w-full hover:shadow-[#8da2e5]/20 hover:scale-[1.02]
               relative overflow-hidden
             ">
-            {/* Decorative elements with high contrast */}
             <div className="absolute -right-16 -top-16 w-32 h-32 bg-white/20 rounded-full"></div>
             <div className="absolute -left-16 -bottom-16 w-32 h-32 bg-white/20 rounded-full"></div>
             
-            {/* Badge with contrast glow effect */}
             <div className="flex justify-center mb-4">
               <p className="text-white mt-1 mb-2 text-sm bg-[#ff6b6b]/80 px-4 py-1.5 rounded-full font-medium text-center inline-flex items-center shadow-lg shadow-[#ff6b6b]/20">
                 <Sparkles className="w-4 h-4 mr-2" />
                 {language === 'pl' ? "Wersja próbna dla 1 000 URL-i za darmo" : "Free trial version for 1 000 URL's"}
               </p>
-            </div>
-            
-            {/* Add a new button for "Try for Free" */}
-            <div className="mt-4 text-center">
-              <Button 
-                variant="accent" 
-                className="w-full py-6 text-lg font-medium transition-all duration-300 border-2 border-white/20 hover:border-white/40"
-                onClick={handleTryForFree}
-              >
-                {language === 'pl' ? "Wypróbuj za darmo" : "Try for Free"}
-              </Button>
             </div>
 
             <div className="flex items-center justify-center mb-6">
