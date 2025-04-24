@@ -7,7 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent } from '@/components/ui/card';
 import { SearchIcon, Loader2, Globe, Layout, Check, ExternalLink, Trash2 } from 'lucide-react';
 import axios from 'axios';
-import { useToast } from "@/hooks/use-toast";
+import { useToast } from "@/components/ui/use-toast";
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/lib/supabase';
 import { Switch } from '@/components/ui/switch';
@@ -15,9 +15,15 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Badge } from '@/components/ui/badge';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Progress } from "@/components/ui/progress";
 
 // Type for project_source_type enum
 type ProjectSourceType = 'domain_url' | 'sitemap_url';
+
+// --- Add URL interface ---
+interface ProcessedUrl {
+  url: string;
+}
 
 // Define Project type based on your database schema
 interface Project {
@@ -45,6 +51,322 @@ interface Filter {
   operator?: 'AND' | 'OR';
 }
 
+// --- Hook for real-time progress (copied and adapted from ProcessingPage) ---
+const useProjectProgress = (projectId: string | null) => {
+  const { toast } = useToast();
+  const [progress, setProgress] = useState(0);
+  const [urlsCount, setUrlsCount] = useState(0);
+  const [processedCount, setProcessedCount] = useState(0);
+  // --- Add state for processed URLs ---
+  const [processedUrls, setProcessedUrls] = useState<string[]>([]);
+  const [isLoadingUrls, setIsLoadingUrls] = useState<boolean>(false);
+  const [hasFetchedUrls, setHasFetchedUrls] = useState<boolean>(false);
+  const [authError, setAuthError] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!projectId) return;
+
+    // Reset state when projectId changes
+    setProgress(0);
+    setUrlsCount(0);
+    setProcessedCount(0);
+
+    // Fetch initial project data
+    const fetchInitialData = async () => {
+      const { data, error } = await supabase
+        .from('projects')
+        .select('urls_count, processed_urls_count')
+        .eq('id', projectId)
+        .single();
+
+      if (error) {
+        console.error('Error fetching initial project data:', error);
+        return;
+      }
+
+      if (data) {
+        setUrlsCount(data.urls_count);
+        setProcessedCount(data.processed_urls_count);
+        if (data.urls_count > 0) {
+          setProgress((data.processed_urls_count / data.urls_count) * 100);
+        }
+      }
+    };
+
+    fetchInitialData();
+
+    // Set up real-time subscription using channel
+    const channel = supabase
+      .channel(`project-progress-${projectId}`)
+      .on(
+        'postgres_changes',
+        {
+          event: 'UPDATE',
+          schema: 'public',
+          table: 'projects',
+          filter: `id=eq.${projectId}`
+        },
+        (payload) => {
+          const updatedProject = payload.new as { processed_urls_count?: number; urls_count?: number };
+          const processed_urls_count = typeof updatedProject?.processed_urls_count === 'number' ? updatedProject.processed_urls_count : null;
+          const urls_count = typeof updatedProject?.urls_count === 'number' ? updatedProject.urls_count : null;
+
+          if (urls_count !== null) {
+            setUrlsCount(urls_count);
+          }
+          if (processed_urls_count !== null) {
+            setProcessedCount(processed_urls_count);
+          }
+
+          if (urls_count !== null && processed_urls_count !== null && urls_count > 0) {
+            const newProgress = (processed_urls_count / urls_count) * 100;
+            setProgress(newProgress);
+          } else if (urls_count === 0) {
+            setProgress(0);
+          }
+        }
+      )
+      .subscribe((status) => {
+        console.log(`SitemapSearch: Supabase channel status for ${projectId}: ${status}`);
+        if (status === 'SUBSCRIBED') {
+          console.log(`SitemapSearch: Successfully subscribed to project ${projectId} updates!`);
+        }
+      });
+
+    // Clean up subscription on unmount or projectId change
+    return () => {
+      if (channel) {
+        supabase.removeChannel(channel);
+        console.log(`SitemapSearch: Unsubscribed from project ${projectId} updates.`);
+      }
+    };
+  }, [projectId]);
+
+  // --- Add effect to fetch processed URLs at 100% ---
+  useEffect(() => {
+    // Fetch only if progress is 100, we have a project ID, and haven't fetched yet
+    if (progress >= 100 && projectId && !hasFetchedUrls && !isLoadingUrls) {
+      const fetchProcessedUrls = async () => {
+        setIsLoadingUrls(true);
+        console.log('SitemapSearch/ProcessingDisplay: Progress reached 100%. Waiting 1 second before fetching processed URLs...');
+
+        // Add 1 second delay before fetching
+        await new Promise(resolve => setTimeout(resolve, 1000));
+
+        console.log('SitemapSearch/ProcessingDisplay: Fetching processed URLs using join...');
+        try {
+          // Get current user session
+          const { data: { session: currentSession } } = await supabase.auth.getSession();
+          const currentUserId = currentSession?.user?.id;
+
+          if (!currentUserId) {
+            console.error('SitemapSearch/ProcessingDisplay: No user ID found in session');
+            setProcessedUrls([]);
+            setIsLoadingUrls(false);
+            setHasFetchedUrls(true);
+            return;
+          }
+
+          console.log(`SitemapSearch/ProcessingDisplay: Fetching URLs for project ${projectId} as user ${currentUserId}`);
+
+          // First verify the project belongs to the current user
+          const { data: projectData, error: projectError } = await supabase
+            .from('projects')
+            .select('id')
+            .eq('id', projectId)
+            .eq('user_id', currentUserId)
+            .single();
+
+          if (projectError || !projectData) {
+            console.error('SitemapSearch/ProcessingDisplay: Project not found or not owned by current user:', projectError);
+            setProcessedUrls([]);
+            setIsLoadingUrls(false);
+            setHasFetchedUrls(true);
+            return;
+          }
+
+          // Then fetch URLs with non-null embedding using join
+          const { data: urlData, error: urlError } = await supabase
+            .from('urls')
+            .select(`
+              url,
+              embedding_title_desc,
+              sitemaps!inner(
+                project_id,
+                projects!inner(id)
+              )
+            `)
+            .eq('sitemaps.project_id', projectId)
+            .eq('sitemaps.projects.user_id', currentUserId);
+
+          if (urlError) {
+            console.error('SitemapSearch/ProcessingDisplay: Error fetching processed URLs with join:', urlError);
+            setProcessedUrls([]);
+          } else if (urlData) {
+            // Filter out URLs without embeddings
+            const urlsWithEmbeddings = urlData.filter(item => item.embedding_title_desc !== null);
+
+            // Process in batches of 10k
+            const BATCH_SIZE = 10000;
+            const apiUrl = import.meta.env.VITE_SITE_FOCUS_RADIUS_METRIC_API_URL;
+            const apiKey = import.meta.env.VITE_APP_API_KEY;
+
+            if (!apiUrl || !apiKey) {
+              console.error('Missing API configuration:', { apiUrl, apiKey });
+              return;
+            }
+
+            console.log('Starting to process batches. Total URLs with embeddings:', urlsWithEmbeddings.length);
+
+            for (let i = 0; i < urlsWithEmbeddings.length; i += BATCH_SIZE) {
+              const batch = urlsWithEmbeddings.slice(i, i + BATCH_SIZE);
+              const payload = {
+                embeddings: batch.map(item => {
+                  // Convert string to array of numbers
+                  if (typeof item.embedding_title_desc === 'string') {
+                    try {
+                      return JSON.parse(item.embedding_title_desc);
+                    } catch (e) {
+                      console.error('Error parsing embedding:', e);
+                      return null;
+                    }
+                  }
+                  return item.embedding_title_desc;
+                }).filter(embedding => embedding !== null),
+                urls: batch.map(item => item.url)
+              };
+
+              console.log(`Sending batch ${i / BATCH_SIZE + 1} to API:`, {
+                batchSize: batch.length,
+                firstUrl: batch[0]?.url,
+                lastUrl: batch[batch.length - 1]?.url,
+                apiUrl
+              });
+
+              try {
+                const response = await axios.post(apiUrl, payload, {
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'x-api-key': apiKey
+                  }
+                });
+                console.log(`Successfully sent batch ${i / BATCH_SIZE + 1} to API. Response:`, response.status);
+              } catch (error) {
+                console.error(`Error sending batch ${i / BATCH_SIZE + 1} to API:`, {
+                  error,
+                  apiUrl,
+                  payloadSize: JSON.stringify(payload).length,
+                  firstUrl: batch[0]?.url
+                });
+                toast({
+                  title: 'API Error',
+                  description: `Failed to send batch ${i / BATCH_SIZE + 1} to API.`,
+                  variant: 'destructive'
+                });
+              }
+            }
+
+            // Handle potential duplicates
+            const uniqueUrls = new Set(urlsWithEmbeddings.map((item: any) => item.url));
+            console.log('SitemapSearch/ProcessingDisplay: Fetched unique processed URLs:', Array.from(uniqueUrls).length);
+            setProcessedUrls(Array.from(uniqueUrls));
+          } else {
+            setProcessedUrls([]);
+          }
+        } catch (err) {
+          console.error('SitemapSearch/ProcessingDisplay: Unexpected error fetching processed URLs with join:', err);
+          setProcessedUrls([]);
+        } finally {
+          setIsLoadingUrls(false);
+          setHasFetchedUrls(true); // Mark as fetched regardless of success/failure
+        }
+      };
+      fetchProcessedUrls();
+    }
+    // Reset URLs and fetch flag if progress drops below 100
+    else if (progress < 100) {
+      setProcessedUrls([]);
+      setHasFetchedUrls(false);
+    }
+    // Depend only on progress, projectId, and the fetch flag
+  }, [progress, projectId, hasFetchedUrls, isLoadingUrls]); // Keep isLoadingUrls to prevent parallel fetches
+  // --- End of fetch effect ---
+
+  // --- Update return value ---
+  return { progress, urlsCount, processedCount, processedUrls, isLoadingUrls, authError };
+};
+// --- End of useProjectProgress hook ---
+
+// --- Component to display processing progress ---
+interface ProcessingDisplayProps {
+  projectId: string;
+}
+
+const ProcessingDisplay: React.FC<ProcessingDisplayProps> = ({ projectId }) => {
+  const { t } = useLanguage();
+  const navigate = useNavigate();
+  const { toast } = useToast();
+  const { progress, urlsCount, processedCount, processedUrls, isLoadingUrls, authError } = useProjectProgress(projectId);
+
+  // Show toast for auth error only once
+  useEffect(() => {
+    if (authError) {
+      toast({
+        title: 'Authentication Error',
+        description: 'Your session may have expired. Please log in again.',
+        variant: 'destructive'
+      });
+    }
+  }, [authError, toast]);
+
+  return (
+    <div className="flex flex-col items-center justify-center py-8">
+      <h3 className="text-lg font-medium text-gray-100 mb-4">Processing Project: {projectId}</h3>
+      <Progress value={progress} className="w-full h-8 mb-4" />
+      <p className="text-gray-300 dark:text-gray-300 mb-2">
+        {t('progress')}: {progress.toFixed(1)}% ({processedCount} / {urlsCount})
+      </p>
+      <p className="text-gray-400 dark:text-gray-400 text-sm mt-4 mb-6">
+        {progress < 100 ? t('converting_content') : t('processing_complete')}
+      </p>
+
+      {progress >= 100 && (
+        <div className="w-full mt-6 border-t border-gray-700 pt-6">
+          <h3 className="text-lg font-semibold mb-4 text-center text-gray-100">
+            {t('processed_urls_list_title')}
+          </h3>
+          {isLoadingUrls ? (
+            <p className="text-center text-gray-400">{t('loading_urls')}</p>
+          ) : processedUrls.length > 0 ? (
+            <ul className="list-disc list-inside space-y-1 max-h-60 overflow-y-auto text-sm text-gray-300 px-4 bg-[#1e1e2d] p-4 rounded-md border border-gray-600">
+              {processedUrls.map((url, index) => (
+                <li key={index}>
+                  <a href={url} target="_blank" rel="noopener noreferrer" className="hover:underline break-all text-gray-200 hover:text-[#ff6b6b]">
+                    {url}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-center text-gray-400">{t('no_processed_urls_found')}</p>
+          )}
+
+          <div className="mt-6 text-center">
+            <Button
+              onClick={() => navigate(`/results?projectId=${projectId}`)}
+              className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors disabled:opacity-50"
+              disabled={isLoadingUrls}
+            >
+              {t('view_results_button')}
+            </Button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+// --- End of ProcessingDisplay component ---
+
 const SitemapSearch = () => {
   const { t } = useLanguage();
   const navigate = useNavigate();
@@ -55,9 +377,9 @@ const SitemapSearch = () => {
   const [sitemapData, setSitemapData] = useState<SitemapData | null>(null);
   const [selectedSitemaps, setSelectedSitemaps] = useState<Set<string>>(new Set());
   const [isProcessing, setIsProcessing] = useState(false);
-  const { toast } = useToast();
   const [fetchedUrlItems, setFetchedUrlItems] = useState<Array<{ sitemapUrl: string; pageUrl: string }>>([]);
   const [totalFetchedUrlsCount, setTotalFetchedUrlsCount] = useState<number>(0);
+  const [initialTotalUrlCountFromAllSitemaps, setInitialTotalUrlCountFromAllSitemaps] = useState<number>(0);
 
   // Nowe stany do przechowywania danych wejściowych dla późniejszego tworzenia projektu
   const [initialUrl, setInitialUrl] = useState('');
@@ -75,6 +397,11 @@ const SitemapSearch = () => {
   // Stany paginacji
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [itemsPerPage, setItemsPerPage] = useState<number>(50);
+
+  // State to hold the ID of the project being processed
+  const [processingProjectId, setProcessingProjectId] = useState<string | null>(null);
+
+  const { toast } = useToast();
 
   const createProject = async (url: string, type: ProjectSourceType) => {
     if (!session?.user?.id) {
@@ -97,7 +424,7 @@ const SitemapSearch = () => {
         .single();
 
       if (error) throw error;
-      return data;
+      return data.id; // Return the project ID
     } catch (error) {
       console.error('Error creating project:', error);
       throw error;
@@ -111,6 +438,7 @@ const SitemapSearch = () => {
     setSelectedSitemaps(new Set());
     setFetchedUrlItems([]);
     setTotalFetchedUrlsCount(0);
+    setInitialTotalUrlCountFromAllSitemaps(0);
     setFilters([]);
     setNewFilterValue('');
     setNewFilterType('contains');
@@ -138,9 +466,9 @@ const SitemapSearch = () => {
       // Reset części stanu, ale zachowaj URL wpisany przez użytkownika
       setSitemapData(null);
       setSelectedSitemaps(new Set());
-      // setCurrentProjectId(null); // Nie używamy
       setFetchedUrlItems([]);
       setTotalFetchedUrlsCount(0);
+      setInitialTotalUrlCountFromAllSitemaps(0);
       setFilters([]);
       setNewFilterValue('');
       setNewFilterType('contains');
@@ -155,53 +483,89 @@ const SitemapSearch = () => {
     if (!isAuthenticated || !session?.access_token) { /* toast + navigate */ return; }
 
     setIsSearching(true);
+    setInitialTotalUrlCountFromAllSitemaps(0);
+
     try {
-      // --- TWORZENIE PROJEKTU USUNIĘTE STĄD ---
-      // Usunięto: const project = await createProject(url, inputType);
-      // Usunięto: if (!project || !project.id) { ... }
-      // Usunięto: setCurrentProjectId(project.id);
+      const parserApiUrl = import.meta.env.VITE_SITEMAP_PARSER_API_URL;
+      if (!parserApiUrl) {
+        throw new Error('Sitemap parser API URL is not defined');
+      }
+      const apiKey = import.meta.env.VITE_APP_API_KEY;
+      if (!apiKey) {
+        throw new Error('API Key is not defined');
+      }
 
       if (inputType === 'domain_url') {
-        const response = await axios.get(`${import.meta.env.VITE_DOMAIN_CRAWL_API_URL}`, {
-          headers: { 'Content-Type': 'application/json', 'x-api-key': import.meta.env.VITE_APP_API_KEY },
+        const domainCrawlApiUrl = import.meta.env.VITE_DOMAIN_CRAWL_API_URL;
+        if (!domainCrawlApiUrl) {
+          throw new Error('Domain Crawl API URL is not defined');
+        }
+
+        const response = await axios.get(domainCrawlApiUrl, {
+          headers: { 'Content-Type': 'application/json', 'x-api-key': apiKey },
           params: { domain: url }
         });
-        setSitemapData(response.data);
-        // Automatycznie zaznacz wszystkie znalezione sitemapy dla domeny
-        setSelectedSitemaps(new Set(response.data.sitemaps));
-      } else { // inputType === 'sitemap_url'
-        const parserApiUrl = import.meta.env.VITE_SITEMAP_PARSER_API_URL;
-        if (!parserApiUrl) {
-          throw new Error('Sitemap parser API URL is not defined');
+        const sitemapDataFromApi = response.data;
+        setSitemapData(sitemapDataFromApi);
+        const allFoundSitemaps = sitemapDataFromApi.sitemaps || [];
+        setSelectedSitemaps(new Set(allFoundSitemaps)); // Auto-select all found
+
+        // Fetch total URL count from ALL found sitemaps
+        if (allFoundSitemaps.length > 0) {
+          console.log('Fetching total URL count for all found sitemaps:', allFoundSitemaps);
+          const parserResponse = await axios.post(parserApiUrl, {
+            sitemap_urls: allFoundSitemaps
+          }, {
+            headers: { 'Content-Type': 'application/json', 'x-api-key': apiKey }
+          });
+
+          let totalCount = 0;
+          if (parserResponse.data && typeof parserResponse.data.results === 'object') {
+            for (const sitemapUrl in parserResponse.data.results) {
+              const result = parserResponse.data.results[sitemapUrl];
+              if (result && !result.error) {
+                totalCount += result.urls_count || (Array.isArray(result.urls) ? result.urls.length : 0);
+              } else if (result && result.error) {
+                console.warn(`Error parsing sitemap ${sitemapUrl} for total count:`, result.error);
+                // Optionally show a toast, but don't fail the whole process
+              }
+            }
+          }
+          console.log('Calculated initial total URL count from all sitemaps:', totalCount);
+          setInitialTotalUrlCountFromAllSitemaps(totalCount);
+        } else {
+          console.log('No sitemaps found for the domain.');
+          setInitialTotalUrlCountFromAllSitemaps(0);
         }
+
+
+      } else { // inputType === 'sitemap_url'
         const response = await axios.post(parserApiUrl, {
           sitemap_urls: [url] // Szukamy tylko dla podanego URL sitemapy
         }, {
-          headers: { 'Content-Type': 'application/json', 'x-api-key': import.meta.env.VITE_APP_API_KEY }
+          headers: { 'Content-Type': 'application/json', 'x-api-key': apiKey }
         });
 
         const parserResponseData = response.data;
         console.log('Successfully received response from parser API for single sitemap:', url);
 
         let allUrlItems: Array<{ sitemapUrl: string; pageUrl: string }> = [];
-        let count = 0;
+        let count = 0; // This will be both totalFetched and initialTotal for single sitemap
         if (parserResponseData && typeof parserResponseData.results === 'object') {
           const result = parserResponseData.results[url];
           if (result && !result.error && Array.isArray(result.urls)) {
             const itemsFromSitemap = result.urls.map((pageUrl: string) => ({ sitemapUrl: url, pageUrl: pageUrl }));
             allUrlItems = allUrlItems.concat(itemsFromSitemap);
-            count += result.urls_count || result.urls.length;
+            count = result.urls_count || result.urls.length; // Get count from response
           } else if (result && result.error) {
             console.error(`Error parsing sitemap ${url}:`, result.error);
             toast({ title: 'Parsing Error', description: `Could not parse sitemap ${url}: ${result.error}`, variant: 'destructive' });
           }
         }
         setFetchedUrlItems(allUrlItems);
-        setTotalFetchedUrlsCount(count);
-        // Ustaw sitemapData, aby UI wiedziało, że przyszliśmy z pojedynczej sitemapy
-        // Traktujemy to jakbyśmy od razu przeszli do kroku z URLami
+        setTotalFetchedUrlsCount(count); // Set count for selected (the only one) sitemap
+        setInitialTotalUrlCountFromAllSitemaps(count); // Set total initial count
         setSitemapData({ domain: '(Direct Sitemap)', sitemaps: [url], sitemap_count: 1, execution_time: 'N/A' });
-        // Dodaj pojedynczą sitemapę do wybranych, aby logika filtrowania/przetwarzania działała
         setSelectedSitemaps(new Set([url]));
       }
 
@@ -417,11 +781,10 @@ const SitemapSearch = () => {
 
     try {
       console.log(`Creating project for URL: ${initialUrl}, Type: ${initialInputType}`);
-      const projectData = await createProject(initialUrl, initialInputType);
-      if (!projectData || !projectData.id) {
+      const projectId = await createProject(initialUrl, initialInputType); // Capture the returned ID
+      if (!projectId) { // Check if projectId is valid
         throw new Error('Project creation failed or did not return an ID');
       }
-      projectId = projectData.id;
       console.log(`Project created successfully with ID: ${projectId}`);
 
       const sitemapFilteredCounts = new Map<string, number>();
@@ -430,7 +793,7 @@ const SitemapSearch = () => {
           sitemapFilteredCounts.set(item.sitemapUrl, (sitemapFilteredCounts.get(item.sitemapUrl) || 0) + 1);
         }
       });
-      console.log('Filtered URL counts per selected sitemap:', sitemapFilteredCounts);
+      console.log('Filtered URL counts per selected sitemaps:', sitemapFilteredCounts);
 
       const sitemapsToInsert = Array.from(selectedSitemaps).map(sitemapUrl => ({
         project_id: projectId,
@@ -554,26 +917,48 @@ const SitemapSearch = () => {
         }
         console.log('Filtered URLs inserted and sent to APIs successfully.');
 
-        const finalUrlCount = urlsToInsert.length;
+        // Update project count to the number of URLs actually inserted
         const { error: projectUpdateError } = await supabase
           .from('projects')
           .update({
-            urls_count: totalFetchedUrlsCount,
-            processed_urls_count: finalUrlCount
+            urls_count: urlsToInsert.length, // Use the length of the array of URLs to be inserted
           })
           .eq('id', projectId);
 
         if (projectUpdateError) {
           console.error('Error updating project counts:', projectUpdateError);
         } else {
-          console.log(`Project ${projectId} updated with counts: total=${totalFetchedUrlsCount}, processed=${finalUrlCount}`);
+          // Update log message
+          console.log(`Project ${projectId} updated with urls_count=${urlsToInsert.length}`);
         }
 
-        console.log(`Navigating to processing page for project ID: ${projectId}`);
-        navigate(`/processing?projectId=${projectId}`);
+        // --- CHANGE: Instead of navigating, set state and switch tab ---
+        console.log(`Starting processing for project ID: ${projectId}`);
+        setProcessingProjectId(projectId);
+        setActiveTab("generate"); // Switch to the processing tab
+        // navigate(`/processing?projectId=${projectId}`); // Removed navigation
 
       } else {
         console.log('No filtered URLs to insert (after filtering by selected sitemaps).');
+        // Update project count to 0 since no URLs were inserted
+        const { error: projectUpdateError } = await supabase
+          .from('projects')
+          .update({
+            urls_count: 0, // Set count to 0 as urlsToInsert.length is 0 here
+          })
+          .eq('id', projectId);
+
+        if (projectUpdateError) {
+          console.error('Error updating project count when no URLs inserted:', projectUpdateError);
+        } else {
+          // Update log message
+          console.log(`Project ${projectId} updated with urls_count=0 (no URLs inserted).`);
+        }
+        // --- CHANGE: Instead of navigating, set state and switch tab ---
+        console.log(`Starting processing (with 0 URLs) for project ID: ${projectId}`);
+        setProcessingProjectId(projectId);
+        setActiveTab("generate"); // Switch to the processing tab
+        // navigate(`/processing?projectId=${projectId}`); // Removed navigation
       }
 
     } catch (error) {
@@ -601,9 +986,13 @@ const SitemapSearch = () => {
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
         <TabsList className="w-full grid grid-cols-3 mb-6 sm:mb-10 bg-[#1e1e2d] border-none rounded-lg shadow-sm overflow-hidden p-0">
           <TabsTrigger value="url" className="py-3 text-center text-sm font-sans data-[state=active]:bg-[#ff6b6b] data-[state=active]:text-white transition-colors rounded-l-lg text-gray-300 hover:bg-gray-700/30">{t('url_source_tab') || 'URL Source'}</TabsTrigger>
-          <TabsTrigger value="filters" className="py-3 text-center text-sm font-sans relative data-[state=active]:bg-[#ff6b6b] data-[state=active]:text-white transition-colors text-gray-400 border-x border-gray-700/30" disabled>{t('filters')} {/* ... */}</TabsTrigger>
-          <TabsTrigger value="generate" className="py-3 text-center text-sm font-sans data-[state=active]:bg-[#ff6b6b] data-[state=active]:text-white transition-colors rounded-r-lg text-gray-400" disabled>
-            Results (Moved)
+          <TabsTrigger value="filters" className="py-3 text-center text-sm font-sans relative data-[state=active]:bg-[#ff6b6b] data-[state=active]:text-white transition-colors text-gray-400 border-x border-gray-700/30" disabled>{t('filters')}</TabsTrigger>
+          <TabsTrigger
+            value="generate"
+            className="py-3 text-center text-sm font-sans data-[state=active]:bg-[#ff6b6b] data-[state=active]:text-white transition-colors rounded-r-lg text-gray-300 hover:bg-gray-700/30"
+            disabled={!processingProjectId}
+          >
+            {t('processing_tab_title') || 'Processing'}
           </TabsTrigger>
         </TabsList>
 
@@ -833,6 +1222,20 @@ const SitemapSearch = () => {
                     )}
                   </button>
                 </form>
+              )}
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="generate" className="w-full">
+          <Card className="bg-[#13131a]/70 dark:bg-[#13131a]/70 backdrop-blur-sm border-none shadow-md rounded-xl w-full">
+            <CardContent className="p-6 sm:p-8">
+              {processingProjectId ? (
+                <ProcessingDisplay projectId={processingProjectId} />
+              ) : (
+                <p className="text-gray-500 text-center py-10">
+                  {t('processing_tab_placeholder') || 'Start a project from the URL Source tab to see processing progress here.'}
+                </p>
               )}
             </CardContent>
           </Card>

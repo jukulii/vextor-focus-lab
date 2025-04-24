@@ -402,7 +402,24 @@ const translations: Translations = {
   "process_filtered_urls": {
     en: "Process %count% Filtered URLs",
     pl: "Przetwórz %count% wyfiltrowanych URL-i"
-  }
+  },
+
+  // New translations added
+  "processing_tab_title": {
+    en: "Processing",
+    pl: "Processing"
+  },
+  "processing_tab_placeholder": {
+    en: "Start a project from the URL Source tab to see processing progress here.",
+    pl: "Start a project from the URL Source tab to see processing progress here."
+  },
+
+  // New translations for processing page status
+  "processing_complete": { en: "Processing complete. Preparing results...", pl: "Processing complete. Preparing results..." },
+  "processed_urls_list_title": { en: "Processed URLs", pl: "Processed URLs" },
+  "loading_urls": { en: "Loading processed URLs...", pl: "Loading processed URLs..." },
+  "no_processed_urls_found": { en: "No processed URLs found.", pl: "No processed URLs found." },
+  "view_results_button": { en: "View Results", pl: "View Results" }
 };
 
 interface LanguageContextType {
