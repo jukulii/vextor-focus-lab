@@ -7,7 +7,6 @@ import { LanguageProvider } from '@/contexts/LanguageContext';
 import { useEffect } from "react";
 import LandingPage from "./pages/LandingPage";
 import AppPage from "./pages/AppPage";
-import ProcessingPage from "./pages/ProcessingPage";
 import ResultsPage from "./pages/ResultsPage";
 import NotFound from "./pages/NotFound";
 import { AuthProvider } from '@/contexts/AuthContext';
@@ -62,14 +61,6 @@ const App = () => {
                   element={
                     <ProtectedRoute>
                       <AppPage />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/processing"
-                  element={
-                    <ProtectedRoute>
-                      <ProcessingPage />
                     </ProtectedRoute>
                   }
                 />

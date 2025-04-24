@@ -7,6 +7,33 @@ import HighchartsDonut from '@/components/HighchartsDonut';
 import HighchartsAreaChart from '@/components/HighchartsAreaChart';
 import VantaBackground from '@/components/VantaBackground';
 import HighchartsTreeMap from '@/components/HighchartsTreeMap';
+import axios from 'axios';
+
+interface TopUrl {
+  url: string;
+  proximity: number;
+}
+
+interface HistogramData {
+  [key: string]: number;
+}
+
+interface PageTypeDistribution {
+  core_content: { count: number; percentage: number };
+  supporting_pages: { count: number; percentage: number };
+  peripheral_pages: { count: number; percentage: number };
+  total_pages: number;
+}
+
+interface ApiResponse {
+  site_focus: number;
+  site_radius: number;
+  top_focused_urls: TopUrl[];
+  top_divergent_urls: TopUrl[];
+  histogram_data: HistogramData;
+  page_type_distribution: PageTypeDistribution;
+  processing_time: string;
+}
 
 const generateScatterData = (count = 400) => {
   const data = [];
@@ -35,8 +62,9 @@ const ResultsPage = () => {
   const { t, language } = useLanguage();
   const navigate = useNavigate();
   const location = useLocation();
-
   const [activeTab, setActiveTab] = useState('overview');
+  const [apiData, setApiData] = useState<ApiResponse | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const translations = {
     site_focus: {
@@ -195,6 +223,10 @@ const ResultsPage = () => {
     urls_count: {
       pl: "Liczba URLi",
       en: "URLs Count"
+    },
+    original_value: {
+      pl: "Wartość oryginalna",
+      en: "Original Value"
     }
   };
 
@@ -479,12 +511,22 @@ const ResultsPage = () => {
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
+    const projectId = searchParams.get('projectId');
     const tabParam = searchParams.get('tab');
 
     if (tabParam) {
       setActiveTab(tabParam);
     }
-  }, [location]);
+
+    // Get data from location state if available
+    if (location.state?.apiData) {
+      setApiData(location.state.apiData);
+      setIsLoading(false);
+    } else if (projectId) {
+      // If no data in state, redirect back to processing
+      navigate(`/processing?projectId=${projectId}`);
+    }
+  }, [location, navigate]);
 
   const handleTabChange = (tab: string) => {
     setActiveTab(tab);
@@ -496,6 +538,14 @@ const ResultsPage = () => {
   };
 
   const renderTabContent = () => {
+    if (isLoading) {
+      return <div className="p-8 text-center text-gray-400">{t('loading')}</div>;
+    }
+
+    if (!apiData) {
+      return <div className="p-8 text-center text-gray-400">{t('no_data_available')}</div>;
+    }
+
     switch (activeTab) {
       case 'overview':
         return (
@@ -504,7 +554,7 @@ const ResultsPage = () => {
               <div className="flex flex-col items-center">
                 <HighchartsGauge
                   id="site-focus-gauge"
-                  value={78}
+                  value={Number((apiData.site_focus * 100).toFixed(2))}
                   title={getLocalTranslation('site_focus')}
                   suffix=""
                   min={0}
@@ -515,9 +565,9 @@ const ResultsPage = () => {
               <div className="flex flex-col items-center">
                 <HighchartsGauge
                   id="site-radius-gauge"
-                  value={92}
+                  value={Number((apiData.site_radius * 100).toFixed(2))}
                   title={getLocalTranslation('site_radius')}
-                  suffix="%"
+                  suffix=""
                   min={0}
                   max={100}
                 />
@@ -529,27 +579,36 @@ const ResultsPage = () => {
                 <h2 className="text-xl font-semibold text-white p-4 bg-black/30 border-b border-gray-800">
                   {getLocalTranslation('top_focused_pages')}
                 </h2>
-                <div className="overflow-x-auto">
-                  <table className="min-w-full divide-y divide-gray-800">
+                <div className="w-full">
+                  <table className="w-full divide-y divide-gray-800">
                     <thead className="bg-black/20">
                       <tr>
-                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                        <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider w-[70%]">
                           {getLocalTranslation('page')}
                         </th>
-                        <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-300 uppercase tracking-wider">
+                        <th scope="col" className="px-4 py-3 text-right text-xs font-medium text-gray-300 uppercase tracking-wider w-[30%]">
                           {getLocalTranslation('proximity_to_centroid')}
                         </th>
                       </tr>
                     </thead>
                     <tbody className="bg-black/10 divide-y divide-gray-800">
-                      {focusedPagesData.map((item, index) => (
+                      {apiData.top_focused_urls.map((item, index) => (
                         <tr key={index} className="hover:bg-gray-900/30">
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-200">
-                            {item.page}
+                          <td className="px-4 py-3 text-sm text-gray-200 truncate max-w-0">
+                            <div className="truncate">
+                              <a
+                                href={item.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="hover:text-blue-400 transition-colors"
+                              >
+                                {item.url}
+                              </a>
+                            </div>
                           </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-right font-medium">
+                          <td className="px-4 py-3 text-sm text-right font-medium whitespace-nowrap">
                             <span className="px-2 py-1 bg-green-500/20 text-green-300 rounded">
-                              {item.score.toFixed(2)}
+                              {item.proximity.toFixed(2)}
                             </span>
                           </td>
                         </tr>
@@ -563,27 +622,36 @@ const ResultsPage = () => {
                 <h2 className="text-xl font-semibold text-white p-4 bg-black/30 border-b border-gray-800">
                   {getLocalTranslation('top_divergent_pages')}
                 </h2>
-                <div className="overflow-x-auto">
-                  <table className="min-w-full divide-y divide-gray-800">
+                <div className="w-full">
+                  <table className="w-full divide-y divide-gray-800">
                     <thead className="bg-black/20">
                       <tr>
-                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                        <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider w-[70%]">
                           {getLocalTranslation('page')}
                         </th>
-                        <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-300 uppercase tracking-wider">
+                        <th scope="col" className="px-4 py-3 text-right text-xs font-medium text-gray-300 uppercase tracking-wider w-[30%]">
                           {getLocalTranslation('proximity_to_centroid')}
                         </th>
                       </tr>
                     </thead>
                     <tbody className="bg-black/10 divide-y divide-gray-800">
-                      {divergentPagesData.map((item, index) => (
+                      {apiData.top_divergent_urls.map((item, index) => (
                         <tr key={index} className="hover:bg-gray-900/30">
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-200">
-                            {item.page}
+                          <td className="px-4 py-3 text-sm text-gray-200 truncate max-w-0">
+                            <div className="truncate">
+                              <a
+                                href={item.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="hover:text-blue-400 transition-colors"
+                              >
+                                {item.url}
+                              </a>
+                            </div>
                           </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-right font-medium">
+                          <td className="px-4 py-3 text-sm text-right font-medium whitespace-nowrap">
                             <span className="px-2 py-1 bg-red-500/20 text-red-300 rounded">
-                              {item.score.toFixed(2)}
+                              {item.proximity.toFixed(2)}
                             </span>
                           </td>
                         </tr>
@@ -602,7 +670,11 @@ const ResultsPage = () => {
                 <HighchartsDonut
                   id="page-types-chart"
                   title=""
-                  data={pageTypesData}
+                  data={[
+                    { name: 'Core Content', y: apiData.page_type_distribution.core_content.percentage, color: '#8884d8' },
+                    { name: 'Supporting Pages', y: apiData.page_type_distribution.supporting_pages.percentage, color: '#82ca9d' },
+                    { name: 'Peripheral Pages', y: apiData.page_type_distribution.peripheral_pages.percentage, color: '#ffc658' }
+                  ]}
                 />
               </div>
 
@@ -616,73 +688,11 @@ const ResultsPage = () => {
                   seriesName={getLocalTranslation('count')}
                   xAxisTitle={getLocalTranslation('distance')}
                   yAxisTitle={getLocalTranslation('count')}
-                  data={distanceDistributionData}
+                  data={Object.entries(apiData.histogram_data).map(([range, count]) => [
+                    parseFloat(range.split('-')[0]),
+                    count
+                  ])}
                 />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-              <div className="bg-black/40 backdrop-blur-lg border border-gray-800 rounded-lg shadow-lg p-4">
-                <h2 className="text-xl font-semibold text-white mb-4">
-                  {getLocalTranslation('distribution_divergent')}
-                </h2>
-                <HighchartsAreaChart
-                  id="divergent-distribution-chart"
-                  title=""
-                  seriesName={getLocalTranslation('count')}
-                  xAxisTitle={getLocalTranslation('distance')}
-                  yAxisTitle={getLocalTranslation('count')}
-                  data={divergentDistributionData}
-                  color="#ff6b6b"
-                />
-              </div>
-
-              <div className="bg-black/40 backdrop-blur-lg border border-gray-800 rounded-lg shadow-lg p-4">
-                <h2 className="text-xl font-semibold text-white mb-4">
-                  {getLocalTranslation('distribution_focused')}
-                </h2>
-                <HighchartsAreaChart
-                  id="focused-distribution-chart"
-                  title=""
-                  seriesName={getLocalTranslation('count')}
-                  xAxisTitle={getLocalTranslation('distance')}
-                  yAxisTitle={getLocalTranslation('count')}
-                  data={focusedDistributionData}
-                  color="#4ecdc4"
-                />
-              </div>
-            </div>
-
-            <div className="bg-black/40 backdrop-blur-lg border border-gray-800 rounded-lg shadow-lg p-6 mb-12">
-              <h2 className="text-2xl font-semibold text-white mb-4">
-                {getLocalTranslation('analysis_summary')}
-              </h2>
-              <div className="text-gray-300 whitespace-pre-line">
-                {getLocalTranslation('analysis_description')}
-              </div>
-            </div>
-
-            <div className="bg-black/40 backdrop-blur-lg border border-gray-800 rounded-lg shadow-lg p-6">
-              <h2 className="text-xl font-semibold text-white mb-4">
-                {getLocalTranslation('domain_info')}
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <p className="text-gray-400">{getLocalTranslation('domain')}</p>
-                  <p className="text-white font-medium">{domainInfo.domain}</p>
-                </div>
-                <div>
-                  <p className="text-gray-400">{getLocalTranslation('creation_date')}</p>
-                  <p className="text-white font-medium">{domainInfo.creationDate}</p>
-                </div>
-                <div>
-                  <p className="text-gray-400">{getLocalTranslation('refresh_date')}</p>
-                  <p className="text-white font-medium">{domainInfo.refreshDate}</p>
-                </div>
-                <div>
-                  <p className="text-gray-400">{getLocalTranslation('analyzed_urls')}</p>
-                  <p className="text-white font-medium">{domainInfo.analyzedUrls}</p>
-                </div>
               </div>
             </div>
           </>
@@ -702,7 +712,7 @@ const ResultsPage = () => {
                 />
               </div>
             </div>
-            
+
             <div className="bg-black/40 backdrop-blur-lg border border-gray-800 rounded-lg shadow-lg overflow-hidden">
               <h2 className="text-xl font-semibold text-white p-4 bg-black/30 border-b border-gray-800">
                 {getLocalTranslation('urls_to_centroid')}
@@ -726,9 +736,8 @@ const ResultsPage = () => {
                           {item.url}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-right font-medium">
-                          <span className={`px-2 py-1 rounded ${
-                            item.score > 0.7 ? 'bg-green-500/20 text-green-300' : 'bg-yellow-500/20 text-yellow-300'
-                          }`}>
+                          <span className={`px-2 py-1 rounded ${item.score > 0.7 ? 'bg-green-500/20 text-green-300' : 'bg-yellow-500/20 text-yellow-300'
+                            }`}>
                             {item.score.toFixed(2)}
                           </span>
                         </td>
@@ -773,11 +782,10 @@ const ResultsPage = () => {
                           {item.url2}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-right font-medium">
-                          <span className={`px-2 py-1 rounded ${
-                            item.similarityScore > 0.8 ? 'bg-red-500/20 text-red-300' : 
-                            item.similarityScore > 0.7 ? 'bg-yellow-500/20 text-yellow-300' : 
-                            'bg-green-500/20 text-green-300'
-                          }`}>
+                          <span className={`px-2 py-1 rounded ${item.similarityScore > 0.8 ? 'bg-red-500/20 text-red-300' :
+                            item.similarityScore > 0.7 ? 'bg-yellow-500/20 text-yellow-300' :
+                              'bg-green-500/20 text-green-300'
+                            }`}>
                             {item.similarityScore.toFixed(2)}
                           </span>
                         </td>
@@ -798,13 +806,13 @@ const ResultsPage = () => {
                 {getLocalTranslation('tab_clusters')}
               </h2>
               <div className="relative h-[600px] border border-gray-700 rounded bg-black/20">
-                <canvas 
-                  ref={scatterCanvasRef} 
+                <canvas
+                  ref={scatterCanvasRef}
                   className="w-full h-full"
                 />
               </div>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="bg-black/40 backdrop-blur-lg border border-gray-800 rounded-lg shadow-lg overflow-hidden">
                 <h2 className="text-xl font-semibold text-white p-4 bg-black/30 border-b border-gray-800">
@@ -823,7 +831,7 @@ const ResultsPage = () => {
                   </ul>
                 </div>
               </div>
-              
+
               <div className="bg-black/40 backdrop-blur-lg border border-gray-800 rounded-lg shadow-lg overflow-hidden">
                 <h2 className="text-xl font-semibold text-white p-4 bg-black/30 border-b border-gray-800">
                   {getLocalTranslation('cluster_2')}
@@ -851,62 +859,62 @@ const ResultsPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
-      <AppHeader />
-      
-      <VantaBackground className="opacity-30">
-        <main className="container mx-auto px-4 py-8">
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-              {t('results')}
-            </h1>
-            <p className="text-lg text-gray-600 dark:text-gray-300">
-              {t('results_description')}
-            </p>
-          </div>
-          
-          <div className="mb-8 overflow-x-auto">
-            <div className="flex space-x-1 bg-black/20 backdrop-blur-sm p-1 rounded-lg shadow-inner min-w-max">
-              <button
-                onClick={() => handleTabChange('overview')}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out ${
-                  activeTab === 'overview' ? 'bg-black/60 text-white' : 'text-gray-300 hover:text-white hover:bg-black/40'
-                }`}
-              >
-                {getLocalTranslation('tab_overview')}
-              </button>
-              <button
-                onClick={() => handleTabChange('url_analysis')}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out ${
-                  activeTab === 'url_analysis' ? 'bg-black/60 text-white' : 'text-gray-300 hover:text-white hover:bg-black/40'
-                }`}
-              >
-                {getLocalTranslation('tab_url_analysis')}
-              </button>
-              <button
-                onClick={() => handleTabChange('cannibalization')}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out ${
-                  activeTab === 'cannibalization' ? 'bg-black/60 text-white' : 'text-gray-300 hover:text-white hover:bg-black/40'
-                }`}
-              >
-                {getLocalTranslation('tab_cannibalization')}
-              </button>
-              <button
-                onClick={() => handleTabChange('clusters')}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out ${
-                  activeTab === 'clusters' ? 'bg-black/60 text-white' : 'text-gray-300 hover:text-white hover:bg-black/40'
-                }`}
-              >
-                {getLocalTranslation('tab_clusters')}
-              </button>
+    <div className="relative min-h-screen bg-gray-100 dark:bg-gray-900">
+      <VantaBackground className="absolute inset-0 opacity-30" />
+
+      <div className="relative z-10 min-h-screen flex flex-col">
+        <AppHeader />
+
+        <div className="flex-1 overflow-y-auto pt-20">
+          <div className="container mx-auto px-4 py-8">
+            <div className="mb-8">
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                {t('results')}
+              </h1>
+              <p className="text-lg text-gray-600 dark:text-gray-300">
+                {t('results_description')}
+              </p>
+            </div>
+
+            <div className="mb-8">
+              <div className="flex space-x-1 bg-black/20 backdrop-blur-sm p-1 rounded-lg shadow-inner">
+                <button
+                  onClick={() => handleTabChange('overview')}
+                  className={`px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out ${activeTab === 'overview' ? 'bg-black/60 text-white' : 'text-gray-300 hover:text-white hover:bg-black/40'
+                    }`}
+                >
+                  {getLocalTranslation('tab_overview')}
+                </button>
+                <button
+                  onClick={() => handleTabChange('url_analysis')}
+                  className={`px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out ${activeTab === 'url_analysis' ? 'bg-black/60 text-white' : 'text-gray-300 hover:text-white hover:bg-black/40'
+                    }`}
+                >
+                  {getLocalTranslation('tab_url_analysis')}
+                </button>
+                <button
+                  onClick={() => handleTabChange('cannibalization')}
+                  className={`px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out ${activeTab === 'cannibalization' ? 'bg-black/60 text-white' : 'text-gray-300 hover:text-white hover:bg-black/40'
+                    }`}
+                >
+                  {getLocalTranslation('tab_cannibalization')}
+                </button>
+                <button
+                  onClick={() => handleTabChange('clusters')}
+                  className={`px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out ${activeTab === 'clusters' ? 'bg-black/60 text-white' : 'text-gray-300 hover:text-white hover:bg-black/40'
+                    }`}
+                >
+                  {getLocalTranslation('tab_clusters')}
+                </button>
+              </div>
+            </div>
+
+            <div className="pb-12">
+              {renderTabContent()}
             </div>
           </div>
-          
-          <div className="pb-12">
-            {renderTabContent()}
-          </div>
-        </main>
-      </VantaBackground>
+        </div>
+      </div>
     </div>
   );
 };

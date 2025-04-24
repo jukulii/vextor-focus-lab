@@ -54,10 +54,10 @@ interface Filter {
 // --- Hook for real-time progress (copied and adapted from ProcessingPage) ---
 const useProjectProgress = (projectId: string | null) => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [progress, setProgress] = useState(0);
   const [urlsCount, setUrlsCount] = useState(0);
   const [processedCount, setProcessedCount] = useState(0);
-  // --- Add state for processed URLs ---
   const [processedUrls, setProcessedUrls] = useState<string[]>([]);
   const [isLoadingUrls, setIsLoadingUrls] = useState<boolean>(false);
   const [hasFetchedUrls, setHasFetchedUrls] = useState<boolean>(false);
@@ -251,49 +251,38 @@ const useProjectProgress = (projectId: string | null) => {
                   }
                 });
                 console.log(`Successfully sent batch ${i / BATCH_SIZE + 1} to API. Response:`, response.status);
+
+                // If this is the last batch, use the response data to navigate to results
+                if (i + BATCH_SIZE >= urlsWithEmbeddings.length) {
+                  navigate(`/results?projectId=${projectId}`, {
+                    state: { apiData: response.data }
+                  });
+                }
               } catch (error) {
-                console.error(`Error sending batch ${i / BATCH_SIZE + 1} to API:`, {
-                  error,
-                  apiUrl,
-                  payloadSize: JSON.stringify(payload).length,
-                  firstUrl: batch[0]?.url
-                });
+                console.error(`Error sending batch ${i / BATCH_SIZE + 1} to API:`, error);
                 toast({
                   title: 'API Error',
                   description: `Failed to send batch ${i / BATCH_SIZE + 1} to API.`,
                   variant: 'destructive'
                 });
+                return; // Stop processing if there's an error
               }
             }
-
-            // Handle potential duplicates
-            const uniqueUrls = new Set(urlsWithEmbeddings.map((item: any) => item.url));
-            console.log('SitemapSearch/ProcessingDisplay: Fetched unique processed URLs:', Array.from(uniqueUrls).length);
-            setProcessedUrls(Array.from(uniqueUrls));
-          } else {
-            setProcessedUrls([]);
           }
-        } catch (err) {
-          console.error('SitemapSearch/ProcessingDisplay: Unexpected error fetching processed URLs with join:', err);
+        } catch (error) {
+          console.error('SitemapSearch/ProcessingDisplay: Error in fetchProcessedUrls:', error);
           setProcessedUrls([]);
         } finally {
           setIsLoadingUrls(false);
-          setHasFetchedUrls(true); // Mark as fetched regardless of success/failure
+          setHasFetchedUrls(true);
         }
       };
+
       fetchProcessedUrls();
     }
-    // Reset URLs and fetch flag if progress drops below 100
-    else if (progress < 100) {
-      setProcessedUrls([]);
-      setHasFetchedUrls(false);
-    }
-    // Depend only on progress, projectId, and the fetch flag
-  }, [progress, projectId, hasFetchedUrls, isLoadingUrls]); // Keep isLoadingUrls to prevent parallel fetches
-  // --- End of fetch effect ---
+  }, [progress, projectId, hasFetchedUrls, isLoadingUrls, navigate, toast]);
 
-  // --- Update return value ---
-  return { progress, urlsCount, processedCount, processedUrls, isLoadingUrls, authError };
+  return { progress, urlsCount, processedCount, processedUrls, isLoadingUrls };
 };
 // --- End of useProjectProgress hook ---
 
@@ -306,62 +295,52 @@ const ProcessingDisplay: React.FC<ProcessingDisplayProps> = ({ projectId }) => {
   const { t } = useLanguage();
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { progress, urlsCount, processedCount, processedUrls, isLoadingUrls, authError } = useProjectProgress(projectId);
+  const { progress, urlsCount, processedCount, processedUrls, isLoadingUrls } = useProjectProgress(projectId);
 
   // Show toast for auth error only once
   useEffect(() => {
-    if (authError) {
+    if (isLoadingUrls) {
       toast({
-        title: 'Authentication Error',
-        description: 'Your session may have expired. Please log in again.',
-        variant: 'destructive'
+        title: 'Processing',
+        description: 'Processing in progress...',
+        variant: 'default'
       });
     }
-  }, [authError, toast]);
+  }, [isLoadingUrls, toast]);
 
   return (
-    <div className="flex flex-col items-center justify-center py-8">
-      <h3 className="text-lg font-medium text-gray-100 mb-4">Processing Project: {projectId}</h3>
-      <Progress value={progress} className="w-full h-8 mb-4" />
-      <p className="text-gray-300 dark:text-gray-300 mb-2">
-        {t('progress')}: {progress.toFixed(1)}% ({processedCount} / {urlsCount})
-      </p>
-      <p className="text-gray-400 dark:text-gray-400 text-sm mt-4 mb-6">
-        {progress < 100 ? t('converting_content') : t('processing_complete')}
-      </p>
+    <div className="w-full max-w-4xl mx-auto mt-8">
+      <h1 className="text-2xl font-bold text-center mb-8 text-gray-900 dark:text-white">
+        {t('check_domain_focus')}
+      </h1>
 
-      {progress >= 100 && (
-        <div className="w-full mt-6 border-t border-gray-700 pt-6">
-          <h3 className="text-lg font-semibold mb-4 text-center text-gray-100">
-            {t('processed_urls_list_title')}
-          </h3>
-          {isLoadingUrls ? (
-            <p className="text-center text-gray-400">{t('loading_urls')}</p>
-          ) : processedUrls.length > 0 ? (
-            <ul className="list-disc list-inside space-y-1 max-h-60 overflow-y-auto text-sm text-gray-300 px-4 bg-[#1e1e2d] p-4 rounded-md border border-gray-600">
-              {processedUrls.map((url, index) => (
-                <li key={index}>
-                  <a href={url} target="_blank" rel="noopener noreferrer" className="hover:underline break-all text-gray-200 hover:text-[#ff6b6b]">
-                    {url}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p className="text-center text-gray-400">{t('no_processed_urls_found')}</p>
-          )}
+      <Tabs value="generate" className="w-full">
+        <TabsList className="grid w-full grid-cols-3 mb-8 bg-gray-100 dark:bg-gray-800">
+          <TabsTrigger value="url" disabled className="text-gray-600 dark:text-gray-400">
+            {t('site_url')}
+          </TabsTrigger>
+          <TabsTrigger value="filters" disabled className="text-gray-600 dark:text-gray-400">
+            {t('filters')}
+          </TabsTrigger>
+          <TabsTrigger value="generate" className="text-gray-800 dark:text-white">
+            {t('processing')}
+          </TabsTrigger>
+        </TabsList>
 
-          <div className="mt-6 text-center">
-            <Button
-              onClick={() => navigate(`/results?projectId=${projectId}`)}
-              className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors disabled:opacity-50"
-              disabled={isLoadingUrls}
-            >
-              {t('view_results_button')}
-            </Button>
-          </div>
-        </div>
-      )}
+        <Card className="bg-white/80 dark:bg-black/40 backdrop-blur-lg border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white shadow-lg dark:shadow-black/30 transition-all duration-300">
+          <CardContent className="pt-6">
+            <div className="flex flex-col items-center justify-center py-8">
+              <Progress value={progress} className="w-full h-8 mb-4" />
+              <p className="text-gray-700 dark:text-gray-300 mb-2">
+                {t('progress')}: {progress.toFixed(1)}% ({processedCount} / {urlsCount})
+              </p>
+              <p className="text-gray-600 dark:text-gray-400 text-sm mt-4">
+                {progress < 100 ? t('converting_content') : t('processing_complete')}
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+      </Tabs>
     </div>
   );
 };
