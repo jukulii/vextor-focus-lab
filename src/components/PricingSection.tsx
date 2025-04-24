@@ -1,9 +1,9 @@
-
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from "@/components/ui/button";
 import { CheckIcon, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { useAuth } from '@/contexts/AuthContext';
 import {
   Select,
   SelectContent,
@@ -14,6 +14,7 @@ import {
 
 const PricingSection = () => {
   const { t, language } = useLanguage();
+  const { isAuthenticated } = useAuth();
   
   // Define pricing tiers
   const pricingTiers = [
@@ -41,7 +42,7 @@ const PricingSection = () => {
       ? ['Opłata tylko za wykorzystane URL-e', 'Szczegółowe raporty i analizy', 'Rekomendacje treści', 'Priorytetowe wsparcie']
       : ['Charge based on what you actually use', 'Complete reports & insights', 'Content recommendations', 'Priority support'],
     buttonText: t('get_started'),
-    to: '/login' // Changed from '/app' to '/login'
+    to: isAuthenticated ? '/app' : '/login'
   };
 
   return (
