@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -15,7 +16,15 @@ import RegisterPage from "./pages/RegisterPage";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import ProtectedAuthRoute from '@/components/ProtectedAuthRoute';
 
-const queryClient = new QueryClient();
+// Create a client
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 const App = () => {
   // Initialize dark mode based on saved preference or system preference
@@ -35,8 +44,6 @@ const App = () => {
       <LanguageProvider>
         <AuthProvider>
           <TooltipProvider>
-            <Toaster />
-            <Sonner />
             <Router>
               <Routes>
                 <Route path="/" element={<LandingPage />} />
@@ -75,6 +82,8 @@ const App = () => {
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Router>
+            <Toaster />
+            <Sonner />
           </TooltipProvider>
         </AuthProvider>
       </LanguageProvider>

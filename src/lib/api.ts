@@ -1,10 +1,16 @@
+
 import { useAuth } from '@/contexts/AuthContext';
 
 export const useApi = () => {
   const { token, logout } = useAuth();
-  const apiUrl = import.meta.env.VITE_API_URL;
+  const apiUrl = import.meta.env.VITE_API_URL || '';
 
   const fetchWithAuth = async (endpoint: string, options: RequestInit = {}) => {
+    // Check if the API URL is defined
+    if (!apiUrl) {
+      console.warn('API URL is not defined in environment variables');
+    }
+    
     const url = `${apiUrl}${endpoint}`;
 
     const headers = {
@@ -54,4 +60,4 @@ export const useApi = () => {
     }),
     delete: (endpoint: string) => fetchWithAuth(endpoint, { method: 'DELETE' }),
   };
-}; 
+};

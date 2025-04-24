@@ -1,9 +1,11 @@
+
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { supabase } from '@/lib/supabase';
 import { Session } from '@supabase/supabase-js';
 
 interface AuthContextType {
     session: Session | null;
+    token: string | null;
     isAuthenticated: boolean;
     login: (email: string, password: string) => Promise<any>;
     logout: () => void;
@@ -14,6 +16,7 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType>({
     session: null,
+    token: null,
     isAuthenticated: false,
     login: async () => { },
     logout: () => { },
@@ -30,12 +33,14 @@ interface AuthProviderProps {
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
     const [session, setSession] = useState<Session | null>(null);
+    const [token, setToken] = useState<string | null>(null);
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
     useEffect(() => {
         // Get initial session
         supabase.auth.getSession().then(({ data: { session } }) => {
             setSession(session);
+            setToken(session?.access_token || null);
             setIsAuthenticated(!!session);
         });
 
@@ -44,6 +49,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
             data: { subscription },
         } = supabase.auth.onAuthStateChange((_event, session) => {
             setSession(session);
+            setToken(session?.access_token || null);
             setIsAuthenticated(!!session);
         });
 
@@ -58,6 +64,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
             });
 
             if (error) throw error;
+            
+            // Set token after successful login
+            if (data.session) {
+                setToken(data.session.access_token);
+            }
 
             return data;
         } catch (error) {
@@ -70,6 +81,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         try {
             const { error } = await supabase.auth.signOut();
             if (error) throw error;
+            setToken(null);
         } catch (error) {
             console.error('Logout error:', error);
             throw error;
@@ -81,6 +93,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
             const { data: { session: newSession }, error } = await supabase.auth.refreshSession();
             if (error) throw error;
             setSession(newSession);
+            setToken(newSession?.access_token || null);
             setIsAuthenticated(!!newSession);
         } catch (error) {
             console.error('Error refreshing session:', error);
@@ -92,6 +105,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         try {
             await supabase.auth.signOut();
             setSession(null);
+            setToken(null);
             setIsAuthenticated(false);
             // Clear any stored data
             localStorage.removeItem('sitemapData');
@@ -104,12 +118,12 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         if (!session) return false;
 
         // Check if token exists and is not expired
-        const token = session.access_token;
-        if (!token) return false;
+        const currentToken = session.access_token;
+        if (!currentToken) return false;
 
         try {
             // Decode JWT token
-            const tokenPayload = JSON.parse(atob(token.split('.')[1]));
+            const tokenPayload = JSON.parse(atob(currentToken.split('.')[1]));
             const expirationTime = tokenPayload.exp * 1000; // Convert to milliseconds
             const currentTime = Date.now();
             const timeUntilExpiration = expirationTime - currentTime;
@@ -127,7 +141,16 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     };
 
     return (
-        <AuthContext.Provider value={{ session, isAuthenticated, login, logout, signOut, isSessionValid, refreshSession }}>
+        <AuthContext.Provider value={{ 
+            session, 
+            token,
+            isAuthenticated, 
+            login, 
+            logout, 
+            signOut, 
+            isSessionValid, 
+            refreshSession 
+        }}>
             {children}
         </AuthContext.Provider>
     );
