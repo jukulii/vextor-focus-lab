@@ -1,11 +1,22 @@
 
 import { Button } from "@/components/ui/button";
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Sparkles } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
 
 const HeroSection = () => {
   const { t, language } = useLanguage();
+  const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
+
+  const handleTryForFree = () => {
+    if (isAuthenticated) {
+      navigate('/app');
+    } else {
+      navigate('/login');
+    }
+  };
   
   return (
     <section className="pt-48 pb-24 md:pt-64 md:pb-32 relative overflow-hidden bg-white dark:bg-gray-900">
@@ -25,15 +36,14 @@ const HeroSection = () => {
               {language === 'pl' ? 'Zoptymalizuj treść. Zbuduj autorytet. Wygraj wyścig o widoczność.' : t('hero_subtitle')}
             </p>
             <div className="space-x-4 fade-in stagger-2">
-              <Link to="/app">
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="border-[#ff6b6b] text-[#ff6b6b] dark:border-[#ff8c8c] dark:text-[#ff8c8c] hover:bg-[#ff6b6b]/10 px-8 py-6 text-lg transition-all duration-300"
-                >
-                  {language === 'pl' ? 'Wypróbuj za darmo' : 'Try For Free'}
-                </Button>
-              </Link>
+              <Button
+                variant="outline"
+                size="lg"
+                onClick={handleTryForFree}
+                className="border-[#ff6b6b] text-[#ff6b6b] dark:border-[#ff8c8c] dark:text-[#ff8c8c] hover:bg-[#ff6b6b]/10 px-8 py-6 text-lg transition-all duration-300"
+              >
+                {language === 'pl' ? 'Wypróbuj za darmo' : 'Try For Free'}
+              </Button>
             </div>
           </div>
         </div>
