@@ -35,6 +35,12 @@ interface ApiResponse {
   processing_time: string;
 }
 
+interface AiAnalysisResponse {
+  analysis_pl: string;
+  analysis_en: string;
+  processing_time: string;
+}
+
 const generateScatterData = (count = 400) => {
   const data = [];
   for (let i = 0; i < count; i++) {
@@ -65,6 +71,8 @@ const ResultsPage = () => {
   const [activeTab, setActiveTab] = useState('overview');
   const [apiData, setApiData] = useState<ApiResponse | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [aiAnalysis, setAiAnalysis] = useState<AiAnalysisResponse | null>(null);
+  const [isLoadingAi, setIsLoadingAi] = useState(false);
 
   const translations = {
     site_focus: {
@@ -227,6 +235,14 @@ const ResultsPage = () => {
     original_value: {
       pl: "Wartość oryginalna",
       en: "Original Value"
+    },
+    ai_summary: {
+      pl: "Podsumowanie analizy AI",
+      en: "AI Analysis Summary"
+    },
+    no_ai_analysis_available: {
+      pl: "Analiza AI niedostępna",
+      en: "AI Analysis Not Available"
     }
   };
 
@@ -527,6 +543,52 @@ const ResultsPage = () => {
       navigate(`/processing?projectId=${projectId}`);
     }
   }, [location, navigate]);
+
+  useEffect(() => {
+    const fetchAiAnalysis = async () => {
+      if (!apiData) return;
+
+      setIsLoadingAi(true);
+      try {
+        const llmApiUrl = import.meta.env.VITE_LLM_ANALYSIS_API_URL;
+        const apiKey = import.meta.env.VITE_APP_API_KEY;
+
+        console.log('Fetching AI analysis with:', {
+          llmApiUrl,
+          apiKey: apiKey ? 'API key present' : 'No API key',
+          apiData
+        });
+
+        if (!llmApiUrl || !apiKey) {
+          console.error('Missing API configuration:', { llmApiUrl, apiKey });
+          return;
+        }
+
+        const response = await axios.post(llmApiUrl, apiData, {
+          headers: {
+            'Content-Type': 'application/json',
+            'x-api-key': apiKey
+          }
+        });
+
+        console.log('AI analysis response:', response.data);
+        setAiAnalysis(response.data);
+      } catch (error) {
+        console.error('Error fetching AI analysis:', error);
+        if (axios.isAxiosError(error)) {
+          console.error('Axios error details:', {
+            status: error.response?.status,
+            data: error.response?.data,
+            headers: error.response?.headers
+          });
+        }
+      } finally {
+        setIsLoadingAi(false);
+      }
+    };
+
+    fetchAiAnalysis();
+  }, [apiData]);
 
   const handleTabChange = (tab: string) => {
     setActiveTab(tab);
@@ -911,6 +973,33 @@ const ResultsPage = () => {
 
             <div className="pb-12">
               {renderTabContent()}
+            </div>
+
+            {/* AI Summary Box */}
+            <div className="mt-8 mb-12">
+              <div className="bg-black/40 backdrop-blur-lg border border-gray-800 rounded-lg shadow-lg p-6">
+                <h2 className="text-xl font-semibold text-white mb-6 text-center">
+                  {getLocalTranslation('ai_summary')}
+                </h2>
+                {isLoadingAi ? (
+                  <div className="flex items-center justify-center py-8">
+                    <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-[#ff6b6b]"></div>
+                  </div>
+                ) : aiAnalysis ? (
+                  <div className="prose prose-invert max-w-none">
+                    <div
+                      className="text-gray-200 space-y-6"
+                      dangerouslySetInnerHTML={{
+                        __html: language === 'pl' ? aiAnalysis.analysis_pl : aiAnalysis.analysis_en
+                      }}
+                    />
+                  </div>
+                ) : (
+                  <div className="text-center text-gray-400">
+                    {getLocalTranslation('no_ai_analysis_available')}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
