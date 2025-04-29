@@ -419,7 +419,12 @@ const translations: Translations = {
   "processed_urls_list_title": { en: "Processed URLs", pl: "Processed URLs" },
   "loading_urls": { en: "Loading processed URLs...", pl: "Loading processed URLs..." },
   "no_processed_urls_found": { en: "No processed URLs found.", pl: "No processed URLs found." },
-  "view_results_button": { en: "View Results", pl: "View Results" }
+  "view_results_button": { en: "View Results", pl: "View Results" },
+
+  "max_urls_exceeded": {
+    en: "Maximum number of URLs exceeded. Please reduce the number of URLs to process to %max% or less.",
+    pl: "Przekroczono maksymalną liczbę adresów URL. Proszę zmniejszyć liczbę adresów URL do przetworzenia do %max% lub mniej."
+  }
 };
 
 interface LanguageContextType {

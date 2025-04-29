@@ -216,57 +216,50 @@ const useProjectProgress = (projectId: string | null) => {
               return;
             }
 
-            console.log('Starting to process batches. Total URLs with embeddings:', urlsWithEmbeddings.length);
+            console.log('Processing all URLs with embeddings:', urlsWithEmbeddings.length);
 
-            for (let i = 0; i < urlsWithEmbeddings.length; i += BATCH_SIZE) {
-              const batch = urlsWithEmbeddings.slice(i, i + BATCH_SIZE);
-              const payload = {
-                embeddings: batch.map(item => {
-                  // Convert string to array of numbers
-                  if (typeof item.embedding_title_desc === 'string') {
-                    try {
-                      return JSON.parse(item.embedding_title_desc);
-                    } catch (e) {
-                      console.error('Error parsing embedding:', e);
-                      return null;
-                    }
+            const payload = {
+              embeddings: urlsWithEmbeddings.map(item => {
+                // Convert string to array of numbers
+                if (typeof item.embedding_title_desc === 'string') {
+                  try {
+                    return JSON.parse(item.embedding_title_desc);
+                  } catch (e) {
+                    console.error('Error parsing embedding:', e);
+                    return null;
                   }
-                  return item.embedding_title_desc;
-                }).filter(embedding => embedding !== null),
-                urls: batch.map(item => item.url)
-              };
-
-              console.log(`Sending batch ${i / BATCH_SIZE + 1} to API:`, {
-                batchSize: batch.length,
-                firstUrl: batch[0]?.url,
-                lastUrl: batch[batch.length - 1]?.url,
-                apiUrl
-              });
-
-              try {
-                const response = await axios.post(apiUrl, payload, {
-                  headers: {
-                    'Content-Type': 'application/json',
-                    'x-api-key': apiKey
-                  }
-                });
-                console.log(`Successfully sent batch ${i / BATCH_SIZE + 1} to API. Response:`, response.status);
-
-                // If this is the last batch, use the response data to navigate to results
-                if (i + BATCH_SIZE >= urlsWithEmbeddings.length) {
-                  navigate(`/results?projectId=${projectId}`, {
-                    state: { apiData: response.data }
-                  });
                 }
-              } catch (error) {
-                console.error(`Error sending batch ${i / BATCH_SIZE + 1} to API:`, error);
-                toast({
-                  title: 'API Error',
-                  description: `Failed to send batch ${i / BATCH_SIZE + 1} to API.`,
-                  variant: 'destructive'
-                });
-                return; // Stop processing if there's an error
-              }
+                return item.embedding_title_desc;
+              }).filter(embedding => embedding !== null),
+              urls: urlsWithEmbeddings.map(item => item.url)
+            };
+
+            console.log('Sending all URLs to API:', {
+              totalUrls: urlsWithEmbeddings.length,
+              firstUrl: urlsWithEmbeddings[0]?.url,
+              lastUrl: urlsWithEmbeddings[urlsWithEmbeddings.length - 1]?.url,
+              apiUrl
+            });
+
+            try {
+              const response = await axios.post(apiUrl, payload, {
+                headers: {
+                  'Content-Type': 'application/json',
+                  'x-api-key': apiKey
+                }
+              });
+              console.log('Successfully sent all URLs to API. Response:', response.status);
+
+              navigate(`/results?projectId=${projectId}`, {
+                state: { apiData: response.data }
+              });
+            } catch (error) {
+              console.error('Error sending URLs to API:', error);
+              toast({
+                title: 'API Error',
+                description: 'Failed to send URLs to API.',
+                variant: 'destructive'
+              });
             }
           }
         } catch (error) {
@@ -754,6 +747,16 @@ const SitemapSearch = () => {
       return;
     }
 
+    // Add validation for maximum URLs
+    if (filteredUrlItems.length > 10000) {
+      toast({
+        title: t('Error'),
+        description: tInterpolate('max_urls_exceeded', { max: 10000 }),
+        variant: "destructive"
+      });
+      return;
+    }
+
     setIsProcessing(true);
     let projectId: string | null = null;
     const sitemapUrlToIdMap = new Map<string, string>();
@@ -822,7 +825,7 @@ const SitemapSearch = () => {
 
       if (urlsToInsert.length > 0) {
         console.log(`Inserting ${urlsToInsert.length} filtered URLs...`);
-        const BATCH_SIZE = 1000;
+        const BATCH_SIZE = 10000;
         for (let i = 0; i < urlsToInsert.length; i += BATCH_SIZE) {
           const batch = urlsToInsert.slice(i, i + BATCH_SIZE);
           console.log(`Inserting URL batch ${i / BATCH_SIZE + 1}...`);
@@ -849,25 +852,25 @@ const SitemapSearch = () => {
               console.warn('VITE_APP_API_KEY is not defined. Skipping API calls.');
             } else {
               // Send to Crawl API
-              if (crawlApiUrl) {
-                try {
-                  console.log(`Sending batch ${i / BATCH_SIZE + 1} to Crawl API: ${crawlApiUrl}`);
-                  axios.post(crawlApiUrl, apiPayload, {
-                    headers: { 'Content-Type': 'application/json', 'x-api-key': apiKey }
-                  }).catch(crawlError => {
-                    console.error(`Error sending batch ${i / BATCH_SIZE + 1} to Crawl API:`, crawlError);
-                    // Decide if you want to throw or just log the error
-                    // throw new Error('Failed to send data to Crawl API.');
-                    toast({ title: 'API Error', description: `Failed to send batch ${i / BATCH_SIZE + 1} to Crawl API.`, variant: 'default' });
-                  });
-                } catch (syncError) {
-                  // Catch potential synchronous errors during request setup
-                  console.error(`Synchronous error setting up Crawl API request for batch ${i / BATCH_SIZE + 1}:`, syncError);
-                  toast({ title: 'API Setup Error', description: `Failed to setup request for batch ${i / BATCH_SIZE + 1} to Crawl API.`, variant: 'destructive' });
-                }
-              } else {
-                console.warn('VITE_CRAWL_URL_API_URL is not defined. Skipping Crawl API call.');
-              }
+              // if (crawlApiUrl) {
+              //   try {
+              //     console.log(`Sending batch ${i / BATCH_SIZE + 1} to Crawl API: ${crawlApiUrl}`);
+              //     axios.post(crawlApiUrl, apiPayload, {
+              //       headers: { 'Content-Type': 'application/json', 'x-api-key': apiKey }
+              //     }).catch(crawlError => {
+              //       console.error(`Error sending batch ${i / BATCH_SIZE + 1} to Crawl API:`, crawlError);
+              //       // Decide if you want to throw or just log the error
+              //       // throw new Error('Failed to send data to Crawl API.');
+              //       toast({ title: 'API Error', description: `Failed to send batch ${i / BATCH_SIZE + 1} to Crawl API.`, variant: 'default' });
+              //     });
+              //   } catch (syncError) {
+              //     // Catch potential synchronous errors during request setup
+              //     console.error(`Synchronous error setting up Crawl API request for batch ${i / BATCH_SIZE + 1}:`, syncError);
+              //     toast({ title: 'API Setup Error', description: `Failed to setup request for batch ${i / BATCH_SIZE + 1} to Crawl API.`, variant: 'destructive' });
+              //   }
+              // } else {
+              //   console.warn('VITE_CRAWL_URL_API_URL is not defined. Skipping Crawl API call.');
+              // }
 
               // Send to BrightData API
               if (brightDataApiUrl) {
